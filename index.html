@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Mentoria — Estude Ambiental</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+  <style>
+    :root {
+      --verde: #68995a;
+      --verde-escuro: #4e594b;
+      --verde-claro: #c5ffb5;
+      --grafite: #443c42;
+      --grafite-light: #6b6069;
+      --branco: #ffffff;
+      --bg: #f5f7f4;
+      --card: #ffffff;
+      --border: #e0e8dc;
+      --danger: #c0392b;
+      --warning: #e67e22;
+      --success: #27ae60;
+      --info: #2980b9;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--grafite); min-height: 100vh; }
+
+    /* HEADER */
+    header {
+      background: var(--grafite);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { width: 32px; height: 32px; background: var(--verde); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .logo-text { color: var(--branco); font-weight: 800; font-size: 1rem; line-height: 1.1; }
+    .logo-text span { color: var(--verde-claro); display: block; font-size: 0.7rem; font-weight: 500; }
+    .header-actions { display: flex; gap: 8px; }
+    .btn { padding: 7px 14px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; font-size: 0.82rem; font-weight: 700; transition: all 0.15s; display: flex; align-items: center; gap: 6px; }
+    .btn-primary { background: var(--verde); color: white; }
+    .btn-primary:hover { background: var(--verde-escuro); }
+    .btn-ghost { background: transparent; color: var(--verde-claro); border: 1px solid rgba(197,255,181,0.3); }
+    .btn-ghost:hover { background: rgba(197,255,181,0.1); }
+    .btn-sm { padding: 5px 10px; font-size: 0.75rem; }
+    .btn-danger { background: var(--danger); color: white; }
+
+    /* LAYOUT */
+    .layout { display: flex; min-height: calc(100vh - 60px); }
+    nav {
+      width: 220px;
+      background: var(--grafite);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      padding: 1.5rem 0;
+      flex-shrink: 0;
+    }
+    nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 1.5rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.15s;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+    }
+    nav a:hover, nav a.active {
+      color: var(--branco);
+      background: rgba(104,153,90,0.15);
+      border-left-color: var(--verde);
+    }
+    nav a .nav-icon { font-size: 1rem; width: 20px; text-align: center; }
+    .nav-section { padding: 8px 1.5rem 4px; font-size: 0.65rem; font-weight: 700; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 8px; }
+    main { flex: 1; padding: 2rem; overflow-y: auto; }
+
+    /* PAGE TITLE */
+    .page-title { font-size: 1.5rem; font-weight: 900; color: var(--grafite); margin-bottom: 0.25rem; }
+    .page-subtitle { font-size: 0.88rem; color: var(--grafite-light); margin-bottom: 1.5rem; }
+
+    /* STATS ROW */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .stat-card { background: var(--card); border-radius: 12px; padding: 1rem 1.25rem; border: 1px solid var(--border); }
+    .stat-label { font-size: 0.72rem; font-weight: 700; color: var(--grafite-light); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+    .stat-value { font-size: 1.8rem; font-weight: 900; color: var(--grafite); line-height: 1; }
+    .stat-sub { font-size: 0.72rem; color: var(--grafite-light); margin-top: 3px; }
+    .stat-card.verde .stat-value { color: var(--verde); }
+    .stat-card.warning .stat-value { color: var(--warning); }
+    .stat-card.danger .stat-value { color: var(--danger); }
+
+    /* ALERTS */
+    .alert-box { background: #fff8f0; border: 1px solid #f0c070; border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.83rem; }
+    .alert-box strong { color: var(--warning); }
+
+    /* FILTERS */
+    .filters { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
+    .filter-btn { padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); background: white; font-family: inherit; font-size: 0.78rem; font-weight: 600; cursor: pointer; color: var(--grafite-light); transition: all 0.15s; }
+    .filter-btn.active { background: var(--verde); color: white; border-color: var(--verde); }
+    .search-input { padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); font-family: inherit; font-size: 0.82rem; width: 220px; outline: none; }
+    .search-input:focus { border-color: var(--verde); }
+
+    /* STUDENTS TABLE */
+    .table-wrap { background: var(--card); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    thead th { background: var(--bg); padding: 10px 14px; text-align: left; font-size: 0.7rem; font-weight: 700; color: var(--grafite-light); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; cursor: pointer; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--bg); }
+    td { padding: 10px 14px; vertical-align: middle; }
+    .student-name { font-weight: 700; color: var(--grafite); }
+    .student-email { font-size: 0.73rem; color: var(--grafite-light); }
+
+    /* BADGES */
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; white-space: nowrap; }
+    .badge-green { background: #e8f5e4; color: var(--verde-escuro); }
+    .badge-gray { background: #eee; color: #888; }
+    .badge-warning { background: #fff3e0; color: var(--warning); }
+    .badge-danger { background: #fdecea; color: var(--danger); }
+    .badge-info { background: #e3f2fd; color: var(--info); }
+    .badge-purple { background: #f3e5f5; color: #7b1fa2; }
+
+    /* TAGS */
+    .tags { display: flex; gap: 4px; flex-wrap: wrap; }
+
+    /* MODAL */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+    .modal { background: white; border-radius: 16px; width: 100%; max-width: 700px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .modal-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; position: sticky; top: 0; background: white; z-index: 1; }
+    .modal-title { font-size: 1.15rem; font-weight: 800; color: var(--grafite); }
+    .modal-subtitle { font-size: 0.8rem; color: var(--grafite-light); margin-top: 2px; }
+    .modal-body { padding: 1.5rem; }
+    .modal-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; background: var(--bg); border-radius: 0 0 16px 16px; }
+    .close-btn { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--grafite-light); padding: 0 4px; line-height: 1; }
+
+    /* FORM FIELDS */
+    .form-group { margin-bottom: 1rem; }
+    .form-label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--grafite-light); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .form-control { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 0.85rem; outline: none; transition: border 0.15s; background: white; }
+    .form-control:focus { border-color: var(--verde); }
+    select.form-control { cursor: pointer; }
+    textarea.form-control { resize: vertical; min-height: 80px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .section-divider { margin: 1.25rem 0 0.75rem; padding-bottom: 6px; border-bottom: 2px solid var(--border); font-size: 0.78rem; font-weight: 800; color: var(--verde); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* DETAIL SECTIONS */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+    .info-item { background: var(--bg); padding: 10px 12px; border-radius: 8px; }
+    .info-item .label { font-size: 0.68rem; font-weight: 700; color: var(--grafite-light); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+    .info-item .value { font-size: 0.88rem; font-weight: 700; color: var(--grafite); }
+    .motivacao-box { background: linear-gradient(135deg, #f0f8ed, #e8f5e4); border: 1px solid var(--verde-claro); border-radius: 10px; padding: 1rem; margin: 0.75rem 0; font-size: 0.88rem; line-height: 1.6; color: var(--grafite); font-style: italic; }
+    .motivacao-box::before { content: "💚 Propósito:"; display: block; font-style: normal; font-weight: 800; font-size: 0.72rem; text-transform: uppercase; color: var(--verde); margin-bottom: 6px; letter-spacing: 0.05em; }
+
+    /* ACTIONS PANEL */
+    .actions-panel { background: var(--bg); border-radius: 10px; padding: 1rem; margin: 0.75rem 0; }
+    .actions-title { font-size: 0.72rem; font-weight: 800; color: var(--grafite-light); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .action-item { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
+    .action-item:last-child { border-bottom: none; }
+    .action-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* CONCURSO CARD */
+    .concurso-card { border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; }
+    .concurso-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
+    .concurso-name { font-weight: 800; font-size: 0.92rem; color: var(--grafite); }
+    .concurso-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+
+    /* PROGRESS BAR */
+    .renewal-bar { background: var(--border); border-radius: 20px; height: 6px; margin-top: 4px; overflow: hidden; }
+    .renewal-fill { height: 100%; border-radius: 20px; transition: width 0.3s; }
+
+    /* IMPORT SECTION */
+    .drop-zone { border: 2px dashed var(--verde); border-radius: 12px; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.15s; background: white; }
+    .drop-zone:hover, .drop-zone.dragover { background: #f0f8ed; }
+    .drop-zone-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .drop-zone-text { font-size: 0.88rem; color: var(--grafite-light); }
+    .drop-zone-text strong { color: var(--verde); }
+    .import-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+
+    /* PROMPT BOX */
+    .prompt-box { background: var(--grafite); color: var(--verde-claro); border-radius: 10px; padding: 1.25rem; font-family: monospace; font-size: 0.78rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word; max-height: 500px; overflow-y: auto; }
+    .copy-banner { background: var(--verde); color: white; padding: 8px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+
+    /* TIMELINE */
+    .phase-timeline { display: flex; gap: 0; margin: 0.75rem 0; }
+    .phase-step { flex: 1; text-align: center; position: relative; }
+    .phase-step::before { content: ''; position: absolute; top: 10px; left: -50%; right: 50%; height: 2px; background: var(--border); z-index: 0; }
+    .phase-step:first-child::before { display: none; }
+    .phase-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--border); margin: 0 auto 4px; position: relative; z-index: 1; transition: all 0.2s; }
+    .phase-step.done .phase-dot { background: var(--verde); }
+    .phase-step.current .phase-dot { background: var(--warning); box-shadow: 0 0 0 4px rgba(230,126,34,0.2); }
+    .phase-step.done::before { background: var(--verde); }
+    .phase-label { font-size: 0.6rem; font-weight: 700; color: var(--grafite-light); }
+    .phase-step.done .phase-label { color: var(--verde); }
+    .phase-step.current .phase-label { color: var(--warning); }
+
+    /* TABS */
+    .tab-nav { display: flex; gap: 4px; border-bottom: 2px solid var(--border); margin-bottom: 1rem; }
+    .tab-btn { padding: 8px 16px; border: none; background: none; font-family: inherit; font-size: 0.82rem; font-weight: 700; color: var(--grafite-light); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; }
+    .tab-btn.active { color: var(--verde); border-bottom-color: var(--verde); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* EMPTY STATE */
+    .empty-state { text-align: center; padding: 3rem 1rem; color: var(--grafite-light); }
+    .empty-state-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+    .empty-state-text { font-size: 0.92rem; margin-bottom: 1rem; }
+
+    /* RENEWAL ALERT */
+    .renewal-urgent { border-left: 4px solid var(--danger); }
+    .renewal-soon { border-left: 4px solid var(--warning); }
+
+    /* TUTORY IMPORT */
+    .tutory-pane { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+    .tutory-instructions { font-size: 0.82rem; color: var(--grafite-light); background: var(--bg); border-radius: 8px; padding: 8px 12px; margin-bottom: 0.75rem; }
+    .tutory-actions { display: flex; gap: 10px; align-items: center; margin-top: 0.75rem; }
+    .tutory-status { font-size: 0.78rem; color: var(--verde-escuro); font-weight: 700; }
+    .tutory-results { margin-top: 1rem; }
+    .tutory-result-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; margin-bottom: 4px; }
+    .tutory-result-ok { background: #e8f5e4; color: var(--verde-escuro); }
+    .tutory-result-miss { background: #fff3e0; color: var(--warning); }
+
+    /* HIDDEN */
+    .hidden { display: none !important; }
+
+    /* TOOLTIP */
+    [data-tip] { position: relative; }
+    [data-tip]:hover::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: var(--grafite); color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.72rem; white-space: nowrap; z-index: 99; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .import-grid, .form-row, .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🌿</div>
+    <div class="logo-text">
+      Painel Mentoria
+      <span>Estude Ambiental</span>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-ghost btn-sm" onclick="exportAllData()">⬇ Exportar dados</button>
+    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('importDataFile').click()">⬆ Restaurar backup</button>
+    <input type="file" id="importDataFile" accept=".json" hidden onchange="importAllData(event)" />
+  </div>
+</header>
+
+<div class="layout">
+  <nav>
+    <div class="nav-section">Principal</div>
+    <a onclick="showPage('dashboard')" id="nav-dashboard" class="active"><span class="nav-icon">📊</span> Dashboard</a>
+    <a onclick="showPage('students')" id="nav-students"><span class="nav-icon">👥</span> Alunos</a>
+    <a onclick="showPage('feedback')" id="nav-feedback"><span class="nav-icon">💬</span> Gerar Feedback</a>
+    <div class="nav-section">Importar</div>
+    <a onclick="showPage('import')" id="nav-import"><span class="nav-icon">📥</span> Importar Dados</a>
+    <a onclick="showPage('tutory')" id="nav-tutory"><span class="nav-icon">🤖</span> Dados Tutory</a>
+    <div class="nav-section">Alertas</div>
+    <a onclick="showPage('renewals')" id="nav-renewals"><span class="nav-icon">🔔</span> Renovações <span id="renewal-badge"></span></a>
+  </nav>
+
+  <main>
+    <!-- DASHBOARD -->
+    <div id="page-dashboard" class="page">
+      <div class="page-title">Visão Geral</div>
+      <div class="page-subtitle" id="dashboard-date"></div>
+      <div class="stats-row" id="stats-row"></div>
+      <div id="alerts-section"></div>
+      <div class="page-title" style="font-size:1.1rem;margin-bottom:0.75rem;">Ações Necessárias Agora</div>
+      <div id="actions-needed"></div>
+    </div>
+
+    <!-- STUDENTS LIST -->
+    <div id="page-students" class="page hidden">
+      <div class="page-title">Alunos</div>
+      <div class="page-subtitle">Clique em um aluno para ver o perfil completo</div>
+      <div class="filters">
+        <input type="text" class="search-input" placeholder="🔍 Buscar aluno..." oninput="filterStudents()" id="student-search" />
+        <button class="filter-btn active" onclick="setFilter('todos', this)">Todos</button>
+        <button class="filter-btn" onclick="setFilter('ativo', this)">Ativos</button>
+        <button class="filter-btn" onclick="setFilter('encerrado', this)">Encerrados</button>
+        <button class="filter-btn" onclick="setFilter('discursiva', this)">Com Discursiva</button>
+        <button class="filter-btn" onclick="setFilter('renovar', this)">Renovar em breve</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Aluno</th>
+              <th>Concurso</th>
+              <th>Fase</th>
+              <th>Encerramento</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="students-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FEEDBACK GENERATOR -->
+    <div id="page-feedback" class="page hidden">
+      <div class="page-title">Gerar Feedback</div>
+      <div class="page-subtitle">Selecione um aluno, cole os dados do Tutory e gere o prompt completo</div>
+
+      <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1rem;">
+        <div class="form-group">
+          <label class="form-label">Selecionar aluno</label>
+          <select class="form-control" id="feedback-student-select" onchange="loadStudentForFeedback()">
+            <option value="">— Escolha um aluno —</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="feedback-tutory-section" class="hidden">
+        <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1rem;">
+          <div class="section-divider">Relatórios do Tutory</div>
+          <p style="font-size:0.82rem;color:var(--grafite-light);margin-bottom:1rem;">Cole o texto copiado do Tutory <strong>ou</strong> suba o PDF exportado — o app extrai o texto automaticamente.</p>
+
+          <div class="form-group">
+            <label class="form-label">📋 Histórico Completo <span style="font-weight:400;color:var(--grafite-light)">(desde o início)</span></label>
+            <div style="display:flex;gap:8px;margin-bottom:6px;">
+              <button class="btn btn-ghost btn-sm" onclick="triggerPdfUpload('tutory-historico','pdf-historico')">📎 Subir PDF</button>
+              <span id="pdf-historico-name" style="font-size:0.78rem;color:var(--verde-escuro);align-self:center;"></span>
+            </div>
+            <input type="file" id="pdf-historico" accept=".pdf" hidden onchange="loadPdfIntoTextarea(this,'tutory-historico','pdf-historico-name')">
+            <textarea class="form-control" id="tutory-historico" rows="5" placeholder="Cole o texto do relatório Estudos → período completo (desde o início)"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">📋 Último Mês <span style="font-weight:400;color:var(--grafite-light)">(últimos 30 dias)</span></label>
+            <div style="display:flex;gap:8px;margin-bottom:6px;">
+              <button class="btn btn-ghost btn-sm" onclick="triggerPdfUpload('tutory-mes','pdf-mes')">📎 Subir PDF</button>
+              <span id="pdf-mes-name" style="font-size:0.78rem;color:var(--verde-escuro);align-self:center;"></span>
+            </div>
+            <input type="file" id="pdf-mes" accept=".pdf" hidden onchange="loadPdfIntoTextarea(this,'tutory-mes','pdf-mes-name')">
+            <textarea class="form-control" id="tutory-mes" rows="4" placeholder="Cole o texto do relatório Estudos → últimos 30 dias"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">📋 Última Semana <span style="font-weight:400;color:var(--grafite-light)">(últimos 7 dias)</span></label>
+            <div style="display:flex;gap:8px;margin-bottom:6px;">
+              <button class="btn btn-ghost btn-sm" onclick="triggerPdfUpload('tutory-semana','pdf-semana')">📎 Subir PDF</button>
+              <span id="pdf-semana-name" style="font-size:0.78rem;color:var(--verde-escuro);align-self:center;"></span>
+            </div>
+            <input type="file" id="pdf-semana" accept=".pdf" hidden onchange="loadPdfIntoTextarea(this,'tutory-semana','pdf-semana-name')">
+            <textarea class="form-control" id="tutory-semana" rows="4" placeholder="Cole o texto do relatório Estudos → últimos 7 dias"></textarea>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="generatePrompt()" style="margin-bottom:1rem;">🚀 Gerar Prompt Completo</button>
+      </div>
+
+      <div id="prompt-output" class="hidden">
+        <div class="copy-banner">
+          <span>✅ Prompt gerado! Copie e cole em uma nova conversa com o Claude.</span>
+          <button class="btn btn-ghost btn-sm" onclick="copyPrompt()">📋 Copiar tudo</button>
+        </div>
+        <div class="prompt-box" id="prompt-content"></div>
+      </div>
+    </div>
+
+    <!-- IMPORT -->
+    <div id="page-import" class="page hidden">
+      <div class="page-title">Importar Dados</div>
+      <div class="page-subtitle">Atualize os dados dos alunos importando os arquivos da plataforma e do Google Forms</div>
+
+      <div class="import-grid">
+        <div>
+          <div class="section-divider">Relatório da Plataforma (Excel)</div>
+          <div class="drop-zone" id="drop-excel" onclick="document.getElementById('excel-file').click()" ondragover="handleDragOver(event,'drop-excel')" ondragleave="handleDragLeave('drop-excel')" ondrop="handleDrop(event,'excel')">
+            <div class="drop-zone-icon">📊</div>
+            <div class="drop-zone-text"><strong>Clique ou arraste o arquivo .xlsx</strong><br>Relatório mensal da plataforma de cursos</div>
+          </div>
+          <input type="file" id="excel-file" accept=".xlsx,.xls" hidden onchange="importExcel(event)" />
+          <div id="excel-status" style="margin-top:0.5rem;font-size:0.78rem;color:var(--verde-escuro);"></div>
+        </div>
+        <div>
+          <div class="section-divider">Respostas do Google Forms (CSV)</div>
+          <div class="drop-zone" id="drop-forms" onclick="document.getElementById('forms-file').click()" ondragover="handleDragOver(event,'drop-forms')" ondragleave="handleDragLeave('drop-forms')" ondrop="handleDrop(event,'forms')">
+            <div class="drop-zone-icon">📋</div>
+            <div class="drop-zone-text"><strong>Clique ou arraste o arquivo .csv</strong><br>Exportado do Google Sheets (respostas do Forms)</div>
+          </div>
+          <input type="file" id="forms-file" accept=".csv" hidden onchange="importForms(event)" />
+          <div id="forms-status" style="margin-top:0.5rem;font-size:0.78rem;color:var(--verde-escuro);"></div>
+        </div>
+      </div>
+
+      <div class="section-divider">Adicionar / Editar Aluno Manualmente</div>
+      <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:1.25rem;">
+        <p style="font-size:0.82rem;color:var(--grafite-light);margin-bottom:1rem;">Use para adicionar um novo aluno ou atualizar informações manualmente (fase do concurso, data de prova, etc.)</p>
+        <button class="btn btn-primary" onclick="openStudentModal(null)">+ Adicionar aluno manualmente</button>
+      </div>
+    </div>
+
+    <!-- TUTORY DATA -->
+    <div id="page-tutory" class="page hidden">
+      <div class="page-title">Dados do Tutory</div>
+      <div class="page-subtitle">Cole os dados das listas administrativas do Tutory para enriquecer os perfis dos alunos</div>
+
+      <!-- BOOKMARKLET SETUP -->
+      <div id="bookmarklet-setup" style="background:linear-gradient(135deg,#f0f8ed,#e8f5e4);border:2px solid var(--verde);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <div style="font-size:2rem;flex-shrink:0;">🔖</div>
+          <div style="flex:1;">
+            <div style="font-weight:800;font-size:0.95rem;color:var(--grafite);margin-bottom:4px;">Configure uma vez, use sempre</div>
+            <div style="font-size:0.82rem;color:var(--grafite-light);margin-bottom:12px;">
+              Arraste o botão abaixo para a sua barra de favoritos do Chrome. Depois, sempre que estiver em uma lista do Tutory, é só clicar — o app abre automaticamente com os dados importados.
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <a id="bookmarklet-link"
+                 href=""
+                 style="display:inline-flex;align-items:center;gap:8px;background:var(--grafite);color:var(--verde-claro);padding:10px 16px;border-radius:10px;font-weight:800;font-size:0.85rem;text-decoration:none;cursor:grab;border:2px dashed rgba(197,255,181,0.5);"
+                 onclick="alert('Não clique — arraste este botão para a barra de favoritos do Chrome!'); return false;"
+                 draggable="true">
+                🌿 Enviar para o Painel
+              </a>
+              <div style="font-size:0.75rem;color:var(--verde-escuro);">← arraste para os favoritos</div>
+            </div>
+            <div style="margin-top:10px;font-size:0.78rem;color:var(--grafite-light);">
+              <strong>Como usar:</strong> Abra qualquer lista no Tutory (atraso, engajamento, coaching, replanejamentos ou assuntos sinalizados) → clique no favorito → pronto!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-nav" id="tutory-tab-nav">
+        <button class="tab-btn active" onclick="showTutoryTab('tt-atraso', this)">⚠️ Atrasos</button>
+        <button class="tab-btn" onclick="showTutoryTab('tt-engaj', this)">📈 Engajamento</button>
+        <button class="tab-btn" onclick="showTutoryTab('tt-coaching', this)">📚 Coaching</button>
+        <button class="tab-btn" onclick="showTutoryTab('tt-replanej', this)">🔄 Replanejamentos</button>
+        <button class="tab-btn" onclick="showTutoryTab('tt-assuntos', this)">🏷️ Sinalizados</button>
+      </div>
+
+      <!-- ATRASO -->
+      <div id="tt-atraso" class="tutory-pane">
+        <div class="tutory-instructions">📍 <strong>admin.tutory.com.br/alunos/atraso</strong> → Ctrl+A, Ctrl+C → cole abaixo</div>
+        <textarea class="form-control" id="t-atraso-text" rows="10" placeholder="Cole aqui o texto da página 'Alunos com Atraso'..."></textarea>
+        <div class="tutory-actions">
+          <button class="btn btn-primary" onclick="importTutoryAtraso()">⚡ Importar Atrasos</button>
+          <span class="tutory-status" id="t-atraso-status"></span>
+        </div>
+        <div id="t-atraso-results" class="tutory-results"></div>
+      </div>
+
+      <!-- ENGAJAMENTO -->
+      <div id="tt-engaj" class="tutory-pane hidden">
+        <div class="tutory-instructions">📍 <strong>admin.tutory.com.br/alunos/engajamento</strong> → ajuste período/filtro → Ctrl+A, Ctrl+C → cole abaixo</div>
+        <textarea class="form-control" id="t-engaj-text" rows="10" placeholder="Cole aqui o texto da página 'Alunos Engajados'..."></textarea>
+        <div class="tutory-actions">
+          <button class="btn btn-primary" onclick="importTutoryEngajamento()">⚡ Importar Engajamento</button>
+          <span class="tutory-status" id="t-engaj-status"></span>
+        </div>
+        <div id="t-engaj-results" class="tutory-results"></div>
+      </div>
+
+      <!-- COACHING -->
+      <div id="tt-coaching" class="tutory-pane hidden">
+        <div class="tutory-instructions">📍 <strong>admin.tutory.com.br/alunos/coaching</strong> → Ctrl+A, Ctrl+C → cole abaixo (importa o plano de estudos de cada aluno)</div>
+        <textarea class="form-control" id="t-coaching-text" rows="10" placeholder="Cole aqui o texto da página 'Relatório de Coaching'..."></textarea>
+        <div class="tutory-actions">
+          <button class="btn btn-primary" onclick="importTutoryCoaching()">⚡ Importar Planos</button>
+          <span class="tutory-status" id="t-coaching-status"></span>
+        </div>
+        <div id="t-coaching-results" class="tutory-results"></div>
+      </div>
+
+      <!-- REPLANEJAMENTOS -->
+      <div id="tt-replanej" class="tutory-pane hidden">
+        <div class="tutory-instructions">📍 <strong>admin.tutory.com.br/alunos/replanejamentos</strong> → Ctrl+A, Ctrl+C → cole abaixo</div>
+        <textarea class="form-control" id="t-replanej-text" rows="10" placeholder="Cole aqui o texto da página 'Últimos Replanejamentos'..."></textarea>
+        <div class="tutory-actions">
+          <button class="btn btn-primary" onclick="importTutoryReplanejamentos()">⚡ Importar Replanejamentos</button>
+          <span class="tutory-status" id="t-replanej-status"></span>
+        </div>
+        <div id="t-replanej-results" class="tutory-results"></div>
+      </div>
+
+      <!-- ASSUNTOS SINALIZADOS -->
+      <div id="tt-assuntos" class="tutory-pane hidden">
+        <div class="tutory-instructions">📍 <strong>admin.tutory.com.br/alunos/assuntos-sinalizados</strong> → Ctrl+A, Ctrl+C → cole abaixo</div>
+        <textarea class="form-control" id="t-assuntos-text" rows="10" placeholder="Cole aqui o texto da página 'Assuntos Sinalizados'..."></textarea>
+        <div class="tutory-actions">
+          <button class="btn btn-primary" onclick="importTutoryAssuntos()">⚡ Importar Sinalizados</button>
+          <span class="tutory-status" id="t-assuntos-status"></span>
+        </div>
+        <div id="t-assuntos-results" class="tutory-results"></div>
+      </div>
+    </div>
+
+    <!-- RENEWALS -->
+    <div id="page-renewals" class="page hidden">
+      <div class="page-title">Controle de Renovações</div>
+      <div class="page-subtitle">Alunos com acesso próximo do vencimento</div>
+      <div id="renewals-content"></div>
+    </div>
+  </main>
+</div>
+
+<!-- STUDENT MODAL -->
+<div class="modal-overlay hidden" id="student-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modal-title">Perfil do Aluno</div>
+        <div class="modal-subtitle" id="modal-subtitle"></div>
+      </div>
+      <button class="close-btn" onclick="closeModal('student-modal')">×</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay hidden" id="edit-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="edit-modal-title">Editar Aluno</div>
+      </div>
+      <button class="close-btn" onclick="closeModal('edit-modal')">×</button>
+    </div>
+    <div class="modal-body" id="edit-modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('edit-modal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveStudent()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA LAYER
+// ============================================================
+let db = { students: {}, lastImport: null };
+let currentFilter = 'todos';
+let editingId = null;
+
+const PHASES = ['pre-edital','edital-publicado','banca-definida','reta-final','pos-prova'];
+const PHASE_LABELS = {
+  'pre-edital': 'Pré-edital',
+  'edital-publicado': 'Edital publicado',
+  'banca-definida': 'Banca definida',
+  'reta-final': 'Reta final',
+  'pos-prova': 'Pós-prova'
+};
+
+function loadDB() {
+  const saved = localStorage.getItem('mentoria_db');
+  if (saved) db = JSON.parse(saved);
+}
+function saveDB() {
+  localStorage.setItem('mentoria_db', JSON.stringify(db));
+}
+function exportAllData() {
+  const blob = new Blob([JSON.stringify(db, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `mentoria-backup-${today()}.json`;
+  a.click();
+}
+function importAllData(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      db = JSON.parse(ev.target.result);
+      saveDB();
+      renderAll();
+      alert('✅ Backup restaurado com sucesso!');
+    } catch { alert('Arquivo inválido.'); }
+  };
+  reader.readAsText(file);
+}
+function today() {
+  return new Date().toISOString().slice(0,10);
+}
+function daysBetween(d1, d2) {
+  return Math.round((new Date(d2) - new Date(d1)) / 86400000);
+}
+function monthsBetween(d1, d2) {
+  const a = new Date(d1), b = new Date(d2);
+  return (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth());
+}
+function formatDate(d) {
+  if (!d) return '—';
+  const parts = d.split('-');
+  if (parts.length < 3) return d;
+  return `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
+function slugify(str) {
+  return str.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/_+/g, '_');
+}
+
+// ============================================================
+// STUDENT LOGIC
+// ============================================================
+function getStudentId(student) {
+  return student.email ? slugify(student.email) : slugify(student.nome + '_' + student.dataEntrada);
+}
+
+function getDaysToExpiry(student) {
+  if (!student.dataEncerramento) return null;
+  return daysBetween(today(), student.dataEncerramento);
+}
+
+function getMonthsInMentoria(student) {
+  if (!student.dataEntrada) return 0;
+  return monthsBetween(student.dataEntrada, today());
+}
+
+function getDaysToProva(student) {
+  if (!student.concurso1DataProva) return null;
+  return daysBetween(today(), student.concurso1DataProva);
+}
+
+function getActionsForStudent(student) {
+  const actions = [];
+  const phase = student.concurso1Fase;
+  const hasDiscursiva = student.concurso1Discursiva === 'Sim';
+  const daysToProva = getDaysToProva(student);
+  const daysToExpiry = getDaysToExpiry(student);
+
+  if (daysToExpiry !== null && daysToExpiry <= 45 && daysToExpiry > 0 && student.status === 'Ativo') {
+    actions.push({ icon: '🔔', text: `Renovação em ${daysToExpiry} dias — iniciar conversa de renovação`, urgency: daysToExpiry <= 15 ? 'danger' : 'warning' });
+  }
+  if (phase === 'edital-publicado') {
+    actions.push({ icon: '📋', text: 'Ajustar plano conforme edital publicado', urgency: 'info' });
+  }
+  if (phase === 'banca-definida') {
+    actions.push({ icon: '🎯', text: 'Revisar estilo da banca e ajustar exercícios', urgency: 'info' });
+  }
+  if (phase === 'reta-final' || (daysToProva !== null && daysToProva <= 60 && daysToProva > 0)) {
+    actions.push({ icon: '🚀', text: 'Alterar plano para modo reta final — parar teoria nova', urgency: 'warning' });
+    actions.push({ icon: '📝', text: 'Criar simulados — pelo menos 2 antes da prova', urgency: 'warning' });
+  }
+  if (hasDiscursiva) {
+    actions.push({ icon: '✍️', text: 'Verificar guia de discursiva entregue ao aluno', urgency: 'info' });
+    actions.push({ icon: '📩', text: 'Cobrar entrega de redações para correção', urgency: 'info' });
+    if (phase === 'reta-final' || (daysToProva !== null && daysToProva <= 60)) {
+      actions.push({ icon: '📝', text: 'Incluir metas de discursiva no plano — prova próxima!', urgency: 'danger' });
+    }
+  }
+  if (daysToProva !== null && daysToProva <= 7 && daysToProva > 0) {
+    actions.push({ icon: '⚡', text: `PROVA EM ${daysToProva} DIAS — enviar checklist pré-prova`, urgency: 'danger' });
+  }
+  return actions;
+}
+
+function getRenewalRingColor(days) {
+  if (days <= 15) return 'var(--danger)';
+  if (days <= 45) return 'var(--warning)';
+  return 'var(--verde)';
+}
+
+// ============================================================
+// IMPORT: EXCEL (plataforma)
+// ============================================================
+function importExcel(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const wb = XLSX.read(ev.target.result, {type: 'binary'});
+    const ws = wb.Sheets[wb.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(ws, {defval: ''});
+    let count = 0;
+    rows.forEach(row => {
+      // Only process "MENTORIA ESTUDE AMBIENTAL" course rows
+      const course = (row['Nome do Curso'] || row['A'] || '').toString();
+      if (!course.includes('MENTORIA')) return;
+      const nome = (row['Nome do Aluno'] || row['D'] || '').toString().trim();
+      const email = (row['E-mail do aluno'] || row['C'] || '').toString().trim().toLowerCase();
+      const dataEntrada = (row['Data de Matrícula'] || row['E'] || '').toString().trim();
+      const dataEncerramento = (row['Data de Encerramento'] || row['F'] || '').toString().trim();
+      const status = (row['Status do Aluno'] || row['G'] || '').toString().trim();
+      if (!nome || nome.length < 2) return;
+      const id = email ? slugify(email) : slugify(nome + '_' + dataEntrada);
+      if (!db.students[id]) db.students[id] = { id };
+      Object.assign(db.students[id], {
+        nome: nome,
+        email: email,
+        dataEntrada: normalizeDate(dataEntrada),
+        dataEncerramento: normalizeDate(dataEncerramento),
+        status: status || 'Ativo',
+        sourcePlataforma: true
+      });
+      count++;
+    });
+    saveDB();
+    renderAll();
+    document.getElementById('excel-status').textContent = `✅ ${count} alunos importados/atualizados`;
+  };
+  reader.readAsBinaryString(file);
+}
+
+function normalizeDate(d) {
+  if (!d) return '';
+  // Already YYYY-MM-DD
+  if (/^\d{4}-\d{2}-\d{2}/.test(d)) return d.slice(0,10);
+  // DD/MM/YYYY
+  const m = d.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+  if (m) return `${m[3]}-${m[2]}-${m[1]}`;
+  // Excel serial number
+  if (/^\d{5}$/.test(d)) {
+    const date = new Date((parseInt(d) - 25569) * 86400000);
+    return date.toISOString().slice(0,10);
+  }
+  return d;
+}
+
+// ============================================================
+// IMPORT: GOOGLE FORMS CSV
+// ============================================================
+function importForms(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const rows = parseCSV(ev.target.result);
+    if (rows.length < 2) { alert('CSV vazio ou inválido.'); return; }
+    const headers = rows[0].map(h => h.toLowerCase().trim());
+    let count = 0;
+    for (let i = 1; i < rows.length; i++) {
+      const row = {};
+      headers.forEach((h, idx) => row[h] = (rows[i][idx] || '').trim());
+      const nome = findField(row, ['nome completo', 'seu nome completo', 'nome']);
+      const email = findField(row, ['e-mail', 'email', 'seu e-mail']);
+      const apelido = findField(row, ['como você prefere', 'apelido', 'nome social']);
+      const whats = findField(row, ['whatsapp', 'seu whatsapp']);
+      const concurso1 = findField(row, ['concurso principal', 'seu concurso principal', 'qual é o seu concurso']);
+      const fase1 = findField(row, ['em que fase está esse concurso', 'fase do concurso', 'fase']);
+      const dataProva1 = findField(row, ['data da prova', 'data prevista', 'se a prova já tem data']);
+      const disc1 = findField(row, ['discursiva', 'tem prova discursiva']);
+      const concurso2 = findField(row, ['segundo concurso', 'outro concurso', 'você tem outro concurso']);
+      const horas = findField(row, ['horas por dia', 'quantas horas por dia']);
+      const turno = findField(row, ['turno', 'qual turno']);
+      const dificuldades = findField(row, ['trava', 'dificuldade', 'o que mais te trava']);
+      const motivacao = findField(row, ['por que você escolheu', 'por que escolheu', 'propósito', 'motivação']);
+      const historico = findField(row, ['provas de concurso', 'tentativas anteriores', 'já fez provas']);
+      const pontosFracos = findField(row, ['ponto fraco', 'matéria que você já sabe', 'pontos fracos']);
+      const obs = findField(row, ['mais alguma coisa', 'observações', 'alguma coisa mais']);
+      if (!nome && !email) continue;
+      const id = email ? slugify(email) : slugify(nome + '_' + today());
+      if (!db.students[id]) db.students[id] = { id };
+      const updates = {};
+      if (nome) updates.nome = nome;
+      if (email) updates.email = email.toLowerCase();
+      if (apelido) updates.apelido = apelido;
+      if (whats) updates.whatsapp = whats;
+      if (concurso1) updates.concurso1Nome = concurso1;
+      if (fase1) updates.concurso1Fase = normalizeFase(fase1);
+      if (dataProva1) updates.concurso1DataProva = normalizeDate(dataProva1);
+      if (disc1) updates.concurso1Discursiva = disc1.includes('im') ? 'Sim' : disc1.includes('ão') ? 'Não' : 'Não sei';
+      if (concurso2) updates.concurso2Nome = concurso2;
+      if (horas) updates.horasDisponiveis = horas;
+      if (turno) updates.turnoEstudo = turno;
+      if (dificuldades) updates.dificuldades = dificuldades;
+      if (motivacao) updates.motivacao = motivacao;
+      if (historico) updates.historicoConcursos = historico;
+      if (pontosFracos) updates.pontosFracosConhecidos = pontosFracos;
+      if (obs) updates.observacoes = obs;
+      updates.sourceForm = true;
+      Object.assign(db.students[id], updates);
+      count++;
+    }
+    saveDB();
+    renderAll();
+    document.getElementById('forms-status').textContent = `✅ ${count} respostas importadas`;
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function findField(row, keys) {
+  for (const k of keys) {
+    for (const h of Object.keys(row)) {
+      if (h.includes(k)) return row[h];
+    }
+  }
+  return '';
+}
+
+function normalizeFase(f) {
+  f = f.toLowerCase();
+  if (f.includes('pré') || f.includes('pre')) return 'pre-edital';
+  if (f.includes('edital')) return 'edital-publicado';
+  if (f.includes('banca')) return 'banca-definida';
+  if (f.includes('reta') || f.includes('prova marcada') || f.includes('data')) return 'reta-final';
+  if (f.includes('pós') || f.includes('resultado')) return 'pos-prova';
+  return 'pre-edital';
+}
+
+function parseCSV(text) {
+  const rows = [];
+  const lines = text.split('\n');
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    const cols = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') { inQ = !inQ; continue; }
+      if (c === ',' && !inQ) { cols.push(cur); cur = ''; continue; }
+      cur += c;
+    }
+    cols.push(cur);
+    rows.push(cols);
+  }
+  return rows;
+}
+
+// ============================================================
+// DRAG & DROP
+// ============================================================
+function handleDragOver(e, id) {
+  e.preventDefault();
+  document.getElementById(id).classList.add('dragover');
+}
+function handleDragLeave(id) {
+  document.getElementById(id).classList.remove('dragover');
+}
+function handleDrop(e, type) {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  if (type === 'excel') {
+    const fakeE = {target: {files: [file]}};
+    importExcel(fakeE);
+    document.getElementById('drop-excel').classList.remove('dragover');
+  } else {
+    const fakeE = {target: {files: [file]}};
+    importForms(fakeE);
+    document.getElementById('drop-forms').classList.remove('dragover');
+  }
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+// PDF helpers
+function triggerPdfUpload(textareaId, inputId) {
+  document.getElementById(inputId).click();
+}
+
+async function loadPdfIntoTextarea(input, textareaId, nameSpanId) {
+  const file = input.files[0];
+  if (!file) return;
+  document.getElementById(nameSpanId).textContent = '⏳ Lendo PDF...';
+  try {
+    if (typeof pdfjsLib === 'undefined') throw new Error('PDF.js não carregado');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let text = '';
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      text += content.items.map(it => it.str).join(' ') + '\n';
+    }
+    document.getElementById(textareaId).value = text.trim();
+    document.getElementById(nameSpanId).textContent = `✅ ${file.name} (${pdf.numPages}p)`;
+  } catch(e) {
+    document.getElementById(nameSpanId).textContent = '❌ Erro ao ler PDF';
+    console.error(e);
+  }
+  input.value = '';
+}
+
+// ============================================================
+function renderAll() {
+  renderDashboard();
+  renderStudentsTable();
+  renderFeedbackSelect();
+  renderRenewals();
+}
+
+function renderDashboard() {
+  const students = Object.values(db.students);
+  const ativos = students.filter(s => s.status === 'Ativo');
+  const encerrados = students.filter(s => s.status !== 'Ativo');
+  const comDiscursiva = ativos.filter(s => s.concurso1Discursiva === 'Sim');
+  const renovarBreve = ativos.filter(s => {
+    const d = getDaysToExpiry(s);
+    return d !== null && d <= 45 && d > 0;
+  });
+
+  document.getElementById('dashboard-date').textContent = `Atualizado em ${formatDate(today())}`;
+
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card verde">
+      <div class="stat-label">Alunos Ativos</div>
+      <div class="stat-value">${ativos.length}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Encerrados</div>
+      <div class="stat-value" style="color:var(--grafite-light)">${encerrados.length}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Com Discursiva</div>
+      <div class="stat-value" style="color:var(--info)">${comDiscursiva.length}</div>
+    </div>
+    <div class="stat-card ${renovarBreve.length > 0 ? 'warning' : ''}">
+      <div class="stat-label">Renovar em breve</div>
+      <div class="stat-value">${renovarBreve.length}</div>
+      <div class="stat-sub">próximos 45 dias</div>
+    </div>
+  `;
+
+  // Alerts
+  let alertsHTML = '';
+  renovarBreve.forEach(s => {
+    const d = getDaysToExpiry(s);
+    alertsHTML += `<div class="alert-box"><strong>⚠️ ${s.apelido || s.nome}</strong> — acesso encerra em <strong>${d} dias</strong> (${formatDate(s.dataEncerramento)})</div>`;
+  });
+
+  // Alert: active students without Tutory study plan
+  const semPlano = ativos.filter(s => !s.tutory || !s.tutory.planoEstudo);
+  if (semPlano.length > 0) {
+    alertsHTML += `<div style="background:#fff3e0;border:1px solid #ffb74d;border-radius:10px;padding:1rem;margin-bottom:0.5rem;">
+      <div style="font-weight:700;color:#e65100;margin-bottom:0.5rem;">📋 ${semPlano.length} aluno(s) SEM plano de estudos no Tutory</div>
+      ${semPlano.map(s => {
+        const d = getDaysToExpiry(s);
+        const badge = d !== null && d <= 0
+          ? `<span style="background:#c62828;color:white;border-radius:4px;padding:1px 6px;font-size:0.72rem;margin-left:6px;">VENCIDO</span>`
+          : d !== null && d <= 30
+          ? `<span style="background:#e65100;color:white;border-radius:4px;padding:1px 6px;font-size:0.72rem;margin-left:6px;">encerra ${d}d</span>`
+          : '';
+        return `<div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid #ffe0b2;">
+          <span style="font-size:0.84rem;">${s.apelido || s.nome} <span style="color:#888;font-size:0.78rem;">${s.email}</span>${badge}</span>
+          <button class="btn btn-ghost btn-sm" onclick="viewStudent('${s.id}')" style="padding:2px 8px;font-size:0.75rem;">Ver</button>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }
+
+  document.getElementById('alerts-section').innerHTML = alertsHTML;
+
+  // Actions needed
+  let actionsHTML = '';
+  ativos.forEach(s => {
+    const actions = getActionsForStudent(s);
+    const urgent = actions.filter(a => a.urgency === 'danger' || a.urgency === 'warning');
+    if (urgent.length === 0) return;
+    actionsHTML += `<div class="concurso-card ${urgent[0].urgency === 'danger' ? 'renewal-urgent' : 'renewal-soon'}" style="margin-bottom:0.5rem;">
+      <div class="concurso-header"><div class="concurso-name">${s.apelido || s.nome}</div>
+      <button class="btn btn-ghost btn-sm" onclick="viewStudent('${s.id}')">Ver perfil</button></div>
+      ${urgent.map(a => `<div class="action-item"><span class="action-icon">${a.icon}</span><span>${a.text}</span></div>`).join('')}
+    </div>`;
+  });
+  if (!actionsHTML) actionsHTML = '<div style="color:var(--grafite-light);font-size:0.88rem;padding:1rem 0;">✅ Nenhuma ação urgente no momento.</div>';
+  document.getElementById('actions-needed').innerHTML = actionsHTML;
+}
+
+function renderStudentsTable() {
+  const search = (document.getElementById('student-search')?.value || '').toLowerCase();
+  let students = Object.values(db.students);
+
+  if (currentFilter === 'ativo') students = students.filter(s => s.status === 'Ativo');
+  else if (currentFilter === 'encerrado') students = students.filter(s => s.status !== 'Ativo');
+  else if (currentFilter === 'discursiva') students = students.filter(s => s.concurso1Discursiva === 'Sim');
+  else if (currentFilter === 'renovar') students = students.filter(s => { const d = getDaysToExpiry(s); return d !== null && d <= 45 && d > 0; });
+
+  if (search) students = students.filter(s => (s.nome||'').toLowerCase().includes(search) || (s.email||'').toLowerCase().includes(search) || (s.concurso1Nome||'').toLowerCase().includes(search));
+
+  students.sort((a, b) => (a.nome || '').localeCompare(b.nome || ''));
+
+  const tbody = document.getElementById('students-table-body');
+  if (!students.length) {
+    tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><div class="empty-state-icon">👤</div><div class="empty-state-text">Nenhum aluno encontrado</div></div></td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = students.map(s => {
+    const days = getDaysToExpiry(s);
+    const months = getMonthsInMentoria(s);
+    const actions = getActionsForStudent(s);
+    const hasUrgent = actions.some(a => a.urgency === 'danger');
+    const hasWarning = actions.some(a => a.urgency === 'warning');
+    const rowClass = hasUrgent ? 'renewal-urgent' : hasWarning ? 'renewal-soon' : '';
+    const statusBadge = s.status === 'Ativo'
+      ? `<span class="badge badge-green">● Ativo</span>`
+      : `<span class="badge badge-gray">Encerrado</span>`;
+    const phaseBadge = s.concurso1Fase
+      ? `<span class="badge badge-info">${PHASE_LABELS[s.concurso1Fase] || s.concurso1Fase}</span>`
+      : `<span class="badge badge-gray">—</span>`;
+    const discBadge = s.concurso1Discursiva === 'Sim' ? `<span class="badge badge-purple">✍️ Discursiva</span>` : '';
+    const expiryColor = days !== null && days <= 15 ? 'var(--danger)' : days !== null && days <= 45 ? 'var(--warning)' : 'var(--grafite)';
+    return `<tr class="${rowClass}" onclick="viewStudent('${s.id}')">
+      <td><div class="student-name">${s.apelido || s.nome || '—'}</div><div class="student-email">${s.email || ''}</div></td>
+      <td style="max-width:180px;font-size:0.78rem;">${s.concurso1Nome || '<span style="color:var(--grafite-light)">Não informado</span>'}</td>
+      <td><div class="tags">${phaseBadge}${discBadge}</div></td>
+      <td><span style="font-weight:700;color:${expiryColor}">${days !== null ? `${days}d` : '—'}</span><div style="font-size:0.7rem;color:var(--grafite-light)">${formatDate(s.dataEncerramento)}</div></td>
+      <td>${statusBadge}<div style="font-size:0.7rem;color:var(--grafite-light);margin-top:2px">${months}m na mentoria</div></td>
+      <td onclick="event.stopPropagation()"><button class="btn btn-primary btn-sm" onclick="openStudentModal('${s.id}')">✏️ Editar</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderFeedbackSelect() {
+  const sel = document.getElementById('feedback-student-select');
+  const ativos = Object.values(db.students).filter(s => s.status === 'Ativo').sort((a,b) => (a.nome||'').localeCompare(b.nome||''));
+  sel.innerHTML = '<option value="">— Escolha um aluno —</option>' + ativos.map(s => `<option value="${s.id}">${s.apelido || s.nome}</option>`).join('');
+}
+
+function renderRenewals() {
+  const students = Object.values(db.students).filter(s => s.status === 'Ativo');
+  const sorted = students.map(s => ({s, days: getDaysToExpiry(s)})).filter(x => x.days !== null).sort((a,b) => a.days - b.days);
+  const content = document.getElementById('renewals-content');
+  if (!sorted.length) { content.innerHTML = '<div class="empty-state"><div class="empty-state-icon">✅</div><div class="empty-state-text">Nenhuma renovação necessária no momento</div></div>'; return; }
+  let badge = sorted.filter(x => x.days <= 45 && x.days > 0).length;
+  document.getElementById('renewal-badge').textContent = badge > 0 ? `(${badge})` : '';
+  content.innerHTML = sorted.map(({s, days}) => {
+    const urgClass = days <= 15 ? 'renewal-urgent' : days <= 45 ? 'renewal-soon' : '';
+    const pct = Math.max(0, Math.min(100, (days / 365) * 100));
+    const fillColor = getRenewalRingColor(days);
+    const months = getMonthsInMentoria(s);
+    return `<div class="concurso-card ${urgClass}" style="margin-bottom:0.5rem;">
+      <div class="concurso-header">
+        <div>
+          <div class="concurso-name">${s.apelido || s.nome}</div>
+          <div style="font-size:0.75rem;color:var(--grafite-light)">${s.email || ''} · ${months} meses na mentoria</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:900;font-size:1.1rem;color:${fillColor}">${days > 0 ? `${days} dias` : 'VENCIDO'}</div>
+          <div style="font-size:0.72rem;color:var(--grafite-light)">Encerra ${formatDate(s.dataEncerramento)}</div>
+        </div>
+      </div>
+      <div class="renewal-bar"><div class="renewal-fill" style="width:${pct}%;background:${fillColor}"></div></div>
+      ${days <= 45 && days > 0 ? `<div style="margin-top:8px;font-size:0.78rem;color:var(--grafite-light)">💡 Iniciar conversa de renovação agora</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// VIEW STUDENT
+// ============================================================
+function viewStudent(id) {
+  const s = db.students[id];
+  if (!s) return;
+  const actions = getActionsForStudent(s);
+  const months = getMonthsInMentoria(s);
+  const days = getDaysToExpiry(s);
+  const daysProva = getDaysToProva(s);
+  const phaseIdx = PHASES.indexOf(s.concurso1Fase);
+
+  document.getElementById('modal-title').textContent = s.nome || 'Aluno';
+  document.getElementById('modal-subtitle').textContent = s.email || '';
+
+  let phaseTimeline = '';
+  if (s.concurso1Fase) {
+    phaseTimeline = `<div class="phase-timeline">` + PHASES.map((p, i) => `
+      <div class="phase-step ${i < phaseIdx ? 'done' : i === phaseIdx ? 'current' : ''}">
+        <div class="phase-dot"></div>
+        <div class="phase-label">${PHASE_LABELS[p].split(' ')[0]}</div>
+      </div>`).join('') + `</div>`;
+  }
+
+  document.getElementById('modal-body').innerHTML = `
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab('tab-perfil', this)">Perfil</button>
+      <button class="tab-btn" onclick="showTab('tab-concurso', this)">Concurso</button>
+      <button class="tab-btn" onclick="showTab('tab-acoes', this)">Ações (${actions.length})</button>
+      <button class="tab-btn" onclick="showTab('tab-tutory', this)">🤖 Tutory</button>
+    </div>
+
+    <div id="tab-perfil" class="tab-pane active">
+      <div class="info-grid">
+        <div class="info-item"><div class="label">Como chamar</div><div class="value">${s.apelido || s.nome || '—'}</div></div>
+        <div class="info-item"><div class="label">WhatsApp</div><div class="value">${s.whatsapp || '—'}</div></div>
+        <div class="info-item"><div class="label">Na mentoria há</div><div class="value">${months} meses</div></div>
+        <div class="info-item"><div class="label">Encerramento</div><div class="value" style="color:${days !== null && days <= 45 ? 'var(--warning)' : 'inherit'}">${formatDate(s.dataEncerramento)} ${days !== null ? `(${days}d)` : ''}</div></div>
+        <div class="info-item"><div class="label">Entrada</div><div class="value">${formatDate(s.dataEntrada)}</div></div>
+        <div class="info-item"><div class="label">Status</div><div class="value">${s.status || '—'}</div></div>
+        <div class="info-item"><div class="label">Horas/dia</div><div class="value">${s.horasDisponiveis || '—'}</div></div>
+        <div class="info-item"><div class="label">Turno</div><div class="value">${s.turnoEstudo || '—'}</div></div>
+      </div>
+      ${s.motivacao ? `<div class="motivacao-box">${s.motivacao}</div>` : ''}
+      ${s.pontosFracosConhecidos ? `<div class="info-item" style="margin-bottom:0.5rem;"><div class="label">⚠️ Pontos fracos conhecidos</div><div class="value" style="font-weight:400">${s.pontosFracosConhecidos}</div></div>` : ''}
+      ${s.historicoConcursos ? `<div class="info-item" style="margin-bottom:0.5rem;"><div class="label">📚 Histórico de provas</div><div class="value" style="font-weight:400">${s.historicoConcursos}</div></div>` : ''}
+      ${s.observacoes ? `<div class="info-item"><div class="label">📝 Observações</div><div class="value" style="font-weight:400">${s.observacoes}</div></div>` : ''}
+    </div>
+
+    <div id="tab-concurso" class="tab-pane">
+      ${s.concurso1Nome ? `
+        <div class="concurso-card">
+          <div class="concurso-name">🎯 ${s.concurso1Nome}</div>
+          ${phaseTimeline}
+          <div class="concurso-meta">
+            ${s.concurso1Fase ? `<span class="badge badge-info">${PHASE_LABELS[s.concurso1Fase]}</span>` : ''}
+            ${s.concurso1Discursiva === 'Sim' ? '<span class="badge badge-purple">✍️ Tem discursiva</span>' : ''}
+            ${s.concurso1Discursiva === 'Não' ? '<span class="badge badge-gray">Sem discursiva</span>' : ''}
+            ${s.concurso1DataProva ? `<span class="badge badge-warning">📅 Prova: ${formatDate(s.concurso1DataProva)} ${daysProva !== null ? `(${daysProva}d)` : ''}</span>` : ''}
+          </div>
+        </div>
+      ` : '<div class="empty-state"><div class="empty-state-icon">🎯</div><div class="empty-state-text">Concurso não informado ainda</div></div>'}
+      ${s.concurso2Nome ? `<div class="concurso-card"><div class="concurso-name">🎯 ${s.concurso2Nome} <span style="font-size:0.75rem;color:var(--grafite-light)">(secundário)</span></div></div>` : ''}
+    </div>
+
+    <div id="tab-acoes" class="tab-pane">
+      ${actions.length ? `<div class="actions-panel"><div class="actions-title">Ações recomendadas para este aluno</div>${actions.map(a => `<div class="action-item"><span class="action-icon">${a.icon}</span><span>${a.text}</span></div>`).join('')}</div>` : '<div class="empty-state"><div class="empty-state-icon">✅</div><div class="empty-state-text">Nenhuma ação urgente</div></div>'}
+    </div>
+
+    <div id="tab-tutory" class="tab-pane">
+      ${(() => {
+        const t = s.tutory;
+        if (!t) return '<div class="empty-state"><div class="empty-state-icon">🤖</div><div class="empty-state-text">Nenhum dado do Tutory importado ainda.<br>Use "Dados Tutory" no menu para importar.</div></div>';
+        let html = '<div class="info-grid">';
+        if (t.planoEstudo) html += `<div class="info-item" style="grid-column:1/-1"><div class="label">Plano de estudos</div><div class="value" style="font-size:0.8rem;font-weight:600">${t.planoEstudo}</div></div>`;
+        if (t.engajamento) {
+          const e = t.engajamento;
+          html += `<div class="info-item"><div class="label">📈 Engajamento</div><div class="value" style="color:var(--verde)">${e.pct !== null ? e.pct + '%' : '—'}</div></div>`;
+          html += `<div class="info-item"><div class="label">⏱ Horas semana</div><div class="value">${e.horas !== null ? e.horas + 'h' : '—'}</div></div>`;
+          html += `<div class="info-item"><div class="label">📅 Dias ativos</div><div class="value">${e.diasAtivos !== null ? e.diasAtivos + '/' + e.totalDias : '—'}</div></div>`;
+        }
+        if (t.atraso) {
+          html += `<div class="info-item"><div class="label">⚠️ Atraso nas metas</div><div class="value" style="color:${t.atraso.days > 14 ? 'var(--danger)' : 'var(--warning)'}">${t.atraso.days !== null ? t.atraso.days + ' dias' : '—'}</div></div>`;
+          html += `<div class="info-item"><div class="label">💬 Última mensagem</div><div class="value">${t.atraso.ultimaMensagem || 'Sem registros'}</div></div>`;
+        }
+        if (t.assuntosSinalizados !== undefined && t.assuntosSinalizados !== null) {
+          html += `<div class="info-item"><div class="label">🏷️ Assuntos sinalizados</div><div class="value">${t.assuntosSinalizados}</div></div>`;
+        }
+        html += '</div>';
+        if (t.replanejamentos && t.replanejamentos.length > 0) {
+          html += '<div class="section-divider" style="margin-top:0.5rem">Replanejamentos recentes</div>';
+          html += t.replanejamentos.slice(0, 5).map(r => `<div class="action-item"><span class="action-icon">🔄</span><span><strong>${r.data}</strong> — ${r.motivo}</span></div>`).join('');
+        }
+        return html;
+      })()}
+    </div>
+  `;
+
+  document.getElementById('modal-footer').innerHTML = `
+    <button class="btn btn-ghost" onclick="closeModal('student-modal')">Fechar</button>
+    <button class="btn btn-primary" onclick="closeModal('student-modal');openStudentModal('${id}')">✏️ Editar</button>
+    <button class="btn btn-primary" onclick="closeModal('student-modal');goToFeedback('${id}')">💬 Gerar Feedback</button>
+  `;
+
+  document.getElementById('student-modal').classList.remove('hidden');
+}
+
+function showTab(tabId, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ============================================================
+// EDIT STUDENT MODAL
+// ============================================================
+function openStudentModal(id) {
+  editingId = id;
+  const s = id ? (db.students[id] || {}) : {};
+  document.getElementById('edit-modal-title').textContent = id ? `Editar — ${s.nome || 'Aluno'}` : 'Adicionar Aluno';
+  document.getElementById('edit-modal-body').innerHTML = `
+    <div class="section-divider">Dados Pessoais</div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Nome completo</label><input class="form-control" id="f-nome" value="${s.nome || ''}" /></div>
+      <div class="form-group"><label class="form-label">Como chamar (apelido)</label><input class="form-control" id="f-apelido" value="${s.apelido || ''}" /></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">E-mail</label><input class="form-control" id="f-email" type="email" value="${s.email || ''}" /></div>
+      <div class="form-group"><label class="form-label">WhatsApp</label><input class="form-control" id="f-whats" value="${s.whatsapp || ''}" /></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Data de entrada</label><input class="form-control" id="f-entrada" type="date" value="${s.dataEntrada || ''}" /></div>
+      <div class="form-group"><label class="form-label">Data de encerramento</label><input class="form-control" id="f-encerramento" type="date" value="${s.dataEncerramento || ''}" /></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Status</label><select class="form-control" id="f-status"><option ${s.status==='Ativo'?'selected':''}>Ativo</option><option ${s.status==='Encerrado'?'selected':''}>Encerrado</option></select></div>
+      <div class="form-group"><label class="form-label">Horas disponíveis/dia</label><select class="form-control" id="f-horas"><option value="">—</option><option ${s.horasDisponiveis?.includes('1')&&!s.horasDisponiveis?.includes('2')?'selected':''}>Menos de 1 hora</option><option ${s.horasDisponiveis?.includes('1 a 2')?'selected':''}>1 a 2 horas</option><option ${s.horasDisponiveis?.includes('2 a 3')?'selected':''}>2 a 3 horas</option><option ${s.horasDisponiveis?.includes('3 a 4')?'selected':''}>3 a 4 horas</option><option ${s.horasDisponiveis?.includes('4')?'selected':''}>Mais de 4 horas</option></select></div>
+    </div>
+    <div class="section-divider">Concurso Principal</div>
+    <div class="form-group"><label class="form-label">Nome do concurso</label><input class="form-control" id="f-c1nome" placeholder="Ex: IBAMA 2025 — Analista Ambiental" value="${s.concurso1Nome || ''}" /></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Fase atual</label><select class="form-control" id="f-c1fase">
+        <option value="">—</option>
+        ${PHASES.map(p => `<option value="${p}" ${s.concurso1Fase===p?'selected':''}>${PHASE_LABELS[p]}</option>`).join('')}
+      </select></div>
+      <div class="form-group"><label class="form-label">Data da prova</label><input class="form-control" id="f-c1data" type="date" value="${s.concurso1DataProva || ''}" /></div>
+    </div>
+    <div class="form-group"><label class="form-label">Tem discursiva?</label><select class="form-control" id="f-c1disc"><option value="">—</option><option ${s.concurso1Discursiva==='Sim'?'selected':''}>Sim</option><option ${s.concurso1Discursiva==='Não'?'selected':''}>Não</option><option ${s.concurso1Discursiva==='Não sei'?'selected':''}>Não sei</option></select></div>
+    <div class="form-group"><label class="form-label">Concurso secundário (opcional)</label><input class="form-control" id="f-c2nome" value="${s.concurso2Nome || ''}" /></div>
+    <div class="section-divider">Perfil do Aluno</div>
+    <div class="form-group"><label class="form-label">💚 Motivação / Propósito (usado nos feedbacks!)</label><textarea class="form-control" id="f-motivacao" rows="3">${s.motivacao || ''}</textarea></div>
+    <div class="form-group"><label class="form-label">Pontos fracos conhecidos</label><textarea class="form-control" id="f-fracos" rows="2">${s.pontosFracosConhecidos || ''}</textarea></div>
+    <div class="form-group"><label class="form-label">Histórico de concursos</label><textarea class="form-control" id="f-historico" rows="2">${s.historicoConcursos || ''}</textarea></div>
+    <div class="form-group"><label class="form-label">Observações</label><textarea class="form-control" id="f-obs" rows="2">${s.observacoes || ''}</textarea></div>
+  `;
+  document.getElementById('edit-modal').classList.remove('hidden');
+}
+
+function saveStudent() {
+  const nome = document.getElementById('f-nome').value.trim();
+  const email = document.getElementById('f-email').value.trim().toLowerCase();
+  if (!nome && !email) { alert('Informe pelo menos nome ou e-mail.'); return; }
+  const id = editingId || (email ? slugify(email) : slugify(nome + '_' + today()));
+  if (!db.students[id]) db.students[id] = { id };
+  Object.assign(db.students[id], {
+    id,
+    nome,
+    apelido: document.getElementById('f-apelido').value.trim(),
+    email,
+    whatsapp: document.getElementById('f-whats').value.trim(),
+    dataEntrada: document.getElementById('f-entrada').value,
+    dataEncerramento: document.getElementById('f-encerramento').value,
+    status: document.getElementById('f-status').value,
+    horasDisponiveis: document.getElementById('f-horas').value,
+    concurso1Nome: document.getElementById('f-c1nome').value.trim(),
+    concurso1Fase: document.getElementById('f-c1fase').value,
+    concurso1DataProva: document.getElementById('f-c1data').value,
+    concurso1Discursiva: document.getElementById('f-c1disc').value,
+    concurso2Nome: document.getElementById('f-c2nome').value.trim(),
+    motivacao: document.getElementById('f-motivacao').value.trim(),
+    pontosFracosConhecidos: document.getElementById('f-fracos').value.trim(),
+    historicoConcursos: document.getElementById('f-historico').value.trim(),
+    observacoes: document.getElementById('f-obs').value.trim(),
+  });
+  saveDB();
+  closeModal('edit-modal');
+  renderAll();
+}
+
+// ============================================================
+// FEEDBACK GENERATOR
+// ============================================================
+function loadStudentForFeedback() {
+  const id = document.getElementById('feedback-student-select').value;
+  document.getElementById('feedback-tutory-section').classList.toggle('hidden', !id);
+  document.getElementById('prompt-output').classList.add('hidden');
+}
+
+function goToFeedback(id) {
+  showPage('feedback');
+  document.getElementById('feedback-student-select').value = id;
+  loadStudentForFeedback();
+}
+
+function generatePrompt() {
+  const id = document.getElementById('feedback-student-select').value;
+  const s = db.students[id];
+  if (!s) return;
+  const historico = document.getElementById('tutory-historico').value.trim();
+  const mes = document.getElementById('tutory-mes').value.trim();
+  const semana = document.getElementById('tutory-semana').value.trim();
+
+  const months = getMonthsInMentoria(s);
+  const daysProva = getDaysToProva(s);
+  const nome = s.apelido || s.nome;
+
+  let context = `=== CONTEXTO DO ALUNO: ${nome.toUpperCase()} ===\n\n`;
+  context += `Nome: ${s.nome}\nComo chamar: ${nome}\n`;
+  if (s.email) context += `E-mail: ${s.email}\n`;
+  if (s.whatsapp) context += `WhatsApp: ${s.whatsapp}\n`;
+  context += `\nNa mentoria há: ${months} meses (desde ${formatDate(s.dataEntrada)})\n`;
+  context += `Acesso encerra: ${formatDate(s.dataEncerramento)}\n\n`;
+
+  if (s.concurso1Nome) {
+    context += `🎯 CONCURSO PRINCIPAL: ${s.concurso1Nome}\n`;
+    context += `   Fase: ${PHASE_LABELS[s.concurso1Fase] || '—'}\n`;
+    context += `   Discursiva: ${s.concurso1Discursiva || '—'}\n`;
+    if (s.concurso1DataProva) context += `   Data da prova: ${formatDate(s.concurso1DataProva)}${daysProva !== null ? ` (${daysProva} dias!)` : ''}\n`;
+  }
+  if (s.concurso2Nome) context += `🎯 CONCURSO SECUNDÁRIO: ${s.concurso2Nome}\n`;
+
+  context += `\n📅 ROTINA: ${s.horasDisponiveis || '—'} | Turno: ${s.turnoEstudo || '—'}\n`;
+
+  if (s.motivacao) context += `\n💚 MOTIVAÇÃO DO ALUNO (use nos feedbacks!):\n"${s.motivacao}"\n`;
+  if (s.pontosFracosConhecidos) context += `\n⚠️ PONTOS FRACOS CONHECIDOS: ${s.pontosFracosConhecidos}\n`;
+  if (s.historicoConcursos) context += `\n📚 HISTÓRICO: ${s.historicoConcursos}\n`;
+  if (s.observacoes) context += `\n📝 OBSERVAÇÕES: ${s.observacoes}\n`;
+
+  // Phase-based instructions
+  const phase = s.concurso1Fase;
+  const hasDiscursiva = s.concurso1Discursiva === 'Sim';
+  context += `\n--- INSTRUÇÕES ESPECIAIS PARA ESSE FEEDBACK ---\n`;
+  if (phase === 'reta-final' || (daysProva !== null && daysProva <= 60)) {
+    context += `⚡ RETA FINAL: Mencionare na mensagem que a prova está próxima e o ritmo precisa ser intensificado. Parar teoria nova, focar em revisão e questões.\n`;
+  }
+  if (hasDiscursiva) {
+    context += `✍️ DISCURSIVA: Lembrar de verificar se o aluno está praticando redação. Cobrar entregas se necessário.\n`;
+  }
+  if (daysProva !== null && daysProva <= 7) {
+    context += `🔴 URGENTE: Prova em ${daysProva} dias! Tom de encorajamento final, checklist pré-prova.\n`;
+  }
+
+  // Tutory summary context
+  const t = s.tutory || {};
+  if (t.planoEstudo) context += `\n📚 PLANO TUTORY: ${t.planoEstudo}\n`;
+  if (t.engajamento) {
+    const e = t.engajamento;
+    context += `\n📈 ENGAJAMENTO (Tutory): ${e.pct !== null ? e.pct + '%' : '—'} | Horas semana: ${e.horas !== null ? e.horas + 'h' : '—'} | Dias ativos: ${e.diasAtivos}/${e.totalDias}\n`;
+  }
+  if (t.atraso) {
+    context += `\n⚠️ ATRASO TUTORY: ${t.atraso.days !== null ? t.atraso.days + ' dias de atraso nas metas' : 'sem atraso'} | Última mensagem enviada: ${t.atraso.ultimaMensagem || '—'}\n`;
+  }
+  if (t.assuntosSinalizados !== undefined && t.assuntosSinalizados !== null) {
+    context += `\n🏷️ ASSUNTOS SINALIZADOS (já estudados, sem data): ${t.assuntosSinalizados}\n`;
+  }
+  if (t.replanejamentos && t.replanejamentos.length > 0) {
+    context += `\n🔄 REPLANEJAMENTOS RECENTES:\n`;
+    t.replanejamentos.slice(0, 3).forEach(r => { context += `   • ${r.data} — ${r.motivo}\n`; });
+  }
+
+  const fullPrompt = `Você é a Dominique (Domi), mentora da Estude Ambiental — mentoria personalizada para concursos públicos ambientais.
+
+**Tom obrigatório:** Humana, próxima, acolhedora e direta. Mensagens curtas para WhatsApp. Celebrar conquistas com dados exatos. Puxão de orelha com carinho quando necessário. Nunca punitiva. Sempre lembrar o propósito. Emoji 🌿 ao final das mensagens WhatsApp.
+
+${context}
+=== DADOS DO TUTORY ===
+
+-- HISTÓRICO COMPLETO (desde o dia 1, agrupado por mês) --
+${historico || '[Não informado]'}
+
+-- ÚLTIMO MÊS (últimos 30 dias) --
+${mes || '[Não informado]'}
+
+-- ÚLTIMA SEMANA (últimos 7 dias) --
+${semana || '[Não informado]'}
+
+=== O QUE GERAR ===
+
+1. 📈 EVOLUÇÃO — Comparação temporal obrigatória (dia 1 vs hoje vs última semana). Números e %!
+2. 🌟 PONTOS FORTES — Citar assunto e % exato. Parabenizar de verdade.
+3. ⚠️ PONTOS DE ATENÇÃO — Direto mas encorajador. Nunca punitivo.
+4. 🎯 RECOMENDAÇÃO — Máximo 3 ações concretas e realizáveis.
+5. 🔥 PALAVRA DE MOTIVAÇÃO — SEMPRE. Usar a motivação real do aluno acima. Positivo se foi bem; bronca com carinho se foi mal ou pouco dedicado.
+6. 💬 MENSAGEM WHATSAPP — 6-10 linhas. Começa com o nome. Inclui evolução em números. Termina com 🌿
+
+Critérios: ≥75% acertos = excelente / 60-74% = razoável / <60% = ponto fraco → voltar à teoria. ≥2h/dia = boa constância / <1h/dia = preocupante.`;
+
+  document.getElementById('prompt-content').textContent = fullPrompt;
+  document.getElementById('prompt-output').classList.remove('hidden');
+}
+
+function copyPrompt() {
+  const text = document.getElementById('prompt-content').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    btn.textContent = '✅ Copiado!';
+    setTimeout(() => btn.textContent = '📋 Copiar tudo', 2000);
+  });
+}
+
+// ============================================================
+// TUTORY IMPORT
+// ============================================================
+
+function normalizeName(str) {
+  return (str || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z]/g, '');
+}
+
+function findStudentByNameOrEmail(name, email) {
+  if (email) {
+    const emailLow = email.toLowerCase().trim();
+    for (const s of Object.values(db.students)) {
+      if ((s.email || '').toLowerCase() === emailLow) return s;
+    }
+  }
+  if (name) {
+    const norm = normalizeName(name);
+    if (!norm || norm.length < 3) return null;
+    for (const s of Object.values(db.students)) {
+      const sNorm = normalizeName(s.nome);
+      const aNorm = normalizeName(s.apelido);
+      if (sNorm === norm || aNorm === norm) return s;
+      // Accept if one is a prefix of the other (handles full name vs first+last)
+      if (norm.length >= 6 && sNorm.length >= 6 && (sNorm.startsWith(norm) || norm.startsWith(sNorm))) return s;
+    }
+  }
+  return null;
+}
+
+// Find a name-like line in a set of lines (ignores UI text like WhatsApp, Ver Painel)
+const UI_LINES = new Set(['whatsapp', 'ver painel', 'buscar', 'primeira', 'última']);
+function extractNameLine(lines, beforeIdx) {
+  return lines.slice(0, beforeIdx).reverse().find(l => {
+    if (UI_LINES.has(l.toLowerCase())) return false;
+    if (l.includes('@') || l.includes(':') || /^\d/.test(l)) return false;
+    return l.length >= 2;
+  }) || '';
+}
+
+function showTutoryResultRows(containerId, rows) {
+  const el = document.getElementById(containerId);
+  if (!rows.length) { el.innerHTML = ''; return; }
+  el.innerHTML = rows.map(r =>
+    `<div class="tutory-result-row ${r.matched ? 'tutory-result-ok' : 'tutory-result-miss'}">
+      <span>${r.matched ? '✅' : '⚠️'} <strong>${r.name}</strong>${r.detail ? ' — ' + r.detail : ''}</span>
+      ${!r.matched ? '<span style="font-size:0.72rem">Não encontrado no painel</span>' : ''}
+    </div>`
+  ).join('');
+}
+
+// --- HELPER: aplica mudanças de Tutory sem sobrescrever dados existentes ---
+const CPF_RE = /\d{3}\.\d{3}\.\d{3}-\d{2}/;
+
+function applyTutoryChanges(changes, statusId, resultsId, rows, matched) {
+  // Reload latest localStorage para não sobrescrever dados de outras importações
+  const stored = localStorage.getItem('mentoria_db');
+  const latest = stored ? JSON.parse(stored) : { students: {} };
+  // Mescla dados em memória com localStorage (mantém o que é mais recente)
+  for (const [id, s] of Object.entries(db.students)) {
+    if (!latest.students[id]) latest.students[id] = s;
+    else {
+      // Preserva campos não-tutory do in-memory (podem ter edições mais recentes)
+      const { tutory: _, ...nonTutory } = s;
+      Object.assign(latest.students[id], nonTutory);
+      if (s.tutory) {
+        if (!latest.students[id].tutory) latest.students[id].tutory = {};
+        // Não sobrescreve campos tutory já existentes do localStorage com versão antiga in-memory
+        for (const [k, v] of Object.entries(s.tutory)) {
+          if (latest.students[id].tutory[k] === undefined) {
+            latest.students[id].tutory[k] = v;
+          }
+        }
+      }
+    }
+  }
+  // Aplica APENAS as mudanças de Tutory desta importação
+  for (const [id, update] of Object.entries(changes)) {
+    if (!latest.students[id]) continue;
+    if (!latest.students[id].tutory) latest.students[id].tutory = {};
+    Object.assign(latest.students[id].tutory, update);
+  }
+  db = latest;
+  saveDB();
+  renderAll();
+  document.getElementById(statusId).textContent = `✅ ${matched} de ${rows.length} encontrados`;
+  showTutoryResultRows(resultsId, rows);
+}
+
+// --- ATRASO ---
+function importTutoryAtraso() {
+  const text = document.getElementById('t-atraso-text').value;
+  const blocks = text.split(/Ver Painel/i).filter(b => b.trim());
+  const rows = [], changes = {};
+  let matched = 0;
+  blocks.forEach(block => {
+    const lines = block.split('\n').map(l => l.trim()).filter(Boolean);
+    const emailLine = lines.find(l => l.includes('@'));
+    const daysLine = lines.find(l => /^\d+ dias$/.test(l));
+    const ultimaLine = lines.find(l => l.startsWith('Última mensagem:'));
+    const emailIdx = lines.indexOf(emailLine);
+    const name = extractNameLine(lines, emailIdx);
+    if (!name && !emailLine) return;
+    const days = daysLine ? parseInt(daysLine) : null;
+    const ultimaMensagem = ultimaLine ? ultimaLine.replace('Última mensagem:', '').trim() : '';
+    const s = findStudentByNameOrEmail(name, emailLine);
+    rows.push({ name: name || emailLine, detail: days !== null ? `${days} dias de atraso` : '', matched: !!s });
+    if (s) { changes[s.id] = { atraso: { days, ultimaMensagem, importedAt: today() } }; matched++; }
+  });
+  applyTutoryChanges(changes, 't-atraso-status', 't-atraso-results', rows, matched);
+}
+
+// --- ENGAJAMENTO ---
+function importTutoryEngajamento() {
+  const text = document.getElementById('t-engaj-text').value;
+  const blocks = text.split(/Ver Painel/i).filter(b => b.trim());
+  const rows = [], changes = {};
+  let matched = 0;
+  blocks.forEach(block => {
+    const lines = block.split('\n').map(l => l.trim()).filter(Boolean);
+    const emailLine = lines.find(l => l.includes('@'));
+    const pctLine = lines.find(l => /^\d+[\.,]\d+%/.test(l));
+    const horasLine = lines.find(l => /^Horas:/i.test(l));
+    const atividadesLine = lines.find(l => /^Atividades em/i.test(l));
+    const pctIdx = lines.indexOf(pctLine);
+    const name = pctIdx > 0 ? extractNameLine(lines, pctIdx) : extractNameLine(lines, lines.indexOf(emailLine));
+    if (!name && !emailLine) return;
+    const pct = pctLine ? parseFloat(pctLine.replace(',', '.')) : null;
+    let horas = null, diasAtivos = null, totalDias = null;
+    if (horasLine) { const m = horasLine.match(/([\d,\.]+)h/); if (m) horas = parseFloat(m[1].replace(',', '.')); }
+    if (atividadesLine) { const m = atividadesLine.match(/(\d+)\s+de\s+(\d+)/); if (m) { diasAtivos = parseInt(m[1]); totalDias = parseInt(m[2]); } }
+    const s = findStudentByNameOrEmail(name, emailLine);
+    rows.push({ name: name || emailLine, detail: pct !== null ? `${pct}% engajamento` : '', matched: !!s });
+    if (s) { changes[s.id] = { engajamento: { pct, horas, diasAtivos, totalDias, importedAt: today() } }; matched++; }
+  });
+  applyTutoryChanges(changes, 't-engaj-status', 't-engaj-results', rows, matched);
+}
+
+// --- COACHING ---
+function importTutoryCoaching() {
+  const text = document.getElementById('t-coaching-text').value;
+  const lines = text.split('\n').map(l => l.trim()).filter(l => CPF_RE.test(l));
+  const rows = [], changes = {};
+  let matched = 0;
+  lines.forEach(line => {
+    const cpfMatch = line.match(CPF_RE);
+    if (!cpfMatch) return;
+    const cpfIdx = line.indexOf(cpfMatch[0]);
+    const name = line.slice(0, cpfIdx).trim();
+    const afterCPF = line.slice(cpfIdx + cpfMatch[0].length).trim();
+    const plano = afterCPF.replace(/Relatório Individual\s*$/i, '').trim();
+    if (!name) return;
+    const s = findStudentByNameOrEmail(name, null);
+    rows.push({ name, detail: plano.slice(0, 60) + (plano.length > 60 ? '…' : ''), matched: !!s });
+    if (s) {
+      const update = { planoEstudo: plano, planoImportedAt: today() };
+      changes[s.id] = update;
+      // Só preenche concurso se ainda não tiver
+      if (!s.concurso1Nome && plano) s.concurso1Nome = plano;
+      matched++;
+    }
+  });
+  applyTutoryChanges(changes, 't-coaching-status', 't-coaching-results', rows, matched);
+}
+
+// --- REPLANEJAMENTOS ---
+function importTutoryReplanejamentos() {
+  const text = document.getElementById('t-replanej-text').value;
+  const lines = text.split('\n').map(l => l.trim()).filter(l => CPF_RE.test(l));
+  const rows = [], changes = {};
+  let matched = 0;
+  lines.forEach(line => {
+    const cpfMatch = line.match(CPF_RE);
+    if (!cpfMatch) return;
+    const cpfIdx = line.indexOf(cpfMatch[0]);
+    const name = line.slice(0, cpfIdx).trim();
+    const afterCPF = line.slice(cpfIdx + cpfMatch[0].length).trim();
+    const dateMatch = afterCPF.match(/(\d{2}\/\d{2}\/\d{4})\s+(\d{2}:\d{2}:\d{2})\s+(.*)/);
+    let dataReplanejamento = '', motivo = '', plano = afterCPF;
+    if (dateMatch) { plano = afterCPF.slice(0, afterCPF.indexOf(dateMatch[1])).trim(); dataReplanejamento = dateMatch[1]; motivo = dateMatch[3].trim(); }
+    if (!name) return;
+    const s = findStudentByNameOrEmail(name, null);
+    rows.push({ name, detail: motivo || plano.slice(0, 40), matched: !!s });
+    if (s) {
+      const existing = (s.tutory?.replanejamentos || []);
+      const isDup = existing.some(r => r.data === dataReplanejamento && r.motivo === motivo);
+      if (!isDup) {
+        const updated = [{ data: dataReplanejamento, motivo, plano }, ...existing].slice(0, 10);
+        changes[s.id] = { replanejamentos: updated };
+      }
+      matched++;
+    }
+  });
+  applyTutoryChanges(changes, 't-replanej-status', 't-replanej-results', rows, matched);
+}
+
+// --- ASSUNTOS SINALIZADOS ---
+function importTutoryAssuntos() {
+  const text = document.getElementById('t-assuntos-text').value;
+  const lines = text.split('\n').map(l => l.trim()).filter(l => CPF_RE.test(l));
+  const rows = [], changes = {};
+  let matched = 0;
+  lines.forEach(line => {
+    const cpfMatch = line.match(CPF_RE);
+    if (!cpfMatch) return;
+    const cpfIdx = line.indexOf(cpfMatch[0]);
+    const name = line.slice(0, cpfIdx).trim();
+    const afterCPF = line.slice(cpfIdx + cpfMatch[0].length).trim();
+    const parts = afterCPF.split(/\s+/);
+    const qtd = /^\d+$/.test(parts[parts.length - 1]) ? parseInt(parts[parts.length - 1]) : null;
+    if (!name) return;
+    const s = findStudentByNameOrEmail(name, null);
+    rows.push({ name, detail: qtd !== null ? `${qtd} assuntos sinalizados` : '', matched: !!s });
+    if (s) { changes[s.id] = { assuntosSinalizados: qtd, assuntosImportedAt: today() }; matched++; }
+  });
+  applyTutoryChanges(changes, 't-assuntos-status', 't-assuntos-results', rows, matched);
+}
+
+function showTutoryTab(tabId, btn) {
+  document.querySelectorAll('.tutory-pane').forEach(p => p.classList.add('hidden'));
+  document.querySelectorAll('#tutory-tab-nav .tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.remove('hidden');
+  btn.classList.add('active');
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById(`page-${name}`)?.classList.remove('hidden');
+  document.getElementById(`nav-${name}`)?.classList.add('active');
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderStudentsTable();
+}
+
+function filterStudents() { renderStudentsTable(); }
+
+function closeModal(id) {
+  document.getElementById(id).classList.add('hidden');
+}
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.add('hidden'); });
+});
+
+// ============================================================
+// BOOKMARKLET
+// ============================================================
+function buildBookmarklet() {
+  // This JS runs in the Tutory page context when the bookmark is clicked
+  const code = `(function(){
+var p=location.pathname;
+var m={'/alunos/atraso':'atraso','/alunos/engajamento':'engajamento','/alunos/coaching':'coaching','/alunos/replanejamentos':'replanejamentos','/alunos/assuntos-sinalizados':'assuntos'};
+var t=m[p];
+if(!t){alert('Abra uma das listas do Tutory primeiro:\\n- /alunos/atraso\\n- /alunos/engajamento\\n- /alunos/coaching\\n- /alunos/replanejamentos\\n- /alunos/assuntos-sinalizados');return;}
+var d=encodeURIComponent(JSON.stringify({type:t,text:document.body.innerText}));
+window.open('http://localhost:3456/#ti='+d,'_blank');
+})();`;
+  return 'javascript:' + code.replace(/\n/g, '');
+}
+
+function processTutoryHash() {
+  const hash = location.hash;
+  if (!hash.startsWith('#ti=')) return;
+  try {
+    const payload = JSON.parse(decodeURIComponent(hash.slice(4)));
+    history.replaceState(null, '', location.pathname + location.search);
+    const { type, text } = payload;
+    // Map type to the textarea id and import function
+    const map = {
+      atraso:     { textId: 't-atraso-text',   fn: importTutoryAtraso,         tab: 'tt-atraso',   nav: 0 },
+      engajamento:{ textId: 't-engaj-text',    fn: importTutoryEngajamento,    tab: 'tt-engaj',    nav: 1 },
+      coaching:   { textId: 't-coaching-text', fn: importTutoryCoaching,       tab: 'tt-coaching', nav: 2 },
+      replanejamentos:{ textId: 't-replanej-text', fn: importTutoryReplanejamentos, tab: 'tt-replanej', nav: 3 },
+      assuntos:   { textId: 't-assuntos-text', fn: importTutoryAssuntos,       tab: 'tt-assuntos', nav: 4 }
+    };
+    const cfg = map[type];
+    if (!cfg) return;
+    document.getElementById(cfg.textId).value = text;
+    showPage('tutory');
+    const tabBtns = document.querySelectorAll('#tutory-tab-nav .tab-btn');
+    showTutoryTab(cfg.tab, tabBtns[cfg.nav]);
+    cfg.fn();
+    showImportSuccessBanner(type);
+  } catch(e) {
+    console.error('Tutory import error', e);
+  }
+}
+
+function showImportSuccessBanner(type) {
+  const labels = { atraso: 'Atrasos', engajamento: 'Engajamento', coaching: 'Planos de Estudo', replanejamentos: 'Replanejamentos', assuntos: 'Assuntos Sinalizados' };
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;top:70px;right:1.5rem;background:var(--verde);color:white;padding:12px 20px;border-radius:10px;font-weight:700;font-size:0.88rem;box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:999;animation:fadeIn 0.3s ease';
+  banner.textContent = `✅ Tutory — ${labels[type] || type} importado com sucesso!`;
+  document.body.appendChild(banner);
+  setTimeout(() => banner.remove(), 4000);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  loadDB();
+  renderAll();
+  document.getElementById('dashboard-date').textContent = `Atualizado em ${formatDate(today())}`;
+  // Set bookmarklet href
+  document.getElementById('bookmarklet-link').href = buildBookmarklet();
+  // Process Tutory data if opened via bookmarklet
+  processTutoryHash();
+});
+</script>
+</body>
+</html>
