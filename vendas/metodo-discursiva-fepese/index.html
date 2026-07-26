@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Método da Discursiva FEPESE | Estude Ambiental</title>
+<meta name="description" content="Aprenda a construir respostas discursivas com mais clareza, organização e segurança para a banca FEPESE — Analista Ambiental, Prefeitura de Itajaí/SC." />
+
+<style>
+/* ============================================================
+   FONTS — Gilroy (marca Estude Ambiental)
+   ============================================================ */
+@font-face { font-family: 'Gilroy'; src: url('./assets/fonts/Gilroy-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('./assets/fonts/Gilroy-MediumItalic.woff2') format('woff2'); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('./assets/fonts/Gilroy-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('./assets/fonts/Gilroy-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('./assets/fonts/Gilroy-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('./assets/fonts/Gilroy-ExtraBold.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('./assets/fonts/Gilroy-Black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('./assets/fonts/Gilroy-Heavy.woff2') format('woff2'); font-weight: 950; font-style: normal; font-display: swap; }
+
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --verde: #68995A;
+  --verde-escuro: #4E594B;
+  --verde-claro: #C5FFB5;
+  --grafite: #443C42;
+  --grafite-soft: #6b6069;
+  --branco: #FFFFFF;
+  --bg: #F6F8F4;
+  --bg-verde: #EEF6EA;
+  --border: #E1E8DC;
+
+  --container: 1140px;
+  --radius-s: 10px;
+  --radius-m: 16px;
+  --radius-l: 28px;
+
+  --section-y: clamp(3.25rem, 6vw, 6.5rem);
+  --section-y-tight: clamp(2.25rem, 4vw, 4rem);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  font-family:'Gilroy', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--grafite);
+  background: var(--branco);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+img{ max-width:100%; display:block; }
+a{ color: inherit; }
+h1,h2,h3,h4{ margin:0; text-wrap: balance; }
+p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+button{ font-family:inherit; cursor:pointer; }
+
+.container{
+  width:100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 640px){
+  .container{ padding: 0 1.25rem; }
+}
+
+/* ============================================================
+   TYPE SCALE
+   ============================================================ */
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  font-size: .74rem;
+  font-weight:700;
+  letter-spacing:.09em;
+  text-transform: uppercase;
+  color: var(--verde-escuro);
+  background: var(--verde-claro);
+  padding: .4rem .9rem;
+  border-radius: 999px;
+}
+
+h1.h-display{
+  font-weight: 950;
+  font-size: clamp(2.1rem, 4.4vw, 3.35rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--grafite);
+}
+h2.h-section{
+  font-weight: 950;
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  line-height: 1.18;
+  color: var(--grafite);
+}
+h3.h-card{
+  font-weight: 800;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  color: var(--grafite);
+}
+.lede{
+  font-weight:500;
+  font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+  color: var(--grafite-soft);
+  max-width: 62ch;
+}
+.section-kicker{
+  text-align:center;
+  max-width: 720px;
+  margin: 0 auto clamp(2rem, 4vw, 3.25rem);
+}
+.section-kicker .lede{ margin: .9rem auto 0; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 1.05rem 2rem;
+  border-radius: 999px;
+  border: none;
+  text-decoration:none;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  white-space: normal;
+  text-align:center;
+}
+.btn-primary{
+  background: var(--verde);
+  color: var(--branco);
+  box-shadow: 0 10px 24px -10px rgba(104,153,90,.55);
+}
+.btn-primary:hover{ background: var(--verde-escuro); transform: translateY(-1px); }
+.btn-block{ width:100%; }
+.btn-lg{ font-size: 1.08rem; padding: 1.2rem 2.25rem; }
+
+.micro-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap: .5rem 1.4rem;
+  justify-content:center;
+  margin-top: 1.1rem;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--verde-escuro);
+}
+.micro-list span{ display:inline-flex; align-items:center; gap:.4rem; }
+.micro-list svg{ width:14px; height:14px; flex-shrink:0; }
+
+/* ============================================================
+   ICONS (inline, outline style)
+   ============================================================ */
+.icon{ width:22px; height:22px; stroke:var(--verde-escuro); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.icon-circle{
+  width:52px; height:52px;
+  border-radius: 50%;
+  background: var(--verde-claro);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom: 1rem;
+}
+.icon-circle .icon{ width:24px; height:24px; }
+.check-ico{ width:18px; height:18px; stroke:var(--verde); fill:none; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+
+/* ============================================================
+   SECTIONS — base rhythm
+   ============================================================ */
+section{ padding: var(--section-y) 0; }
+.bg-tint{ background: var(--bg); }
+.bg-verde-tint{ background: var(--bg-verde); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0 var(--section-y);
+  background: linear-gradient(180deg, var(--bg-verde) 0%, var(--branco) 78%);
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items:center;
+}
+.hero-copy{ max-width: 560px; }
+.hero-copy .eyebrow{ margin-bottom: 1.1rem; }
+.hero-copy h1{ margin-bottom: 1.1rem; }
+.hero-copy .lede{ max-width: 46ch; margin-bottom: 1.9rem; }
+.hero-signature{
+  margin-top: 1.6rem;
+  display:flex;
+  align-items:center;
+  gap: .7rem;
+  font-size: .86rem;
+  color: var(--grafite-soft);
+}
+.hero-signature strong{ color: var(--grafite); font-weight: 700; }
+.hero-signature .dot{ width:4px; height:4px; border-radius:50%; background: var(--grafite-soft); flex-shrink:0; }
+
+.hero-visual{
+  position:relative;
+}
+.photo-frame{
+  position:relative;
+  border-radius: var(--radius-l);
+  overflow:hidden;
+  aspect-ratio: 4/5;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(197,255,181,.55), transparent 55%),
+    radial-gradient(circle at 80% 85%, rgba(104,153,90,.35), transparent 55%),
+    linear-gradient(150deg, var(--verde-escuro) 0%, var(--grafite) 100%);
+  display:flex;
+  align-items:flex-end;
+  box-shadow: 0 30px 60px -25px rgba(68,60,66,.45);
+}
+.photo-frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.photo-caption{
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding: 1.1rem 1.3rem;
+  background: linear-gradient(0deg, rgba(0,0,0,.45), transparent);
+  color: var(--branco);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.hero-visual .photo-frame{ aspect-ratio: 5/6; }
+.hero-badge-float{
+  position:absolute;
+  top: -1.2rem;
+  left: -1.2rem;
+  background: var(--branco);
+  border-radius: var(--radius-m);
+  box-shadow: 0 16px 32px -12px rgba(68,60,66,.28);
+  padding: .9rem 1.15rem;
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  max-width: 250px;
+  z-index: 3;
+}
+.hero-badge-float .icon-circle{ width:38px; height:38px; margin:0; flex-shrink:0; }
+.hero-badge-float .icon-circle .icon{ width:18px; height:18px; }
+.hero-badge-float p{ font-size:.78rem; font-weight:700; color:var(--grafite); line-height:1.3; }
+.hero-badge-float span{ display:block; font-size:.68rem; font-weight:600; color:var(--grafite-soft); }
+
+@media (max-width: 900px){
+  .hero-grid{ grid-template-columns: 1fr; }
+  .hero-copy{ max-width:none; }
+  .hero-visual{ order:-1; max-width: 380px; margin: 0 auto; }
+  .hero-badge-float{ left: .6rem; top:-1rem; }
+}
+
+/* ============================================================
+   BLOCO 2 — DOR
+   ============================================================ */
+.dor-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items:center;
+}
+.dor-text p + p{ margin-top: 1rem; }
+.dor-text{ color: var(--grafite-soft); font-size: 1.02rem; }
+.flow{
+  display:flex;
+  align-items:center;
+  gap: .5rem;
+  flex-wrap:wrap;
+  margin-top: 1.75rem;
+  font-weight:700;
+  font-size:.88rem;
+  color: var(--verde-escuro);
+}
+.flow .step{
+  background: var(--bg-verde);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: .5rem 1rem;
+}
+.flow .arrow{ color: var(--verde); font-weight:900; }
+
+.pain-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .85rem;
+}
+.pain-card{
+  display:flex;
+  gap:.75rem;
+  align-items:flex-start;
+  background: var(--branco);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  padding: 1.1rem 1.2rem;
+  font-size: .89rem;
+  font-weight: 600;
+  color: var(--grafite);
+}
+.pain-card .dash{ color:var(--verde); font-weight:900; flex-shrink:0; }
+
+@media (max-width: 900px){
+  .dor-grid{ grid-template-columns: 1fr; }
+  .pain-grid{ grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   BLOCO 3 — MUDANÇA DE PERCEPÇÃO
+   ============================================================ */
+.shift{
+  text-align:center;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.shift h2{ margin-bottom: 1.3rem; }
+.shift p{ color: var(--grafite-soft); font-size: 1.05rem; margin: 0 auto 2rem; max-width: 60ch; }
+.quote-block{
+  position:relative;
+  background: var(--grafite);
+  color: var(--verde-claro);
+  border-radius: var(--radius-l);
+  padding: clamp(1.8rem, 4vw, 2.75rem);
+  font-family:'Gilroy';
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  line-height:1.45;
+}
+
+/* ============================================================
+   BLOCO 4 — APRESENTAÇÃO
+   ============================================================ */
+.split{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items:center;
+}
+.split.reverse{ grid-template-columns: .9fr 1.1fr; }
+.split.reverse .split-visual{ order:-1; }
+.check-list{ margin-top:1.4rem; display:flex; flex-direction:column; gap:.7rem; }
+.check-list li{ display:flex; gap:.65rem; align-items:flex-start; font-weight:600; font-size:.96rem; }
+.split p.lede{ max-width:none; }
+.mockup-card{
+  background: linear-gradient(160deg, var(--bg-verde), var(--branco));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  display:flex;
+  flex-direction:column;
+  gap: 1rem;
+  min-height: 320px;
+  justify-content:center;
+}
+.mockup-doc{
+  background: var(--branco);
+  border-radius: var(--radius-m);
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 20px 40px -24px rgba(68,60,66,.35);
+}
+.mockup-doc .tag{ display:inline-block; background:var(--verde); color:var(--branco); font-size:.66rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:.25rem .6rem; border-radius:6px; margin-bottom:.65rem; }
+.mockup-doc h4{ font-size:1rem; font-weight:800; margin-bottom:.4rem; }
+.mockup-doc .lines span{ display:block; height:8px; border-radius:4px; background:var(--border); margin-bottom:.45rem; }
+.mockup-doc .lines span:nth-child(2){ width:88%; }
+.mockup-doc .lines span:nth-child(3){ width:64%; }
+.mockup-doc.offset{ transform: translate(1.4rem,-.6rem); }
+
+@media (max-width: 900px){
+  .split, .split.reverse{ grid-template-columns: 1fr; }
+  .split.reverse .split-visual{ order:0; }
+}
+
+/* ============================================================
+   BLOCO 5 — GRID DE BENEFÍCIOS
+   ============================================================ */
+.benefit-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem 1.2rem;
+}
+.benefit-card{ text-align:left; }
+.benefit-card h3{ margin-bottom:.4rem; }
+.benefit-card p{ font-size:.88rem; color:var(--grafite-soft); }
+
+@media (max-width: 980px){ .benefit-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .benefit-grid{ grid-template-columns: 1fr; } }
+
+/* ============================================================
+   BLOCO 6 — O QUE ESTÁ INCLUÍDO
+   ============================================================ */
+.include-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+.include-card{
+  background: var(--branco);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  padding: 1.6rem 1.5rem;
+  display:flex;
+  flex-direction:column;
+}
+.include-card h3{ margin-bottom:.55rem; }
+.include-card p{ font-size:.88rem; color:var(--grafite-soft); flex:1; }
+.include-note{
+  margin-top: 1.75rem;
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-m);
+  padding: 1rem 1.3rem;
+  font-size: .84rem;
+  color: var(--grafite-soft);
+  text-align:center;
+}
+@media (max-width: 980px){ .include-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .include-grid{ grid-template-columns: 1fr; } }
+
+/* ============================================================
+   BLOCO 7 — JORNADA / TIMELINE
+   ============================================================ */
+.journey{
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: .5rem;
+  position:relative;
+  margin-bottom: 2.25rem;
+}
+.journey::before{
+  content:'';
+  position:absolute;
+  top:22px; left: 7.14%; right:7.14%;
+  height:2px;
+  background: var(--border);
+  z-index:0;
+}
+.journey-step{ position:relative; z-index:1; text-align:center; }
+.journey-num{
+  width:44px; height:44px;
+  border-radius:50%;
+  background: var(--verde);
+  color:var(--branco);
+  font-weight:900;
+  font-size:1rem;
+  display:flex; align-items:center; justify-content:center;
+  margin: 0 auto .75rem;
+  box-shadow: 0 8px 18px -8px rgba(104,153,90,.6);
+}
+.journey-step p{ font-size:.78rem; font-weight:700; color:var(--grafite); line-height:1.35; padding: 0 .25rem; }
+.journey-cycle{
+  text-align:center;
+  font-weight:800;
+  font-size: clamp(.95rem, 1.6vw, 1.15rem);
+  color: var(--verde-escuro);
+  background: var(--bg-verde);
+  border-radius: 999px;
+  padding: 1rem 1.5rem;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.5rem 1rem;
+  margin-bottom: 1.75rem;
+}
+.journey-close{ text-align:center; font-weight:600; color:var(--grafite-soft); max-width:56ch; margin:0 auto; }
+
+@media (max-width: 900px){
+  .journey{ grid-template-columns: repeat(4, 1fr); row-gap: 1.75rem; }
+  .journey::before{ display:none; }
+}
+@media (max-width: 560px){ .journey{ grid-template-columns: repeat(2, 1fr); } }
+
+/* ============================================================
+   BLOCO 8 — DIFERENCIAIS (lista numerada)
+   ============================================================ */
+.diff-list{
+  display:flex;
+  flex-direction:column;
+}
+.diff-item{
+  display:grid;
+  grid-template-columns: 56px 1fr;
+  gap: 1.1rem;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.diff-item:first-child{ padding-top:0; }
+.diff-item:last-child{ border-bottom:none; }
+.diff-num{
+  font-weight:900;
+  font-size:1.3rem;
+  color: var(--verde-claro);
+  -webkit-text-stroke: 1.5px var(--verde);
+}
+.diff-item h3{ margin-bottom:.3rem; }
+.diff-item p{ font-size:.92rem; color:var(--grafite-soft); }
+
+/* ============================================================
+   BLOCO 9/10 — PARA QUEM É / NÃO É
+   ============================================================ */
+.fit-grid{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 1.25rem;
+  align-items:stretch;
+}
+.fit-card{
+  border-radius: var(--radius-l);
+  padding: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+.fit-card.yes{ background: var(--bg-verde); border: 1px solid var(--verde-claro); }
+.fit-card.no{ background: var(--bg); border: 1px solid var(--border); }
+.fit-card h3{ font-size:1.15rem; margin-bottom: 1.1rem; }
+.fit-card ul{ display:flex; flex-direction:column; gap:.75rem; }
+.fit-card.yes li{ display:flex; gap:.6rem; align-items:flex-start; font-weight:600; font-size:.94rem; }
+.fit-card.no p{ font-size:.94rem; color:var(--grafite-soft); font-weight:500; }
+
+@media (max-width: 820px){ .fit-grid{ grid-template-columns: 1fr; } }
+
+/* ============================================================
+   BLOCO 11 — SOBRE DOMINIQUE
+   ============================================================ */
+.about-grid{
+  display:grid;
+  grid-template-columns: .78fr 1.22fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items:center;
+}
+.about-visual .photo-frame{ aspect-ratio: 4/5; border-radius: var(--radius-l); }
+.about-copy p{ margin-bottom: 1rem; color: var(--grafite-soft); font-size: 1rem; }
+.about-copy p:last-of-type{ margin-bottom: 1.5rem; }
+.about-sign{
+  font-family:'Gilroy';
+  font-weight:500;
+  font-style:italic;
+  font-size: 1.1rem;
+  color: var(--grafite);
+}
+.about-sign span{ display:block; font-style:normal; font-weight:600; font-size:.78rem; color:var(--grafite-soft); margin-top:.25rem; }
+
+@media (max-width: 860px){
+  .about-grid{ grid-template-columns: 1fr; }
+  .about-visual{ max-width:320px; margin:0 auto; }
+}
+
+/* ============================================================
+   BLOCO 13 — OFERTA
+   ============================================================ */
+.offer-wrap{
+  max-width: 760px;
+  margin: 0 auto;
+}
+.offer-context{ text-align:center; color: var(--grafite-soft); max-width:58ch; margin: 0 auto 2.5rem; }
+.offer-card{
+  background: var(--branco);
+  border: 2px solid var(--verde);
+  border-radius: var(--radius-l);
+  padding: clamp(2rem, 4vw, 3rem);
+  box-shadow: 0 30px 60px -30px rgba(104,153,90,.4);
+}
+.offer-card h3{ font-size: 1.3rem; margin-bottom: 1.4rem; text-align:center; }
+.offer-includes{ display:flex; flex-direction:column; gap:.7rem; margin-bottom: 2rem; }
+.offer-includes li{ display:flex; gap:.6rem; align-items:flex-start; font-weight:600; font-size:.96rem; }
+.offer-price-row{
+  text-align:center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.75rem 0;
+  margin-bottom: 1.75rem;
+}
+.offer-price-main{ font-weight:950; font-size: clamp(2.4rem, 5vw, 3rem); color: var(--verde-escuro); line-height:1; }
+.offer-price-main small{ font-size:.42em; font-weight:700; color: var(--grafite-soft); display:block; margin-top:.4rem; }
+.offer-price-alt{ margin-top:.9rem; font-size:.95rem; font-weight:700; color: var(--grafite-soft); }
+.offer-guarantee-line{
+  display:flex; align-items:center; justify-content:center; gap:.5rem;
+  font-size:.85rem; font-weight:700; color: var(--verde-escuro);
+  margin-top: 1.5rem;
+}
+.offer-note{
+  text-align:center;
+  font-size:.78rem;
+  color: var(--grafite-soft);
+  max-width: 56ch;
+  margin: 1.5rem auto 0;
+}
+
+/* ============================================================
+   BLOCO 14 — GARANTIA
+   ============================================================ */
+.guarantee{
+  display:grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.75rem;
+  align-items:center;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.guarantee-badge{
+  width:110px; height:110px;
+  border-radius:50%;
+  background: var(--bg-verde);
+  border: 2px solid var(--verde-claro);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.guarantee-badge strong{ font-size:1.9rem; font-weight:950; color:var(--verde-escuro); line-height:1; }
+.guarantee-badge span{ font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:var(--verde-escuro); }
+.guarantee-text p{ color: var(--grafite-soft); }
+.guarantee-text h3{ margin-bottom:.5rem; }
+
+@media (max-width: 560px){ .guarantee{ grid-template-columns:1fr; text-align:center; justify-items:center; } }
+
+/* ============================================================
+   BLOCO 15 — FAQ
+   ============================================================ */
+.faq-list{ max-width: 780px; margin: 0 auto; }
+.faq-item{ border-bottom: 1px solid var(--border); }
+.faq-item:first-child{ border-top: 1px solid var(--border); }
+.faq-q{
+  width:100%;
+  background:none;
+  border:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding: 1.25rem 0;
+  text-align:left;
+  font-weight:700;
+  font-size: .98rem;
+  color: var(--grafite);
+}
+.faq-q .plus{
+  flex-shrink:0;
+  width:26px; height:26px;
+  border-radius:50%;
+  border:1.5px solid var(--verde);
+  color:var(--verde-escuro);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem;
+  font-weight:700;
+  transition: transform .2s ease;
+}
+.faq-item.open .faq-q .plus{ transform: rotate(45deg); }
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition: max-height .28s ease;
+}
+.faq-a-inner{ padding: 0 0 1.35rem; color: var(--grafite-soft); font-size:.92rem; max-width: 68ch; }
+
+/* ============================================================
+   BLOCO 16 — CTA FINAL + FOOTER
+   ============================================================ */
+.final-cta{
+  background: var(--grafite);
+  color: var(--branco);
+  text-align:center;
+}
+.final-cta h2{ color: var(--branco); margin-bottom: 1rem; }
+.final-cta p{ color: rgba(255,255,255,.72); max-width: 58ch; margin: 0 auto 2rem; font-size:1.02rem; }
+.final-cta .btn-primary{ background: var(--verde-claro); color: var(--verde-escuro); }
+.final-cta .btn-primary:hover{ background: var(--branco); }
+
+footer{
+  background: #37312F;
+  color: rgba(255,255,255,.55);
+  padding: 2.25rem 0;
+  font-size: .82rem;
+}
+.footer-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap: 1rem;
+}
+.footer-links{ display:flex; gap:1.5rem; flex-wrap:wrap; }
+.footer-links a{ text-decoration:none; color: inherit; }
+.footer-links a:hover{ color: var(--verde-claro); }
+.footer-disclaimer{
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,.12);
+  font-size: .74rem;
+  color: rgba(255,255,255,.4);
+  line-height:1.6;
+}
+
+/* ============================================================
+   INSTITUTIONAL BADGES (FEPESE / Itajaí) — placeholders
+   ============================================================ */
+.badge-strip{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap: 1.75rem;
+  flex-wrap:wrap;
+  margin-top: 2.5rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid var(--border);
+}
+.badge-strip .badge-pill{
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+  font-size:.78rem;
+  font-weight:700;
+  color: var(--grafite-soft);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: .55rem 1.05rem;
+}
+.badge-strip .badge-pill b{ color: var(--grafite); }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header{
+  position: sticky;
+  top:0;
+  z-index: 50;
+  background: rgba(246,248,244,.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.site-header .container{ display:flex; align-items:center; justify-content:space-between; height: 68px; }
+.brand{ display:flex; align-items:center; gap:.55rem; font-weight:800; font-size:1.02rem; color:var(--grafite); text-decoration:none; }
+.brand svg{ width:22px; height:29px; }
+.footer-brand{ display:flex; align-items:center; gap:.6rem; }
+.footer-brand svg{ width:18px; height:23px; flex-shrink:0; }
+.header-cta{ display:none; }
+@media (min-width: 720px){ .header-cta{ display:inline-flex; padding: .65rem 1.3rem; font-size:.85rem; } }
+
+/* ============================================================
+   MISC
+   ============================================================ */
+.reveal-hidden{ display:none; }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .faq-a, .faq-q .plus, .btn{ transition:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header">
+  <div class="container">
+    <a href="#hero" class="brand">
+      <svg viewBox="0 0 100 130" fill="none" stroke="var(--verde)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M50 49 C47 32 33 24 33 8 C48 14 54 30 50 49 Z"/>
+        <path d="M42 20 L47 44"/>
+        <path d="M51 56 C57 47 68 44 74 49 C66 55 57 58 51 56 Z"/>
+        <path d="M44 50 L44 86"/>
+        <path d="M56 50 L56 86"/>
+        <path d="M44 86 L39 102 L61 102 L56 86"/>
+        <path d="M39 102 L50 120 L61 102"/>
+      </svg>
+      estude ambiental
+    </a>
+    <a href="#oferta" class="btn btn-primary header-cta">Quero acessar o método</a>
+  </div>
+</header>
+
+<!-- ============================================================
+     BLOCO 1 — HERO
+     ============================================================ -->
+<section class="hero" id="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Método da Discursiva FEPESE · Analista Ambiental · Itajaí/SC</span>
+      <h1 class="h-display">Aprenda a construir respostas discursivas com mais clareza, organização e segurança para a banca FEPESE.</h1>
+      <p class="lede">O Método da Discursiva FEPESE combina orientação estratégica e prática por meio de 20 estudos de caso, para ajudar você a transformar o que já sabe em respostas bem estruturadas — pensado especificamente para quem vai prestar Analista Ambiental na Prefeitura de Itajaí/SC.</p>
+      <a href="#oferta" class="btn btn-primary btn-lg">Quero acessar o Método da Discursiva FEPESE</a>
+      <div class="micro-list">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Acesso imediato</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Área exclusiva do aluno</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 20 estudos de caso</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Estude no seu ritmo</span>
+      </div>
+      <div class="hero-signature">
+        <span>Por <strong>Dominique Martins Sala</strong></span>
+        <span class="dot"></span>
+        <span>Engenheira Ambiental &amp; fundadora da Estude Ambiental</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <!-- FOTO: substituir por <img src="./assets/img/dominique-hero.jpg" alt="Dominique Martins Sala estudando"> -->
+      <div class="photo-frame">
+        <div class="photo-caption">Dominique Martins Sala — fundadora da Estude Ambiental</div>
+      </div>
+      <div class="hero-badge-float">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></div>
+        <p>20 estudos de caso<span>com modelo de resposta comentado</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 2 — IDENTIFICAÇÃO DA DOR
+     ============================================================ -->
+<section>
+  <div class="container dor-grid">
+    <div class="dor-text">
+      <h2 class="h-section" style="margin-bottom:1.25rem;">Você pode conhecer o conteúdo e ainda assim perder pontos na discursiva.</h2>
+      <p>É comum estudar toda a legislação, revisar os conceitos técnicos e chegar seguro ao dia da prova — e mesmo assim travar diante da folha de resposta. Isso acontece porque conhecer o assunto e saber apresentá-lo por escrito são habilidades diferentes.</p>
+      <p>A banca FEPESE não avalia apenas o que você sabe. Ela observa como você organiza o raciocínio, se responde exatamente ao que foi solicitado e se as ideias estão desenvolvidas com clareza e objetividade.</p>
+      <p>Sem um método de escrita, cada questão nova parece começar do zero. Com método, esse processo deixa de ser uma dúvida a cada tentativa.</p>
+      <div class="flow">
+        <span class="step">Conhecimento</span><span class="arrow">→</span>
+        <span class="step">Organização</span><span class="arrow">→</span>
+        <span class="step">Estrutura</span><span class="arrow">→</span>
+        <span class="step">Resposta</span>
+      </div>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card"><span class="dash">—</span>Olhar para a questão e não saber por onde começar</div>
+      <div class="pain-card"><span class="dash">—</span>Escrever muito e sentir que não respondeu</div>
+      <div class="pain-card"><span class="dash">—</span>Escrever pouco e perceber que faltou desenvolvimento</div>
+      <div class="pain-card"><span class="dash">—</span>Dificuldade para interpretar o comando da questão</div>
+      <div class="pain-card"><span class="dash">—</span>Fazer respostas genéricas, sem relação com o pedido</div>
+      <div class="pain-card"><span class="dash">—</span>Treinar sem saber identificar os próprios erros</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 3 — MUDANÇA DE PERCEPÇÃO
+     ============================================================ -->
+<section class="bg-verde-tint">
+  <div class="container shift">
+    <h2 class="h-section">Uma boa resposta não depende de inspiração. Depende de método.</h2>
+    <p>Escrever bem uma discursiva não é um talento com o qual se nasce. É um processo que pode ser aprendido, treinado e repetido — como qualquer outra parte do edital. O Método da Discursiva FEPESE ensina exatamente esse processo: uma forma organizada de interpretar, planejar e estruturar sua resposta, aplicável a qualquer tema que a banca apresentar.</p>
+    <div class="quote-block">"Não estude para decorar respostas. Estude para aprender a construí-las."</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 4 — APRESENTAÇÃO DO PRODUTO
+     ============================================================ -->
+<section>
+  <div class="container split">
+    <div class="split-copy">
+      <h2 class="h-section" style="margin-bottom:1.1rem;">Conheça o Método da Discursiva FEPESE</h2>
+      <p class="lede" style="margin-bottom:0;">Desenvolvido para o candidato ao cargo de Analista Ambiental da Prefeitura de Itajaí/SC que já estuda o conteúdo técnico, mas quer aprender a transformar esse conhecimento em respostas discursivas mais claras e alinhadas ao que a banca espera. Ele não entrega respostas prontas para memorizar — ensina, passo a passo, como pensar antes de escrever.</p>
+      <ul class="check-list">
+        <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Interpretar corretamente o comando da questão</li>
+        <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Organizar as ideias antes de começar a escrever</li>
+        <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Estruturar introdução, desenvolvimento e conclusão</li>
+        <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Identificar os critérios normalmente avaliados pela banca</li>
+        <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Comparar sua resposta com modelos comentados</li>
+      </ul>
+    </div>
+    <div class="split-visual">
+      <!-- MOCKUP: Material 1 — Método da Discursiva -->
+      <div class="mockup-card">
+        <div class="mockup-doc">
+          <span class="tag">Material 1</span>
+          <h4>Método da Discursiva</h4>
+          <div class="lines"><span></span><span></span><span></span></div>
+        </div>
+        <div class="mockup-doc offset">
+          <span class="tag" style="background:var(--verde-escuro);">Material 2</span>
+          <h4>20 Estudos de Caso</h4>
+          <div class="lines"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 5 — O QUE VOCÊ VAI DESENVOLVER
+     ============================================================ -->
+<section class="bg-tint">
+  <div class="container">
+    <div class="section-kicker">
+      <span class="eyebrow">Habilidades</span>
+      <h2 class="h-section">O que você vai desenvolver ao longo do método</h2>
+      <p class="lede">Mais do que um conteúdo para ler, o método foi pensado para desenvolver habilidades que você vai usar em qualquer questão discursiva da prova.</p>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>
+        <h3 class="h-card">Interpretação do comando</h3>
+        <p>Entender exatamente o que a questão está pedindo, sem se perder em suposições.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></svg></div>
+        <h3 class="h-card">Organização das ideias</h3>
+        <p>Planejar o que será dito antes de escrever a primeira frase.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 10v10"/></svg></div>
+        <h3 class="h-card">Estrutura da resposta</h3>
+        <p>Construir introdução, desenvolvimento e conclusão com lógica e coesão.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3 class="h-card">Objetividade</h3>
+        <p>Responder ao que foi pedido sem enrolação nem repetição.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
+        <h3 class="h-card">Reconhecimento de padrões</h3>
+        <p>Identificar, nos próprios textos, os erros que se repetem.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-6"/></svg></div>
+        <h3 class="h-card">Prática orientada</h3>
+        <p>Treinar com estudos de caso pensados para o perfil da FEPESE.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M12 22c4-2 7-6 7-11a7 7 0 0 0-14 0c0 5 3 9 7 11Z"/></svg></div>
+        <h3 class="h-card">Autonomia de escrita</h3>
+        <p>Depender cada vez menos de modelos prontos.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
+        <h3 class="h-card">Constância</h3>
+        <p>Criar o hábito de treinar a escrita discursiva com regularidade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 6 — O QUE ESTÁ INCLUÍDO
+     ============================================================ -->
+<section>
+  <div class="container">
+    <div class="section-kicker">
+      <span class="eyebrow">O que você recebe</span>
+      <h2 class="h-section">Dentro do Método da Discursiva FEPESE</h2>
+    </div>
+    <div class="include-grid">
+      <div class="include-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></div>
+        <h3 class="h-card">Material 1 — Método da Discursiva</h3>
+        <p>Todo o conteúdo teórico e estratégico para compreender como interpretar, planejar e construir respostas discursivas claras e alinhadas aos critérios da banca FEPESE.</p>
+      </div>
+      <div class="include-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3 class="h-card">Material 2 — 20 Estudos de Caso</h3>
+        <p>Propostas elaboradas conforme o perfil da banca FEPESE, cada uma com modelo de resposta comentado para comparação — escreva antes de consultar o modelo.</p>
+      </div>
+      <div class="include-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
+        <h3 class="h-card">Área exclusiva do aluno</h3>
+        <p>Uma área organizada na plataforma Tutory, com o módulo "Primeiros Passos" orientando desde o início como estudar e aplicar o método.</p>
+      </div>
+      <div class="include-card">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3 class="h-card">Acesso por 2 meses</h3>
+        <p>Tempo de acesso pensado para acompanhar sua reta final até a prova, em 30 de agosto de 2026.</p>
+      </div>
+    </div>
+    <p class="include-note">Esta oferta contempla o Método da Discursiva completo e os 20 estudos de caso. As correções individuais de redação não estão incluídas nesta modalidade — podem ser adquiridas separadamente, conforme disponibilidade.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 7 — COMO ESTUDAR (JORNADA)
+     ============================================================ -->
+<section class="bg-tint">
+  <div class="container">
+    <div class="section-kicker">
+      <span class="eyebrow">A metodologia</span>
+      <h2 class="h-section">Como aplicar o método na prática</h2>
+      <p class="lede">A evolução na escrita discursiva acontece por repetição consciente. O método propõe um ciclo simples, que você repete a cada novo treino.</p>
+    </div>
+    <div class="journey">
+      <div class="journey-step"><div class="journey-num">1</div><p>Estude o método</p></div>
+      <div class="journey-step"><div class="journey-num">2</div><p>Escolha um estudo de caso</p></div>
+      <div class="journey-step"><div class="journey-num">3</div><p>Escreva sua resposta primeiro</p></div>
+      <div class="journey-step"><div class="journey-num">4</div><p>Compare com o modelo</p></div>
+      <div class="journey-step"><div class="journey-num">5</div><p>Identifique as diferenças</p></div>
+      <div class="journey-step"><div class="journey-num">6</div><p>Registre os padrões</p></div>
+      <div class="journey-step"><div class="journey-num">7</div><p>Aplique no próximo treino</p></div>
+    </div>
+    <div class="journey-cycle">
+      <span>Aprender</span><span class="arrow">→</span><span>Escrever</span><span class="arrow">→</span><span>Comparar</span><span class="arrow">→</span><span>Analisar</span><span class="arrow">→</span><span>Aplicar</span><span class="arrow">→</span><span>Evoluir</span>
+    </div>
+    <p class="journey-close">A prática sem análise repete erros. A prática com método gera evolução.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 8 — POR QUE ESTE MÉTODO É DIFERENTE
+     ============================================================ -->
+<section>
+  <div class="container">
+    <div class="section-kicker">
+      <span class="eyebrow">Diferenciais</span>
+      <h2 class="h-section">Por que este método é diferente</h2>
+      <p class="lede">Existem muitos materiais de discursiva no mercado. A diferença do Método da Discursiva FEPESE está na forma como ele foi construído.</p>
+    </div>
+    <div class="diff-list">
+      <div class="diff-item"><div class="diff-num">01</div><div><h3 class="h-card">Método, não respostas prontas</h3><p>Você aprende a construir, não apenas a copiar.</p></div></div>
+      <div class="diff-item"><div class="diff-num">02</div><div><h3 class="h-card">Aplicação prática incluída</h3><p>A teoria vem acompanhada de 20 estudos de caso para treinar de verdade.</p></div></div>
+      <div class="diff-item"><div class="diff-num">03</div><div><h3 class="h-card">Direcionado à FEPESE</h3><p>Não é um material genérico de redação: foi pensado considerando o perfil da banca.</p></div></div>
+      <div class="diff-item"><div class="diff-num">04</div><div><h3 class="h-card">Jornada organizada</h3><p>Você sabe por onde começar, o que estudar, quando praticar e como evoluir.</p></div></div>
+      <div class="diff-item"><div class="diff-num">05</div><div><h3 class="h-card">Aprendizado ativo</h3><p>A recomendação de escrever antes de consultar o modelo fortalece a autonomia.</p></div></div>
+      <div class="diff-item"><div class="diff-num">06</div><div><h3 class="h-card">Desenvolvimento de autonomia</h3><p>O objetivo é que você dependa cada vez menos de modelos decorados.</p></div></div>
+      <div class="diff-item"><div class="diff-num">07</div><div><h3 class="h-card">Linguagem clara e didática</h3><p>Conteúdo pensado para ser acompanhado sem complicação.</p></div></div>
+      <div class="diff-item"><div class="diff-num">08</div><div><h3 class="h-card">Plataforma organizada</h3><p>Acesso por uma área exclusiva, com onboarding próprio no módulo Primeiros Passos.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 9/10 — PARA QUEM É / NÃO É
+     ============================================================ -->
+<section class="bg-tint">
+  <div class="container">
+    <div class="section-kicker">
+      <h2 class="h-section">Para quem este método foi pensado</h2>
+    </div>
+    <div class="fit-grid">
+      <div class="fit-card yes">
+        <h3>Este método é para você que:</h3>
+        <ul>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Nunca escreveu uma discursiva ou escreveu poucas vezes</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Domina o conteúdo técnico, mas trava na hora de organizar a resposta</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sente insegurança sobre fugir do tema ou ser superficial demais</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Já pratica, mas não sabe identificar os próprios erros</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Quer uma preparação direcionada ao perfil da FEPESE, não genérica</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Vai prestar Analista Ambiental na Prefeitura de Itajaí/SC e quer chegar mais preparado à prova de 30/08/2026</li>
+        </ul>
+      </div>
+      <div class="fit-card no">
+        <h3>Este método não foi pensado para:</h3>
+        <p>Quem procura apenas respostas prontas para decorar, sem praticar a construção da própria escrita. O Método da Discursiva FEPESE exige que você escreva, compare e evolua — a transformação acontece na prática, não apenas na leitura.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 11 — SOBRE DOMINIQUE
+     ============================================================ -->
+<section>
+  <div class="container about-grid">
+    <div class="about-visual">
+      <!-- FOTO: substituir por <img src="./assets/img/dominique-sobre.jpg" alt="Dominique Martins Sala"> -->
+      <div class="photo-frame">
+        <div class="photo-caption">Dominique Martins Sala</div>
+      </div>
+    </div>
+    <div class="about-copy">
+      <span class="eyebrow" style="margin-bottom:1rem;">Quem preparou este método</span>
+      <h2 class="h-section" style="margin-bottom:1.25rem;">Sobre Dominique</h2>
+      <p>Olá! Sou Dominique Martins Sala, Engenheira Ambiental, Mestra em Engenharia Urbana e fundadora da Estude Ambiental.</p>
+      <p>Depois de anos me sentindo perdida, desmotivada e desvalorizada em empregos que não reconheciam o meu esforço, entendi que só esforço não basta: é preciso método, direção e propósito.</p>
+      <p>Foi a partir dessa experiência que criei o Estude Ambiental e, mais tarde, o Método da Discursiva: um material pensado para tornar o estudo da prova discursiva mais claro, prático e direcionado, ajudando o candidato a construir respostas com mais segurança e confiança — especialmente para quem, como eu um dia, sente que o esforço em estudar o conteúdo não está sendo suficiente na hora de escrever.</p>
+      <p>Espero que este método também faça parte da sua preparação para a vaga de Analista Ambiental em Itajaí/SC.</p>
+      <p class="about-sign">Dominique Martins Sala<span>Fundadora da Estude Ambiental</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 12 — PROVA SOCIAL
+     Aguardando depoimentos reais. Estrutura pronta em .testimonials
+     (ver CSS acima) — descomentar este bloco assim que houver
+     depoimentos confirmados pela Dominique.
+     ============================================================
+<section class="bg-tint" id="prova-social">
+  <div class="container">
+    <div class="section-kicker">
+      <h2 class="h-section">O que dizem os alunos</h2>
+    </div>
+  </div>
+</section>
+============================================================ -->
+
+<!-- ============================================================
+     BLOCO 13 — OFERTA
+     ============================================================ -->
+<section class="bg-verde-tint" id="oferta">
+  <div class="container offer-wrap">
+    <div class="section-kicker" style="margin-bottom:1.5rem;">
+      <h2 class="h-section">Comece sua preparação para a discursiva da FEPESE</h2>
+    </div>
+    <p class="offer-context">A prova de Analista Ambiental para a Prefeitura de Itajaí/SC está marcada para 30 de agosto de 2026. Quanto antes você começar a praticar, mais tempo terá para identificar dificuldades, aperfeiçoar sua estrutura de resposta e ganhar confiança até o dia da prova.</p>
+
+    <div class="offer-card">
+      <h3>Método da Discursiva FEPESE</h3>
+      <ul class="offer-includes">
+        <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Material 1 — Método da Discursiva completo</li>
+        <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Material 2 — 20 Estudos de Caso com modelos de resposta</li>
+        <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Área exclusiva do aluno na plataforma Tutory</li>
+        <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Módulo Primeiros Passos (onboarding orientado)</li>
+        <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Acesso por 2 meses, com download e impressão liberados</li>
+      </ul>
+      <div class="offer-price-row">
+        <div class="offer-price-main">R$ 67,00<small>à vista no Pix ou boleto</small></div>
+        <div class="offer-price-alt">ou 12x de R$ 6,93 no cartão de crédito</div>
+      </div>
+      <a href="https://pay.plataformatutory.com.br/checkout/d0f2b420-9b60-473f-8a6e-6f4a45c63f56" class="btn btn-primary btn-block btn-lg">Quero acessar o Método da Discursiva FEPESE</a>
+      <div class="offer-guarantee-line">
+        <svg class="icon" style="width:16px;height:16px;stroke:var(--verde-escuro);" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        Garantia incondicional de 7 dias
+      </div>
+    </div>
+    <p class="offer-note">As correções individuais de redação não estão incluídas nesta modalidade. Este é um material fechado de reta final — não há atualizações previstas.</p>
+
+    <div class="badge-strip">
+      <span class="badge-pill"><b>Banca:</b>&nbsp;FEPESE</span>
+      <span class="badge-pill"><b>Órgão:</b>&nbsp;Prefeitura de Itajaí/SC</span>
+    </div>
+    <p style="text-align:center;font-size:.72rem;color:var(--grafite-soft);margin-top:.9rem;">Material produzido de forma independente pela Estude Ambiental. Sem vínculo oficial com a banca FEPESE ou com a Prefeitura de Itajaí/SC.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 14 — GARANTIA
+     ============================================================ -->
+<section>
+  <div class="container guarantee">
+    <div class="guarantee-badge"><strong>7</strong><span>dias de garantia</span></div>
+    <div class="guarantee-text">
+      <h3 class="h-card" style="font-size:1.2rem;">Garantia de 7 dias</h3>
+      <p>Você pode conhecer o conteúdo do Método da Discursiva FEPESE com tranquilidade. Caso, dentro de 7 dias corridos a partir da confirmação da compra, você entenda que o método não atende ao que esperava, basta solicitar o cancelamento dentro desse prazo, conforme os termos da compra. Nosso objetivo é que você avance na sua preparação com segurança — inclusive na hora de decidir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 15 — FAQ
+     ============================================================ -->
+<section class="bg-tint">
+  <div class="container">
+    <div class="section-kicker">
+      <h2 class="h-section">Perguntas frequentes</h2>
+    </div>
+    <div class="faq-list" id="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q"><span>O método é indicado para iniciantes, que nunca escreveram uma discursiva?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. O Material 1 apresenta a lógica do método desde o início, orientando como estudar e praticar mesmo para quem nunca escreveu uma resposta discursiva.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>O material é específico para a banca FEPESE?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. Todo o conteúdo e os estudos de caso foram organizados considerando o perfil da banca FEPESE, no contexto do concurso de Analista Ambiental da Prefeitura de Itajaí/SC.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>Quantos estudos de caso estão incluídos?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">20 estudos de caso, cada um com modelo de resposta para comparação.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>As correções de redação estão incluídas?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Não nesta modalidade. As correções individuais podem ser adquiridas separadamente, conforme disponibilidade.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>Por quanto tempo terei acesso ao material?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">O acesso é de 2 meses a partir da confirmação da compra.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>Vou receber atualizações do material?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Não. Este é um material fechado, pensado para a reta final da preparação — não há atualizações previstas.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>Como recebo o acesso?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">O acesso é liberado automaticamente no momento da confirmação do pagamento, direto na plataforma Tutory.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>Posso estudar pelo celular ou tablet?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim, você pode acessar o conteúdo pelo celular ou tablet. Como o método envolve prática de escrita, a etapa de resolver os estudos de caso funciona melhor escrevendo à mão — o acesso ao material em si funciona bem em qualquer dispositivo.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>O material pode ser baixado e impresso?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. Todo o material pode ser baixado e impresso, caso você prefira estudar no papel.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>Quais formas de pagamento são aceitas?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Cartão de crédito em até 12x, ou Pix e boleto à vista.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>Existe garantia?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim, garantia incondicional de 7 dias a partir da compra.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>O método garante aprovação?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Não. O método oferece preparação, estrutura e prática para a escrita discursiva. O resultado depende de diversos fatores, incluindo dedicação, constância e desempenho individual do candidato.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BLOCO 16 — CTA FINAL + FOOTER
+     ============================================================ -->
+<section class="final-cta">
+  <div class="container">
+    <h2 class="h-section">Comece hoje sua preparação para a discursiva</h2>
+    <p>Você não precisa esperar a prova se aproximar para começar a treinar sua escrita. Quanto antes iniciar a prática, mais tempo terá para identificar dificuldades, aperfeiçoar sua estrutura de resposta e ganhar confiança até 30 de agosto de 2026.</p>
+    <a href="#oferta" class="btn btn-primary btn-lg">Quero acessar o Método da Discursiva FEPESE</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span class="footer-brand">
+        <svg viewBox="0 0 100 130" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M50 49 C47 32 33 24 33 8 C48 14 54 30 50 49 Z"/>
+          <path d="M42 20 L47 44"/>
+          <path d="M51 56 C57 47 68 44 74 49 C66 55 57 58 51 56 Z"/>
+          <path d="M44 50 L44 86"/>
+          <path d="M56 50 L56 86"/>
+          <path d="M44 86 L39 102 L61 102 L56 86"/>
+          <path d="M39 102 L50 120 L61 102"/>
+        </svg>
+        Estude Ambiental — Dominique Martins Sala
+      </span>
+      <div class="footer-links">
+        <a href="#">Termos de uso</a>
+        <a href="#">Política de privacidade</a>
+        <a href="#">Contato</a>
+      </div>
+    </div>
+    <p class="footer-disclaimer">Estude Ambiental — CNPJ 55.491.669/0001-15. Material produzido de forma independente. Sem vínculo oficial com a banca FEPESE ou com a Prefeitura de Itajaí/SC. O Método da Discursiva FEPESE oferece preparação, estrutura e prática de escrita — não garante aprovação em concurso público.</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-item').forEach(function(item){
+  var q = item.querySelector('.faq-q');
+  var a = item.querySelector('.faq-a');
+  q.addEventListener('click', function(){
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(openItem){
+      if(openItem !== item){
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-a').style.maxHeight = null;
+      }
+    });
+    if(isOpen){
+      item.classList.remove('open');
+      a.style.maxHeight = null;
+    } else {
+      item.classList.add('open');
+      a.style.maxHeight = a.scrollHeight + 'px';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
