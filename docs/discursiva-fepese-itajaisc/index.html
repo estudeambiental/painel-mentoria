@@ -470,7 +470,7 @@ section{ padding: var(--section-y) 0; }
 .hero-badge-float{
   animation: floatY 4.5s ease-in-out infinite;
   position:absolute;
-  top: -1.2rem;
+  bottom: -1.2rem;
   left: -1.2rem;
   background: var(--branco);
   border-radius: var(--radius-m);
@@ -632,9 +632,17 @@ section{ padding: var(--section-y) 0; }
 /* ============================================================
    BLOCO 6: O QUE ESTÁ INCLUÍDO
    ============================================================ */
+.include-wrap{
+  display:grid;
+  grid-template-columns: 1.3fr .9fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items:center;
+}
+.include-visual .mockup-card{ min-height:260px; }
+@media (max-width: 900px){ .include-wrap{ grid-template-columns: 1fr; } .include-visual{ order:-1; max-width:420px; margin:0 auto; } }
 .include-grid{
   display:grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.25rem;
 }
 .include-card{
@@ -657,7 +665,6 @@ section{ padding: var(--section-y) 0; }
   color: var(--grafite-soft);
   text-align:center;
 }
-@media (max-width: 980px){ .include-grid{ grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px){ .include-grid{ grid-template-columns: 1fr; } }
 
 /* ============================================================
@@ -757,6 +764,9 @@ section{ padding: var(--section-y) 0; }
 .fit-card ul{ display:flex; flex-direction:column; gap:.75rem; }
 .fit-card.yes li{ display:flex; gap:.6rem; align-items:flex-start; font-weight:600; font-size:.94rem; }
 .fit-card.no p{ font-size:.94rem; color:var(--grafite-soft); font-weight:500; }
+.fit-card.no ul{ display:flex; flex-direction:column; gap:.75rem; }
+.fit-card.no li{ display:flex; gap:.6rem; align-items:flex-start; font-weight:600; font-size:.94rem; color:var(--grafite-soft); }
+.fit-card.no .x-ico{ width:18px; height:18px; flex-shrink:0; margin-top:.1rem; stroke: var(--grafite-soft); stroke-width:2.4; fill:none; stroke-linecap:round; }
 
 @media (max-width: 820px){ .fit-grid{ grid-template-columns: 1fr; } }
 
@@ -838,15 +848,17 @@ section{ padding: var(--section-y) 0; }
   margin: 0 auto;
 }
 .guarantee-badge{
-  width:110px; height:110px;
-  border-radius:50%;
-  background: var(--bg-verde);
-  border: 2px solid var(--verde-claro);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  display:flex; flex-direction:column; align-items:center;
+  width:172px;
   flex-shrink:0;
 }
-.guarantee-badge strong{ font-size:1.9rem; font-weight:950; color:var(--verde-escuro); line-height:1; }
-.guarantee-badge span{ font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:var(--verde-escuro); }
+.badge-seal{
+  width:100%; height:auto;
+  filter: drop-shadow(0 14px 22px -10px rgba(104,153,90,.55));
+}
+.guarantee-badge-caption{ display:flex; flex-direction:column; align-items:center; margin-top:.3rem; }
+.guarantee-badge-caption strong{ font-size:1.05rem; font-weight:950; color:var(--verde-escuro); line-height:1.2; }
+.guarantee-badge-caption span{ font-size:.66rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:var(--grafite-soft); margin-top:.15rem; }
 .guarantee-text p{ color: var(--grafite-soft); }
 .guarantee-text h3{ margin-bottom:.5rem; }
 
@@ -1214,33 +1226,51 @@ footer{
      ============================================================ -->
 <section>
   <div class="container">
-    <div class="section-kicker reveal">
-      <span class="eyebrow">O que você recebe</span>
-      <h2 class="h-section">Dentro do Método da Discursiva FEPESE</h2>
+    <div class="include-wrap">
+      <div>
+        <div class="section-kicker reveal">
+          <span class="eyebrow">O que você recebe</span>
+          <h2 class="h-section">Dentro do Método da Discursiva FEPESE</h2>
+        </div>
+        <div class="include-grid stagger">
+          <div class="include-card reveal">
+            <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></div>
+            <h3 class="h-card">Material 1: Método da Discursiva</h3>
+            <p>Todo o conteúdo teórico e estratégico para compreender como interpretar, planejar e construir respostas discursivas claras e alinhadas aos critérios da banca FEPESE.</p>
+          </div>
+          <div class="include-card reveal">
+            <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+            <h3 class="h-card">Material 2: 20 Estudos de Caso</h3>
+            <p>Selecionados para representar os principais temas e situações da prova discursiva deste edital, cada um com modelo de resposta comentado para comparação. Escreva antes de consultar o modelo.</p>
+          </div>
+          <div class="include-card reveal">
+            <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
+            <h3 class="h-card">Área exclusiva do aluno</h3>
+            <p>Uma área organizada na plataforma Tutory, com o módulo "Primeiros Passos" orientando desde o início como estudar e aplicar o método.</p>
+          </div>
+          <div class="include-card reveal">
+            <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+            <h3 class="h-card">Acesso por 2 meses</h3>
+            <p>Tempo de acesso pensado para acompanhar sua reta final até a prova, em 30 de agosto de 2026.</p>
+          </div>
+        </div>
+        <p class="include-note">Esta oferta contempla o Método da Discursiva completo e os 20 estudos de caso. As correções individuais de redação não estão incluídas nesta modalidade, mas podem ser adquiridas separadamente, conforme disponibilidade.</p>
+      </div>
+      <div class="include-visual reveal" style="--reveal-delay:.15s">
+        <div class="mockup-card">
+          <div class="mockup-doc">
+            <span class="tag">Plataforma</span>
+            <h4>Área exclusiva do aluno</h4>
+            <div class="lines"><span></span><span></span><span></span></div>
+          </div>
+          <div class="mockup-doc offset">
+            <span class="tag" style="background:var(--verde-escuro);">Onboarding</span>
+            <h4>Módulo Primeiros Passos</h4>
+            <div class="lines"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="include-grid stagger">
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></div>
-        <h3 class="h-card">Material 1: Método da Discursiva</h3>
-        <p>Todo o conteúdo teórico e estratégico para compreender como interpretar, planejar e construir respostas discursivas claras e alinhadas aos critérios da banca FEPESE.</p>
-      </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <h3 class="h-card">Material 2: 20 Estudos de Caso</h3>
-        <p>Selecionados para representar os principais temas e situações da prova discursiva deste edital, cada um com modelo de resposta comentado para comparação. Escreva antes de consultar o modelo.</p>
-      </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
-        <h3 class="h-card">Área exclusiva do aluno</h3>
-        <p>Uma área organizada na plataforma Tutory, com o módulo "Primeiros Passos" orientando desde o início como estudar e aplicar o método.</p>
-      </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <h3 class="h-card">Acesso por 2 meses</h3>
-        <p>Tempo de acesso pensado para acompanhar sua reta final até a prova, em 30 de agosto de 2026.</p>
-      </div>
-    </div>
-    <p class="include-note">Esta oferta contempla o Método da Discursiva completo e os 20 estudos de caso. As correções individuais de redação não estão incluídas nesta modalidade, mas podem ser adquiridas separadamente, conforme disponibilidade.</p>
   </div>
 </section>
 
@@ -1315,7 +1345,11 @@ footer{
       </div>
       <div class="fit-card no reveal">
         <h3>Este método não foi pensado para:</h3>
-        <p>Quem procura apenas respostas prontas para decorar, sem praticar a construção da própria escrita. O Método da Discursiva FEPESE exige que você escreva, compare e evolua: a transformação acontece na prática, não apenas na leitura.</p>
+        <ul>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Quem busca preparação para outro edital ou outra banca</li>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Quem procura um curso genérico de redação discursiva</li>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Quem quer apenas respostas prontas para decorar, sem praticar a própria escrita</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -1389,12 +1423,7 @@ footer{
       </div>
     </div>
     <p class="offer-note">As correções individuais de redação não estão incluídas nesta modalidade. Este é um material fechado de reta final, sem atualizações previstas.</p>
-
-    <div class="badge-strip">
-      <span class="badge-logo"><img src="./assets/img/fepese.png" alt="Banca FEPESE" /><span>Banca organizadora</span></span>
-      <span class="badge-logo"><img src="./assets/img/itajai.png" alt="Prefeitura de Itajaí/SC" /><span>Órgão responsável</span></span>
-    </div>
-    <p style="text-align:center;font-size:.72rem;color:var(--grafite-soft);margin-top:.9rem;">Material produzido de forma independente pela Estude Ambiental. Sem vínculo oficial com a banca FEPESE ou com a Prefeitura de Itajaí/SC.</p>
+    <p style="text-align:center;font-size:.72rem;color:var(--grafite-soft);margin-top:1.5rem;">Material produzido de forma independente pela Estude Ambiental, com base no edital do concurso de Analista Ambiental da Prefeitura de Itajaí/SC (banca FEPESE). Sem vínculo oficial com a banca ou com a Prefeitura.</p>
   </div>
 </section>
 
@@ -1403,7 +1432,29 @@ footer{
      ============================================================ -->
 <section>
   <div class="container guarantee reveal">
-    <div class="guarantee-badge"><strong>7</strong><span>dias de garantia</span></div>
+    <div class="guarantee-badge">
+      <svg class="badge-seal" viewBox="0 0 220 150" aria-hidden="true">
+        <g class="laurel" fill="var(--verde-claro)" stroke="var(--verde)" stroke-width="2">
+          <path d="M72 74 C56 63 45 46 42 24" fill="none"/>
+          <ellipse cx="68" cy="70" rx="8" ry="3.4" transform="rotate(-38 68 70)"/>
+          <ellipse cx="59" cy="58" rx="8" ry="3.4" transform="rotate(-54 59 58)"/>
+          <ellipse cx="52" cy="45" rx="7.5" ry="3.2" transform="rotate(-68 52 45)"/>
+          <ellipse cx="46" cy="32" rx="7" ry="3" transform="rotate(-82 46 32)"/>
+          <ellipse cx="43" cy="19" rx="6.5" ry="2.8" transform="rotate(-95 43 19)"/>
+        </g>
+        <g class="laurel" fill="var(--verde-claro)" stroke="var(--verde)" stroke-width="2" transform="translate(220,0) scale(-1,1)">
+          <path d="M72 74 C56 63 45 46 42 24" fill="none"/>
+          <ellipse cx="68" cy="70" rx="8" ry="3.4" transform="rotate(-38 68 70)"/>
+          <ellipse cx="59" cy="58" rx="8" ry="3.4" transform="rotate(-54 59 58)"/>
+          <ellipse cx="52" cy="45" rx="7.5" ry="3.2" transform="rotate(-68 52 45)"/>
+          <ellipse cx="46" cy="32" rx="7" ry="3" transform="rotate(-82 46 32)"/>
+          <ellipse cx="43" cy="19" rx="6.5" ry="2.8" transform="rotate(-95 43 19)"/>
+        </g>
+        <circle cx="110" cy="62" r="36" fill="var(--grafite)"/>
+        <text x="110" y="76" font-size="38" font-weight="800" fill="var(--verde-claro)" text-anchor="middle" font-family="inherit">$</text>
+      </svg>
+      <div class="guarantee-badge-caption"><strong>7 dias</strong><span>dinheiro de volta</span></div>
+    </div>
     <div class="guarantee-text">
       <h3 class="h-card" style="font-size:1.2rem;">Garantia de 7 dias</h3>
       <p>Você pode conhecer o conteúdo do Método da Discursiva FEPESE com tranquilidade. Caso, dentro de 7 dias corridos a partir da confirmação da compra, você entenda que o método não atende ao que esperava, basta solicitar o cancelamento dentro desse prazo, conforme os termos da compra. Nosso objetivo é que você avance na sua preparação com segurança, inclusive na hora de decidir.</p>
@@ -1492,8 +1543,8 @@ footer{
   <div class="blob blob-5"></div>
   <div class="blob blob-6"></div>
   <div class="container">
-    <h2 class="h-section">Comece hoje sua preparação para a discursiva</h2>
-    <p>Você não precisa esperar a prova se aproximar para começar a treinar sua escrita. Quanto antes iniciar a prática, mais tempo terá para identificar dificuldades, aperfeiçoar sua estrutura de resposta e ganhar confiança até 30 de agosto de 2026.</p>
+    <h2 class="h-section">Sua preparação para a discursiva começa agora</h2>
+    <p>Sua preparação não depende apenas de estudar mais. Depende de saber demonstrar, na prova discursiva, tudo aquilo que você já aprendeu. Quanto antes começar a praticar, mais tempo terá para identificar dificuldades, aperfeiçoar sua estrutura de resposta e ganhar confiança até 30 de agosto de 2026.</p>
     <a href="#oferta" class="btn btn-primary btn-lg">Quero acessar o Método da Discursiva FEPESE</a>
   </div>
 </section>
