@@ -608,6 +608,18 @@ section{ padding: var(--section-y) 0; }
 .mockup-doc .lines span:nth-child(2){ width:88%; }
 .mockup-doc .lines span:nth-child(3){ width:64%; }
 .mockup-doc.offset{ transform: translate(1.4rem,-.6rem); }
+.mockup-card-covers{ position:relative; flex-direction:row; align-items:center; justify-content:center; min-height:340px; }
+.mockup-cover{
+  width: 56%;
+  border-radius: var(--radius-m);
+  box-shadow: 0 24px 44px -20px rgba(68,60,66,.45);
+  transform: rotate(-6deg);
+}
+.mockup-cover.offset{
+  position:absolute;
+  transform: translate(2.6rem, 1.6rem) rotate(5deg);
+  z-index:1;
+}
 
 @media (max-width: 900px){
   .split, .split.reverse{ grid-template-columns: 1fr; }
@@ -1149,18 +1161,10 @@ footer{
       </ul>
     </div>
     <div class="split-visual reveal" style="--reveal-delay:.15s">
-      <!-- MOCKUP: Material 1, Método da Discursiva -->
-      <div class="mockup-card">
-        <div class="mockup-doc">
-          <span class="tag">Material 1</span>
-          <h4>Método da Discursiva</h4>
-          <div class="lines"><span></span><span></span><span></span></div>
-        </div>
-        <div class="mockup-doc offset">
-          <span class="tag" style="background:var(--verde-escuro);">Material 2</span>
-          <h4>20 Estudos de Caso</h4>
-          <div class="lines"><span></span><span></span><span></span></div>
-        </div>
+      <!-- MOCKUP: capas reais dos materiais -->
+      <div class="mockup-card mockup-card-covers">
+        <img class="mockup-cover" src="./assets/img/material-1-capa.jpg" alt="Capa do Material 1: Método da Discursiva FEPESE" />
+        <img class="mockup-cover offset" src="./assets/img/material-2-capa.jpg" alt="Capa do Material 2: 20 Estudos de Caso Comentados" />
       </div>
     </div>
   </div>
