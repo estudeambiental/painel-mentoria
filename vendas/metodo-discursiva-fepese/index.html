@@ -839,9 +839,9 @@ footer{
 .site-header .container{ display:flex; align-items:center; justify-content:space-between; height: 68px; transition: height .3s ease; }
 .site-header.scrolled .container{ height: 58px; }
 .brand{ display:flex; align-items:center; gap:.55rem; font-weight:800; font-size:1.02rem; color:var(--grafite); text-decoration:none; }
-.brand svg{ width:22px; height:29px; }
+.brand-logo{ height:34px; width:auto; display:block; }
 .footer-brand{ display:flex; align-items:center; gap:.6rem; }
-.footer-brand svg{ width:18px; height:23px; flex-shrink:0; }
+.footer-logo{ height:26px; width:auto; display:block; }
 .header-cta{ display:none; }
 @media (min-width: 720px){ .header-cta{ display:inline-flex; padding: .65rem 1.3rem; font-size:.85rem; } }
 
@@ -864,16 +864,7 @@ footer{
 <header class="site-header">
   <div class="container">
     <a href="#hero" class="brand">
-      <svg viewBox="0 0 100 130" fill="none" stroke="var(--verde)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M50 49 C47 32 33 24 33 8 C48 14 54 30 50 49 Z"/>
-        <path d="M42 20 L47 44"/>
-        <path d="M51 56 C57 47 68 44 74 49 C66 55 57 58 51 56 Z"/>
-        <path d="M44 50 L44 86"/>
-        <path d="M56 50 L56 86"/>
-        <path d="M44 86 L39 102 L61 102 L56 86"/>
-        <path d="M39 102 L50 120 L61 102"/>
-      </svg>
-      estude ambiental
+      <img src="./assets/img/estude-ambiental-vertical-green.png" alt="Estude Ambiental" class="brand-logo" />
     </a>
     <a href="#oferta" class="btn btn-primary header-cta">Quero acessar o método</a>
   </div>
@@ -904,8 +895,8 @@ footer{
       </div>
     </div>
     <div class="hero-visual hero-anim d3" id="heroVisual">
-      <!-- FOTO: substituir por <img src="./assets/img/dominique-hero.jpg" alt="Dominique Martins Sala estudando"> -->
       <div class="photo-frame">
+        <img src="./assets/img/dominique-retrato.jpg" alt="Dominique Martins Sala, fundadora da Estude Ambiental" />
         <div class="photo-caption">Dominique Martins Sala, fundadora da Estude Ambiental</div>
       </div>
       <div class="hero-badge-float">
@@ -1165,8 +1156,8 @@ footer{
 <section>
   <div class="container about-grid">
     <div class="about-visual reveal">
-      <!-- FOTO: substituir por <img src="./assets/img/dominique-sobre.jpg" alt="Dominique Martins Sala"> -->
       <div class="photo-frame">
+        <img src="./assets/img/dominique-retrato.jpg" alt="Dominique Martins Sala" style="object-position: center 20%;" />
         <div class="photo-caption">Dominique Martins Sala</div>
       </div>
     </div>
@@ -1338,15 +1329,7 @@ footer{
   <div class="container">
     <div class="footer-row">
       <span class="footer-brand">
-        <svg viewBox="0 0 100 130" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M50 49 C47 32 33 24 33 8 C48 14 54 30 50 49 Z"/>
-          <path d="M42 20 L47 44"/>
-          <path d="M51 56 C57 47 68 44 74 49 C66 55 57 58 51 56 Z"/>
-          <path d="M44 50 L44 86"/>
-          <path d="M56 50 L56 86"/>
-          <path d="M44 86 L39 102 L61 102 L56 86"/>
-          <path d="M39 102 L50 120 L61 102"/>
-        </svg>
+        <img src="./assets/img/estude-ambiental-vertical-white.png" alt="Estude Ambiental" class="footer-logo" />
         Estude Ambiental · Dominique Martins Sala
       </span>
       <div class="footer-links">
