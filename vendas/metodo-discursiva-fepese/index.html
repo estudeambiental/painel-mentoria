@@ -92,11 +92,12 @@ button{ font-family:inherit; cursor:pointer; }
    ============================================================ */
 .reveal{
   opacity:0;
-  transform: translateY(28px);
-  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+  transform: translateY(34px) scale(.96);
+  filter: blur(6px);
+  transition: opacity .85s cubic-bezier(.22,1,.36,1), transform .85s cubic-bezier(.22,1,.36,1), filter .85s cubic-bezier(.22,1,.36,1);
   transition-delay: var(--reveal-delay, 0s);
 }
-.reveal.in-view{ opacity:1; transform:none; }
+.reveal.in-view{ opacity:1; transform:none; filter:blur(0); }
 
 @keyframes fadeSlideUp{ from{ opacity:0; transform:translateY(22px); } to{ opacity:1; transform:none; } }
 .hero-anim{ opacity:0; animation: fadeSlideUp .8s cubic-bezier(.22,1,.36,1) forwards; }
@@ -118,6 +119,121 @@ button{ font-family:inherit; cursor:pointer; }
 .blob-2{ width:260px; height:260px; background: radial-gradient(circle, var(--verde), transparent 70%); bottom:-10%; right:2%; opacity:.3; animation: driftB 20s ease-in-out infinite; }
 .hero-wave{ position:absolute; left:0; right:0; bottom:-1px; width:100%; height:60px; z-index:1; }
 @media (max-width: 640px){ .hero-wave{ height:36px; } }
+
+/* glow ring pulsing behind hero photo */
+@keyframes glowPulse{ 0%,100%{ opacity:.45; transform:scale(1); } 50%{ opacity:.8; transform:scale(1.04); } }
+.hero-visual{ position:relative; }
+.hero-visual::before{
+  content:'';
+  position:absolute;
+  inset:-18px;
+  z-index:-1;
+  border-radius: calc(var(--radius-l) + 14px);
+  background: conic-gradient(from 0deg, var(--verde-claro), var(--verde), var(--verde-claro), var(--verde));
+  filter: blur(28px);
+  opacity:.5;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* glassmorphism chips */
+.eyebrow, .hero-badge-float, .badge-strip .badge-pill{
+  backdrop-filter: blur(6px);
+}
+.hero-badge-float{
+  background: rgba(255,255,255,.82);
+  border: 1px solid rgba(255,255,255,.6);
+}
+
+/* pulsing status dot */
+@keyframes dotPulse{ 0%{ box-shadow:0 0 0 0 rgba(104,153,90,.55); } 70%{ box-shadow:0 0 0 8px rgba(104,153,90,0); } 100%{ box-shadow:0 0 0 0 rgba(104,153,90,0); } }
+.pulse-dot{
+  display:inline-block;
+  width:8px; height:8px;
+  border-radius:50%;
+  background: var(--verde);
+  animation: dotPulse 1.8s ease-out infinite;
+  flex-shrink:0;
+}
+
+/* animated gradient text */
+@keyframes gradShift{ 0%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } 100%{ background-position:0% 50%; } }
+.grad-text{
+  background: linear-gradient(90deg, var(--verde-escuro), var(--verde), var(--verde-claro), var(--verde));
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradShift 5s ease-in-out infinite;
+}
+
+/* marquee ticker */
+.marquee{
+  position:relative;
+  overflow:hidden;
+  background: var(--grafite);
+  padding: .95rem 0;
+  white-space:nowrap;
+}
+.marquee-track{
+  display:inline-flex;
+  animation: marqueeScroll 26s linear infinite;
+}
+.marquee-track span{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  font-weight:700;
+  font-size:.82rem;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color: var(--verde-claro);
+  padding: 0 2rem;
+}
+.marquee-track span::after{ content:'✦'; color: var(--verde); margin-left:2rem; font-size:.7rem; }
+@keyframes marqueeScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* rotating conic glow border on offer card (animates the gradient angle, not the box, so corners never escape the rounded shape) */
+@property --border-angle{
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes rotateBorder{ to{ --border-angle: 360deg; } }
+.offer-card{ position:relative; z-index:0; }
+.offer-card::before{
+  content:'';
+  position:absolute;
+  inset:-2px;
+  z-index:-1;
+  border-radius: inherit;
+  background: conic-gradient(from var(--border-angle), var(--verde), var(--verde-claro), var(--verde-escuro), var(--verde-claro), var(--verde));
+  animation: rotateBorder 6s linear infinite;
+}
+.offer-card::after{
+  content:'';
+  position:absolute;
+  inset:2px;
+  z-index:-1;
+  border-radius: calc(var(--radius-l) - 2px);
+  background: var(--branco);
+}
+
+/* sticky mobile CTA bar */
+.sticky-cta{
+  position:fixed;
+  left:0; right:0; bottom:0;
+  z-index:60;
+  background: var(--branco);
+  border-top:1px solid var(--border);
+  box-shadow: 0 -8px 24px -12px rgba(68,60,66,.25);
+  padding: .7rem 1rem;
+  transform: translateY(110%);
+  transition: transform .4s cubic-bezier(.22,1,.36,1);
+  display:none;
+}
+.sticky-cta.show{ transform: translateY(0); }
+.sticky-cta .btn{ width:100%; padding: .9rem 1rem; font-size:.92rem; }
+@media (max-width: 860px){ .sticky-cta{ display:block; } }
 
 /* card hover polish */
 .include-card, .benefit-card, .diff-item, .pain-card, .mockup-doc, .fit-card, .offer-card{
@@ -174,10 +290,15 @@ button{ font-family:inherit; cursor:pointer; }
 .stagger > *:nth-child(12){ --reveal-delay: .69s; }
 
 @media (prefers-reduced-motion: reduce){
-  .reveal, .hero-anim{ opacity:1 !important; transform:none !important; animation:none !important; transition:none !important; }
+  .reveal, .hero-anim{ opacity:1 !important; transform:none !important; filter:none !important; animation:none !important; transition:none !important; }
   .blob{ animation:none !important; }
   .offer-card .btn-primary{ animation:none !important; }
   .hero-badge-float{ animation:none !important; }
+  .hero-visual::before{ animation:none !important; }
+  .pulse-dot{ animation:none !important; }
+  .grad-text{ animation:none !important; background-position:0 0; }
+  .marquee-track{ animation:none !important; }
+  .offer-card::before{ animation:none !important; }
   .include-card:hover, .fit-card.yes:hover, .benefit-card:hover, .pain-card:hover, .diff-item:hover{ transform:none; }
 }
 
@@ -664,7 +785,6 @@ section{ padding: var(--section-y) 0; }
 .offer-context{ text-align:center; color: var(--grafite-soft); max-width:58ch; margin: 0 auto 2.5rem; }
 .offer-card{
   background: var(--branco);
-  border: 2px solid var(--verde);
   border-radius: var(--radius-l);
   padding: clamp(2rem, 4vw, 3rem);
   box-shadow: 0 30px 60px -30px rgba(104,153,90,.4);
@@ -824,6 +944,21 @@ footer{
   padding: .55rem 1.05rem;
 }
 .badge-strip .badge-pill b{ color: var(--grafite); }
+.badge-strip .badge-logo{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.55rem;
+  background: var(--branco);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  padding: .85rem 1.5rem;
+  box-shadow: 0 10px 24px -16px rgba(68,60,66,.25);
+  transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease;
+}
+.badge-strip .badge-logo:hover{ transform: translateY(-3px); box-shadow: 0 16px 30px -16px rgba(68,60,66,.3); }
+.badge-strip .badge-logo img{ height:32px; width:auto; display:block; }
+.badge-strip .badge-logo span{ font-size:.65rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--grafite-soft); }
 
 /* ============================================================
    HEADER
@@ -879,11 +1014,11 @@ footer{
   <div class="container hero-grid">
     <div class="hero-copy">
       <span class="eyebrow hero-anim d1">Método da Discursiva FEPESE · Analista Ambiental · Itajaí/SC</span>
-      <h1 class="h-display hero-anim d2">Aprenda a construir respostas discursivas com mais clareza, organização e segurança para a banca FEPESE.</h1>
+      <h1 class="h-display hero-anim d2">Aprenda a construir respostas discursivas com mais clareza, organização e segurança para a <span class="grad-text">banca FEPESE</span>.</h1>
       <p class="lede hero-anim d3">O Método da Discursiva FEPESE combina orientação estratégica e prática por meio de 20 estudos de caso, para ajudar você a transformar o que já sabe em respostas bem estruturadas. Pensado especificamente para quem vai prestar Analista Ambiental na Prefeitura de Itajaí/SC.</p>
       <a href="#oferta" class="btn btn-primary btn-lg hero-anim d4">Quero acessar o Método da Discursiva FEPESE</a>
       <div class="micro-list hero-anim d5">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Acesso imediato</span>
+        <span><span class="pulse-dot"></span> Acesso imediato</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Área exclusiva do aluno</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 20 estudos de caso</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Estude no seu ritmo</span>
@@ -909,6 +1044,12 @@ footer{
     <path d="M0,32 C240,80 480,0 720,24 C960,48 1200,88 1440,40 L1440,80 L0,80 Z" fill="var(--branco)"/>
   </svg>
 </section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Método</span><span>Estrutura</span><span>Clareza</span><span>Prática</span><span>Constância</span><span>Confiança</span><span>Método</span><span>Estrutura</span><span>Clareza</span><span>Prática</span><span>Constância</span><span>Confiança</span>
+  </div>
+</div>
 
 <!-- ============================================================
      BLOCO 2: IDENTIFICAÇÃO DA DOR
@@ -1220,8 +1361,8 @@ footer{
     <p class="offer-note">As correções individuais de redação não estão incluídas nesta modalidade. Este é um material fechado de reta final, sem atualizações previstas.</p>
 
     <div class="badge-strip">
-      <span class="badge-pill"><b>Banca:</b>&nbsp;FEPESE</span>
-      <span class="badge-pill"><b>Órgão:</b>&nbsp;Prefeitura de Itajaí/SC</span>
+      <span class="badge-logo"><img src="./assets/img/fepese.png" alt="Banca FEPESE" /><span>Banca organizadora</span></span>
+      <span class="badge-logo"><img src="./assets/img/itajai.png" alt="Prefeitura de Itajaí/SC" /><span>Órgão responsável</span></span>
     </div>
     <p style="text-align:center;font-size:.72rem;color:var(--grafite-soft);margin-top:.9rem;">Material produzido de forma independente pela Estude Ambiental. Sem vínculo oficial com a banca FEPESE ou com a Prefeitura de Itajaí/SC.</p>
   </div>
@@ -1342,6 +1483,10 @@ footer{
   </div>
 </footer>
 
+<div class="sticky-cta" id="stickyCta">
+  <a href="#oferta" class="btn btn-primary">Quero acessar o Método da Discursiva FEPESE</a>
+</div>
+
 <script>
 document.querySelectorAll('.faq-item').forEach(function(item){
   var q = item.querySelector('.faq-q');
@@ -1363,6 +1508,28 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     }
   });
 });
+
+// Sticky mobile CTA: show after hero, hide once the offer button is reachable
+(function(){
+  var bar = document.getElementById('stickyCta');
+  var hero = document.getElementById('hero');
+  var offer = document.getElementById('oferta');
+  var foot = document.querySelector('footer');
+  if(!bar || !hero || !offer || !foot || !('IntersectionObserver' in window)) return;
+  var pastHero = false, nearCta = false;
+  var update = function(){ bar.classList.toggle('show', pastHero && !nearCta); };
+  new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ pastHero = !e.isIntersecting; });
+    update();
+  }, { threshold: 0 }).observe(hero);
+  var ctaWatcher = new IntersectionObserver(function(entries){
+    var anyVisible = entries.some(function(e){ return e.isIntersecting; });
+    nearCta = anyVisible;
+    update();
+  }, { threshold: .15 });
+  ctaWatcher.observe(offer);
+  ctaWatcher.observe(foot);
+})();
 
 // Header reacts to scroll
 (function(){
