@@ -117,6 +117,11 @@ button{ font-family:inherit; cursor:pointer; }
 }
 .blob-1{ width:340px; height:340px; background: radial-gradient(circle, var(--verde-claro), transparent 70%); top:-6%; left:-8%; animation: driftA 16s ease-in-out infinite; }
 .blob-2{ width:260px; height:260px; background: radial-gradient(circle, var(--verde), transparent 70%); bottom:-10%; right:2%; opacity:.3; animation: driftB 20s ease-in-out infinite; }
+.blob-3{ width:280px; height:280px; background: radial-gradient(circle, var(--verde), transparent 70%); top:-12%; right:-6%; opacity:.28; animation: driftB 18s ease-in-out infinite; }
+.blob-4{ width:220px; height:220px; background: radial-gradient(circle, var(--verde-escuro), transparent 70%); bottom:-14%; left:-4%; opacity:.35; animation: driftA 22s ease-in-out infinite; }
+.blob-5{ width:300px; height:300px; background: radial-gradient(circle, var(--verde-claro), transparent 70%); top:-10%; left:4%; opacity:.16; animation: driftA 19s ease-in-out infinite; }
+.blob-6{ width:240px; height:240px; background: radial-gradient(circle, var(--verde-claro), transparent 70%); bottom:-16%; right:6%; opacity:.14; animation: driftB 24s ease-in-out infinite; }
+.shift, .final-cta .container{ position:relative; z-index:1; }
 .hero-wave{ position:absolute; left:0; right:0; bottom:-1px; width:100%; height:60px; z-index:1; }
 @media (max-width: 640px){ .hero-wave{ height:36px; } }
 
@@ -392,7 +397,7 @@ h3.h-card{
    ============================================================ */
 section{ padding: var(--section-y) 0; }
 .bg-tint{ background: var(--bg); }
-.bg-verde-tint{ background: var(--bg-verde); }
+.bg-verde-tint{ background: var(--bg-verde); position:relative; overflow:hidden; }
 
 /* ============================================================
    HERO
@@ -887,6 +892,8 @@ section{ padding: var(--section-y) 0; }
   background: var(--grafite);
   color: var(--branco);
   text-align:center;
+  position:relative;
+  overflow:hidden;
 }
 .final-cta h2{ color: var(--branco); margin-bottom: 1rem; }
 .final-cta p{ color: rgba(255,255,255,.72); max-width: 58ch; margin: 0 auto 2rem; font-size:1.02rem; }
@@ -963,6 +970,18 @@ footer{
 /* ============================================================
    HEADER
    ============================================================ */
+.scroll-progress{
+  position: fixed;
+  top:0; left:0;
+  height:3px;
+  width:100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--verde-escuro), var(--verde), var(--verde-claro));
+  z-index: 60;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce){ .scroll-progress{ transition:none; } }
 .site-header{
   position: sticky;
   top:0;
@@ -992,6 +1011,8 @@ footer{
 </style>
 </head>
 <body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <!-- ============================================================
      HEADER
@@ -1083,6 +1104,8 @@ footer{
      BLOCO 3: MUDANÇA DE PERCEPÇÃO
      ============================================================ -->
 <section class="bg-verde-tint">
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
   <div class="container shift">
     <h2 class="h-section">Uma boa resposta não depende de inspiração. Depende de método.</h2>
     <p>Escrever bem uma discursiva não é um talento com o qual se nasce. É um processo que pode ser aprendido, treinado e repetido, como qualquer outra parte do edital. O Método da Discursiva FEPESE ensina exatamente esse processo: uma forma organizada de interpretar, planejar e estruturar sua resposta, aplicável a qualquer tema que a banca apresentar.</p>
@@ -1459,6 +1482,8 @@ footer{
      BLOCO 16: CTA FINAL + FOOTER
      ============================================================ -->
 <section class="final-cta">
+  <div class="blob blob-5"></div>
+  <div class="blob blob-6"></div>
   <div class="container">
     <h2 class="h-section">Comece hoje sua preparação para a discursiva</h2>
     <p>Você não precisa esperar a prova se aproximar para começar a treinar sua escrita. Quanto antes iniciar a prática, mais tempo terá para identificar dificuldades, aperfeiçoar sua estrutura de resposta e ganhar confiança até 30 de agosto de 2026.</p>
@@ -1540,6 +1565,26 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   };
   window.addEventListener('scroll', onScroll, { passive:true });
   onScroll();
+})();
+
+// Scroll progress bar
+(function(){
+  var bar = document.getElementById('scrollProgress');
+  if(!bar) return;
+  var ticking = false;
+  function update(){
+    var h = document.documentElement;
+    var scrollable = h.scrollHeight - h.clientHeight;
+    var ratio = scrollable > 0 ? h.scrollTop / scrollable : 0;
+    bar.style.transform = 'scaleX(' + ratio + ')';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive:true });
+  update();
 })();
 
 // Subtle parallax on hero visual
