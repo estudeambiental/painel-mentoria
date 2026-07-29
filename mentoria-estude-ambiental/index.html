@@ -137,6 +137,31 @@ button{ font-family:inherit; cursor:pointer; }
 .hero-wave{ position:absolute; left:0; right:0; bottom:-1px; width:100%; height:60px; z-index:1; }
 @media (max-width: 640px){ .hero-wave{ height:36px; } }
 
+/* ============================================================
+   SEÇÕES ESCURAS (autoridade) — hero, VSL, diagnóstico, Método TEIA
+   ============================================================ */
+.bg-dark{
+  background: linear-gradient(165deg, var(--verde-escuro) 0%, var(--grafite) 100%);
+  color: var(--branco);
+  position:relative; overflow:hidden;
+}
+.bg-dark h1, .bg-dark h2, .bg-dark h3,
+.bg-dark h1.h-display, .bg-dark h2.h-section, .bg-dark h3.h-card{ color: var(--branco); }
+.bg-dark .lede, .bg-dark .dor-text, .bg-dark .teia-intro p, .bg-dark .vsl-text{ color: rgba(255,255,255,.72); }
+.bg-dark .dor-close{ color: var(--branco); }
+.bg-dark .pain-card{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); color: var(--branco); backdrop-filter: blur(4px); }
+.bg-dark .pain-card .dash{ color: var(--verde-claro); }
+.bg-dark .btn-primary{ background: var(--verde-claro); color: var(--verde-escuro); }
+.bg-dark .btn-primary:hover{ background: var(--branco); }
+.bg-dark .teia-card{ background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.14); backdrop-filter: blur(4px); }
+.bg-dark .teia-card > p{ color: rgba(255,255,255,.68); }
+.bg-dark .teia-letter{ background: var(--verde-claro); color: var(--verde-escuro); }
+.bg-dark .teia-elements span{ color: var(--verde-claro); background: rgba(197,255,181,.12); border-color: rgba(197,255,181,.35); }
+.bg-dark .vsl-caption, .bg-dark .micro-note{ color: rgba(255,255,255,.55); }
+.bg-dark .hero-signature{ color: rgba(255,255,255,.65); }
+.bg-dark .hero-signature strong{ color: var(--branco); }
+.bg-dark .hero-signature .dot{ background: rgba(255,255,255,.4); }
+
 @keyframes glowPulse{ 0%,100%{ opacity:.45; transform:scale(1); } 50%{ opacity:.8; transform:scale(1.04); } }
 .hero-visual{ position:relative; }
 .hero-visual::before{
@@ -279,7 +304,7 @@ section{ padding: var(--section-y) 0; }
 /* ============================================================
    HERO
    ============================================================ */
-.hero{ position:relative; overflow:hidden; padding: clamp(2.5rem, 6vw, 4.5rem) 0 var(--section-y); background: linear-gradient(180deg, var(--bg-verde) 0%, var(--branco) 78%); }
+.hero{ position:relative; overflow:hidden; padding: clamp(2.5rem, 6vw, 4.5rem) 0 var(--section-y); }
 .hero-grid{ position:relative; z-index:1; display:grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem, 5vw, 4rem); align-items:center; }
 .hero-copy{ max-width: 580px; }
 .hero-copy .eyebrow{ margin-bottom: 1.1rem; }
@@ -544,7 +569,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 <!-- ============================================================
      HERO
      ============================================================ -->
-<section class="hero" id="hero">
+<section class="hero bg-dark" id="hero">
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <div class="container hero-grid">
@@ -571,9 +596,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </div>
     </div>
   </div>
-  <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0,32 C240,80 480,0 720,24 C960,48 1200,88 1440,40 L1440,80 L0,80 Z" fill="var(--branco)"/>
-  </svg>
 </section>
 
 <div class="marquee" aria-hidden="true">
@@ -585,7 +607,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 <!-- ============================================================
      VSL
      ============================================================ -->
-<section class="vsl" id="vsl">
+<section class="vsl bg-dark" id="vsl">
   <div class="container vsl-wrap">
     <div class="section-kicker reveal" style="margin-bottom:0;">
       <h2 class="h-section">Antes de aplicar, entenda por que estudar mais nem sempre significa avançar mais.</h2>
@@ -607,7 +629,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 <!-- ============================================================
      DIAGNÓSTICO DO PROBLEMA
      ============================================================ -->
-<section class="bg-tint">
+<section class="bg-dark">
   <div class="container dor-grid">
     <div class="dor-text reveal">
       <h2 class="h-section" style="margin-bottom:1.25rem;">Você pode estar se esforçando muito e, ainda assim, avançando menos do que poderia.</h2>
@@ -667,7 +689,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 <!-- ============================================================
      MÉTODO TEIA
      ============================================================ -->
-<section id="metodo-teia">
+<section id="metodo-teia" class="bg-dark">
   <div class="container">
     <div class="teia-intro reveal">
       <span class="eyebrow">O método</span>
