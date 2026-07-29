@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '706004184857947');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=706004184857947&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="../estude-ambiental-vertical-green.png" />
+<title>Mentoria Estude Ambiental | Preparação para concursos da área ambiental</title>
+<meta name="description" content="Pare de estudar no escuro. A Mentoria Estude Ambiental organiza sua preparação para concursos da área ambiental com plano personalizado, metas diárias, revisões, questões, simulados, discursivas e acompanhamento próximo." />
+<link rel="canonical" href="https://estudeambiental.com/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:url" content="https://estudeambiental.com/" />
+<meta property="og:site_name" content="Estude Ambiental" />
+<meta property="og:title" content="Mentoria Estude Ambiental | Preparação para concursos da área ambiental" />
+<meta property="og:description" content="Pare de estudar no escuro. Plano personalizado, metas diárias, revisões, questões, simulados, discursivas e acompanhamento próximo, com o Método TEIA." />
+
+<style>
+/* ============================================================
+   NOTA INTERNA (comentário HTML, não renderiza para o visitante):
+   Este é o primeiro rascunho estrutural completo da nova home,
+   construído em cima do documento mestre da Dominique. Pendências
+   marcadas com PLACEHOLDER ao longo do arquivo:
+     - Link real do formulário Respondi (hoje aponta para "#aplicar")
+     - Screenshots reais da Tutory (bloco "dia a dia do aluno")
+     - Vídeo real da VSL + thumbnail
+     - Depoimentos e resultados reais, com autorização
+     - Lista final de entregas/bônus e descrição dos planos 3/6/12 meses
+   ============================================================ */
+
+/* ============================================================
+   FONTS
+   ============================================================ */
+@font-face { font-family: 'Gilroy'; src: url('../assets/fonts/Gilroy-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('../assets/fonts/Gilroy-MediumItalic.woff2') format('woff2'); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('../assets/fonts/Gilroy-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('../assets/fonts/Gilroy-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('../assets/fonts/Gilroy-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('../assets/fonts/Gilroy-ExtraBold.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('../assets/fonts/Gilroy-Black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('../assets/fonts/Gilroy-Heavy.woff2') format('woff2'); font-weight: 950; font-style: normal; font-display: swap; }
+
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --verde: #68995A;
+  --verde-escuro: #4E594B;
+  --verde-claro: #C5FFB5;
+  --grafite: #443C42;
+  --grafite-soft: #6b6069;
+  --branco: #FFFFFF;
+  --bg: #F6F8F4;
+  --bg-verde: #EEF6EA;
+  --border: #E1E8DC;
+  --danger: #B65C4A;
+  --danger-bg: #FBEFEC;
+
+  --container: 1140px;
+  --radius-s: 10px;
+  --radius-m: 16px;
+  --radius-l: 28px;
+
+  --section-y: clamp(3.25rem, 6vw, 6.5rem);
+  --section-y-tight: clamp(2.25rem, 4vw, 4rem);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  font-family:'Gilroy', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--grafite);
+  background: var(--branco);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+img{ max-width:100%; display:block; }
+a{ color: inherit; }
+h1,h2,h3,h4{ margin:0; text-wrap: balance; }
+p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+button{ font-family:inherit; cursor:pointer; }
+
+.container{ width:100%; max-width: var(--container); margin: 0 auto; padding: 0 1.5rem; }
+@media (max-width: 640px){ .container{ padding: 0 1.25rem; } }
+
+.eyebrow{
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-size: .74rem; font-weight:700; letter-spacing:.09em; text-transform: uppercase;
+  color: var(--verde-escuro); background: var(--verde-claro);
+  padding: .4rem .9rem; border-radius: 999px;
+}
+
+/* ============================================================
+   MOTION
+   ============================================================ */
+.reveal{
+  opacity:0; transform: translateY(34px) scale(.96); filter: blur(6px);
+  transition: opacity .85s cubic-bezier(.22,1,.36,1), transform .85s cubic-bezier(.22,1,.36,1), filter .85s cubic-bezier(.22,1,.36,1);
+  transition-delay: var(--reveal-delay, 0s);
+}
+.reveal.in-view{ opacity:1; transform:none; filter:blur(0); }
+@keyframes fadeSlideUp{ from{ opacity:0; transform:translateY(22px); } to{ opacity:1; transform:none; } }
+.hero-anim{ opacity:0; animation: fadeSlideUp .8s cubic-bezier(.22,1,.36,1) forwards; }
+.hero-anim.d1{ animation-delay:.05s; } .hero-anim.d2{ animation-delay:.16s; }
+.hero-anim.d3{ animation-delay:.27s; } .hero-anim.d4{ animation-delay:.38s; }
+.hero-anim.d5{ animation-delay:.49s; } .hero-anim.d6{ animation-delay:.6s; }
+
+@keyframes driftA{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(-18px,24px) scale(1.08); } }
+@keyframes driftB{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(22px,-18px) scale(1.05); } }
+.blob{ position:absolute; border-radius:50%; filter: blur(50px); pointer-events:none; z-index:0; opacity:.55; }
+.blob-1{ width:340px; height:340px; background: radial-gradient(circle, var(--verde-claro), transparent 70%); top:-6%; left:-8%; animation: driftA 16s ease-in-out infinite; }
+.blob-2{ width:260px; height:260px; background: radial-gradient(circle, var(--verde), transparent 70%); bottom:-10%; right:2%; opacity:.3; animation: driftB 20s ease-in-out infinite; }
+.blob-3{ width:280px; height:280px; background: radial-gradient(circle, var(--verde), transparent 70%); top:-12%; right:-6%; opacity:.28; animation: driftB 18s ease-in-out infinite; }
+.blob-4{ width:220px; height:220px; background: radial-gradient(circle, var(--verde-escuro), transparent 70%); bottom:-14%; left:-4%; opacity:.35; animation: driftA 22s ease-in-out infinite; }
+.blob-5{ width:300px; height:300px; background: radial-gradient(circle, var(--verde-claro), transparent 70%); top:-10%; left:4%; opacity:.16; animation: driftA 19s ease-in-out infinite; }
+.blob-6{ width:240px; height:240px; background: radial-gradient(circle, var(--verde-claro), transparent 70%); bottom:-16%; right:6%; opacity:.14; animation: driftB 24s ease-in-out infinite; }
+.shift, .final-cta .container{ position:relative; z-index:1; }
+.hero-wave{ position:absolute; left:0; right:0; bottom:-1px; width:100%; height:60px; z-index:1; }
+@media (max-width: 640px){ .hero-wave{ height:36px; } }
+
+@keyframes glowPulse{ 0%,100%{ opacity:.45; transform:scale(1); } 50%{ opacity:.8; transform:scale(1.04); } }
+.hero-visual{ position:relative; }
+.hero-visual::before{
+  content:''; position:absolute; inset:-18px; z-index:-1;
+  border-radius: calc(var(--radius-l) + 14px);
+  background: conic-gradient(from 0deg, var(--verde-claro), var(--verde), var(--verde-claro), var(--verde));
+  filter: blur(28px); opacity:.5; animation: glowPulse 4s ease-in-out infinite;
+}
+.hero-badge-float{ backdrop-filter: blur(6px); background: rgba(255,255,255,.86); border: 1px solid rgba(255,255,255,.6); }
+@keyframes dotPulse{ 0%{ box-shadow:0 0 0 0 rgba(104,153,90,.55); } 70%{ box-shadow:0 0 0 8px rgba(104,153,90,0); } 100%{ box-shadow:0 0 0 0 rgba(104,153,90,0); } }
+.pulse-dot{ display:inline-block; width:8px; height:8px; border-radius:50%; background: var(--verde); animation: dotPulse 1.8s ease-out infinite; flex-shrink:0; }
+
+@keyframes marqueeScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+.marquee{ position:relative; overflow:hidden; background: var(--grafite); padding: .95rem 0; white-space:nowrap; }
+.marquee-track{ display:inline-flex; animation: marqueeScroll 18s linear infinite; }
+.marquee-track span{ display:inline-flex; align-items:center; gap:.6rem; font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; color: var(--verde-claro); padding: 0 2rem; }
+.marquee-track span::after{ content:'✦'; color: var(--verde); margin-left:2rem; font-size:.7rem; }
+
+.sticky-cta{
+  position:fixed; left:0; right:0; bottom:0; z-index:60;
+  background: var(--branco); border-top:1px solid var(--border);
+  box-shadow: 0 -8px 24px -12px rgba(68,60,66,.25); padding: .7rem 1rem;
+  transform: translateY(110%); transition: transform .4s cubic-bezier(.22,1,.36,1); display:none;
+}
+.sticky-cta.show{ transform: translateY(0); }
+.sticky-cta .btn{ width:100%; padding: .9rem 1rem; font-size:.92rem; }
+@media (max-width: 860px){ .sticky-cta{ display:block; } }
+
+.include-card, .benefit-card, .fit-card.yes, .teia-card, .step-card{
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s cubic-bezier(.22,1,.36,1), border-color .35s ease;
+}
+.include-card:hover, .fit-card.yes:hover{ transform: translateY(-6px); box-shadow: 0 22px 40px -22px rgba(68,60,66,.28); border-color: var(--verde-claro); }
+.benefit-card{ transition: transform .3s ease; }
+.benefit-card:hover{ transform: translateY(-4px); }
+.benefit-card:hover .icon-circle{ background: var(--verde); transform: rotate(-6deg) scale(1.06); }
+.icon-circle{ transition: background .3s ease, transform .3s cubic-bezier(.34,1.56,.64,1); }
+.icon-circle .icon{ transition: stroke .3s ease; }
+.benefit-card:hover .icon-circle .icon{ stroke: var(--branco); }
+
+.btn-primary{ position:relative; overflow:hidden; }
+.btn-primary::after{
+  content:''; position:absolute; top:0; left:-60%; width:40%; height:100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: skewX(-20deg); transition: left .6s ease;
+}
+.btn-primary:hover::after{ left:120%; }
+
+.site-header{ transition: box-shadow .3s ease, height .3s ease; }
+.site-header.scrolled{ box-shadow: 0 4px 16px -8px rgba(68,60,66,.18); }
+
+.stagger > *:nth-child(1){ --reveal-delay: .03s; } .stagger > *:nth-child(2){ --reveal-delay: .09s; }
+.stagger > *:nth-child(3){ --reveal-delay: .15s; } .stagger > *:nth-child(4){ --reveal-delay: .21s; }
+.stagger > *:nth-child(5){ --reveal-delay: .27s; } .stagger > *:nth-child(6){ --reveal-delay: .33s; }
+.stagger > *:nth-child(7){ --reveal-delay: .39s; } .stagger > *:nth-child(8){ --reveal-delay: .45s; }
+.stagger > *:nth-child(9){ --reveal-delay: .51s; } .stagger > *:nth-child(10){ --reveal-delay: .57s; }
+.stagger > *:nth-child(11){ --reveal-delay: .63s; } .stagger > *:nth-child(12){ --reveal-delay: .69s; }
+
+@media (prefers-reduced-motion: reduce){
+  .reveal, .hero-anim{ opacity:1 !important; transform:none !important; filter:none !important; animation:none !important; transition:none !important; }
+  .blob{ animation:none !important; }
+  .hero-badge-float{ animation:none !important; }
+  .hero-visual::before{ animation:none !important; }
+  .pulse-dot{ animation:none !important; }
+  .marquee-track{ animation:none !important; }
+}
+
+/* ============================================================
+   TYPE
+   ============================================================ */
+h1.h-display{ font-weight: 950; font-size: clamp(2.05rem, 4.2vw, 3.15rem); line-height: 1.14; letter-spacing: -0.01em; color: var(--grafite); }
+h2.h-section{ font-weight: 950; font-size: clamp(1.65rem, 3.1vw, 2.4rem); line-height: 1.18; color: var(--grafite); }
+h3.h-card{ font-weight: 800; font-size: clamp(1.02rem, 1.4vw, 1.15rem); color: var(--grafite); }
+.lede{ font-weight:500; font-size: clamp(1.02rem, 1.6vw, 1.18rem); color: var(--grafite-soft); max-width: 62ch; }
+.section-kicker{ text-align:center; max-width: 740px; margin: 0 auto clamp(2rem, 4vw, 3.25rem); }
+.section-kicker .lede{ margin: .9rem auto 0; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:.6rem; font-weight: 800; font-size: 1rem; padding: 1.05rem 2rem; border-radius: 999px; border: none; text-decoration:none; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; white-space: normal; text-align:center; }
+.btn-primary{ background: var(--verde); color: var(--branco); box-shadow: 0 10px 24px -10px rgba(104,153,90,.55); }
+.btn-primary:hover{ background: var(--verde-escuro); transform: translateY(-1px); }
+.btn-block{ width:100%; }
+.btn-lg{ font-size: 1.08rem; padding: 1.2rem 2.25rem; }
+
+.micro-list{ display:flex; flex-wrap:wrap; gap: .5rem 1.4rem; justify-content:center; margin-top: 1.1rem; font-size: .85rem; font-weight: 600; color: var(--verde-escuro); }
+.micro-list span{ display:inline-flex; align-items:center; gap:.4rem; }
+.micro-list svg{ width:14px; height:14px; flex-shrink:0; }
+.micro-note{ text-align:center; font-size:.82rem; color:var(--grafite-soft); margin-top:.85rem; }
+
+/* ============================================================
+   ICONS
+   ============================================================ */
+.icon{ width:22px; height:22px; stroke:var(--verde-escuro); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.icon-circle{ width:52px; height:52px; border-radius: 50%; background: var(--verde-claro); display:flex; align-items:center; justify-content:center; margin-bottom: 1rem; }
+.icon-circle .icon{ width:24px; height:24px; }
+.check-ico{ width:18px; height:18px; stroke:var(--verde); fill:none; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.x-ico{ width:18px; height:18px; flex-shrink:0; margin-top:.1rem; stroke: var(--grafite-soft); stroke-width:2.4; fill:none; stroke-linecap:round; }
+
+/* ============================================================
+   SECTIONS BASE
+   ============================================================ */
+section{ padding: var(--section-y) 0; }
+.bg-tint{ background: var(--bg); }
+.bg-verde-tint{ background: var(--bg-verde); position:relative; overflow:hidden; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{ position:relative; overflow:hidden; padding: clamp(2.5rem, 6vw, 4.5rem) 0 var(--section-y); background: linear-gradient(180deg, var(--bg-verde) 0%, var(--branco) 78%); }
+.hero-grid{ position:relative; z-index:1; display:grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem, 5vw, 4rem); align-items:center; }
+.hero-copy{ max-width: 580px; }
+.hero-copy .eyebrow{ margin-bottom: 1.1rem; }
+.hero-copy h1{ margin-bottom: .9rem; }
+.hero-copy .lede{ max-width: 48ch; margin-bottom: 1.9rem; }
+.hero-signature{ margin-top: 1.6rem; display:flex; align-items:center; gap: .7rem; font-size: .86rem; color: var(--grafite-soft); }
+.hero-signature strong{ color: var(--grafite); font-weight: 700; }
+.hero-signature .dot{ width:4px; height:4px; border-radius:50%; background: var(--grafite-soft); flex-shrink:0; }
+
+.hero-visual{ position:relative; }
+.photo-frame{
+  position:relative; border-radius: var(--radius-l); overflow:hidden; aspect-ratio: 4/5;
+  background: radial-gradient(circle at 30% 20%, rgba(197,255,181,.55), transparent 55%), radial-gradient(circle at 80% 85%, rgba(104,153,90,.35), transparent 55%), linear-gradient(150deg, var(--verde-escuro) 0%, var(--grafite) 100%);
+  display:flex; align-items:flex-end; box-shadow: 0 30px 60px -25px rgba(68,60,66,.45);
+}
+.photo-frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.photo-caption{ position:relative; z-index:2; width:100%; padding: 1.1rem 1.3rem; background: linear-gradient(0deg, rgba(0,0,0,.45), transparent); color: var(--branco); font-size: .74rem; font-weight: 600; letter-spacing: .02em; }
+.hero-visual .photo-frame{ aspect-ratio: 5/6; }
+@keyframes floatY{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-8px); } }
+.hero-badge-float{
+  animation: floatY 4.5s ease-in-out infinite; position:absolute; top: -1.2rem; left: -1.2rem;
+  background: var(--branco); border-radius: var(--radius-m); box-shadow: 0 16px 32px -12px rgba(68,60,66,.28);
+  padding: .9rem 1.15rem; display:flex; align-items:center; gap:.7rem; max-width: 250px; z-index: 3;
+}
+.hero-badge-float .icon-circle{ width:38px; height:38px; margin:0; flex-shrink:0; }
+.hero-badge-float .icon-circle .icon{ width:18px; height:18px; }
+.hero-badge-float p{ font-size:.78rem; font-weight:700; color:var(--grafite); line-height:1.3; }
+.hero-badge-float span{ display:block; font-size:.68rem; font-weight:600; color:var(--grafite-soft); }
+
+@media (max-width: 900px){
+  .hero-grid{ grid-template-columns: 1fr; }
+  .hero-copy{ max-width:none; }
+  .hero-visual{ max-width: 380px; margin: 1.75rem auto 0; }
+  .hero-badge-float{ left: .6rem; top:-1rem; }
+}
+
+/* ============================================================
+   VSL
+   ============================================================ */
+.vsl{ text-align:center; }
+.vsl-wrap{ max-width: 860px; margin: 0 auto; }
+.vsl-text{ color: var(--grafite-soft); font-size: 1.02rem; max-width: 62ch; margin: .9rem auto 2.25rem; }
+.vsl-player{
+  position:relative; border-radius: var(--radius-l); overflow:hidden; aspect-ratio: 16/9;
+  background: linear-gradient(150deg, var(--verde-escuro) 0%, var(--grafite) 100%);
+  display:flex; align-items:center; justify-content:center; box-shadow: 0 30px 60px -25px rgba(68,60,66,.45);
+  border: 2px dashed rgba(255,255,255,.25);
+}
+.vsl-player img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.35; }
+.vsl-play{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:1rem; color:#fff; }
+.vsl-play .play-circle{ width:76px; height:76px; border-radius:50%; background: rgba(255,255,255,.16); border: 2px solid rgba(255,255,255,.5); display:flex; align-items:center; justify-content:center; }
+.vsl-play .play-circle svg{ width:26px; height:26px; fill:#fff; margin-left:4px; }
+.vsl-play span{ font-size:.82rem; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color: var(--verde-claro); }
+.vsl-caption{ margin-top:1.5rem; font-size:.8rem; color:var(--grafite-soft); }
+
+/* ============================================================
+   DOR / DIAGNÓSTICO
+   ============================================================ */
+.dor-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 3.5rem); align-items:center; }
+.dor-text p + p{ margin-top: 1rem; }
+.dor-text{ color: var(--grafite-soft); font-size: 1.02rem; }
+.dor-close{ margin-top:1.5rem; font-weight:700; color: var(--grafite); font-size:1.02rem; }
+.pain-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: .85rem; }
+.pain-card{ display:flex; gap:.75rem; align-items:flex-start; background: var(--branco); border: 1px solid var(--border); border-radius: var(--radius-m); padding: 1.1rem 1.2rem; font-size: .89rem; font-weight: 600; color: var(--grafite); }
+.pain-card .dash{ color:var(--verde); font-weight:900; flex-shrink:0; font-size:1.3em; line-height:1; }
+@media (max-width: 900px){ .dor-grid{ grid-template-columns: 1fr; } .pain-grid{ grid-template-columns: 1fr; } }
+
+/* ============================================================
+   REPOSICIONAMENTO / COMPARATIVO
+   ============================================================ */
+.shift{ text-align:center; max-width: 780px; margin: 0 auto; }
+.shift h2{ margin-bottom: 1.3rem; }
+.shift p{ color: var(--grafite-soft); font-size: 1.05rem; margin: 0 auto 2.5rem; max-width: 62ch; }
+.compare-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; text-align:left; max-width: 920px; margin: 0 auto; }
+.compare-card{ border-radius: var(--radius-l); padding: clamp(1.6rem, 3vw, 2.25rem); }
+.compare-card.no{ background: var(--danger-bg); border: 1px solid #EBD4CB; }
+.compare-card.yes{ background: var(--bg-verde); border: 1px solid var(--verde-claro); }
+.compare-card h3{ font-size:1.05rem; margin-bottom: 1.1rem; }
+.compare-card.no h3{ color: var(--danger); }
+.compare-card.yes h3{ color: var(--verde-escuro); }
+.compare-card ul{ display:flex; flex-direction:column; gap:.75rem; }
+.compare-card li{ display:flex; gap:.6rem; align-items:flex-start; font-weight:600; font-size:.93rem; color: var(--grafite); }
+.compare-card .mark{ flex-shrink:0; font-weight:900; margin-top:.05rem; }
+.compare-card.no .mark{ color: var(--danger); }
+.compare-card.yes .mark{ color: var(--verde); }
+@media (max-width: 780px){ .compare-grid{ grid-template-columns: 1fr; } }
+
+/* ============================================================
+   MÉTODO TEIA
+   ============================================================ */
+.teia-intro{ text-align:center; max-width: 720px; margin: 0 auto clamp(2rem, 4vw, 3rem); }
+.teia-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.teia-card{ background: var(--branco); border: 1px solid var(--border); border-radius: var(--radius-l); padding: clamp(1.6rem, 3vw, 2.25rem); }
+.teia-letter{
+  width:52px; height:52px; border-radius:14px; background: var(--grafite); color: var(--verde-claro);
+  display:flex; align-items:center; justify-content:center; font-weight:950; font-size:1.4rem; margin-bottom:1rem;
+}
+.teia-card h3{ font-size:1.15rem; margin-bottom:.6rem; }
+.teia-card > p{ color: var(--grafite-soft); font-size:.94rem; margin-bottom: 1rem; }
+.teia-elements{ display:flex; flex-wrap:wrap; gap:.5rem; }
+.teia-elements span{ font-size:.76rem; font-weight:700; color: var(--verde-escuro); background: var(--bg-verde); border: 1px solid var(--verde-claro); padding:.35rem .75rem; border-radius:999px; }
+@media (max-width: 780px){ .teia-grid{ grid-template-columns: 1fr; } }
+
+/* ============================================================
+   COMO FUNCIONA (etapas)
+   ============================================================ */
+.steps-list{ display:flex; flex-direction:column; max-width: 780px; margin: 0 auto; }
+.step-item{ display:grid; grid-template-columns: 52px 1fr; gap: 1.1rem; padding: 1.35rem 0; border-bottom: 1px solid var(--border); }
+.step-item:first-child{ padding-top:0; } .step-item:last-child{ border-bottom:none; padding-bottom:0; }
+.step-num{ width:44px; height:44px; border-radius:50%; background: var(--verde); color:var(--branco); font-weight:900; font-size:1rem; display:flex; align-items:center; justify-content:center; box-shadow: 0 8px 18px -8px rgba(104,153,90,.6); }
+.step-item h3{ margin-bottom:.3rem; }
+.step-item p{ font-size:.93rem; color:var(--grafite-soft); }
+
+/* ============================================================
+   DIA A DIA (grid de telas)
+   ============================================================ */
+.screens-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.screen-card{ background: var(--branco); border: 1px solid var(--border); border-radius: var(--radius-m); overflow:hidden; }
+.screen-card h3{ font-size:.92rem; padding: 1rem 1.1rem .3rem; }
+.screen-card p{ font-size:.82rem; color: var(--grafite-soft); padding: 0 1.1rem 1rem; }
+@media (max-width: 900px){ .screens-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .screens-grid{ grid-template-columns: 1fr; } }
+
+/* placeholder de imagem reutilizável */
+.placeholder-img{
+  aspect-ratio: 4/3; background: repeating-linear-gradient(135deg, var(--bg) 0 10px, #EFF3EC 10px 20px);
+  border: 1.5px dashed var(--border); display:flex; align-items:center; justify-content:center; text-align:center;
+  color: var(--grafite-soft); font-size:.74rem; font-weight:700; padding: 1rem; line-height:1.4;
+}
+.placeholder-img svg{ width:22px; height:22px; stroke: var(--grafite-soft); margin-bottom:.5rem; }
+
+/* ============================================================
+   INCLUDE GRID (tudo que recebe)
+   ============================================================ */
+.include-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+.include-card{ background: var(--branco); border: 1px solid var(--border); border-radius: var(--radius-m); padding: 1.6rem 1.5rem; display:flex; flex-direction:column; }
+.include-card h3{ margin-bottom:.55rem; }
+.include-card p{ font-size:.88rem; color: var(--grafite-soft); flex:1; }
+.include-note{ margin-top: 1.75rem; background: var(--bg); border: 1px dashed var(--border); border-radius: var(--radius-m); padding: 1rem 1.3rem; font-size: .84rem; color: var(--grafite-soft); text-align:center; }
+@media (max-width: 900px){ .include-grid{ grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px){ .include-grid{ grid-template-columns: 1fr; } }
+
+/* ============================================================
+   FAIXA DE ÓRGÃOS
+   ============================================================ */
+.org-strip{ display:flex; flex-wrap:wrap; justify-content:center; gap:.6rem 1rem; margin-top: 2rem; }
+.org-strip span{ font-size:.85rem; font-weight:700; color: var(--verde-escuro); background: var(--bg-verde); border: 1px solid var(--verde-claro); padding:.5rem 1.1rem; border-radius:999px; }
+
+/* ============================================================
+   FIT (para quem é / não é)
+   ============================================================ */
+.fit-grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap: 1.25rem; align-items:stretch; }
+.fit-card{ border-radius: var(--radius-l); padding: clamp(1.75rem, 3.5vw, 2.5rem); }
+.fit-card.yes{ background: var(--bg-verde); border: 1px solid var(--verde-claro); }
+.fit-card.no{ background: var(--bg); border: 1px solid var(--border); }
+.fit-card h3{ font-size:1.15rem; margin-bottom: 1.1rem; }
+.fit-card ul{ display:flex; flex-direction:column; gap:.75rem; }
+.fit-card.yes li{ display:flex; gap:.6rem; align-items:flex-start; font-weight:600; font-size:.94rem; }
+.fit-card.no li{ display:flex; gap:.6rem; align-items:flex-start; font-weight:600; font-size:.94rem; color:var(--grafite-soft); }
+.fit-close{ text-align:center; font-weight:700; color: var(--grafite); margin-top: 2rem; max-width: 62ch; margin-left:auto; margin-right:auto; }
+@media (max-width: 820px){ .fit-grid{ grid-template-columns: 1fr; } }
+
+/* ============================================================
+   RESULTADOS / DEPOIMENTOS
+   ============================================================ */
+.result-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-bottom: 2.5rem; }
+.result-card{ background: var(--branco); border: 1px solid var(--border); border-radius: var(--radius-m); padding: 1.5rem 1.6rem; }
+.result-card .tag{ display:inline-block; background: var(--verde-claro); color: var(--verde-escuro); font-size:.68rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:.3rem .7rem; border-radius:999px; margin-bottom:.75rem; }
+.result-card h3{ font-size:1.05rem; margin-bottom:.3rem; }
+.result-card .meta{ font-size:.82rem; color: var(--grafite-soft); margin-bottom:.75rem; }
+.result-card p.quote{ font-size:.9rem; color: var(--grafite); font-style: italic; }
+.testimonial-grid{ columns: 2; column-gap: 1.25rem; }
+.testimonial-shot{ display:block; width:100%; border-radius: var(--radius-m); box-shadow: 0 20px 40px -24px rgba(68,60,66,.35); margin-bottom: 1.25rem; break-inside: avoid; }
+@media (max-width: 780px){ .result-grid{ grid-template-columns: 1fr; } .testimonial-grid{ columns:1; } }
+
+/* ============================================================
+   SOBRE
+   ============================================================ */
+.about-grid{ display:grid; grid-template-columns: .78fr 1.22fr; gap: clamp(2rem, 5vw, 3.5rem); align-items:center; }
+.about-visual .photo-frame{ aspect-ratio: 4/5; border-radius: var(--radius-l); }
+.about-copy p{ margin-bottom: 1rem; color: var(--grafite-soft); font-size: 1rem; }
+.about-quote{
+  background: var(--grafite); color: var(--verde-claro); border-radius: var(--radius-m);
+  padding: clamp(1.4rem, 3vw, 1.9rem); font-style: italic; font-weight:500; font-size: clamp(1rem, 1.6vw, 1.15rem);
+  margin: 1.5rem 0;
+}
+.about-sign{ font-family:'Gilroy'; font-weight:500; font-style:italic; font-size: 1.1rem; color: var(--grafite); }
+.about-sign span{ display:block; font-style:normal; font-weight:600; font-size:.78rem; color:var(--grafite-soft); margin-top:.25rem; }
+@media (max-width: 860px){ .about-grid{ grid-template-columns: 1fr; } .about-visual{ max-width:320px; margin:0 auto; } }
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-list{ max-width: 780px; margin: 0 auto; }
+.faq-item{ border-bottom: 1px solid var(--border); }
+.faq-item:first-child{ border-top: 1px solid var(--border); }
+.faq-q{ width:100%; background:none; border:none; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding: 1.25rem 0; text-align:left; font-weight:700; font-size: .98rem; color: var(--grafite); }
+.faq-q .plus{ flex-shrink:0; width:26px; height:26px; border-radius:50%; border:1.5px solid var(--verde); color:var(--verde-escuro); display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:700; transition: transform .2s ease; }
+.faq-item.open .faq-q .plus{ transform: rotate(45deg); }
+.faq-a{ max-height:0; overflow:hidden; transition: max-height .28s ease; }
+.faq-a-inner{ padding: 0 0 1.35rem; color: var(--grafite-soft); font-size:.92rem; max-width: 68ch; }
+
+/* ============================================================
+   CTA FINAL + FOOTER
+   ============================================================ */
+.final-cta{ background: var(--grafite); color: var(--branco); text-align:center; position:relative; overflow:hidden; }
+.final-cta h2{ color: var(--branco); margin-bottom: 1rem; }
+.final-cta p{ color: rgba(255,255,255,.72); max-width: 58ch; margin: 0 auto 2rem; font-size:1.02rem; }
+.final-cta .btn-primary{ background: var(--verde-claro); color: var(--verde-escuro); }
+.final-cta .btn-primary:hover{ background: var(--branco); }
+.final-cta .micro-note{ color: rgba(255,255,255,.55); }
+
+footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; font-size: .82rem; }
+.footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 1rem; }
+.footer-links{ display:flex; gap:1.5rem; flex-wrap:wrap; }
+.footer-links a{ text-decoration:none; color: inherit; }
+.footer-links a:hover{ color: var(--verde-claro); }
+.footer-brand{ display:flex; align-items:center; gap:.6rem; }
+.footer-logo{ height:26px; width:auto; display:block; }
+.footer-disclaimer{ margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.12); font-size: .74rem; color: rgba(255,255,255,.4); line-height:1.6; }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.scroll-progress{ position: fixed; top:0; left:0; height:3px; width:100%; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, var(--verde-escuro), var(--verde), var(--verde-claro)); z-index: 60; will-change: transform; }
+.site-header{ position: sticky; top:0; z-index: 50; background: rgba(246,248,244,.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+.site-header .container{ display:flex; align-items:center; justify-content:space-between; height: 68px; transition: height .3s ease; }
+.site-header.scrolled .container{ height: 58px; }
+.brand{ display:flex; align-items:center; gap:.55rem; font-weight:800; font-size:1.02rem; color:var(--grafite); text-decoration:none; }
+.brand-logo{ height:34px; width:auto; display:block; }
+.nav-links{ display:none; gap: 1.5rem; font-weight:700; font-size:.85rem; color: var(--grafite-soft); }
+.nav-links a{ text-decoration:none; }
+.nav-links a:hover{ color: var(--verde-escuro); }
+.header-cta{ display:none; }
+@media (min-width: 720px){ .header-cta{ display:inline-flex; padding: .65rem 1.3rem; font-size:.85rem; } .nav-links{ display:flex; } }
+
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .faq-a, .faq-q .plus, .btn{ transition:none; } }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header">
+  <div class="container">
+    <a href="#hero" class="brand">
+      <img src="../estude-ambiental-horizontal-green.png" alt="Estude Ambiental" class="brand-logo" />
+    </a>
+    <nav class="nav-links">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#metodo-teia">Método TEIA</a>
+      <a href="#resultados">Depoimentos</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+    <a href="#aplicar" class="btn btn-primary header-cta">Quero aplicar</a>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow hero-anim d1">Mentoria para concursos da área ambiental</span>
+      <h1 class="h-display hero-anim d2">Pare de estudar no escuro. Saiba o que estudar, em qual ordem e como avançar na sua preparação.</h1>
+      <p class="lede hero-anim d3">A Mentoria Estude Ambiental transforma editais extensos, rotinas apertadas e dificuldades nos estudos em uma preparação organizada, com plano personalizado, metas diárias, revisões, questões, simulados, discursivas e acompanhamento próximo.</p>
+      <a href="#aplicar" class="btn btn-primary btn-lg hero-anim d4">Quero aplicar para a Mentoria</a>
+      <p class="micro-note hero-anim d5" style="text-align:left;">Preencha a aplicação em poucos minutos e conclua seu atendimento pelo WhatsApp.</p>
+      <div class="hero-signature hero-anim d6">
+        <span>Por <strong>Dominique Martins Sala</strong></span>
+        <span class="dot"></span>
+        <span>Engenheira Ambiental &amp; fundadora da Estude Ambiental</span>
+      </div>
+    </div>
+    <div class="hero-visual hero-anim d3" id="heroVisual">
+      <div class="photo-frame">
+        <img src="./assets/img/dominique-estudando.jpg" alt="Dominique Martins Sala estudando" style="object-position: center 20%;" />
+        <div class="photo-caption">Dominique Martins Sala, fundadora da Estude Ambiental</div>
+      </div>
+      <div class="hero-badge-float">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-6"/></svg></div>
+        <p>Método TEIA<span>Trilha · Estudo · Iteração · Avaliação</span></p>
+      </div>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,32 C240,80 480,0 720,24 C960,48 1200,88 1440,40 L1440,80 L0,80 Z" fill="var(--branco)"/>
+  </svg>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Trilha</span><span>Estudo</span><span>Iteração</span><span>Avaliação</span><span>Direção</span><span>Constância</span><span>Evolução</span><span>Trilha</span><span>Estudo</span><span>Iteração</span><span>Avaliação</span><span>Direção</span><span>Constância</span><span>Evolução</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     VSL
+     ============================================================ -->
+<section class="vsl" id="vsl">
+  <div class="container vsl-wrap">
+    <div class="section-kicker reveal" style="margin-bottom:0;">
+      <h2 class="h-section">Antes de aplicar, entenda por que estudar mais nem sempre significa avançar mais.</h2>
+      <p class="lede vsl-text">Neste vídeo, eu vou mostrar por que tantos concurseiros ambientais acumulam materiais, passam horas estudando e continuam sem saber se estão no caminho certo. Você também vai entender como funciona a Mentoria Estude Ambiental e o que muda quando sua preparação deixa de depender de improviso.</p>
+    </div>
+    <!-- PLACEHOLDER: substituir por embed real do vídeo (YouTube/Vimeo/Panda) quando a VSL estiver gravada. Duração recomendada: 12–18 min. -->
+    <div class="vsl-player reveal" id="vslPlayer">
+      <img src="./assets/img/dominique-retrato.jpg" alt="" />
+      <div class="vsl-play">
+        <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <span>Vídeo em produção</span>
+      </div>
+    </div>
+    <p class="vsl-caption">Assista até o final para entender o Método TEIA antes de aplicar.</p>
+    <a href="#aplicar" class="btn btn-primary btn-lg" style="margin-top:2rem;">Quero uma preparação com direção</a>
+  </div>
+</section>
+
+<!-- ============================================================
+     DIAGNÓSTICO DO PROBLEMA
+     ============================================================ -->
+<section class="bg-tint">
+  <div class="container dor-grid">
+    <div class="dor-text reveal">
+      <h2 class="h-section" style="margin-bottom:1.25rem;">Você pode estar se esforçando muito e, ainda assim, avançando menos do que poderia.</h2>
+      <p>Quem estuda para concursos ambientais costuma enfrentar um problema diferente do concurseiro de outras áreas. Os editais misturam legislação, políticas públicas, conhecimentos ambientais, conteúdos específicos da formação, língua portuguesa, informática, administração e diversas outras disciplinas.</p>
+      <p>Sem uma estratégia, a preparação vira uma sequência de decisões cansativas: qual concurso priorizar, qual matéria estudar, quando revisar, quantas questões resolver, qual material usar e o que fazer quando o edital muda.</p>
+      <p class="dor-close">Isso não significa que você seja incapaz ou indisciplinado. Significa que está tentando administrar sozinho uma preparação complexa demais.</p>
+    </div>
+    <div class="pain-grid stagger">
+      <div class="pain-card reveal"><span class="dash">•</span>Começa vários materiais e não termina nenhum</div>
+      <div class="pain-card reveal"><span class="dash">•</span>Não sabe se estuda para um concurso específico ou uma base ampla</div>
+      <div class="pain-card reveal"><span class="dash">•</span>Faz cronogramas que não sobrevivem à rotina</div>
+      <div class="pain-card reveal"><span class="dash">•</span>Esquece boa parte do que já estudou</div>
+      <div class="pain-card reveal"><span class="dash">•</span>Resolve questões, mas não transforma erros em evolução</div>
+      <div class="pain-card reveal"><span class="dash">•</span>Sente que precisa recomeçar quando o edital sai</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     REPOSICIONAMENTO DA SOLUÇÃO
+     ============================================================ -->
+<section class="bg-verde-tint">
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <div class="container shift">
+    <h2 class="h-section">Você não precisa necessariamente de mais conteúdo. Precisa de uma estratégia para usar o conteúdo certo.</h2>
+    <p>Cursos, PDFs, videoaulas e bancos de questões são ferramentas importantes. O problema começa quando você tem acesso a tudo isso, mas continua sem saber o que usar, em qual sequência e durante quanto tempo. A Mentoria Estude Ambiental não substitui obrigatoriamente o material que você já utiliza. Ela organiza sua preparação para que cada hora de estudo tenha uma finalidade.</p>
+    <div class="compare-grid stagger">
+      <div class="compare-card no reveal">
+        <h3>Estudando sozinho</h3>
+        <ul>
+          <li><span class="mark">–</span>Decide diariamente o que fazer</li>
+          <li><span class="mark">–</span>Troca de estratégia com frequência</li>
+          <li><span class="mark">–</span>Acumula atrasos</li>
+          <li><span class="mark">–</span>Revisa quando lembra</li>
+          <li><span class="mark">–</span>Não sabe se o desempenho está suficiente</li>
+          <li><span class="mark">–</span>Perde tempo filtrando assuntos e questões</li>
+          <li><span class="mark">–</span>Só percebe as falhas perto da prova</li>
+        </ul>
+      </div>
+      <div class="compare-card yes reveal" style="--reveal-delay:.1s">
+        <h3>Com a Mentoria Estude Ambiental</h3>
+        <ul>
+          <li><span class="mark">✓</span>Segue uma trilha definida</li>
+          <li><span class="mark">✓</span>Recebe metas compatíveis com sua rotina</li>
+          <li><span class="mark">✓</span>Trabalha com revisões programadas</li>
+          <li><span class="mark">✓</span>Resolve questões com objetivos claros</li>
+          <li><span class="mark">✓</span>Acompanha desempenho por assunto</li>
+          <li><span class="mark">✓</span>Ajusta o plano quando surgem dificuldades</li>
+          <li><span class="mark">✓</span>Chega à prova conhecendo seus pontos fortes e fracos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MÉTODO TEIA
+     ============================================================ -->
+<section id="metodo-teia">
+  <div class="container">
+    <div class="teia-intro reveal">
+      <span class="eyebrow">O método</span>
+      <h2 class="h-section" style="margin:1rem 0;">Sua preparação deixa de depender de improviso e passa a seguir o Método TEIA.</h2>
+      <p class="lede" style="margin:0 auto;">O Método TEIA organiza a preparação em quatro movimentos que se conectam. Você não recebe apenas uma lista de matérias — cada etapa alimenta a próxima e permite que o plano evolua junto com você.</p>
+    </div>
+    <div class="teia-grid stagger">
+      <div class="teia-card reveal">
+        <div class="teia-letter">T</div>
+        <h3 class="h-card">Trilha</h3>
+        <p>Mapeamos seu momento: concurso e cargo de interesse, histórico de estudos, tempo disponível, materiais e desempenho. O edital é organizado em uma trilha de prioridades — você entende o que estudar primeiro, o que pode esperar e como distribuir o conteúdo ao longo do tempo.</p>
+        <div class="teia-elements">
+          <span>Diagnóstico inicial</span><span>Análise do edital</span><span>Prioridades</span><span>Plano adaptado ao tempo disponível</span>
+        </div>
+      </div>
+      <div class="teia-card reveal" style="--reveal-delay:.06s">
+        <div class="teia-letter">E</div>
+        <h3 class="h-card">Estudo</h3>
+        <p>A estratégia sai do papel e vira execução. Você recebe metas diárias com estudo teórico, revisões, questões e atividades adequadas à sua fase de preparação — inicia o dia entendendo exatamente o que precisa cumprir.</p>
+        <div class="teia-elements">
+          <span>Metas diárias</span><span>Orientação de materiais</span><span>Revisões</span><span>Questões</span>
+        </div>
+      </div>
+      <div class="teia-card reveal" style="--reveal-delay:.12s">
+        <div class="teia-letter">I</div>
+        <h3 class="h-card">Iteração</h3>
+        <p>Nenhum planejamento continua perfeito por meses. A rotina muda, dificuldades aparecem, editais são publicados. Por isso o plano é acompanhado e ajustado — o que não funcionou é corrigido, o que deu resultado é reforçado.</p>
+        <div class="teia-elements">
+          <span>Replanejamento</span><span>Ajustes de carga</span><span>Pré e pós-edital</span><span>Revisão espaçada</span>
+        </div>
+      </div>
+      <div class="teia-card reveal" style="--reveal-delay:.18s">
+        <div class="teia-letter">A</div>
+        <h3 class="h-card">Avaliação</h3>
+        <p>Você precisa saber se está apenas cumprindo horas ou realmente evoluindo. Questões, simulados, discursivas e relatórios ajudam a identificar falhas, acompanhar acertos e direcionar os próximos ciclos de estudo.</p>
+        <div class="teia-elements">
+          <span>Desempenho por assunto</span><span>Simulados</span><span>Discursivas</span><span>Análise de erros</span>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2.5rem;">
+      <a href="#aplicar" class="btn btn-primary btn-lg">Quero aplicar o Método TEIA nos meus estudos</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMO FUNCIONA
+     ============================================================ -->
+<section class="bg-tint" id="como-funciona">
+  <div class="container">
+    <div class="section-kicker reveal">
+      <span class="eyebrow">Passo a passo</span>
+      <h2 class="h-section">Você não recebe um cronograma e fica sozinho tentando fazê-lo funcionar.</h2>
+    </div>
+    <div class="steps-list stagger">
+      <div class="step-item reveal"><div class="step-num">1</div><div><h3 class="h-card">Diagnóstico e onboarding</h3><p>Entendemos sua rotina, seu histórico, seu objetivo, seu tempo de estudo, os materiais disponíveis e as dificuldades que mais atrapalham sua preparação.</p></div></div>
+      <div class="step-item reveal"><div class="step-num">2</div><div><h3 class="h-card">Construção do plano</h3><p>Seu edital é organizado e transformado em uma sequência de estudo compatível com o seu momento.</p></div></div>
+      <div class="step-item reveal"><div class="step-num">3</div><div><h3 class="h-card">Configuração da plataforma</h3><p>Você aprende a visualizar e concluir suas metas, registrar atividades, acompanhar desempenho, lidar com atrasos e utilizar os recursos da mentoria.</p></div></div>
+      <div class="step-item reveal"><div class="step-num">4</div><div><h3 class="h-card">Execução diária</h3><p>A cada dia, você acessa a plataforma e encontra as atividades previstas. Menos energia decidindo o que fazer, mais energia estudando.</p></div></div>
+      <div class="step-item reveal"><div class="step-num">5</div><div><h3 class="h-card">Acompanhamento</h3><p>Seu desempenho, dificuldades e cumprimento das metas são acompanhados para que os próximos passos façam sentido.</p></div></div>
+      <div class="step-item reveal"><div class="step-num">6</div><div><h3 class="h-card">Ajustes e evolução</h3><p>O plano é atualizado quando sua rotina muda, quando um edital é publicado, quando uma disciplina exige mais atenção ou quando seu desempenho indica uma nova prioridade.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DIA A DIA DO ALUNO
+     ============================================================ -->
+<section>
+  <div class="container">
+    <div class="section-kicker reveal">
+      <span class="eyebrow">Na prática</span>
+      <h2 class="h-section">Abra a plataforma e saiba o que precisa fazer naquele dia.</h2>
+      <p class="lede">Na Tutory, você acompanha sua preparação em um só lugar. O objetivo não é criar mais uma obrigação, mas reduzir o número de decisões que você precisa tomar sozinho.</p>
+    </div>
+    <!-- PLACEHOLDER: substituir os 6 cards abaixo por capturas reais e ampliadas da Tutory (nada de tela inteira do computador em miniatura) -->
+    <div class="screens-grid stagger">
+      <div class="screen-card reveal">
+        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg>PRINT REAL: Missões diárias</div>
+        <h3 class="h-card">Missões diárias</h3>
+        <p>Visualize as tarefas previstas, conclua o que estudou e acompanhe o cumprimento do plano.</p>
+      </div>
+      <div class="screen-card reveal">
+        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h16M9 15l3-4 3 3 4-6"/></svg>PRINT REAL: Progresso e previsão</div>
+        <h3 class="h-card">Progresso e previsão</h3>
+        <p>Veja horas planejadas, horas executadas, andamento das disciplinas e previsão de conclusão.</p>
+      </div>
+      <div class="screen-card reveal">
+        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>PRINT REAL: Desempenho</div>
+        <h3 class="h-card">Desempenho</h3>
+        <p>Acompanhe sua taxa de acertos e identifique quais matérias e assuntos precisam de mais atenção.</p>
+      </div>
+      <div class="screen-card reveal">
+        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>PRINT REAL: Questões</div>
+        <h3 class="h-card">Questões</h3>
+        <p>Registre e acompanhe a resolução de questões, os erros e a evolução por conteúdo.</p>
+      </div>
+      <div class="screen-card reveal">
+        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>PRINT REAL: Simulados e discursivas</div>
+        <h3 class="h-card">Simulados e discursivas</h3>
+        <p>Treine o formato da prova, organize seus envios e receba orientações para melhorar.</p>
+      </div>
+      <div class="screen-card reveal">
+        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22c4-2 7-6 7-11a7 7 0 0 0-14 0c0 5 3 9 7 11Z"/></svg>PRINT REAL: Replanejamento</div>
+        <h3 class="h-card">Replanejamento e hábitos</h3>
+        <p>Quando algo sair do previsto, o plano é reorganizado — e você acompanha sua constância e conquistas ao longo das semanas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TUDO O QUE O ALUNO RECEBE
+     ============================================================ -->
+<section class="bg-tint">
+  <div class="container">
+    <div class="section-kicker reveal">
+      <span class="eyebrow">O que você recebe</span>
+      <h2 class="h-section">Uma estrutura completa para transformar intenção em execução</h2>
+    </div>
+    <div class="include-grid stagger">
+      <div class="include-card reveal">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-6"/></svg></div>
+        <h3 class="h-card">Plano personalizado</h3>
+        <p>Organização das disciplinas, assuntos e prioridades conforme o concurso, o cargo, o histórico e a disponibilidade do aluno.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3 class="h-card">Metas diárias</h3>
+        <p>Atividades distribuídas de forma prática para reduzir dúvidas e facilitar a execução.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3 class="h-card">Sistema de revisões</h3>
+        <p>Revisões programadas em diferentes intervalos para reforçar o conteúdo e reduzir o esquecimento.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3 class="h-card">Questões e análise de desempenho</h3>
+        <p>Acompanhamento de acertos, erros, disciplinas e assuntos que precisam ser fortalecidos.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
+        <h3 class="h-card">Simulados</h3>
+        <p>Treinos para desenvolver gestão de tempo, resistência, estratégia de prova e identificação de falhas.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></div>
+        <h3 class="h-card">Discursivas</h3>
+        <p>Orientações, temas, materiais e treinos voltados aos formatos cobrados pelas bancas.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></svg></div>
+        <h3 class="h-card">Guias e materiais de apoio</h3>
+        <p>Materiais desenvolvidos para ajudar na aplicação da metodologia e na preparação para concursos ambientais.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3 class="h-card">Aulas e encontros</h3>
+        <p>Encontros para trabalhar questões, estratégia, dificuldades e pontos importantes da preparação.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3 class="h-card">Suporte</h3>
+        <p>Canal para dúvidas, orientações e ajustes relacionados à execução do plano.</p>
+      </div>
+      <div class="include-card reveal">
+        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div>
+        <h3 class="h-card">Atualizações do planejamento</h3>
+        <p>Adaptações de acordo com mudanças na rotina, desempenho, publicação do edital e proximidade da prova.</p>
+      </div>
+    </div>
+    <!-- PLACEHOLDER: confirmar lista final de entregas/bônus e descrição dos planos de 3, 6 e 12 meses -->
+    <p class="include-note">Esta oferta contempla o acompanhamento descrito acima dentro do plano escolhido. Os detalhes de cada plano (3, 6 ou 12 meses) são apresentados durante a aplicação.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     ESPECIALIZAÇÃO EM CONCURSOS AMBIENTAIS
+     ============================================================ -->
+<section>
+  <div class="container shift">
+    <span class="eyebrow">Especialização</span>
+    <h2 class="h-section" style="margin:1rem 0 1.25rem;">Uma mentoria pensada para a área ambiental, não uma metodologia genérica adaptada às pressas.</h2>
+    <p>Os concursos ambientais envolvem órgãos, cargos, formações e bancas muito diferentes. Um biólogo, um engenheiro ambiental, um agrônomo, um oceanógrafo e um candidato a um cargo generalista podem compartilhar algumas disciplinas, mas não devem seguir exatamente a mesma preparação. A Estude Ambiental nasceu para organizar essa complexidade: o plano considera o edital, o cargo, a formação exigida, a banca, a fase do concurso e o histórico do aluno.</p>
+    <div class="org-strip">
+      <span>IBAMA</span><span>ICMBio</span><span>MMA</span><span>órgãos estaduais</span><span>institutos ambientais</span><span>fundações</span><span>secretarias municipais</span><span>empresas e agências da área ambiental</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PARA QUEM É / NÃO É
+     ============================================================ -->
+<section class="bg-tint">
+  <div class="container">
+    <div class="section-kicker reveal">
+      <h2 class="h-section">Para quem esta mentoria foi pensada</h2>
+    </div>
+    <div class="fit-grid stagger">
+      <div class="fit-card yes reveal">
+        <h3>A Mentoria Estude Ambiental é para você que:</h3>
+        <ul>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Está começando e precisa de um caminho</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Já estuda, mas sente que não avança</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Tem dificuldade para organizar o edital</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Não sabe qual concurso priorizar</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Trabalha e precisa aproveitar melhor o tempo</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Já possui curso ou materiais, mas não sabe como utilizá-los</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Precisa de acompanhamento para manter constância</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Quer melhorar revisões, questões, simulados ou discursivas</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Procura uma preparação especializada na área ambiental</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Está disposto a executar o plano e receber orientações</li>
+        </ul>
+      </div>
+      <div class="fit-card no reveal">
+        <h3>A mentoria provavelmente não é a melhor escolha para quem:</h3>
+        <ul>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Procura uma promessa de aprovação rápida</li>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Quer apenas receber uma planilha e não executar</li>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Não aceita fazer ajustes na rotina</li>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Busca somente um pacote de videoaulas</li>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Não pretende resolver questões ou revisar</li>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Não deseja acompanhar o próprio desempenho</li>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Espera atendimento instantâneo 24 horas</li>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Não tem intenção de investir em acompanhamento no momento</li>
+        </ul>
+      </div>
+    </div>
+    <p class="fit-close">A mentoria oferece direção, método e acompanhamento. A execução continua sendo responsabilidade do aluno.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     RESULTADOS E DEPOIMENTOS
+     ============================================================ -->
+<section id="resultados">
+  <div class="container">
+    <div class="section-kicker reveal">
+      <span class="eyebrow">Prova social</span>
+      <h2 class="h-section">O plano ganha força quando o aluno executa e utiliza o acompanhamento.</h2>
+      <p class="lede">Cada trajetória é diferente. Por isso, em vez de prometer aprovação, mostramos o que acontece quando o aluno deixa de estudar sem direção e passa a seguir um processo.</p>
+    </div>
+
+    <!-- PLACEHOLDER: resultados objetivos — só publicar com autorização e confirmação da Dominique -->
+    <h3 class="h-card" style="text-align:center; margin-bottom:1.25rem;">Resultados objetivos</h3>
+    <div class="result-grid stagger">
+      <div class="result-card reveal">
+        <span class="tag">A confirmar</span>
+        <h3>[Nome da aluna]</h3>
+        <div class="meta">[Concurso e cargo] · [Resultado/classificação]</div>
+        <p class="quote">"[Pequeno relato sobre a preparação — inserir depoimento real com autorização]"</p>
+      </div>
+      <div class="result-card reveal" style="--reveal-delay:.08s">
+        <span class="tag">A confirmar</span>
+        <h3>[Nome do aluno]</h3>
+        <div class="meta">[Concurso e cargo] · [Resultado/classificação]</div>
+        <p class="quote">"[Pequeno relato sobre a preparação — inserir depoimento real com autorização]"</p>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER: depoimentos sobre transformação no processo (constância, organização, confiança) — substituir por prints reais e legíveis -->
+    <h3 class="h-card" style="text-align:center; margin-bottom:1.25rem;">Transformações durante a preparação</h3>
+    <div class="testimonial-grid stagger">
+      <div class="placeholder-img reveal" style="aspect-ratio: 3/4; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre sair da desorganização</div>
+      <div class="placeholder-img reveal" style="aspect-ratio: 4/5; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre constância e metas</div>
+      <div class="placeholder-img reveal" style="aspect-ratio: 4/3; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre melhora na taxa de acertos</div>
+      <div class="placeholder-img reveal" style="aspect-ratio: 3/4; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre segurança antes da prova</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOBRE DOMINIQUE
+     ============================================================ -->
+<section class="bg-tint">
+  <div class="container about-grid">
+    <div class="about-visual reveal">
+      <div class="photo-frame">
+        <img src="./assets/img/dominique-retrato.jpg" alt="Dominique Martins Sala" style="object-position: center 20%;" loading="lazy" />
+        <div class="photo-caption">Dominique Martins Sala</div>
+      </div>
+    </div>
+    <div class="about-copy reveal" style="--reveal-delay:.12s">
+      <span class="eyebrow" style="margin-bottom:1rem;">Quem organiza sua preparação</span>
+      <h2 class="h-section" style="margin-bottom:1.25rem;">Sobre Dominique</h2>
+      <p>Eu sou Dominique Sala, engenheira ambiental, mestra em Engenharia Urbana, pós-graduada em Engenharia de Segurança do Trabalho e fundadora da Estude Ambiental.</p>
+      <p>Ao longo da minha trajetória, desenvolvi uma habilidade que se tornou a base da mentoria: pegar informações extensas e desorganizadas e transformá-las em caminhos claros, processos e ferramentas de execução.</p>
+      <p>Nos concursos ambientais, isso significa analisar editais, compreender as exigências de cada cargo, organizar conteúdos, estabelecer prioridades e transformar tudo isso em uma preparação que caiba na rotina do aluno.</p>
+      <p>Criei a Estude Ambiental porque percebi que muitos candidatos não precisavam apenas de mais aulas. Eles precisavam de alguém que os ajudasse a decidir o que fazer com todo o conteúdo disponível. Meu trabalho não é prometer um caminho fácil. É reduzir o improviso, orientar suas decisões e acompanhar a evolução da sua preparação.</p>
+      <div class="about-quote">Você não entra para receber uma planilha e se virar. Entra para ter direção, método e ajustes ao longo do caminho.</div>
+      <p class="about-sign" style="margin-top:1.5rem;">Dominique Martins Sala<span>Fundadora da Estude Ambiental</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-kicker reveal">
+      <h2 class="h-section">Perguntas frequentes</h2>
+    </div>
+    <div class="faq-list stagger" id="faq-list">
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Estou começando do zero. A mentoria serve para mim?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. O diagnóstico identifica seu ponto de partida e o planejamento é construído considerando seu nível, seu tempo disponível e seu objetivo. Você não precisa chegar sabendo como estudar.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Já tenho um curso. Ainda faz sentido?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. A mentoria não exige que você abandone os materiais que já possui. O plano ajuda a organizar o que utilizar, em qual sequência e como combinar teoria, revisão e questões.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Não sei qual concurso priorizar. Posso entrar mesmo assim?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. Essa dúvida é comum, principalmente na área ambiental. O diagnóstico ajuda a avaliar seus objetivos, sua formação, as oportunidades e o tipo de preparação mais adequado.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Trabalho e tenho pouco tempo. Vou conseguir acompanhar?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">O plano é adaptado ao tempo que você consegue manter com consistência. A mentoria não cria horas que não existem, mas ajuda a utilizar melhor as horas disponíveis.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>A mentoria fornece todas as videoaulas das disciplinas?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">A Mentoria Estude Ambiental não funciona como um cursinho tradicional. Você recebe planejamento, metodologia, acompanhamento, materiais de apoio, guias, questões, simulados e recursos da plataforma. Quando houver necessidade de conteúdo teórico complementar, você poderá utilizar os materiais indicados ou aqueles que já possui.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Como funciona o suporte?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">O suporte acontece pelos canais informados na mentoria, dentro dos horários de atendimento. Você recebe acompanhamento próximo para dúvidas relacionadas ao plano, execução e ajustes, mas não existe promessa de atendimento instantâneo vinte e quatro horas por dia.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>O plano é atualizado depois da publicação do edital?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. O planejamento pode ser ajustado conforme as mudanças do edital, a proximidade da prova, seu desempenho e as prioridades da reta final.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Vale a pena entrar antes do edital?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. O período anterior ao edital permite construir base, desenvolver rotina, testar a metodologia e avançar em conteúdos que dificilmente seriam estudados com tranquilidade durante o pós-edital.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>A mentoria garante minha aprovação?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Não. Nenhuma mentoria séria pode garantir aprovação. O resultado depende do edital, da concorrência, da prova e, principalmente, da execução do aluno. A Estude Ambiental oferece direção, método, acompanhamento e ferramentas para melhorar sua preparação.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Quais são os planos?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Existem opções com diferentes períodos de acompanhamento. Depois da aplicação e do diagnóstico inicial, você recebe a explicação dos planos e das condições adequadas ao seu momento.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Como funciona o cancelamento?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">As condições de contratação, cancelamento e acesso são apresentadas de forma clara antes da matrícula e constam no <a href="../institucional/contrato-mentoria/">contrato da mentoria</a>.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Posso entrar mesmo sem edital publicado?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. A mentoria atende tanto preparações pré-edital quanto pós-edital. O plano muda de acordo com a fase do concurso.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA FINAL + FOOTER
+     ============================================================ -->
+<section class="final-cta" id="aplicar">
+  <div class="blob blob-5"></div>
+  <div class="blob blob-6"></div>
+  <div class="container">
+    <h2 class="h-section">Sua preparação precisa de direção, não de mais improviso.</h2>
+    <p>Se você quer construir uma preparação organizada para concursos da área ambiental, preencha a aplicação. Suas respostas serão analisadas para entender seu momento e verificar se a Mentoria Estude Ambiental faz sentido para você.</p>
+    <!-- PLACEHOLDER: trocar o href abaixo pelo link real do formulário Respondi assim que estiver configurado -->
+    <a href="#" class="btn btn-primary btn-lg" id="ctaAplicar">Quero aplicar para a Mentoria</a>
+    <p class="micro-note">A aplicação não garante uma vaga e não gera cobrança. Ela inicia a análise do seu momento e a continuidade do atendimento pelo WhatsApp.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span class="footer-brand">
+        <img src="../estude-ambiental-horizontal-white.png" alt="Estude Ambiental" class="footer-logo" loading="lazy" />
+        Estude Ambiental · Dominique Martins Sala
+      </span>
+      <div class="footer-links">
+        <a href="../institucional/termos-e-condicoes/">Termos de uso</a>
+        <a href="../institucional/politica-de-privacidade/">Política de privacidade</a>
+        <a href="../institucional/contrato-mentoria/">Contrato</a>
+      </div>
+    </div>
+    <p class="footer-disclaimer">Estude Ambiental (55.491.669 Dominique Martins Sala) · CNPJ 55.491.669/0001-15 · Florianópolis/SC. A Mentoria Estude Ambiental oferece preparação, método e acompanhamento para concursos públicos da área ambiental, e não garante aprovação.</p>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <a href="#aplicar" class="btn btn-primary">Quero aplicar para a Mentoria</a>
+</div>
+
+<script>
+// PLACEHOLDER: número de WhatsApp da mentoria já atualizado — usar quando o botão de WhatsApp
+// for necessário em alguma tela (ex: confirmação pós-Respondi). Não há CTA direto de WhatsApp
+// nesta landing page, por orientação do documento mestre (fluxo obrigatório passa pelo Respondi).
+var WHATSAPP_NUMBER = '5544988068463';
+
+document.querySelectorAll('.faq-item').forEach(function(item){
+  var q = item.querySelector('.faq-q');
+  var a = item.querySelector('.faq-a');
+  q.addEventListener('click', function(){
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(openItem){
+      if(openItem !== item){
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-a').style.maxHeight = null;
+      }
+    });
+    if(isOpen){
+      item.classList.remove('open');
+      a.style.maxHeight = null;
+    } else {
+      item.classList.add('open');
+      a.style.maxHeight = a.scrollHeight + 'px';
+    }
+  });
+});
+
+// Sticky mobile CTA: show after hero, hide once the final CTA is reachable
+(function(){
+  var bar = document.getElementById('stickyCta');
+  var hero = document.getElementById('hero');
+  var offer = document.getElementById('aplicar');
+  var foot = document.querySelector('footer');
+  if(!bar || !hero || !offer || !foot || !('IntersectionObserver' in window)) return;
+  var pastHero = false, nearCta = false;
+  var update = function(){ bar.classList.toggle('show', pastHero && !nearCta); };
+  new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ pastHero = !e.isIntersecting; });
+    update();
+  }, { threshold: 0 }).observe(hero);
+  var ctaWatcher = new IntersectionObserver(function(entries){
+    var anyVisible = entries.some(function(e){ return e.isIntersecting; });
+    nearCta = anyVisible;
+    update();
+  }, { threshold: .15 });
+  ctaWatcher.observe(offer);
+  ctaWatcher.observe(foot);
+})();
+
+// Header reacts to scroll
+(function(){
+  var header = document.querySelector('.site-header');
+  var onScroll = function(){
+    if(window.scrollY > 30){ header.classList.add('scrolled'); }
+    else { header.classList.remove('scrolled'); }
+  };
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+})();
+
+// Scroll progress bar
+(function(){
+  var bar = document.getElementById('scrollProgress');
+  if(!bar) return;
+  var ticking = false;
+  function update(){
+    var h = document.documentElement;
+    var scrollable = h.scrollHeight - h.clientHeight;
+    var ratio = scrollable > 0 ? h.scrollTop / scrollable : 0;
+    bar.style.transform = 'scaleX(' + ratio + ')';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive:true });
+  update();
+})();
+
+// Reveal on scroll
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window) || !els.length){
+    els.forEach(function(el){ el.classList.add('in-view'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .15, rootMargin: '0px 0px -60px 0px' });
+  els.forEach(function(el){ io.observe(el); });
+})();
+
+// Tracking: cliques nos CTAs "Quero aplicar" (Meta Pixel + preservação de UTM)
+// PLACEHOLDER: quando o link do Respondi for definido, os parâmetros de UTM
+// da URL atual devem ser anexados a ele automaticamente (o Respondi também
+// tem sua própria captura de UTM nativa — confirmar qual caminho usar).
+(function(){
+  var ctas = document.querySelectorAll('a[href="#aplicar"], #ctaAplicar');
+  ctas.forEach(function(el){
+    el.addEventListener('click', function(){
+      if(typeof fbq === 'function'){ fbq('trackCustom', 'CliqueAplicarMentoria'); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
