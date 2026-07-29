@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contrato de Prestação de Serviços | Mentoria Estude Ambiental</title>
+<meta name="description" content="Contrato de prestação de serviços educacionais da Mentoria Estude Ambiental." />
+<meta name="robots" content="noindex, follow" />
+<style>
+@font-face { font-family: 'Gilroy'; src: url('../../assets/fonts/Gilroy-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('../../assets/fonts/Gilroy-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('../../assets/fonts/Gilroy-ExtraBold.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+
+:root{
+  --verde: #68995A;
+  --verde-escuro: #4E594B;
+  --verde-claro: #C5FFB5;
+  --grafite: #443C42;
+  --grafite-soft: #6b6069;
+  --bg: #F6F8F4;
+  --border: #E1E8DC;
+  --warn-bg: #FFF6DD;
+  --warn-border: #E9CE7A;
+}
+*, *::before, *::after{ box-sizing: border-box; }
+body{
+  margin:0;
+  font-family:'Gilroy', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--grafite);
+  background: var(--bg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+a{ color: var(--verde-escuro); }
+header{
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 1.5rem;
+}
+header a.brand{ display:flex; align-items:center; gap:.5rem; font-weight:800; color: var(--grafite); text-decoration:none; font-size:1rem; }
+header a.brand img{ height:30px; width:auto; display:block; }
+.wrap{
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+h1{
+  font-weight: 800;
+  font-size: clamp(1.5rem, 4vw, 1.9rem);
+  color: var(--grafite);
+  margin: 0 0 .3rem;
+}
+.subtitle{ font-weight:700; color: var(--verde-escuro); margin-bottom: .5rem; }
+.updated{ color: var(--grafite-soft); font-size: .85rem; margin-bottom: 2rem; }
+h2{
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  color: var(--verde-escuro);
+  margin: 2.25rem 0 .75rem;
+}
+h3{ font-weight:700; font-size: .98rem; color: var(--grafite); margin: 1.25rem 0 .5rem; }
+p{ margin: 0 0 1rem; color: var(--grafite); }
+ul, ol{ margin: 0 0 1rem; padding-left: 1.4rem; }
+li{ margin-bottom: .5rem; }
+.intro-box{
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem 1.6rem;
+  margin-bottom: 2rem;
+}
+.fill{
+  background: var(--verde-claro);
+  color: var(--verde-escuro);
+  font-weight: 700;
+  padding: .05em .4em;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.note{
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+  font-size: .88rem;
+  color: var(--grafite-soft);
+  margin-top: 3rem;
+}
+footer{
+  text-align:center;
+  padding: 2rem 1.5rem;
+  font-size: .8rem;
+  color: var(--grafite-soft);
+}
+</style>
+</head>
+<body>
+
+<!--
+  NOTA INTERNA — não aparece para quem visita a página (comentário HTML).
+
+  Este contrato foi adaptado a partir da estrutura de cláusulas usada por um
+  contrato de mentoria similar de mercado, ajustado ao contexto da Estude
+  Ambiental. Ele cobre as mesmas categorias de proteção (objeto, acesso,
+  pagamento, cancelamento/reembolso, propriedade intelectual, confidencialidade,
+  LGPD, força maior), mas os valores e regras específicos abaixo são
+  PLACEHOLDERS/SUGESTÕES até serem confirmados pela Dominique:
+
+    - Percentual de multa rescisória após os 7 dias de arrependimento
+      (usei 15% à vista / 20% parcelado como sugestão intermediária —
+      ajustar para o que realmente será praticado)
+    - Prazo de resposta do suporte via WhatsApp/Tutory (usei 48h úteis
+      como referência de mercado — confirmar o real)
+    - Lista exata de entregáveis/bônus da Mentoria Estude Ambiental
+      (usei o que já está confirmado nas conversas: Método TEIA,
+      cronograma individual, acompanhamento via WhatsApp, plataforma
+      Tutory — adicionar/remover conforme a oferta real)
+    - Razão social completa (se diferente de "Estude Ambiental")
+
+  ANTES DE PUBLICAR ESTE CONTRATO COMO VINCULANTE, ele deve passar por
+  revisão de um advogado — isso é um documento legal real, não apenas
+  copy de página de vendas.
+-->
+
+<header>
+  <a href="/" class="brand">
+    <img src="../../estude-ambiental-horizontal-green.png" alt="Estude Ambiental" />
+  </a>
+</header>
+
+<div class="wrap">
+  <h1>Contrato de Prestação de Serviços Educacionais</h1>
+  <p class="subtitle">MENTORIA ESTUDE AMBIENTAL</p>
+  <p class="updated">Última atualização: <span class="fill">[DATA]</span> · leitura de aproximadamente 10 minutos</p>
+
+  <div class="intro-box">
+    <p>Olá! Seja bem-vindo(a). Se você está buscando informações sobre a Mentoria Estude Ambiental, aqui é o lugar certo, com todas as informações necessárias sobre essa jornada rumo à sua aprovação.</p>
+    <p>Ao adquirir a MENTORIA ou qualquer produto correlato, o aluno, devidamente cadastrado, será designado neste contrato como <strong>CONTRATANTE</strong> ou <strong>ALUNO</strong>, conforme o caso. O CONTRATANTE declara estar ciente e de acordo com todas as disposições constantes destes termos, bem como com a <a href="../politica-de-privacidade/">Política de Privacidade</a> da CONTRATADA.</p>
+    <p style="margin-bottom:0;"><strong>Caso o CONTRATANTE não concorde com estes termos, não deverá adquirir a MENTORIA.</strong> Ao efetuar o pagamento do plano contratado ou realizar a aplicação para participação na mentoria, o CONTRATANTE declara ter lido, compreendido e aceito integralmente os termos e condições deste contrato, não sendo necessária assinatura física ou digital para sua plena validade.</p>
+  </div>
+
+  <h2>Cláusula Primeira — Das Partes</h2>
+  <p>De um lado, o aluno devidamente cadastrado junto ao banco de dados do site (<strong>CONTRATANTE</strong> ou <strong>ALUNO</strong>) e, de outro lado, a <strong>CONTRATADA</strong>: <span class="fill">[RAZÃO SOCIAL]</span>, pessoa jurídica de direito privado, inscrita no CNPJ sob o número <strong>55.491.669/0001-15</strong>, com sede em <strong>Florianópolis/SC</strong>, neste ato representada por sua sócia-administradora <strong>Dominique Martins Sala</strong>.</p>
+
+  <h2>Cláusula Segunda — Do Objeto</h2>
+  <p>Este contrato tem por objeto definir as regras a serem seguidas para a participação na <strong>MENTORIA ESTUDE AMBIENTAL</strong>, incluindo todos os materiais, informações, documentos, aulas e serviços disponibilizados e promovidos pela CONTRATADA, digitais ou físicos, sem prejuízo da aplicação da legislação vigente.</p>
+  <p>A Mentoria Estude Ambiental caracteriza-se como um serviço personalizado de acompanhamento pedagógico e estratégico, estruturado a partir do <strong>Método TEIA</strong> (Trilha, Estudo, Iteração e Avaliação), com cronogramas individuais, suporte direcionado e acompanhamento próximo do CONTRATANTE, voltado à preparação para concursos públicos da área ambiental.</p>
+  <p>A Mentoria terá duração de <span class="fill">3 (três), 6 (seis) ou 12 (doze) meses</span>, conforme o plano contratado, contados a partir da liberação do acesso à plataforma.</p>
+
+  <h3>O que está incluído</h3>
+  <ul>
+    <li>Cronograma de estudos individual, adaptado à rotina e ao concurso-alvo do CONTRATANTE;</li>
+    <li>Acompanhamento próximo, com contato direto via WhatsApp;</li>
+    <li>Acesso à área exclusiva do aluno na plataforma Tutory;</li>
+    <li><span class="fill">[completar com os demais itens/bônus reais da oferta]</span>.</li>
+  </ul>
+
+  <h2>Cláusula Terceira — Do Acesso à Plataforma</h2>
+  <p>Após a contratação, haverá o onboarding do CONTRATANTE, que receberá instruções de acesso no e-mail cadastrado e, eventualmente, por WhatsApp. A Mentoria é hospedada na plataforma <strong>Tutory</strong>, que pode fazer uso de cookies, razão pela qual, ao acessar, o CONTRATANTE concorda com a política de cookies dessa plataforma.</p>
+  <p>O acesso à Mentoria e aos demais entregáveis é <strong>pessoal, individual e intransferível</strong>, não podendo ser cedido, compartilhado, vendido ou adquirido por meio de rateio ou compra coletiva. Em caso de suspeita de fraude ou descumprimento das condições contratuais, a CONTRATADA se reserva o direito de suspender ou cancelar o acesso a qualquer momento, sem devolução de valores pagos.</p>
+
+  <h2>Cláusula Quarta — Do Suporte</h2>
+  <p>O suporte ao CONTRATANTE será prestado durante o prazo de duração da Mentoria, pelos canais oficiais (WhatsApp e/ou plataforma Tutory), com prazo máximo de resposta de <span class="fill">48 (quarenta e oito) horas úteis</span>. Mensagens enviadas por canais não oficiais (como redes sociais) não são consideradas válidas para fins de atendimento ou execução da mentoria.</p>
+
+  <h2>Cláusula Quinta — Do Pagamento</h2>
+  <p>A Mentoria é um serviço oneroso, cujo valor total é definido de acordo com o plano contratado (3, 6 ou 12 meses), informado no checkout da plataforma de pagamento. A possibilidade de parcelamento é uma facilitação de pagamento; a compra da Mentoria é considerada à vista.</p>
+  <p>Os pagamentos poderão ser realizados via cartão de crédito, PIX ou boleto bancário, conforme as opções disponibilizadas no checkout. A nota fiscal referente à aquisição será emitida em até 7 (sete) dias úteis após a confirmação do pagamento (ou, em caso de pagamento parcelado, mensalmente).</p>
+
+  <h2>Cláusula Sexta — Do Cancelamento e Reembolso</h2>
+  <p><strong>Direito de arrependimento (7 dias):</strong> nos termos do art. 49 do Código de Defesa do Consumidor, o CONTRATANTE tem direito ao cancelamento com devolução integral do valor pago, caso solicite em até 7 (sete) dias corridos a partir da data da compra, por meio do e-mail <a href="mailto:contato@estudeambiental.com">contato@estudeambiental.com</a>.</p>
+  <p><strong>Após os 7 dias:</strong> o CONTRATANTE poderá solicitar o cancelamento a qualquer momento, incidindo multa rescisória de <span class="fill">10% (dez por cento)</span> sobre o valor global do contrato, em pagamentos à vista, ou <span class="fill">15% (quinze por cento)</span> sobre o saldo remanescente, em pagamentos parcelados — valores que se justificam pelo acesso já disponibilizado a cronogramas, materiais e acompanhamento.</p>
+  <p>A conclusão antecipada ou o abandono da Mentoria por iniciativa exclusiva do CONTRATANTE não o isenta do cumprimento das obrigações financeiras já assumidas.</p>
+
+  <h2>Cláusula Sétima — Da Propriedade Intelectual</h2>
+  <p>Todos os direitos relativos à Mentoria Estude Ambiental — conteúdos, materiais, o Método TEIA, ferramentas, aulas e a estratégia que a compõe — são de propriedade exclusiva da CONTRATADA. O CONTRATANTE adquire apenas o direito de utilização pessoal dos materiais, durante o período de vigência do plano contratado, sendo proibido copiar, compartilhar, reproduzir, redistribuir ou comercializar qualquer conteúdo, mesmo que gratuitamente.</p>
+
+  <h2>Cláusula Oitava — Da Confidencialidade</h2>
+  <p>O CONTRATANTE se compromete a respeitar o sigilo e a confidencialidade dos materiais e informações compartilhadas na Mentoria, incluindo eventuais grupos e comunidades de alunos, sendo vedada a gravação, distribuição ou comercialização desse conteúdo.</p>
+
+  <h2>Cláusula Nona — Da Proteção de Dados (LGPD)</h2>
+  <p>A CONTRATADA se compromete a tratar os dados pessoais do CONTRATANTE em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), conforme detalhado na <a href="../politica-de-privacidade/">Política de Privacidade</a>. Em caso de cancelamento do vínculo, a CONTRATADA procederá com a anonimização dos dados pessoais, ressalvadas as hipóteses de guarda obrigatória por lei.</p>
+
+  <h2>Cláusula Décima — Da Responsabilidade e dos Resultados</h2>
+  <p>A CONTRATADA fornece as ferramentas, o método e o acompanhamento, mas <strong>não garante</strong> que o CONTRATANTE atingirá aprovação em concurso público, uma vez que o resultado depende de fatores fora do controle da CONTRATADA, incluindo dedicação, esforço e aplicação correta do método pelo CONTRATANTE.</p>
+  <p>A garantia oferecida por esta Mentoria é uma <strong>garantia de satisfação com a experiência</strong> (nos termos da Cláusula Sexta), <strong>não uma garantia de aprovação</strong>.</p>
+
+  <h2>Cláusula Décima Primeira — Do Caso Fortuito e Força Maior</h2>
+  <p>Nenhuma das partes será considerada inadimplente se a falha for causada por evento de caso fortuito ou força maior, imprevisível e inevitável, fora de seu controle razoável. Os prazos contratuais ficarão suspensos enquanto o evento perdurar.</p>
+
+  <h2>Cláusula Décima Segunda — Do Uso de Imagem e Depoimentos</h2>
+  <p>O CONTRATANTE autoriza, a título gratuito, o uso de depoimentos, comentários e, em caso de aprovação, de sua imagem e nome, para fins de divulgação da Mentoria Estude Ambiental, podendo revogar essa autorização a qualquer momento mediante solicitação por escrito.</p>
+
+  <h2>Cláusula Décima Terceira — Disposições Gerais</h2>
+  <p>Este contrato é regido pelas leis da República Federativa do Brasil. As partes se comprometem a tentar resolver eventuais desacordos diretamente com a CONTRATADA, pelos canais de suporte, antes de recorrer a qualquer órgão externo de proteção ao consumidor. Fica eleito o foro da comarca de <strong>Florianópolis/SC</strong> para dirimir quaisquer controvérsias oriundas deste contrato, ressalvado o disposto no Código de Defesa do Consumidor.</p>
+
+  <div class="note">
+    Dúvidas sobre este contrato podem ser encaminhadas para <a href="mailto:contato@estudeambiental.com">contato@estudeambiental.com</a>.<br>
+    Estude Ambiental · CNPJ 55.491.669/0001-15 · Florianópolis/SC
+  </div>
+</div>
+
+<footer>
+  Estude Ambiental · <a href="../termos-e-condicoes/">Termos e Condições</a> · <a href="../politica-de-privacidade/">Política de Privacidade</a>
+</footer>
+
+</body>
+</html>
