@@ -704,6 +704,24 @@ section{ padding: var(--section-y) 0; }
 .mockup-carousel.six-slides img:nth-child(5){ animation-delay: calc(var(--carousel-duration) * -4 / 6); }
 .mockup-carousel.six-slides img:nth-child(6){ animation-delay: calc(var(--carousel-duration) * -5 / 6); }
 
+@keyframes mockupFadeEight{
+  0%{ opacity:0; }
+  1.5%{ opacity:1; }
+  10.5%{ opacity:1; }
+  12.5%{ opacity:0; }
+  100%{ opacity:0; }
+}
+.mockup-carousel.eight-slides{ --carousel-duration: 21s; }
+.mockup-carousel.eight-slides img{ animation-name: mockupFadeEight; }
+.mockup-carousel.eight-slides img:nth-child(1){ animation-delay: calc(var(--carousel-duration) * -0 / 8); }
+.mockup-carousel.eight-slides img:nth-child(2){ animation-delay: calc(var(--carousel-duration) * -1 / 8); }
+.mockup-carousel.eight-slides img:nth-child(3){ animation-delay: calc(var(--carousel-duration) * -2 / 8); }
+.mockup-carousel.eight-slides img:nth-child(4){ animation-delay: calc(var(--carousel-duration) * -3 / 8); }
+.mockup-carousel.eight-slides img:nth-child(5){ animation-delay: calc(var(--carousel-duration) * -4 / 8); }
+.mockup-carousel.eight-slides img:nth-child(6){ animation-delay: calc(var(--carousel-duration) * -5 / 8); }
+.mockup-carousel.eight-slides img:nth-child(7){ animation-delay: calc(var(--carousel-duration) * -6 / 8); }
+.mockup-carousel.eight-slides img:nth-child(8){ animation-delay: calc(var(--carousel-duration) * -7 / 8); }
+
 @keyframes mockupFadeThree{
   0%{ opacity:0; }
   3%{ opacity:1; }
@@ -1315,14 +1333,15 @@ footer{
     <div class="split-visual reveal" style="--reveal-delay:.15s">
       <!-- MOCKUP: páginas reais dos materiais, alternando -->
       <div class="mockup-card mockup-card-covers">
-        <div class="mockup-carousel six-slides">
-          <!-- PLACEHOLDER: substituir por imagens reais do material FCC / Fundação Florestal-SP -->
+        <div class="mockup-carousel eight-slides">
           <img src="./assets/img/material-1-capa.jpg" alt="Capa do Material 1: Método da Discursiva FCC" loading="lazy" />
           <img src="./assets/img/material-1-sumario.jpg" alt="Sumário do Material 1" loading="lazy" />
           <img src="./assets/img/material-1-teoria.jpg" alt="Página de teoria do Material 1" loading="lazy" />
           <img src="./assets/img/material-2-capa.jpg" alt="Capa do Material 2: 20 Redações Comentadas" loading="lazy" />
+          <img src="./assets/img/material-2-sumario.jpg" alt="Índice por tema das 20 redações comentadas" loading="lazy" />
           <img src="./assets/img/caso-01-situacao.jpg" alt="Página real do Material 2: proposta de redação 01" loading="lazy" />
           <img src="./assets/img/caso-01-resposta-modelo.jpg" alt="Página real do Material 2: redação-modelo comentada 01" loading="lazy" />
+          <img src="./assets/img/caso-01-espelho.jpg" alt="Página real do Material 2: espelho comentado da redação 01" loading="lazy" />
         </div>
       </div>
       <p class="mockup-caption">Páginas reais dos materiais</p>
