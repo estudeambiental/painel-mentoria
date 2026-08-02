@@ -447,6 +447,20 @@ section{ padding: var(--section-y) 0; }
 }
 .placeholder-img svg{ width:22px; height:22px; stroke: var(--grafite-soft); margin-bottom:.5rem; }
 
+/* placeholder de vídeo curto (loop mudo) reutilizável */
+.placeholder-video{
+  aspect-ratio: 4/3; background: repeating-linear-gradient(135deg, var(--bg) 0 10px, #EFF3EC 10px 20px);
+  border: 1.5px dashed var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding: 1rem; gap:.55rem;
+}
+.placeholder-video .play-circle-sm{
+  width:42px; height:42px; border-radius:50%; background: var(--verde); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; box-shadow: 0 8px 18px -8px rgba(104,153,90,.55);
+}
+.placeholder-video .play-circle-sm svg{ width:15px; height:15px; margin-left:2px; }
+.placeholder-video .ph-label{ font-size:.74rem; font-weight:700; color: var(--grafite-soft); line-height:1.4; }
+.placeholder-video .ph-sub{ font-size:.66rem; font-weight:600; color: var(--grafite-soft); opacity:.7; text-transform:uppercase; letter-spacing:.03em; }
+
 /* ============================================================
    INCLUDE GRID (tudo que recebe)
    ============================================================ */
@@ -624,7 +638,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       <h2 class="h-section">Antes de aplicar, entenda por que estudar mais nem sempre significa avançar mais.</h2>
       <p class="lede vsl-text">Neste vídeo, eu vou mostrar por que tantos concurseiros ambientais acumulam materiais, passam horas estudando e continuam sem saber se estão no caminho certo. Você também vai entender como funciona a Mentoria Estude Ambiental e o que muda quando sua preparação deixa de depender de improviso.</p>
     </div>
-    <!-- PLACEHOLDER: substituir por embed real do vídeo (YouTube/Vimeo/Panda) quando a VSL estiver gravada. Duração recomendada: 12–18 min. -->
+    <!-- PLACEHOLDER: substituir por embed real do vídeo (YouTube não-listado/Vimeo/Panda) quando a VSL estiver gravada. Roteiro final: ~9 min, 8 blocos + abertura. -->
     <div class="vsl-player reveal" id="vslPlayer">
       <img src="./assets/img/dominique-retrato.jpg" alt="" />
       <div class="vsl-play">
@@ -777,35 +791,62 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       <h2 class="h-section">Abra a plataforma e saiba o que precisa fazer naquele dia.</h2>
       <p class="lede">Na Tutory, você acompanha sua preparação em um só lugar. O objetivo não é criar mais uma obrigação, mas reduzir o número de decisões que você precisa tomar sozinho.</p>
     </div>
-    <!-- PLACEHOLDER: substituir os 6 cards abaixo por capturas reais e ampliadas da Tutory (nada de tela inteira do computador em miniatura) -->
+    <!-- PLACEHOLDER: substituir os 6 cards abaixo por vídeos curtos, mudos, em loop, gravados direto da Tutory (nada de tela inteira do computador em miniatura — recorte e amplie só a área relevante).
+         Pra trocar um card: apague a <div class="placeholder-video">...</div> inteira e coloque no lugar:
+         <video autoplay muted loop playsinline class="screen-video"><source src="./assets/video/NOME-DO-ARQUIVO.mp4" type="video/mp4"></video>
+         (adicione .screen-video{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; } no CSS quando for usar) -->
     <div class="screens-grid stagger">
       <div class="screen-card reveal">
-        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg>PRINT REAL: Missões diárias</div>
+        <div class="placeholder-video">
+          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="ph-label">Missões diárias</span>
+          <span class="ph-sub">vídeo em produção</span>
+        </div>
         <h3 class="h-card">Missões diárias</h3>
         <p>Visualize as tarefas previstas, conclua o que estudou e acompanhe o cumprimento do plano.</p>
       </div>
       <div class="screen-card reveal">
-        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h16M9 15l3-4 3 3 4-6"/></svg>PRINT REAL: Progresso e previsão</div>
+        <div class="placeholder-video">
+          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="ph-label">Progresso e previsão</span>
+          <span class="ph-sub">vídeo em produção</span>
+        </div>
         <h3 class="h-card">Progresso e previsão</h3>
         <p>Veja horas planejadas, horas executadas, andamento das disciplinas e previsão de conclusão.</p>
       </div>
       <div class="screen-card reveal">
-        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>PRINT REAL: Desempenho</div>
+        <div class="placeholder-video">
+          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="ph-label">Desempenho</span>
+          <span class="ph-sub">vídeo em produção</span>
+        </div>
         <h3 class="h-card">Desempenho</h3>
         <p>Acompanhe sua taxa de acertos e identifique quais matérias e assuntos precisam de mais atenção.</p>
       </div>
       <div class="screen-card reveal">
-        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>PRINT REAL: Questões</div>
+        <div class="placeholder-video">
+          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="ph-label">Questões</span>
+          <span class="ph-sub">vídeo em produção</span>
+        </div>
         <h3 class="h-card">Questões</h3>
         <p>Registre e acompanhe a resolução de questões, os erros e a evolução por conteúdo.</p>
       </div>
       <div class="screen-card reveal">
-        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>PRINT REAL: Simulados e discursivas</div>
+        <div class="placeholder-video">
+          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="ph-label">Simulados e discursivas</span>
+          <span class="ph-sub">vídeo em produção</span>
+        </div>
         <h3 class="h-card">Simulados e discursivas</h3>
         <p>Treine o formato da prova, organize seus envios e receba orientações para melhorar.</p>
       </div>
       <div class="screen-card reveal">
-        <div class="placeholder-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22c4-2 7-6 7-11a7 7 0 0 0-14 0c0 5 3 9 7 11Z"/></svg>PRINT REAL: Replanejamento</div>
+        <div class="placeholder-video">
+          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="ph-label">Replanejamento</span>
+          <span class="ph-sub">vídeo em produção</span>
+        </div>
         <h3 class="h-card">Replanejamento e hábitos</h3>
         <p>Quando algo sair do previsto, o plano é reorganizado — e você acompanha sua constância e conquistas ao longo das semanas.</p>
       </div>
