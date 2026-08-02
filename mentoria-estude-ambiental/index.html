@@ -191,6 +191,17 @@ button{ font-family:inherit; cursor:pointer; }
 .marquee-track span{ display:inline-flex; align-items:center; gap:.6rem; font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; color: var(--verde-claro); padding: 0 2rem; }
 .marquee-track span::after{ content:'✦'; color: var(--verde); margin-left:2rem; font-size:.7rem; }
 
+.quick-proof{ background: var(--bg-verde); padding: 1.75rem 0; border-bottom: 1px solid var(--border); }
+.quick-proof-inner{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:1.5rem 3rem; }
+.quick-proof-stats{ display:flex; flex-wrap:wrap; gap:1.25rem 2rem; }
+.quick-proof-stat{ display:flex; flex-direction:column; align-items:center; text-align:center; }
+.quick-proof-stat strong{ font-size:1.5rem; font-weight:800; color: var(--verde-escuro); line-height:1; }
+.quick-proof-stat span{ font-size:.74rem; color: var(--grafite-soft); margin-top:.3rem; max-width:120px; }
+.quick-proof-quotes{ display:flex; flex-wrap:wrap; gap:1rem 2rem; justify-content:center; }
+.quick-proof-quotes p{ font-size:.82rem; font-style:italic; color: var(--grafite); max-width:230px; margin:0; }
+.quick-proof-quotes cite{ display:block; font-style:normal; font-weight:700; font-size:.72rem; margin-top:.35rem; color: var(--verde-escuro); }
+@media (max-width: 640px){ .quick-proof-quotes p{ max-width:100%; } }
+
 .sticky-cta{
   position:fixed; left:0; right:0; bottom:0; z-index:60;
   background: var(--branco); border-top:1px solid var(--border);
@@ -636,6 +647,25 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 </div>
 
 <!-- ============================================================
+     PROVA SOCIAL RÁPIDA
+     Barra curta com dados reais (extraídos da seção de resultados
+     mais abaixo), pra dar confiança antes de pedir atenção pra VSL.
+     ============================================================ -->
+<section class="quick-proof">
+  <div class="container quick-proof-inner">
+    <div class="quick-proof-stats">
+      <div class="quick-proof-stat"><strong>5</strong><span>aprovados reais, com autorização</span></div>
+      <div class="quick-proof-stat"><strong>IDEMA/RN</strong><span>e IPAAM/AM</span></div>
+      <div class="quick-proof-stat"><strong>83%+</strong><span>de aproveitamento nas questões, em mais de um caso</span></div>
+    </div>
+    <div class="quick-proof-quotes">
+      <p>"Fechou 51% do edital, 83% de aproveitamento na objetiva e gabaritou a redação na prova."<cite>Lucemir — Fiscal Ambiental, IDEMA/RN</cite></p>
+      <p>"Já tinha batido na trave em dois concursos anteriores. 87,5% de aproveitamento em mais de mil questões resolvidas."<cite>Daniel — Analista Ambiental, IDEMA/RN</cite></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      VSL
      ============================================================ -->
 <section class="vsl bg-dark" id="vsl">
@@ -713,6 +743,66 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
           <li><span class="mark">✓</span>Chega à prova conhecendo seus pontos fortes e fracos</li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RESULTADOS E DEPOIMENTOS
+     ============================================================ -->
+<section id="resultados">
+  <div class="container">
+    <div class="section-kicker reveal">
+      <span class="eyebrow">Prova social</span>
+      <h2 class="h-section">O plano ganha força quando o aluno executa e utiliza o acompanhamento.</h2>
+      <p class="lede">Cada trajetória é diferente. Por isso, em vez de prometer aprovação, mostramos o que acontece quando o aluno deixa de estudar sem direção e passa a seguir um processo.</p>
+    </div>
+
+    <!-- Resultados objetivos: extraídos das entrevistas gravadas e autorizadas com os aprovados -->
+    <h3 class="h-card" style="text-align:center; margin-bottom:1.25rem;">Resultados objetivos</h3>
+    <div class="result-grid stagger">
+      <div class="result-card reveal">
+        <span class="tag">IDEMA/RN</span>
+        <h3>Lucemir</h3>
+        <div class="meta">Fiscal Ambiental · 5º lugar (cotas) / 30º (ampla)</div>
+        <p class="quote">"Formado em Ciências Contábeis, sem nenhuma bagagem ambiental. Fechou 51% do edital, 83% de aproveitamento na objetiva e gabaritou a redação na prova."</p>
+      </div>
+      <div class="result-card reveal" style="--reveal-delay:.06s">
+        <span class="tag">IDEMA/RN</span>
+        <h3>Arianne</h3>
+        <div class="meta">Fiscal Ambiental (2º lugar) e Analista/Arquitetura, no mesmo concurso</div>
+        <p class="quote">"Formada em Direito e Arquitetura, começou a estudar a área ambiental cerca de três semanas depois do edital. Foi de nota baixa a 30/30 na redação de Fiscal."</p>
+      </div>
+      <div class="result-card reveal" style="--reveal-delay:.12s">
+        <span class="tag">IDEMA/RN</span>
+        <h3>Daniel</h3>
+        <div class="meta">Analista Ambiental (Geografia) · 4º lugar</div>
+        <p class="quote">"Já tinha batido na trave em dois concursos anteriores por causa da nota mínima na discursiva. 87,5% de aproveitamento em mais de mil questões resolvidas."</p>
+      </div>
+      <div class="result-card reveal" style="--reveal-delay:.18s">
+        <span class="tag">IDEMA/RN</span>
+        <h3>Luanna</h3>
+        <div class="meta">Analista Ambiental (Engenharia Florestal) · 4º lugar</div>
+        <p class="quote">"Fechou quase 50% do edital com 85% de aproveitamento. 'Eu senti uma leveza', foi a frase dela sobre sair do estudo por conta própria para um plano acompanhado."</p>
+      </div>
+      <div class="result-card reveal" style="--reveal-delay:.24s">
+        <span class="tag">IPAAM/AM</span>
+        <h3>André</h3>
+        <div class="meta">Engenheiro Florestal · aprovado dentro das vagas, 481 inscritos para 12 vagas imediatas</div>
+        <p class="quote">"Entrou na mentoria já na reta final, poucas semanas antes da prova, com um plano focado no que ainda faltava fechar."</p>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER: depoimentos sobre transformação no processo (constância, organização, confiança) — substituir por prints reais e legíveis -->
+    <h3 class="h-card" style="text-align:center; margin-bottom:1.25rem;">Transformações durante a preparação</h3>
+    <div class="testimonial-grid stagger">
+      <div class="placeholder-img reveal" style="aspect-ratio: 3/4; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre sair da desorganização</div>
+      <div class="placeholder-img reveal" style="aspect-ratio: 4/5; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre constância e metas</div>
+      <div class="placeholder-img reveal" style="aspect-ratio: 4/3; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre melhora na taxa de acertos</div>
+      <div class="placeholder-img reveal" style="aspect-ratio: 3/4; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre segurança antes da prova</div>
+    </div>
+    <div style="text-align:center; margin-top:2.5rem;">
+      <a href="#aplicar" class="btn btn-primary btn-lg">Quero um plano baseado em resultados reais</a>
     </div>
   </div>
 </section>
@@ -897,13 +987,13 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </div>
       <div class="include-card reveal">
         <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></div>
-        <h3 class="h-card">Discursivas</h3>
-        <p>Orientações, temas, materiais e treinos voltados aos formatos cobrados pelas bancas.</p>
+        <h3 class="h-card">Discursivas <span style="font-weight:600;font-size:.75em;opacity:.7;">(bônus)</span></h3>
+        <p>Para quem tem discursiva no edital, guia de estudo, treinos e correção entram como bônus da mentoria.</p>
       </div>
       <div class="include-card reveal">
         <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></svg></div>
-        <h3 class="h-card">Guias e materiais de apoio</h3>
-        <p>Materiais desenvolvidos para ajudar na aplicação da metodologia e na preparação para concursos ambientais.</p>
+        <h3 class="h-card">Guias de aplicação do método</h3>
+        <p>Guias práticos sobre como usar a trilha, organizar revisões, resolver questões e simulados dentro do Método TEIA. Não é material de conteúdo das disciplinas.</p>
       </div>
       <div class="include-card reveal">
         <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
@@ -979,63 +1069,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </div>
     </div>
     <p class="fit-close">A mentoria oferece direção, método e acompanhamento. A execução continua sendo responsabilidade do aluno.</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     RESULTADOS E DEPOIMENTOS
-     ============================================================ -->
-<section id="resultados">
-  <div class="container">
-    <div class="section-kicker reveal">
-      <span class="eyebrow">Prova social</span>
-      <h2 class="h-section">O plano ganha força quando o aluno executa e utiliza o acompanhamento.</h2>
-      <p class="lede">Cada trajetória é diferente. Por isso, em vez de prometer aprovação, mostramos o que acontece quando o aluno deixa de estudar sem direção e passa a seguir um processo.</p>
-    </div>
-
-    <!-- Resultados objetivos: extraídos das entrevistas gravadas e autorizadas com os aprovados -->
-    <h3 class="h-card" style="text-align:center; margin-bottom:1.25rem;">Resultados objetivos</h3>
-    <div class="result-grid stagger">
-      <div class="result-card reveal">
-        <span class="tag">IDEMA/RN</span>
-        <h3>Lucemir</h3>
-        <div class="meta">Fiscal Ambiental · 5º lugar (cotas) / 30º (ampla)</div>
-        <p class="quote">"Formado em Ciências Contábeis, sem nenhuma bagagem ambiental. Fechou 51% do edital, 83% de aproveitamento na objetiva e gabaritou a redação na prova."</p>
-      </div>
-      <div class="result-card reveal" style="--reveal-delay:.06s">
-        <span class="tag">IDEMA/RN</span>
-        <h3>Arianne</h3>
-        <div class="meta">Fiscal Ambiental (2º lugar) e Analista/Arquitetura, no mesmo concurso</div>
-        <p class="quote">"Formada em Direito e Arquitetura, começou a estudar a área ambiental cerca de três semanas depois do edital. Foi de nota baixa a 30/30 na redação de Fiscal."</p>
-      </div>
-      <div class="result-card reveal" style="--reveal-delay:.12s">
-        <span class="tag">IDEMA/RN</span>
-        <h3>Daniel</h3>
-        <div class="meta">Analista Ambiental (Geografia) · 4º lugar</div>
-        <p class="quote">"Já tinha batido na trave em dois concursos anteriores por causa da nota mínima na discursiva. 87,5% de aproveitamento em mais de mil questões resolvidas."</p>
-      </div>
-      <div class="result-card reveal" style="--reveal-delay:.18s">
-        <span class="tag">IDEMA/RN</span>
-        <h3>Luanna</h3>
-        <div class="meta">Analista Ambiental (Engenharia Florestal) · 4º lugar</div>
-        <p class="quote">"Fechou quase 50% do edital com 85% de aproveitamento. 'Eu senti uma leveza', foi a frase dela sobre sair do estudo por conta própria para um plano acompanhado."</p>
-      </div>
-      <div class="result-card reveal" style="--reveal-delay:.24s">
-        <span class="tag">IPAAM/AM</span>
-        <h3>André</h3>
-        <div class="meta">Engenheiro Florestal · aprovado dentro das vagas, 481 inscritos para 12 vagas imediatas</div>
-        <p class="quote">"Entrou na mentoria já na reta final, poucas semanas antes da prova, com um plano focado no que ainda faltava fechar."</p>
-      </div>
-    </div>
-
-    <!-- PLACEHOLDER: depoimentos sobre transformação no processo (constância, organização, confiança) — substituir por prints reais e legíveis -->
-    <h3 class="h-card" style="text-align:center; margin-bottom:1.25rem;">Transformações durante a preparação</h3>
-    <div class="testimonial-grid stagger">
-      <div class="placeholder-img reveal" style="aspect-ratio: 3/4; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre sair da desorganização</div>
-      <div class="placeholder-img reveal" style="aspect-ratio: 4/5; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre constância e metas</div>
-      <div class="placeholder-img reveal" style="aspect-ratio: 4/3; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre melhora na taxa de acertos</div>
-      <div class="placeholder-img reveal" style="aspect-ratio: 3/4; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre segurança antes da prova</div>
-    </div>
   </div>
 </section>
 
