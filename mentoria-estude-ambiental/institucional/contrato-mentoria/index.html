@@ -79,6 +79,21 @@ li{ margin-bottom: .5rem; }
   border-radius: 4px;
   white-space: nowrap;
 }
+.p-item{
+  margin: .9rem 0;
+  padding: .1rem 0 .1rem 1rem;
+  border-left: 3px solid var(--border);
+}
+.p-item strong{ color: var(--verde-escuro); }
+.callout{
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+  margin: 1.1rem 0;
+}
+.callout strong{ color: #7a5b12; }
+ol[type="a"]{ padding-left: 1.6rem; }
 .note{
   background: #fff;
   border: 1px solid var(--border);
@@ -101,25 +116,34 @@ footer{
 <!--
   NOTA INTERNA — não aparece para quem visita a página (comentário HTML).
 
-  Este contrato foi adaptado a partir da estrutura de cláusulas usada por um
-  contrato de mentoria similar de mercado, ajustado ao contexto da Estude
-  Ambiental. Ele cobre as mesmas categorias de proteção (objeto, acesso,
-  pagamento, cancelamento/reembolso, propriedade intelectual, confidencialidade,
-  LGPD, força maior), mas os valores e regras específicos abaixo são
-  PLACEHOLDERS/SUGESTÕES até serem confirmados pela Dominique:
+  Contrato reestruturado em formato Cláusula > Inciso > Parágrafo, no molde
+  de um contrato de mentoria de mercado bem mais granular (Comunidade de
+  Aprovados / Helena Emerick), mas com o CONTEÚDO e os VALORES baseados no
+  contrato real já usado pela Dominique com uma aluna (Natalia), que é mais
+  equilibrado do que o de mercado usado como referência de estrutura (aquele
+  tinha multas contraditórias e cláusulas desproporcionais — não foram
+  copiadas aqui). Pontos ainda a confirmar com a Dominique / revisar com
+  advogado antes de considerar definitivo:
 
-    - Percentual de multa rescisória após os 7 dias de arrependimento
-      (usei 15% à vista / 20% parcelado como sugestão intermediária —
-      ajustar para o que realmente será praticado)
-    - Prazo de resposta do suporte via WhatsApp/Tutory (usei 48h úteis
-      como referência de mercado — confirmar o real)
-    - Lista exata de entregáveis/bônus da Mentoria Estude Ambiental
-      (usei o que já está confirmado nas conversas: Método TEIA,
-      cronograma individual, acompanhamento via WhatsApp, plataforma
-      Tutory — adicionar/remover conforme a oferta real)
+    - Inciso II da Cláusula Segunda: lista exata de entregáveis/bônus
+      vigentes (mantive apenas o que já está confirmado: Método TEIA,
+      cronograma individual, acompanhamento via WhatsApp, plataforma Tutory,
+      indicação de fontes de estudo — SEM fornecimento de material de
+      conteúdo, conforme pedido explícito da Dominique)
+    - Cláusula Segunda, Inciso IV: bônus de discursiva (guia, simulados,
+      correção) condicionados a quem tem discursiva no edital — confirmar
+      se a frequência/formato descritos batem com o que será praticado
+    - Cláusula Terceira, Parágrafo Primeiro: limite de 3 trocas de
+      concurso-alvo e prazo de 15 dias úteis para reestruturação — valores
+      trazidos do contrato da Natalia, confirmar se continuam valendo
+    - Cláusula Sexta, Inciso II: prazo de resposta de 48h úteis — mesmo
+      valor já usado antes, confirmar se é o real
+    - Cláusula Nona, Inciso II: multa rescisória de 80% / restituição de
+      20% — são os valores exatos do contrato já assinado com a Natalia,
+      generalizados aqui (sem o exemplo em R$ específico do plano dela)
 
   Já confirmado: razão social (55.491.669 DOMINIQUE MARTINS SALA, MEI),
-  CNPJ, endereço completo (Florianópolis/SC) e e-mail de contato.
+  CNPJ, endereço completo (Florianópolis/SC), e-mail de contato e Método TEIA.
 
   ANTES DE PUBLICAR ESTE CONTRATO COMO VINCULANTE, ele deve passar por
   revisão de um advogado — isso é um documento legal real, não apenas
@@ -135,7 +159,7 @@ footer{
 <div class="wrap">
   <h1>Contrato de Prestação de Serviços Educacionais</h1>
   <p class="subtitle">MENTORIA ESTUDE AMBIENTAL</p>
-  <p class="updated">Última atualização: <span class="fill">[DATA]</span> · leitura de aproximadamente 10 minutos</p>
+  <p class="updated">Última atualização: <span class="fill">[DATA]</span> · leitura de aproximadamente 15 minutos</p>
 
   <div class="intro-box">
     <p>Olá! Seja bem-vindo(a). Se você está buscando informações sobre a Mentoria Estude Ambiental, aqui é o lugar certo, com todas as informações necessárias sobre essa jornada rumo à sua aprovação.</p>
@@ -146,56 +170,168 @@ footer{
   <h2>Cláusula Primeira: Das Partes</h2>
   <p>De um lado, o aluno devidamente cadastrado junto ao banco de dados do site (<strong>CONTRATANTE</strong> ou <strong>ALUNO</strong>) e, de outro lado, a <strong>CONTRATADA</strong>: <strong>55.491.669 DOMINIQUE MARTINS SALA</strong>, empresária individual (MEI), inscrita no CNPJ sob o número <strong>55.491.669/0001-15</strong>, com sede na Rua Dario Manoel Cardoso, 132, Ingleses do Rio Vermelho, Florianópolis/SC, CEP 88058-400.</p>
 
-  <h2>Cláusula Segunda: Do Objeto</h2>
-  <p>Este contrato tem por objeto definir as regras a serem seguidas para a participação na <strong>MENTORIA ESTUDE AMBIENTAL</strong>, incluindo todos os materiais, informações, documentos, aulas e serviços disponibilizados e promovidos pela CONTRATADA, digitais ou físicos, sem prejuízo da aplicação da legislação vigente.</p>
-  <p>A Mentoria Estude Ambiental caracteriza-se como um serviço personalizado de acompanhamento pedagógico e estratégico, estruturado a partir do <strong>Método TEIA</strong> (Trilha, Estudo, Iteração e Avaliação), com cronogramas individuais, suporte direcionado e acompanhamento próximo do CONTRATANTE, voltado à preparação para concursos públicos da área ambiental.</p>
-  <p>A Mentoria terá duração de <span class="fill">3 (três), 6 (seis) ou 12 (doze) meses</span>, conforme o plano contratado, contados a partir da liberação do acesso à plataforma.</p>
+  <h2>Cláusula Segunda: Do Objeto Contratual e da Natureza dos Serviços</h2>
 
-  <h3>O que está incluído</h3>
-  <ul>
-    <li>Cronograma de estudos individual, adaptado à rotina e ao concurso-alvo do CONTRATANTE;</li>
-    <li>Acompanhamento próximo, com contato direto via WhatsApp;</li>
-    <li>Acesso à área exclusiva do aluno na plataforma Tutory;</li>
-    <li><span class="fill">[completar com os demais itens/bônus reais da oferta]</span>.</li>
-  </ul>
+  <h3>Inciso I. Do Objeto</h3>
+  <p>O presente contrato tem por objeto a prestação de serviços de mentoria de estudos personalizada, voltada à preparação do CONTRATANTE para concursos públicos da área ambiental, mediante planejamento estratégico estruturado a partir do <strong>Método TEIA</strong> (Trilha, Estudo, Iteração e Avaliação), com organização de conteúdos, cronograma individual e acompanhamento próximo, de acordo com os objetivos definidos entre as Partes.</p>
+  <div class="p-item"><strong>Parágrafo Único.</strong> O concurso-alvo, o cargo pretendido e a estratégia de preparação poderão ser ajustados ao longo da vigência contratual, conforme solicitação do CONTRATANTE, análise de viabilidade da CONTRATADA e observância dos procedimentos e limites previstos na Cláusula Terceira.</div>
 
-  <h2>Cláusula Terceira: Do Acesso à Plataforma</h2>
-  <p>Após a contratação, haverá o onboarding do CONTRATANTE, que receberá instruções de acesso no e-mail cadastrado e, eventualmente, por WhatsApp. A Mentoria é hospedada na plataforma <strong>Tutory</strong>, que pode fazer uso de cookies, razão pela qual, ao acessar, o CONTRATANTE concorda com a política de cookies dessa plataforma.</p>
-  <p>O acesso à Mentoria e aos demais entregáveis é <strong>pessoal, individual e intransferível</strong>, não podendo ser cedido, compartilhado, vendido ou adquirido por meio de rateio ou compra coletiva. Em caso de suspeita de fraude ou descumprimento das condições contratuais, a CONTRATADA se reserva o direito de suspender ou cancelar o acesso a qualquer momento, sem devolução de valores pagos.</p>
+  <h3>Inciso II. Do que Compreendem os Serviços</h3>
+  <p>Os serviços compreendem, conforme o plano contratado:</p>
+  <ol type="a">
+    <li>Elaboração de plano de estudos personalizado, com direcionamento sobre o que, como e quando estudar;</li>
+    <li>Definição de metas de estudo adaptadas à rotina e ao concurso-alvo do CONTRATANTE;</li>
+    <li>Acompanhamento direto e individualizado pela CONTRATADA, pelos canais de comunicação oficiais previstos na Cláusula Quinta;</li>
+    <li>Disponibilização de acesso pessoal e intransferível à plataforma de mentoria indicada pela CONTRATADA (atualmente, a plataforma Tutory), operada por fornecedor tecnológico terceiro;</li>
+    <li>Indicação das melhores fontes de estudo (pagas ou gratuitas) disponíveis no mercado para cada matéria, cabendo ao CONTRATANTE adquirir ou acessar por conta própria o material indicado;</li>
+    <li>Realização de reunião(ões) inicial(is) de diagnóstico e orientação (onboarding), conforme a metodologia da mentoria;</li>
+    <li><span class="fill">[demais itens confirmados da oferta vigente]</span>.</li>
+  </ol>
 
-  <h2>Cláusula Quarta: Do Suporte</h2>
-  <p>O suporte ao CONTRATANTE será prestado durante o prazo de duração da Mentoria, pelos canais oficiais (WhatsApp e/ou plataforma Tutory), com prazo máximo de resposta de <span class="fill">48 (quarenta e oito) horas úteis</span>. Mensagens enviadas por canais não oficiais (como redes sociais) não são consideradas válidas para fins de atendimento ou execução da mentoria.</p>
+  <h3>Inciso III. Da Distinção entre Mentoria e Curso Preparatório</h3>
+  <div class="callout">
+    <p style="margin-bottom:.5rem;">A Mentoria <strong>NÃO é um curso preparatório</strong> e <strong>NÃO inclui</strong> o fornecimento de apostilas, PDFs de conteúdo, videoaulas teóricas ou qualquer material didático das disciplinas do edital.</p>
+    <p style="margin-bottom:0;">A CONTRATADA atua na organização, priorização e direcionamento estratégico dos estudos, indicando ao CONTRATANTE as melhores fontes (pagas ou gratuitas) para que ele próprio adquira ou acesse o conteúdo necessário. Eventual disponibilização pontual de aulas, guias, resumos ou materiais complementares pela CONTRATADA constitui liberalidade extraordinária, não fazendo parte das obrigações centrais deste contrato nem gerando direito de exigência pelo CONTRATANTE.</p>
+  </div>
 
-  <h2>Cláusula Quinta: Do Pagamento</h2>
-  <p>A Mentoria é um serviço oneroso, cujo valor total é definido de acordo com o plano contratado (3, 6 ou 12 meses), informado no checkout da plataforma de pagamento. A possibilidade de parcelamento é uma facilitação de pagamento; a compra da Mentoria é considerada à vista.</p>
-  <p>Os pagamentos poderão ser realizados via cartão de crédito, PIX ou boleto bancário, conforme as opções disponibilizadas no checkout. A nota fiscal referente à aquisição será emitida em até 7 (sete) dias úteis após a confirmação do pagamento (ou, em caso de pagamento parcelado, mensalmente).</p>
+  <h3>Inciso IV. Dos Bônus Condicionados (Discursivas)</h3>
+  <p>Para o CONTRATANTE cujo concurso-alvo ou objetivo contemple prova discursiva, a CONTRATADA poderá disponibilizar, a título de <strong>bônus</strong>, guia de estudo para discursiva elaborado de acordo com o objetivo do CONTRATANTE, simulados e correção de questões discursivas.</p>
+  <div class="p-item"><strong>Parágrafo Único.</strong> Os itens deste Inciso são benefícios adicionais e não integram o objeto principal da mentoria descrito no Inciso II, podendo sua forma, frequência e disponibilidade ser ajustadas pela CONTRATADA a qualquer tempo, sem que isso caracterize descumprimento contratual.</div>
 
-  <h2>Cláusula Sexta: Do Cancelamento e Reembolso</h2>
-  <p><strong>Direito de arrependimento (7 dias):</strong> nos termos do art. 49 do Código de Defesa do Consumidor, o CONTRATANTE tem direito ao cancelamento com devolução integral do valor pago, caso solicite em até 7 (sete) dias corridos a partir da data da compra, por meio do e-mail <a href="mailto:estudeambiental@gmail.com">estudeambiental@gmail.com</a>.</p>
-  <p><strong>Após os 7 dias:</strong> o CONTRATANTE poderá solicitar o cancelamento a qualquer momento, incidindo multa rescisória de <span class="fill">10% (dez por cento)</span> sobre o valor global do contrato, em pagamentos à vista, ou <span class="fill">15% (quinze por cento)</span> sobre o saldo remanescente, em pagamentos parcelados, valores que se justificam pelo acesso já disponibilizado a cronogramas, materiais e acompanhamento.</p>
-  <p>A conclusão antecipada ou o abandono da Mentoria por iniciativa exclusiva do CONTRATANTE não o isenta do cumprimento das obrigações financeiras já assumidas.</p>
+  <h2>Cláusula Terceira: Da Execução, Alteração e Atualização do Cronograma</h2>
 
-  <h2>Cláusula Sétima: Da Propriedade Intelectual</h2>
-  <p>Todos os direitos relativos à Mentoria Estude Ambiental (conteúdos, materiais, o Método TEIA, ferramentas, aulas e a estratégia que a compõe) são de propriedade exclusiva da CONTRATADA. O CONTRATANTE adquire apenas o direito de utilização pessoal dos materiais, durante o período de vigência do plano contratado, sendo proibido copiar, compartilhar, reproduzir, redistribuir ou comercializar qualquer conteúdo, mesmo que gratuitamente.</p>
+  <h3>Inciso I. Da Elaboração do Plano</h3>
+  <p>O plano de estudos será elaborado em formato individualizado, considerando as informações fornecidas pelo CONTRATANTE: sua disponibilidade, seu histórico de estudos, seus objetivos e, quando houver, o edital ou conjunto de editais utilizado como referência.</p>
 
-  <h2>Cláusula Oitava: Da Confidencialidade</h2>
+  <h3>Inciso II. Da Alteração do Concurso-Alvo</h3>
+  <p>Caso o CONTRATANTE opte por alterar o concurso público norteador do seu plano, deverá formalizar a solicitação pelos canais oficiais previstos na Cláusula Quinta, fornecendo as informações necessárias à análise da CONTRATADA.</p>
+  <div class="p-item"><strong>Parágrafo Primeiro.</strong> Formalizado o pedido, a CONTRATADA disporá do prazo de <span class="fill">15 (quinze) dias úteis</span> para analisar as diretrizes do novo concurso e reestruturar o cronograma do CONTRATANTE.</div>
+  <div class="p-item"><strong>Parágrafo Segundo (Tolerância).</strong> O prazo acima poderá ser prorrogado por igual período em decorrência de caso fortuito ou força maior (Cláusula Décima Sexta), especialmente em caso de adoecimento superveniente ou impedimento da CONTRATADA.</div>
+  <div class="p-item"><strong>Parágrafo Terceiro (Limite).</strong> O CONTRATANTE terá direito a solicitar até <span class="fill">3 (três)</span> mudanças de concurso-alvo no decorrer da vigência contratual, condicionadas à compatibilidade com a área ambiental. Ultrapassado esse limite, eventual novo pedido dependerá de análise de viabilidade pela CONTRATADA, podendo ser objeto de aditivo ou contratação complementar.</div>
+  <div class="p-item"><strong>Parágrafo Quarto.</strong> Atualizações decorrentes da publicação de novo edital, retificação, alteração de cronograma ou modificação do conteúdo programático relacionadas ao concurso-alvo já adotado como referência não são consideradas mudança de concurso para os fins deste Inciso.</div>
+
+  <h3>Inciso III. Das Responsabilidades do CONTRATANTE</h3>
+  <p>Para a adequada execução da mentoria, o CONTRATANTE compromete-se a:</p>
+  <ol type="a">
+    <li>fornecer informações verdadeiras, completas e atualizadas sobre sua rotina, disponibilidade, objetivos e condições de estudo;</li>
+    <li>acessar regularmente a plataforma e acompanhar as comunicações enviadas pelos canais oficiais;</li>
+    <li>executar, dentro de suas possibilidades, as metas e orientações definidas na estratégia de preparação;</li>
+    <li>comunicar alterações relevantes em sua rotina, disponibilidade, objetivo ou dificuldades de execução;</li>
+    <li>adquirir ou acessar, por conta própria, os materiais e fontes de estudo indicados pela CONTRATADA, nos termos da Cláusula Segunda;</li>
+    <li>manter seus dados de acesso pessoais e intransferíveis, não compartilhando a plataforma ou os materiais disponibilizados;</li>
+    <li>reconhecer que o aproveitamento da mentoria depende de sua participação ativa, dedicação e constância;</li>
+    <li>reconhecer que a não utilização voluntária da plataforma, das orientações ou dos demais recursos disponibilizados não caracteriza, por si só, falha na prestação do serviço pela CONTRATADA.</li>
+  </ol>
+
+  <h2>Cláusula Quarta: Da Condução Pedagógica</h2>
+  <p>A condução pedagógica, a elaboração dos planos de estudos e o acompanhamento estratégico personalizado serão realizados diretamente pela CONTRATADA. Eventual apoio administrativo, comercial ou operacional de terceiros não implica transferência das atribuições pedagógicas personalizadas, nem torna o CONTRATANTE representante, associado ou parceiro da CONTRATADA.</p>
+
+  <h2>Cláusula Quinta: Dos Meios de Comunicação Oficial e da Plataforma</h2>
+
+  <h3>Inciso I. Dos Canais Oficiais</h3>
+  <p>Todas as comunicações, orientações, notificações e demais tratativas relacionadas à execução deste contrato serão realizadas por escrito, através de:</p>
+  <ol type="a">
+    <li>e-mail oficial: <a href="mailto:estudeambiental@gmail.com">estudeambiental@gmail.com</a>;</li>
+    <li>plataforma de mentoria indicada na Cláusula Segunda, Inciso II, alínea "d";</li>
+    <li>aplicativo de mensagens WhatsApp, pelo número informado pela CONTRATADA.</li>
+  </ol>
+
+  <h3>Inciso II. Da Validade das Comunicações por WhatsApp</h3>
+  <p>As comunicações realizadas pelo WhatsApp são consideradas válidas entre as Partes para fins de orientações, solicitações, confirmações, notificações e demais tratativas relacionadas à execução deste contrato, desde que realizadas pelos números informados pelas Partes, produzindo os efeitos jurídicos cabíveis.</p>
+
+  <h3>Inciso III. Das Alterações Contratuais</h3>
+  <p>Eventuais alterações substanciais das condições deste contrato, especialmente as que impliquem modificação do objeto, dos valores ou do prazo de vigência, deverão ser formalizadas por escrito, mediante termo aditivo, troca de e-mails ou manifestação expressa e inequívoca das Partes, inclusive por WhatsApp.</p>
+
+  <h3>Inciso IV. Da Plataforma de Terceiros</h3>
+  <p>A plataforma de mentoria é operada por empresa terceira (atualmente, a Tutory), estando sujeita a atualizações, manutenções e eventuais indisponibilidades que não estejam sob o controle direto da CONTRATADA, que não será responsável por interrupções exclusivamente imputáveis ao respectivo fornecedor, comprometendo-se, sempre que possível, a comunicar a ocorrência e adotar medida alternativa razoável. Ao acessar a plataforma, o CONTRATANTE concorda com a política de cookies dela.</p>
+
+  <h2>Cláusula Sexta: Da Forma de Atendimento e Suporte</h2>
+
+  <h3>Inciso I. Canais e Horário</h3>
+  <p>O suporte será realizado exclusivamente pelos canais oficiais descritos na Cláusula Quinta. O atendimento ocorre em dias úteis, em horário comercial, das 9h às 18h (horário de Brasília), não havendo obrigação de resposta a novas solicitações em finais de semana e feriados. Mensagens enviadas por canais não oficiais (como redes sociais) não são consideradas válidas para fins de atendimento ou execução da mentoria.</p>
+
+  <h3>Inciso II. Prazo de Resposta</h3>
+  <p>As dúvidas e solicitações encaminhadas pelos canais oficiais serão respondidas, em condições normais de funcionamento, no prazo estimado de até <span class="fill">48 (quarenta e oito) horas úteis</span>, contado do recebimento da mensagem.</p>
+  <div class="p-item"><strong>Parágrafo Único.</strong> O prazo poderá ser excepcionalmente ampliado em razão de elevado volume de demandas, adoecimento, emergência pessoal, indisponibilidade técnica das plataformas ou outro impedimento temporário devidamente justificável.</div>
+
+  <h3>Inciso III. Da Natureza do Acompanhamento</h3>
+  <p>O acompanhamento tem como foco o suporte estratégico, o planejamento, a análise de desempenho e a orientação do CONTRATANTE, não se confundindo com aulas particulares ou plantão de dúvidas sobre o conteúdo das disciplinas, cabendo ao CONTRATANTE realizar o estudo teórico por meio das fontes que adquirir ou acessar, nos termos da Cláusula Segunda.</p>
+
+  <h2>Cláusula Sétima: Do Acesso à Plataforma</h2>
+  <p>O acesso à Mentoria e aos demais entregáveis é <strong>pessoal, individual e intransferível</strong>, não podendo ser cedido, compartilhado, vendido ou adquirido por meio de rateio ou compra coletiva.</p>
+  <div class="callout"><strong>Em caso de suspeita de fraude ou descumprimento das condições contratuais</strong>, a CONTRATADA se reserva o direito de suspender ou cancelar o acesso a qualquer momento, não sendo devida restituição de valores já pagos.</div>
+
+  <h2>Cláusula Oitava: Das Condições Financeiras e Forma de Pagamento</h2>
+
+  <h3>Inciso I. Valor e Planos</h3>
+  <p>A Mentoria é um serviço oneroso, cujo valor total é definido de acordo com o plano contratado (3, 6 ou 12 meses), informado no checkout da plataforma de pagamento. Os pagamentos poderão ser realizados via cartão de crédito, PIX ou boleto bancário, conforme as opções disponibilizadas no checkout.</p>
+
+  <h3>Inciso II. Natureza da Compra</h3>
+  <p>A possibilidade de parcelamento é uma facilitação de pagamento; a compra da Mentoria é considerada à vista para todos os efeitos, inclusive para o cálculo previsto na Cláusula Nona.</p>
+
+  <h3>Inciso III. Nota Fiscal</h3>
+  <p>A nota fiscal referente à aquisição será emitida em até 7 (sete) dias úteis após a confirmação do pagamento (ou, em caso de pagamento parcelado, mensalmente).</p>
+  <div class="p-item"><strong>Parágrafo Único.</strong> Em caso de atraso no pagamento de parcelas, poderão incidir juros de mora de 1% (um por cento) ao mês e correção monetária, sem prejuízo da suspensão do acesso prevista na Cláusula Sétima em caso de inadimplência superior a 30 (trinta) dias.</div>
+
+  <h2>Cláusula Nona: Do Direito de Arrependimento e da Rescisão Antecipada</h2>
+
+  <div class="callout"><strong>Direito de arrependimento (7 dias).</strong> Nos termos do art. 49 do Código de Defesa do Consumidor, o CONTRATANTE tem direito ao cancelamento com devolução integral do valor pago, caso solicite em até 7 (sete) dias corridos a partir da data da compra, pelo e-mail <a href="mailto:estudeambiental@gmail.com">estudeambiental@gmail.com</a>.</div>
+
+  <h3>Inciso I. Da Rescisão Após o Prazo de Reflexão</h3>
+  <p>Transcorrido o prazo legal de arrependimento, o CONTRATANTE poderá solicitar a rescisão antecipada do contrato a qualquer momento, mediante comunicação formal pelo e-mail oficial.</p>
+
+  <h3>Inciso II. Da Multa Rescisória</h3>
+  <p>Na hipótese de rescisão antecipada por iniciativa do CONTRATANTE, sem inadimplemento da CONTRATADA, em razão da natureza intelectual dos serviços prestados, da elaboração do planejamento individualizado e do acesso já disponibilizado a cronogramas e acompanhamento desde o início da execução contratual, incidirá cláusula penal compensatória correspondente a <span class="fill">80% (oitenta por cento)</span> do valor total original do contrato, sendo restituída ao CONTRATANTE a diferença de <span class="fill">20% (vinte por cento)</span>.</p>
+  <div class="p-item"><strong>Parágrafo Primeiro.</strong> Para fins de apuração dos valores, será considerado o valor total original da contratação, independentemente da modalidade de parcelamento selecionada ou do número de parcelas já quitadas.</div>
+  <div class="p-item"><strong>Parágrafo Segundo.</strong> A restituição será realizada diretamente pela CONTRATADA, por Pix ou transferência bancária, no prazo de até 10 (dez) dias úteis, contado da formalização da rescisão e do fornecimento dos dados bancários necessários.</div>
+  <div class="p-item"><strong>Parágrafo Terceiro.</strong> A rescisão antecipada não implica o estorno da transação original realizada por meio da plataforma intermediadora de pagamento; eventuais parcelas assumidas pelo CONTRATANTE perante a administradora do cartão de crédito continuarão sendo cobradas conforme as condições aceitas na contratação, sendo o valor da multa compensado no cálculo da restituição.</div>
+
+  <h3>Inciso III. Exceção à Multa</h3>
+  <p>Caso o CONTRATANTE seja aprovado no mesmo concurso que motivou a contratação, poderá cancelar a assinatura sem incidência da multa rescisória prevista no Inciso II, mediante apresentação de comprovação documental da aprovação.</p>
+
+  <h3>Inciso IV. Do Encerramento dos Acessos</h3>
+  <p>Formalizada a rescisão contratual, serão encerrados o acompanhamento e os acessos do CONTRATANTE à plataforma e aos demais recursos vinculados à mentoria, na data indicada no respectivo termo de rescisão.</p>
+
+  <h2>Cláusula Décima: Da Vigência</h2>
+  <p>O presente instrumento vigora pelo prazo contratado (3, 6 ou 12 meses), contado a partir da liberação do acesso à plataforma. Encerrado esse prazo, cessarão automaticamente os serviços de mentoria e o acesso do CONTRATANTE à plataforma, sem necessidade de aviso prévio, podendo o CONTRATANTE solicitar proposta de renovação conforme as condições vigentes à época.</p>
+
+  <h2>Cláusula Décima Primeira: Da Propriedade Intelectual</h2>
+  <p>Todos os direitos relativos à Mentoria Estude Ambiental (conteúdos, materiais, o Método TEIA, ferramentas, aulas e a estratégia que a compõe) são de propriedade exclusiva da CONTRATADA, protegidos nos termos da Lei Federal nº 9.610/1998. O CONTRATANTE adquire apenas o direito de utilização pessoal dos materiais, durante o período de vigência do plano contratado, sendo proibido copiar, compartilhar, reproduzir, redistribuir ou comercializar qualquer conteúdo, mesmo que gratuitamente.</p>
+
+  <h2>Cláusula Décima Segunda: Da Confidencialidade</h2>
   <p>O CONTRATANTE se compromete a respeitar o sigilo e a confidencialidade dos materiais e informações compartilhadas na Mentoria, incluindo eventuais grupos e comunidades de alunos, sendo vedada a gravação, distribuição ou comercialização desse conteúdo.</p>
+  <div class="p-item"><strong>Parágrafo Único.</strong> Em caso de descumprimento, a CONTRATADA poderá exigir a reparação pelos danos comprovadamente sofridos, sem prejuízo das demais medidas cabíveis.</div>
 
-  <h2>Cláusula Nona: Da Proteção de Dados (LGPD)</h2>
-  <p>A CONTRATADA se compromete a tratar os dados pessoais do CONTRATANTE em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), conforme detalhado na <a href="../politica-de-privacidade/">Política de Privacidade</a>. Em caso de cancelamento do vínculo, a CONTRATADA procederá com a anonimização dos dados pessoais, ressalvadas as hipóteses de guarda obrigatória por lei.</p>
+  <h2>Cláusula Décima Terceira: Da Proteção de Dados Pessoais (LGPD)</h2>
+  <p>A CONTRATADA se compromete a tratar os dados pessoais do CONTRATANTE em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), conforme detalhado na <a href="../politica-de-privacidade/">Política de Privacidade</a>.</p>
+  <h3>Inciso I. Consentimento</h3>
+  <p>O CONTRATANTE consente que a CONTRATADA realize o tratamento e utilize os dados disponibilizados em razão da contratação, exclusivamente para a execução da mentoria, comunicação, acompanhamento pedagógico e cumprimento de obrigações legais.</p>
+  <h3>Inciso II. Retenção e Anonimização</h3>
+  <p>Em caso de cancelamento do vínculo, a CONTRATADA procederá com a anonimização dos dados pessoais, ressalvadas as hipóteses de guarda obrigatória por lei.</p>
 
-  <h2>Cláusula Décima: Da Responsabilidade e dos Resultados</h2>
-  <p>A CONTRATADA fornece as ferramentas, o método e o acompanhamento, mas <strong>não garante</strong> que o CONTRATANTE atingirá aprovação em concurso público, uma vez que o resultado depende de fatores fora do controle da CONTRATADA, incluindo dedicação, esforço e aplicação correta do método pelo CONTRATANTE.</p>
-  <p>A garantia oferecida por esta Mentoria é uma <strong>garantia de satisfação com a experiência</strong> (nos termos da Cláusula Sexta), <strong>não uma garantia de aprovação</strong>.</p>
+  <h2>Cláusula Décima Quarta: Da Responsabilidade e dos Resultados</h2>
+  <p>A CONTRATADA fornece as ferramentas, o método e o acompanhamento, mas <strong>não garante</strong> que o CONTRATANTE atingirá aprovação em concurso público, uma vez que o resultado depende de fatores fora do controle da CONTRATADA, incluindo dedicação, esforço e aplicação correta do método pelo CONTRATANTE. A prestação de serviços configura obrigação de meio, e não de resultado.</p>
+  <p>A garantia oferecida por esta Mentoria é uma <strong>garantia de satisfação com a experiência</strong> (nos termos da Cláusula Nona), <strong>não uma garantia de aprovação</strong>.</p>
 
-  <h2>Cláusula Décima Primeira: Do Caso Fortuito e Força Maior</h2>
+  <h2>Cláusula Décima Quinta: Do Uso de Imagem e Depoimentos</h2>
+  <p>O CONTRATANTE autoriza, a título gratuito, o uso de depoimentos, comentários e, em caso de aprovação, de sua imagem e nome, para fins de divulgação da Mentoria Estude Ambiental, podendo revogar essa autorização a qualquer momento mediante solicitação por escrito, sem efeito retroativo sobre materiais já publicados até a data da revogação.</p>
+
+  <h2>Cláusula Décima Sexta: Do Caso Fortuito e Força Maior</h2>
   <p>Nenhuma das partes será considerada inadimplente se a falha for causada por evento de caso fortuito ou força maior, imprevisível e inevitável, fora de seu controle razoável. Os prazos contratuais ficarão suspensos enquanto o evento perdurar.</p>
 
-  <h2>Cláusula Décima Segunda: Do Uso de Imagem e Depoimentos</h2>
-  <p>O CONTRATANTE autoriza, a título gratuito, o uso de depoimentos, comentários e, em caso de aprovação, de sua imagem e nome, para fins de divulgação da Mentoria Estude Ambiental, podendo revogar essa autorização a qualquer momento mediante solicitação por escrito.</p>
+  <h2>Cláusula Décima Sétima: Disposições Gerais</h2>
 
-  <h2>Cláusula Décima Terceira: Disposições Gerais</h2>
-  <p>Este contrato é regido pelas leis da República Federativa do Brasil. As partes se comprometem a tentar resolver eventuais desacordos diretamente com a CONTRATADA, pelos canais de suporte, antes de recorrer a qualquer órgão externo de proteção ao consumidor. Fica eleito o foro da comarca de <strong>Florianópolis/SC</strong> para dirimir quaisquer controvérsias oriundas deste contrato, ressalvado o disposto no Código de Defesa do Consumidor.</p>
+  <h3>Inciso I. Da Resolução Amigável</h3>
+  <p>Antes de recorrer a qualquer órgão externo de proteção ao consumidor, as partes se comprometem a tentar resolver eventuais desacordos diretamente, pelos canais de suporte previstos na Cláusula Quinta.</p>
+
+  <h3>Inciso II. Da Tolerância</h3>
+  <p>Tolerâncias ou concessões não manifestadas por escrito não constituirão precedente ou renúncia a qualquer direito previsto neste contrato.</p>
+
+  <h3>Inciso III. Da Independência das Cláusulas</h3>
+  <p>A eventual nulidade ou ineficácia de qualquer disposição deste contrato não prejudicará a validade e a eficácia das demais cláusulas.</p>
+
+  <h3>Inciso IV. Do Foro</h3>
+  <p>Este contrato é regido pelas leis da República Federativa do Brasil. Fica eleito o foro da comarca de <strong>Florianópolis/SC</strong> para dirimir quaisquer controvérsias oriundas deste contrato, ressalvado o disposto no Código de Defesa do Consumidor.</p>
 
   <div class="note">
     Dúvidas sobre este contrato podem ser encaminhadas para <a href="mailto:estudeambiental@gmail.com">estudeambiental@gmail.com</a>.<br>
