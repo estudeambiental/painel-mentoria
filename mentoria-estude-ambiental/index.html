@@ -541,6 +541,12 @@ section{ padding: var(--section-y) 0; }
 .final-cta .btn-primary{ background: var(--verde-claro); color: var(--verde-escuro); }
 .final-cta .btn-primary:hover{ background: var(--branco); }
 .final-cta .micro-note{ color: rgba(255,255,255,.55); }
+.agree-row{ display:flex; align-items:flex-start; gap:.6rem; justify-content:center; max-width:46ch; margin:0 auto 1.4rem; text-align:left; }
+.agree-row input[type="checkbox"]{ width:18px; height:18px; margin-top:.15rem; accent-color: var(--verde-claro); cursor:pointer; flex-shrink:0; }
+.agree-row label{ font-size:.86rem; color: rgba(255,255,255,.72); cursor:pointer; line-height:1.5; }
+.agree-row a{ color: var(--verde-claro); text-decoration: underline; }
+.agree-hint{ font-size:.8rem; color:#ffb4b4; max-width:46ch; margin:-.9rem auto 1.2rem; display:none; }
+.agree-hint.show{ display:block; }
 
 footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; font-size: .82rem; }
 .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 1rem; }
@@ -1145,6 +1151,11 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
   <div class="container">
     <h2 class="h-section">Sua preparação precisa de direção, não de mais improviso.</h2>
     <p>Se você quer construir uma preparação organizada para concursos da área ambiental, preencha a aplicação. Suas respostas serão analisadas para entender seu momento e verificar se a Mentoria Estude Ambiental faz sentido para você.</p>
+    <div class="agree-row">
+      <input type="checkbox" id="agreeTerms" />
+      <label for="agreeTerms">Ao clicar em "Quero aplicar", você concorda com os <a href="./institucional/termos-e-condicoes/" target="_blank" rel="noopener">Termos de Uso</a> e com o <a href="./institucional/contrato-mentoria/" target="_blank" rel="noopener">Contrato de Prestação de Serviços</a> da Mentoria.</label>
+    </div>
+    <p class="agree-hint" id="agreeHint">Marque a caixinha acima concordando com os termos pra continuar.</p>
     <!-- PLACEHOLDER: trocar o href abaixo pelo link real do formulário Respondi assim que estiver configurado -->
     <a href="#" class="btn btn-primary btn-lg" id="ctaAplicar">Quero aplicar para a Mentoria</a>
     <p class="micro-note">A aplicação não garante uma vaga e não gera cobrança. Ela inicia a análise do seu momento e a continuidade do atendimento pelo WhatsApp.</p>
@@ -1309,9 +1320,23 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   });
 
   var realCta = document.getElementById('ctaAplicar');
+  var agreeCheckbox = document.getElementById('agreeTerms');
+  var agreeHint = document.getElementById('agreeHint');
   if(realCta){
-    realCta.addEventListener('click', function(){
+    realCta.addEventListener('click', function(e){
+      if(agreeCheckbox && !agreeCheckbox.checked){
+        e.preventDefault();
+        if(agreeHint){ agreeHint.classList.add('show'); }
+        agreeCheckbox.focus();
+        return;
+      }
+      if(agreeHint){ agreeHint.classList.remove('show'); }
       if(typeof fbq === 'function'){ fbq('track', 'Lead'); }
+    });
+  }
+  if(agreeCheckbox && agreeHint){
+    agreeCheckbox.addEventListener('change', function(){
+      if(agreeCheckbox.checked){ agreeHint.classList.remove('show'); }
     });
   }
 })();
