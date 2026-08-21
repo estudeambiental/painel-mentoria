@@ -1434,5 +1434,31 @@ document.querySelectorAll('.faq-item').forEach(function(item){
 })();
 </script>
 
+<!-- ============================================================
+     UTM PASSTHROUGH: propaga os parâmetros de anúncio (utm_*, fbclid,
+     gclid) da URL da página pro link do formulário de aplicação, pra
+     que o formulário receba e salve a origem do lead.
+     ============================================================ -->
+<script>
+(function () {
+  var FORM_URL = 'estude-ambiental-form.vercel.app'
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid', 'gclid']
+  var src = new URLSearchParams(window.location.search)
+  var hasParams = UTM_KEYS.some(function (k) { return src.get(k) })
+  if (!hasParams) return
+  function patchLinks() {
+    document.querySelectorAll('a[href*="' + FORM_URL + '"]').forEach(function (el) {
+      try {
+        var url = new URL(el.href)
+        UTM_KEYS.forEach(function (k) { var v = src.get(k); if (v) url.searchParams.set(k, v) })
+        el.href = url.toString()
+      } catch (_) {}
+    })
+  }
+  patchLinks()
+  if (document.readyState !== 'complete') { window.addEventListener('load', patchLinks) }
+})()
+</script>
+
 </body>
 </html>
