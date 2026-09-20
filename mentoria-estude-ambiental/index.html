@@ -196,9 +196,9 @@ button{ font-family:inherit; cursor:pointer; }
 .quick-proof-stats{ display:flex; flex-wrap:wrap; gap:1.25rem 2rem; }
 .quick-proof-stat{ display:flex; flex-direction:column; align-items:center; text-align:center; }
 .quick-proof-stat strong{ font-size:1.5rem; font-weight:800; color: var(--verde-escuro); line-height:1; }
-.quick-proof-stat span{ font-size:.74rem; color: var(--grafite-soft); margin-top:.3rem; max-width:120px; }
+.quick-proof-stat span{ font-size:.78rem; color: var(--grafite-soft); margin-top:.3rem; max-width:120px; }
 .quick-proof-quotes{ display:flex; flex-wrap:wrap; gap:1rem 2rem; justify-content:center; }
-.quick-proof-quotes p{ font-size:.82rem; font-style:italic; color: var(--grafite); max-width:230px; margin:0; }
+.quick-proof-quotes p{ font-size:.86rem; font-style:italic; color: var(--grafite); max-width:230px; margin:0; }
 .quick-proof-quotes cite{ display:block; font-style:normal; font-weight:700; font-size:.72rem; margin-top:.35rem; color: var(--verde-escuro); }
 @media (max-width: 640px){ .quick-proof-quotes p{ max-width:100%; } }
 
@@ -446,7 +446,7 @@ section{ padding: var(--section-y) 0; }
 .screens-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 .screen-card{ background: var(--branco); border: 1px solid var(--border); border-radius: var(--radius-m); overflow:hidden; }
 .screen-card h3{ font-size:.92rem; padding: 1rem 1.1rem .3rem; }
-.screen-card p{ font-size:.82rem; color: var(--grafite-soft); padding: 0 1.1rem 1rem; }
+.screen-card p{ font-size:.88rem; color: var(--grafite-soft); padding: 0 1.1rem 1rem; }
 @media (max-width: 900px){ .screens-grid{ grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px){ .screens-grid{ grid-template-columns: 1fr; } }
 
@@ -471,7 +471,35 @@ section{ padding: var(--section-y) 0; }
 .include-card{ background: var(--branco); border: 1px solid var(--border); border-radius: var(--radius-m); padding: 1.6rem 1.5rem; display:flex; flex-direction:column; }
 .include-card h3{ margin-bottom:.55rem; }
 .include-card p{ font-size:.88rem; color: var(--grafite-soft); flex:1; }
-.include-note{ margin-top: 1.75rem; background: var(--bg); border: 1px dashed var(--border); border-radius: var(--radius-m); padding: 1rem 1.3rem; font-size: .84rem; color: var(--grafite-soft); text-align:center; }
+.include-note{ margin-top: 1.75rem; background: var(--bg); border: 1px dashed var(--border); border-radius: var(--radius-m); padding: 1rem 1.3rem; font-size: .88rem; color: var(--grafite-soft); text-align:center; }
+
+/* três pilares da entrega (no lugar de 10 cartões de peso igual) */
+.pillars{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; align-items:start; }
+.pillar{ background: var(--branco); border:1px solid var(--border); border-radius: var(--radius-l); padding: 2rem 1.75rem; box-shadow: 0 1px 3px rgba(68,60,66,.05); }
+.pillar-num{ display:inline-flex; align-items:center; justify-content:center; width:2.4rem; height:2.4rem; border-radius:999px; background: var(--verde-claro); color: var(--verde-escuro); font-weight:950; font-size:.95rem; margin-bottom:1rem; }
+.pillar h3{ font-size:1.12rem; margin-bottom:.5rem; }
+.pillar-lede{ font-size:.92rem; color: var(--grafite-soft); margin-bottom:1.25rem; }
+.pillar-list{ display:flex; flex-direction:column; gap:.9rem; }
+.pillar-list li{ font-size:.9rem; color: var(--grafite-soft); padding-left:1.35rem; position:relative; line-height:1.5; }
+.pillar-list li::before{ content:''; position:absolute; left:0; top:.5em; width:.5rem; height:.5rem; border-radius:999px; background: var(--verde); }
+.pillar-list strong{ color: var(--grafite); font-weight:800; display:block; }
+@media (max-width: 900px){ .pillars{ grid-template-columns:1fr; } }
+
+/* CTA solto entre seções */
+.cta-solo{ text-align:center; padding: 0 0 var(--section-y); }
+.cta-solo .btn{ margin: 0 auto; }
+.cta-solo p{ font-size:.84rem; color: var(--grafite-soft); margin-top:.9rem; }
+
+/* recapitulação da oferta, imediatamente antes da decisão */
+.offer-recap{ max-width: 720px; margin: 0 auto; background: var(--branco); border:1px solid var(--border); border-radius: var(--radius-l); padding: clamp(1.75rem, 4vw, 2.75rem); box-shadow: 0 18px 40px -28px rgba(68,60,66,.45); }
+.offer-recap{ text-align:left; }
+.offer-recap ul{ display:flex; flex-direction:column; gap:.75rem; margin: 1.5rem 0; }
+.offer-recap li{ display:flex; gap:.7rem; align-items:flex-start; font-size:.95rem; color: var(--grafite); text-align:left; }
+.offer-recap li svg{ width:19px; height:19px; stroke: var(--verde); stroke-width:2.6; fill:none; flex-shrink:0; margin-top:.15rem; }
+.offer-recap li span.bonus{ font-size:.74rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color: var(--verde-escuro); background: var(--verde-claro); border-radius:999px; padding:.1rem .5rem; margin-left:.35rem; }
+.offer-recap .recap-plans{ background: var(--bg-verde); border-radius: var(--radius-m); padding: 1rem 1.2rem; font-size:.9rem; color: var(--verde-escuro); font-weight:600; text-align:center; }
+.offer-recap .btn{ width:100%; margin-top:1.5rem; }
+.offer-recap .recap-fine{ font-size:.82rem; color: var(--grafite-soft); text-align:center; margin-top:1rem; }
 @media (max-width: 900px){ .include-grid{ grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px){ .include-grid{ grid-template-columns: 1fr; } }
 
@@ -502,8 +530,8 @@ section{ padding: var(--section-y) 0; }
 .result-card{ background: var(--branco); border: 1px solid var(--border); border-radius: var(--radius-m); padding: 1.5rem 1.6rem; }
 .result-card .tag{ display:inline-block; background: var(--verde-claro); color: var(--verde-escuro); font-size:.68rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:.3rem .7rem; border-radius:999px; margin-bottom:.75rem; }
 .result-card h3{ font-size:1.05rem; margin-bottom:.3rem; }
-.result-card .meta{ font-size:.82rem; color: var(--grafite-soft); margin-bottom:.75rem; }
-.result-card p.quote{ font-size:.9rem; color: var(--grafite); font-style: italic; }
+.result-card .meta{ font-size:.86rem; color: var(--grafite-soft); margin-bottom:.75rem; }
+.result-card p.quote{ font-size:.94rem; color: var(--grafite); font-style: italic; }
 .testimonial-grid{ columns: 2; column-gap: 1.25rem; }
 .testimonial-shot{ display:block; width:100%; border-radius: var(--radius-m); box-shadow: 0 20px 40px -24px rgba(68,60,66,.35); margin-bottom: 1.25rem; break-inside: avoid; }
 @media (max-width: 780px){ .result-grid{ grid-template-columns: 1fr; } .testimonial-grid{ columns:1; } }
@@ -894,35 +922,38 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     </div>
     <div class="screens-grid stagger">
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/missoes.jpg"><source src="./assets/video/missoes.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/missoes.jpg"><source src="./assets/video/missoes.mp4" type="video/mp4"></video>
         <h3 class="h-card">Missões diárias</h3>
         <p>Visualize as tarefas previstas, conclua o que estudou e acompanhe o cumprimento do plano.</p>
       </div>
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/cronograma.jpg"><source src="./assets/video/cronograma.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/cronograma.jpg"><source src="./assets/video/cronograma.mp4" type="video/mp4"></video>
         <h3 class="h-card">Cronograma semanal</h3>
         <p>Sua semana já montada: o que estudar em cada dia, com as matérias distribuídas conforme o tempo que você tem.</p>
       </div>
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/desempenho.jpg"><source src="./assets/video/desempenho.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/desempenho.jpg"><source src="./assets/video/desempenho.mp4" type="video/mp4"></video>
         <h3 class="h-card">Desempenho e evolução</h3>
         <p>Acompanhe horas estudadas, evolução por disciplina e onde seu desempenho precisa de mais atenção.</p>
       </div>
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/questoes.jpg"><source src="./assets/video/questoes.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/questoes.jpg"><source src="./assets/video/questoes.mp4" type="video/mp4"></video>
         <h3 class="h-card">Questões</h3>
         <p>Registre e acompanhe a resolução de questões, os erros e a evolução por conteúdo.</p>
       </div>
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/simulados.jpg"><source src="./assets/video/simulados.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/simulados.jpg"><source src="./assets/video/simulados.mp4" type="video/mp4"></video>
         <h3 class="h-card">Simulados e discursivas <span style="font-weight:600;font-size:.75em;opacity:.7;">(bônus)</span></h3>
         <p>Treine o formato da prova, organize seus envios e receba orientações para melhorar. Guia, simulados e correção de discursiva são bônus para quem tem essa fase no edital.</p>
       </div>
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/replanejamento.jpg"><source src="./assets/video/replanejamento.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/replanejamento.jpg"><source src="./assets/video/replanejamento.mp4" type="video/mp4"></video>
         <h3 class="h-card">Replanejamento</h3>
         <p>Quando algo sair do previsto, o plano é reorganizado — e você recebe o novo caminho, sem precisar remontar nada sozinho.</p>
       </div>
+    </div>
+    <div class="cta-solo" style="padding-top:2.5rem;">
+      <a href="#aplicar" class="btn btn-primary btn-lg">Quero estudar assim</a>
     </div>
   </div>
 </section>
@@ -936,60 +967,44 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       <span class="eyebrow">O que você recebe</span>
       <h2 class="h-section">Uma estrutura completa para transformar intenção em execução</h2>
     </div>
-    <div class="include-grid stagger">
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-6"/></svg></div>
-        <h3 class="h-card">Plano personalizado</h3>
-        <p>Organização das disciplinas, assuntos e prioridades conforme o concurso, o cargo, o histórico e a disponibilidade do aluno.</p>
+    <div class="pillars stagger">
+      <div class="pillar reveal">
+        <span class="pillar-num">01</span>
+        <h3 class="h-card">O plano</h3>
+        <p class="pillar-lede">O edital extenso vira uma sequência de estudo que cabe na sua rotina — e que continua fazendo sentido quando a rotina muda.</p>
+        <ul class="pillar-list">
+          <li><strong>Plano personalizado</strong>Organização das disciplinas, assuntos e prioridades conforme o concurso, o cargo, o histórico e a sua disponibilidade.</li>
+          <li><strong>Atualizações do planejamento</strong>Adaptações conforme mudanças na rotina, desempenho, publicação do edital e proximidade da prova.</li>
+          <li><strong>Guias de aplicação do método</strong>Como usar a trilha, organizar revisões, resolver questões e simulados dentro do Método TEIA.</li>
+        </ul>
       </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <h3 class="h-card">Metas diárias</h3>
-        <p>Atividades distribuídas de forma prática para reduzir dúvidas e facilitar a execução.</p>
+      <div class="pillar reveal" style="--reveal-delay:.08s">
+        <span class="pillar-num">02</span>
+        <h3 class="h-card">A execução</h3>
+        <p class="pillar-lede">O que fazer em cada dia de estudo, sem gastar energia decidindo — e com como saber se está funcionando.</p>
+        <ul class="pillar-list">
+          <li><strong>Metas diárias</strong>Atividades distribuídas de forma prática, para reduzir dúvidas e facilitar a execução.</li>
+          <li><strong>Sistema de revisões</strong>Revisões programadas em diferentes intervalos para reforçar o conteúdo e reduzir o esquecimento.</li>
+          <li><strong>Questões e análise de desempenho</strong>Acompanhamento de acertos, erros, disciplinas e assuntos que precisam ser fortalecidos.</li>
+          <li><strong>Simulados</strong>Treinos para desenvolver gestão de tempo, resistência, estratégia de prova e identificação de falhas.</li>
+        </ul>
       </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <h3 class="h-card">Sistema de revisões</h3>
-        <p>Revisões programadas em diferentes intervalos para reforçar o conteúdo e reduzir o esquecimento.</p>
-      </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <h3 class="h-card">Questões e análise de desempenho</h3>
-        <p>Acompanhamento de acertos, erros, disciplinas e assuntos que precisam ser fortalecidos.</p>
-      </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
-        <h3 class="h-card">Simulados</h3>
-        <p>Treinos para desenvolver gestão de tempo, resistência, estratégia de prova e identificação de falhas.</p>
-      </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg></div>
-        <h3 class="h-card">Discursivas <span style="font-weight:600;font-size:.75em;opacity:.7;">(bônus)</span></h3>
-        <p>Para quem tem discursiva no edital, guia de estudo, treinos e correção entram como bônus da mentoria.</p>
-      </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/></svg></div>
-        <h3 class="h-card">Guias de aplicação do método</h3>
-        <p>Guias práticos sobre como usar a trilha, organizar revisões, resolver questões e simulados dentro do Método TEIA. Não é material de conteúdo das disciplinas.</p>
-      </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <h3 class="h-card">Aulas e encontros</h3>
-        <p>Encontros para trabalhar questões, estratégia, dificuldades e pontos importantes da preparação.</p>
-      </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <h3 class="h-card">Suporte</h3>
-        <p>Canal para dúvidas, orientações e ajustes relacionados à execução do plano.</p>
-      </div>
-      <div class="include-card reveal">
-        <div class="icon-circle"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div>
-        <h3 class="h-card">Atualizações do planejamento</h3>
-        <p>Adaptações de acordo com mudanças na rotina, desempenho, publicação do edital e proximidade da prova.</p>
+      <div class="pillar reveal" style="--reveal-delay:.16s">
+        <span class="pillar-num">03</span>
+        <h3 class="h-card">O acompanhamento</h3>
+        <p class="pillar-lede">A parte que você não consegue fazer sozinho: alguém olhando seus números e corrigindo a rota com você.</p>
+        <ul class="pillar-list">
+          <li><strong>Aulas e encontros</strong>Encontros para trabalhar questões, estratégia, dificuldades e pontos importantes da preparação.</li>
+          <li><strong>Suporte</strong>Canal para dúvidas, orientações e ajustes relacionados à execução do plano.</li>
+          <li><strong>Discursivas <span style="font-weight:600;font-size:.8em;opacity:.7;">(bônus)</span></strong>Para quem tem discursiva no edital: guia de estudo, treinos e correção entram como bônus.</li>
+        </ul>
       </div>
     </div>
     <!-- PLACEHOLDER: confirmar lista final de entregas/bônus e descrição dos planos de 3, 6 e 12 meses -->
     <p class="include-note">Esta oferta contempla o acompanhamento descrito acima dentro do plano escolhido. Os detalhes de cada plano (3, 6 ou 12 meses) são apresentados durante a aplicação. Como o acompanhamento é individual, as vagas por período são limitadas.</p>
+    <div class="cta-solo" style="padding-top:2.5rem;">
+      <a href="#aplicar" class="btn btn-primary btn-lg">Quero essa estrutura na minha preparação</a>
+    </div>
   </div>
 </section>
 
@@ -1046,6 +1061,10 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </div>
     </div>
     <p class="fit-close">A mentoria oferece direção, método e acompanhamento. A execução continua sendo responsabilidade do aluno.</p>
+    <div class="cta-solo" style="padding-top:2.5rem;">
+      <a href="#aplicar" class="btn btn-primary btn-lg">Me identifiquei. Quero aplicar</a>
+      <p>A aplicação leva poucos minutos e não gera cobrança.</p>
+    </div>
   </div>
 </section>
 
@@ -1148,6 +1167,33 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         <div class="faq-a"><div class="faq-a-inner">Sim. A mentoria atende tanto preparações pré-edital quanto pós-edital. O plano muda de acordo com a fase do concurso.</div></div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RECAPITULAÇÃO DA OFERTA
+     ============================================================ -->
+<section class="bg-verde-tint">
+  <div class="blob blob-3"></div>
+  <div class="container shift">
+    <div class="section-kicker reveal">
+      <span class="eyebrow">A oferta</span>
+      <h2 class="h-section">Recapitulando tudo o que você leva</h2>
+    </div>
+    <div class="offer-recap reveal">
+      <ul>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Plano de estudos personalizado</strong>, construído a partir do seu concurso, cargo, histórico e tempo disponível</span></li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Metas diárias na plataforma</strong>, para você abrir e saber exatamente o que fazer naquele dia</span></li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Sistema de revisões programadas</strong>, para parar de esquecer o que já estudou</span></li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Questões, simulados e análise de desempenho</strong> por disciplina e por assunto</span></li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Aulas, encontros e canal de suporte</strong> para dúvidas, estratégia e ajustes de rota</span></li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Replanejamento sempre que a vida sair do previsto</strong> — atraso não vira bola de neve</span></li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Guia, treinos e correção de discursiva</strong><span class="bonus">bônus</span><br>Para quem tem essa fase no edital</span></li>
+      </ul>
+      <p class="recap-plans">Planos de 3, 6 ou 12 meses de acompanhamento — qual faz sentido para o seu momento é o que a gente define na conversa, depois da aplicação.</p>
+      <a href="#aplicar" class="btn btn-primary btn-lg">Quero aplicar para a Mentoria</a>
+      <p class="recap-fine">A aplicação não gera cobrança · Garantia de 7 dias · Vagas limitadas</p>
     </div>
   </div>
 </section>
