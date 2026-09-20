@@ -458,19 +458,11 @@ section{ padding: var(--section-y) 0; }
 }
 .placeholder-img svg{ width:22px; height:22px; stroke: var(--grafite-soft); margin-bottom:.5rem; }
 
-/* placeholder de vídeo curto (loop mudo) reutilizável */
-.placeholder-video{
-  aspect-ratio: 4/3; background: repeating-linear-gradient(135deg, var(--bg) 0 10px, #EFF3EC 10px 20px);
-  border: 1.5px dashed var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; padding: 1rem; gap:.55rem;
+/* telas reais da plataforma: clipes curtos, mudos, em loop */
+.screen-video{
+  width:100%; aspect-ratio: 16/10; object-fit: cover; display:block;
+  background: var(--bg); border-bottom: 1px solid var(--border);
 }
-.placeholder-video .play-circle-sm{
-  width:42px; height:42px; border-radius:50%; background: var(--verde); flex-shrink:0;
-  display:flex; align-items:center; justify-content:center; box-shadow: 0 8px 18px -8px rgba(104,153,90,.55);
-}
-.placeholder-video .play-circle-sm svg{ width:15px; height:15px; margin-left:2px; }
-.placeholder-video .ph-label{ font-size:.74rem; font-weight:700; color: var(--grafite-soft); line-height:1.4; }
-.placeholder-video .ph-sub{ font-size:.66rem; font-weight:600; color: var(--grafite-soft); opacity:.7; text-transform:uppercase; letter-spacing:.03em; }
 
 /* ============================================================
    INCLUDE GRID (tudo que recebe)
@@ -887,64 +879,36 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       <h2 class="h-section">Abra a plataforma e saiba o que precisa fazer naquele dia.</h2>
       <p class="lede">Você acompanha toda a sua preparação em um só lugar, numa plataforma exclusiva da mentoria. O objetivo não é criar mais uma obrigação, mas reduzir o número de decisões que você precisa tomar sozinho.</p>
     </div>
-    <!-- PLACEHOLDER: substituir os 6 cards abaixo por vídeos curtos, mudos, em loop, gravados direto da Tutory (nada de tela inteira do computador em miniatura — recorte e amplie só a área relevante).
-         Pra trocar um card: apague a <div class="placeholder-video">...</div> inteira e coloque no lugar:
-         <video autoplay muted loop playsinline class="screen-video"><source src="./assets/video/NOME-DO-ARQUIVO.mp4" type="video/mp4"></video>
-         (adicione .screen-video{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; } no CSS quando for usar) -->
     <div class="screens-grid stagger">
       <div class="screen-card reveal">
-        <div class="placeholder-video">
-          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="ph-label">Missões diárias</span>
-          <span class="ph-sub">vídeo em produção</span>
-        </div>
+        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/missoes.jpg"><source src="./assets/video/missoes.mp4" type="video/mp4"></video>
         <h3 class="h-card">Missões diárias</h3>
         <p>Visualize as tarefas previstas, conclua o que estudou e acompanhe o cumprimento do plano.</p>
       </div>
       <div class="screen-card reveal">
-        <div class="placeholder-video">
-          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="ph-label">Progresso e previsão</span>
-          <span class="ph-sub">vídeo em produção</span>
-        </div>
-        <h3 class="h-card">Progresso e previsão</h3>
-        <p>Veja horas planejadas, horas executadas, andamento das disciplinas e previsão de conclusão.</p>
+        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/cronograma.jpg"><source src="./assets/video/cronograma.mp4" type="video/mp4"></video>
+        <h3 class="h-card">Cronograma semanal</h3>
+        <p>Sua semana já montada: o que estudar em cada dia, com as matérias distribuídas conforme o tempo que você tem.</p>
       </div>
       <div class="screen-card reveal">
-        <div class="placeholder-video">
-          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="ph-label">Desempenho</span>
-          <span class="ph-sub">vídeo em produção</span>
-        </div>
-        <h3 class="h-card">Desempenho</h3>
-        <p>Acompanhe sua taxa de acertos e identifique quais matérias e assuntos precisam de mais atenção.</p>
+        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/desempenho.jpg"><source src="./assets/video/desempenho.mp4" type="video/mp4"></video>
+        <h3 class="h-card">Desempenho e evolução</h3>
+        <p>Acompanhe horas estudadas, evolução por disciplina e onde seu desempenho precisa de mais atenção.</p>
       </div>
       <div class="screen-card reveal">
-        <div class="placeholder-video">
-          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="ph-label">Questões</span>
-          <span class="ph-sub">vídeo em produção</span>
-        </div>
+        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/questoes.jpg"><source src="./assets/video/questoes.mp4" type="video/mp4"></video>
         <h3 class="h-card">Questões</h3>
         <p>Registre e acompanhe a resolução de questões, os erros e a evolução por conteúdo.</p>
       </div>
       <div class="screen-card reveal">
-        <div class="placeholder-video">
-          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="ph-label">Simulados e discursivas</span>
-          <span class="ph-sub">vídeo em produção</span>
-        </div>
+        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/simulados.jpg"><source src="./assets/video/simulados.mp4" type="video/mp4"></video>
         <h3 class="h-card">Simulados e discursivas <span style="font-weight:600;font-size:.75em;opacity:.7;">(bônus)</span></h3>
         <p>Treine o formato da prova, organize seus envios e receba orientações para melhorar. Guia, simulados e correção de discursiva são bônus para quem tem essa fase no edital.</p>
       </div>
       <div class="screen-card reveal">
-        <div class="placeholder-video">
-          <div class="play-circle-sm"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="ph-label">Replanejamento</span>
-          <span class="ph-sub">vídeo em produção</span>
-        </div>
-        <h3 class="h-card">Replanejamento e hábitos</h3>
-        <p>Quando algo sair do previsto, o plano é reorganizado, e você acompanha sua constância e conquistas ao longo das semanas.</p>
+        <video class="screen-video" autoplay muted loop playsinline preload="metadata" poster="./assets/video/replanejamento.jpg"><source src="./assets/video/replanejamento.mp4" type="video/mp4"></video>
+        <h3 class="h-card">Replanejamento</h3>
+        <p>Quando algo sair do previsto, o plano é reorganizado — e você recebe o novo caminho, sem precisar remontar nada sozinho.</p>
       </div>
     </div>
   </div>
