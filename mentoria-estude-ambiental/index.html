@@ -485,6 +485,23 @@ section{ padding: var(--section-y) 0; }
 .pillar-list strong{ color: var(--grafite); font-weight:800; display:block; }
 @media (max-width: 900px){ .pillars{ grid-template-columns:1fr; } }
 
+/* resultado esperado de cada etapa do método */
+.teia-result{ margin-top:1rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,.14); font-size:.92rem; color: var(--branco); }
+.teia-result span{ display:block; font-size:.68rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color: var(--verde-claro); margin-bottom:.35rem; }
+
+/* o que muda com a aprovação — tipográfico, sem cartão, pra quebrar o ritmo de grades */
+.after-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem 3rem; text-align:left; margin-top: .5rem; }
+.after-item{ border-left: 2px solid var(--verde); padding-left: 1.4rem; }
+.after-item h3{ font-size:1.12rem; font-weight:800; color: var(--branco); margin-bottom:.5rem; }
+.after-item p{ font-size:.95rem; color: rgba(255,255,255,.72); }
+@media (max-width: 760px){ .after-grid{ grid-template-columns:1fr; gap:1.75rem; } }
+
+/* momento de respiro: uma frase grande, sem caixa */
+.pull-quote{ max-width: 900px; margin: 0 auto; text-align:center; }
+.pull-quote p{ font-size: clamp(1.4rem, 3.6vw, 2.15rem); font-weight:800; line-height:1.28; color: var(--grafite); text-wrap:balance; }
+.pull-quote p em{ font-style:normal; color: var(--verde); }
+.pull-quote cite{ display:block; font-style:normal; font-size:.86rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color: var(--grafite-soft); margin-top:1.5rem; }
+
 /* CTA solto entre seções */
 .cta-solo{ text-align:center; padding: 0 0 var(--section-y); }
 .cta-solo .btn{ margin: 0 auto; }
@@ -781,6 +798,36 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 </section>
 
 <!-- ============================================================
+     O QUE MUDA COM A APROVAÇÃO
+     ============================================================ -->
+<section class="bg-dark">
+  <div class="blob blob-5"></div>
+  <div class="container shift">
+    <span class="eyebrow">Do outro lado</span>
+    <h2 class="h-section" style="margin:1rem 0 1.1rem;">Um cronograma não é o que você quer. É só o caminho até o que você quer.</h2>
+    <p class="lede" style="margin:0 auto 3rem;">Você não escolheu a área ambiental por acaso. A aprovação é o que finalmente permite viver dela.</p>
+    <div class="after-grid">
+      <div class="after-item reveal">
+        <h3>Trabalhar com o que você estudou</h3>
+        <p>A sua formação sai da gaveta e vira o seu trabalho — dentro de um órgão que decide política ambiental de verdade, e não em mais um contrato de projeto.</p>
+      </div>
+      <div class="after-item reveal" style="--reveal-delay:.08s">
+        <h3>Estabilidade depois de anos de incerteza</h3>
+        <p>Fim do ciclo de contrato temporário, consultoria por demanda e recomeço a cada ano. Dá para planejar a vida com mais de doze meses de horizonte.</p>
+      </div>
+      <div class="after-item reveal" style="--reveal-delay:.16s">
+        <h3>O seu tempo de volta</h3>
+        <p>A preparação passa a ter data para acabar. Depois dela, noite e fim de semana voltam a ser seus — sem a culpa de quem deveria estar estudando.</p>
+      </div>
+      <div class="after-item reveal" style="--reveal-delay:.24s">
+        <h3>Ser ouvido pelo que você sabe</h3>
+        <p>Um cargo técnico em que o seu conhecimento é justamente o que coloca você na mesa onde as decisões acontecem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      RESULTADOS E DEPOIMENTOS
      ============================================================ -->
 <section id="resultados">
@@ -841,6 +888,16 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 </section>
 
 <!-- ============================================================
+     FRASE DE TRANSIÇÃO
+     ============================================================ -->
+<section style="padding-top:0;">
+  <div class="container pull-quote reveal">
+    <p>Ninguém é reprovado por falta de conteúdo disponível. É reprovado por <em>falta de direção</em>.</p>
+    <cite>Dominique Martins Sala</cite>
+  </div>
+</section>
+
+<!-- ============================================================
      MÉTODO TEIA
      ============================================================ -->
 <section id="metodo-teia" class="bg-dark">
@@ -858,6 +915,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         <div class="teia-elements">
           <span>Diagnóstico inicial</span><span>Análise do edital</span><span>Prioridades</span><span>Plano adaptado ao tempo disponível</span>
         </div>
+        <p class="teia-result"><span>o que muda</span>Você para de decidir todo dia o que estudar. A ordem já está definida.</p>
       </div>
       <div class="teia-card reveal" style="--reveal-delay:.06s">
         <div class="teia-letter">E</div>
@@ -866,6 +924,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         <div class="teia-elements">
           <span>Metas diárias</span><span>Indicação de fontes</span><span>Revisões</span><span>Questões</span>
         </div>
+        <p class="teia-result"><span>o que muda</span>Você abre a plataforma e executa, em vez de gastar energia planejando.</p>
       </div>
       <div class="teia-card reveal" style="--reveal-delay:.12s">
         <div class="teia-letter">I</div>
@@ -874,6 +933,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         <div class="teia-elements">
           <span>Replanejamento</span><span>Ajustes de carga</span><span>Pré e pós-edital</span><span>Revisão espaçada</span>
         </div>
+        <p class="teia-result"><span>o que muda</span>Atraso deixa de virar bola de neve. O plano se reorganiza e você continua.</p>
       </div>
       <div class="teia-card reveal" style="--reveal-delay:.18s">
         <div class="teia-letter">A</div>
@@ -882,6 +942,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         <div class="teia-elements">
           <span>Desempenho por assunto</span><span>Simulados</span><span>Discursivas (bônus)</span><span>Análise de erros</span>
         </div>
+        <p class="teia-result"><span>o que muda</span>Você chega na prova sabendo onde está forte e onde ainda não está.</p>
       </div>
     </div>
     <div style="text-align:center; margin-top:2.5rem;">
@@ -896,16 +957,14 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 <section class="bg-tint" id="como-funciona">
   <div class="container">
     <div class="section-kicker reveal">
-      <span class="eyebrow">Passo a passo</span>
+      <span class="eyebrow">Depois que você aplica</span>
       <h2 class="h-section">Você não recebe um cronograma e fica sozinho tentando fazê-lo funcionar.</h2>
+      <p class="lede">Aprovada a sua aplicação, é assim que a mentoria começa — e em poucos dias você já está estudando com um plano de pé.</p>
     </div>
     <div class="steps-list stagger">
-      <div class="step-item reveal"><div class="step-num">1</div><div><h3 class="h-card">Diagnóstico e onboarding</h3><p>Entendemos sua rotina, seu histórico, seu objetivo, seu tempo de estudo, os materiais disponíveis e as dificuldades que mais atrapalham sua preparação.</p></div></div>
-      <div class="step-item reveal"><div class="step-num">2</div><div><h3 class="h-card">Construção do plano</h3><p>Seu edital é organizado e transformado em uma sequência de estudo compatível com o seu momento.</p></div></div>
-      <div class="step-item reveal"><div class="step-num">3</div><div><h3 class="h-card">Configuração da plataforma</h3><p>Você aprende a visualizar e concluir suas metas, registrar atividades, acompanhar desempenho, lidar com atrasos e utilizar os recursos da mentoria.</p></div></div>
-      <div class="step-item reveal"><div class="step-num">4</div><div><h3 class="h-card">Execução diária</h3><p>A cada dia, você acessa a plataforma e encontra as atividades previstas. Menos energia decidindo o que fazer, mais energia estudando.</p></div></div>
-      <div class="step-item reveal"><div class="step-num">5</div><div><h3 class="h-card">Acompanhamento</h3><p>Seu desempenho, dificuldades e cumprimento das metas são acompanhados para que os próximos passos façam sentido.</p></div></div>
-      <div class="step-item reveal"><div class="step-num">6</div><div><h3 class="h-card">Ajustes e evolução</h3><p>O plano é atualizado quando sua rotina muda, quando um edital é publicado, quando uma disciplina exige mais atenção ou quando seu desempenho indica uma nova prioridade.</p></div></div>
+      <div class="step-item reveal"><div class="step-num">1</div><div><h3 class="h-card">Diagnóstico</h3><p>Conversamos sobre sua rotina, seu histórico, seu objetivo, o tempo que você tem e as dificuldades que mais atrapalham hoje.</p></div></div>
+      <div class="step-item reveal"><div class="step-num">2</div><div><h3 class="h-card">Construção do plano</h3><p>Seu edital é organizado e transformado em uma sequência de estudo compatível com o seu momento — não um modelo genérico.</p></div></div>
+      <div class="step-item reveal"><div class="step-num">3</div><div><h3 class="h-card">Plataforma configurada para você</h3><p>Você entra na plataforma com o plano já montado e aprende a usá-la: metas, registro de atividades, desempenho e o que fazer quando atrasar.</p></div></div>
     </div>
   </div>
 </section>
@@ -1008,19 +1067,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
   </div>
 </section>
 
-<!-- ============================================================
-     ESPECIALIZAÇÃO EM CONCURSOS AMBIENTAIS
-     ============================================================ -->
-<section>
-  <div class="container shift">
-    <span class="eyebrow">Especialização</span>
-    <h2 class="h-section" style="margin:1rem 0 1.25rem;">Uma mentoria pensada para a área ambiental, não uma metodologia genérica adaptada às pressas.</h2>
-    <p>Os concursos ambientais envolvem órgãos, cargos, formações e bancas muito diferentes. Um biólogo, um engenheiro ambiental, um agrônomo, um oceanógrafo e um candidato a um cargo generalista podem compartilhar algumas disciplinas, mas não devem seguir exatamente a mesma preparação. A Estude Ambiental nasceu para organizar essa complexidade: o plano considera o edital, o cargo, a formação exigida, a banca, a fase do concurso e o histórico do aluno.</p>
-    <div class="org-strip">
-      <span>IBAMA</span><span>ICMBio</span><span>MMA</span><span>órgãos estaduais</span><span>institutos ambientais</span><span>fundações</span><span>secretarias municipais</span><span>empresas e agências da área ambiental</span>
-    </div>
-  </div>
-</section>
 
 <!-- ============================================================
      PARA QUEM É / NÃO É
@@ -1028,7 +1074,12 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 <section class="bg-tint">
   <div class="container">
     <div class="section-kicker reveal">
+      <span class="eyebrow">Especialização</span>
       <h2 class="h-section">Para quem esta mentoria foi pensada</h2>
+      <p class="lede">Um biólogo, um engenheiro ambiental, um agrônomo e um oceanógrafo compartilham algumas disciplinas, mas não deveriam seguir a mesma preparação. O plano considera o edital, o cargo, a formação exigida, a banca e a fase do concurso.</p>
+      <div class="org-strip">
+        <span>IBAMA</span><span>ICMBio</span><span>MMA</span><span>órgãos estaduais</span><span>institutos ambientais</span><span>fundações</span><span>secretarias municipais</span><span>agências da área ambiental</span>
+      </div>
     </div>
     <div class="fit-grid stagger">
       <div class="fit-card yes reveal">
@@ -1036,13 +1087,10 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         <ul>
           <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Está começando e precisa de um caminho</li>
           <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Já estuda, mas sente que não avança</li>
-          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Tem dificuldade para organizar o edital</li>
-          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Não sabe qual concurso priorizar</li>
-          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Trabalha e precisa aproveitar melhor o tempo</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Tem dificuldade para organizar o edital ou não sabe qual concurso priorizar</li>
+          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Trabalha e precisa aproveitar melhor o tempo que tem</li>
           <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Já possui curso ou materiais, mas não sabe como utilizá-los</li>
           <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Precisa de acompanhamento para manter constância</li>
-          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Quer melhorar revisões, questões, simulados ou discursivas</li>
-          <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Procura uma preparação especializada na área ambiental</li>
           <li><svg class="check-ico" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Está disposto a executar o plano e receber orientações</li>
         </ul>
       </div>
@@ -1050,13 +1098,11 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         <h3>A mentoria provavelmente não é a melhor escolha para quem:</h3>
         <ul>
           <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Procura uma promessa de aprovação rápida</li>
-          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Quer apenas receber uma planilha e não executar</li>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Quer apenas receber uma planilha, sem executar, revisar ou acompanhar o próprio desempenho</li>
           <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Não aceita fazer ajustes na rotina</li>
           <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Busca somente um pacote de videoaulas</li>
-          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Não pretende resolver questões ou revisar</li>
-          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Não deseja acompanhar o próprio desempenho</li>
           <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Espera atendimento instantâneo 24 horas</li>
-          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Não tem intenção de investir em acompanhamento no momento</li>
+          <li><svg class="x-ico" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Não pretende investir em acompanhamento neste momento</li>
         </ul>
       </div>
     </div>
@@ -1138,14 +1184,10 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </div>
 
       <div class="faq-item reveal">
-        <button class="faq-q"><span>O plano é atualizado depois da publicação do edital?</span><span class="plus">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Sim. O planejamento pode ser ajustado conforme as mudanças do edital, a proximidade da prova, seu desempenho e as prioridades da reta final.</div></div>
+        <button class="faq-q"><span>E se o edital ainda não saiu — ou sair depois que eu entrar?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Nos dois casos funciona, e o plano muda conforme a fase. Antes do edital, o tempo é usado para construir base, criar rotina e avançar em conteúdos que dificilmente seriam estudados com tranquilidade na reta final. Quando o edital sai, o planejamento é reorganizado de acordo com o que foi cobrado, a proximidade da prova, o seu desempenho e as prioridades do pós-edital.</div></div>
       </div>
 
-      <div class="faq-item reveal">
-        <button class="faq-q"><span>Vale a pena entrar antes do edital?</span><span class="plus">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Sim. O período anterior ao edital permite construir base, desenvolver rotina, testar a metodologia e avançar em conteúdos que dificilmente seriam estudados com tranquilidade durante o pós-edital.</div></div>
-      </div>
 
       <div class="faq-item reveal">
         <button class="faq-q"><span>A mentoria garante minha aprovação?</span><span class="plus">+</span></button>
@@ -1162,10 +1204,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         <div class="faq-a"><div class="faq-a-inner">As condições de contratação, cancelamento e acesso são apresentadas de forma clara antes da matrícula e constam no <a href="./institucional/contrato-mentoria/">contrato da mentoria</a>.</div></div>
       </div>
 
-      <div class="faq-item reveal">
-        <button class="faq-q"><span>Posso entrar mesmo sem edital publicado?</span><span class="plus">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Sim. A mentoria atende tanto preparações pré-edital quanto pós-edital. O plano muda de acordo com a fase do concurso.</div></div>
-      </div>
 
     </div>
   </div>
