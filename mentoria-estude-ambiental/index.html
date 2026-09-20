@@ -976,7 +976,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </div>
     </div>
     <!-- PLACEHOLDER: confirmar lista final de entregas/bônus e descrição dos planos de 3, 6 e 12 meses -->
-    <p class="include-note">Esta oferta contempla o acompanhamento descrito acima dentro do plano escolhido. Os detalhes de cada plano (3, 6 ou 12 meses) são apresentados durante a aplicação.</p>
+    <p class="include-note">Esta oferta contempla o acompanhamento descrito acima dentro do plano escolhido. Os detalhes de cada plano (3, 6 ou 12 meses) são apresentados durante a aplicação. Como o acompanhamento é individual, as vagas por período são limitadas.</p>
   </div>
 </section>
 
@@ -1146,15 +1146,15 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
   <div class="blob blob-5"></div>
   <div class="blob blob-6"></div>
   <div class="container">
+    <span class="eyebrow" style="margin-bottom:1rem;"><span class="pulse-dot"></span> Vagas limitadas</span>
     <h2 class="h-section">Sua preparação precisa de direção, não de mais improviso.</h2>
-    <p>Se você quer construir uma preparação organizada para concursos da área ambiental, preencha a aplicação. Suas respostas serão analisadas para entender seu momento e verificar se a Mentoria Estude Ambiental faz sentido para você.</p>
+    <p>O acompanhamento é individual, então o número de alunos que entram por período é limitado. Se você quer construir uma preparação organizada para concursos da área ambiental, preencha a aplicação: suas respostas serão analisadas para entender seu momento e verificar se a Mentoria Estude Ambiental faz sentido para você.</p>
     <div class="agree-row">
       <input type="checkbox" id="agreeTerms" />
       <label for="agreeTerms">Ao clicar em "Quero aplicar", você concorda com os <a href="./institucional/termos-e-condicoes/" target="_blank" rel="noopener">Termos de Uso</a> e com o <a href="./institucional/contrato-mentoria/" target="_blank" rel="noopener">Contrato de Prestação de Serviços</a> da Mentoria.</label>
     </div>
     <p class="agree-hint" id="agreeHint">Marque a caixinha acima concordando com os termos pra continuar.</p>
-    <!-- PLACEHOLDER: trocar o href abaixo pelo link real do formulário Respondi assim que estiver configurado -->
-    <a href="#" class="btn btn-primary btn-lg" id="ctaAplicar">Quero aplicar para a Mentoria</a>
+    <a href="https://form.respondi.app/USGGUf9h" target="_blank" rel="noopener" class="btn btn-primary btn-lg" id="ctaAplicar">Quero aplicar para a Mentoria</a>
     <p class="micro-note">A aplicação não garante uma vaga e não gera cobrança. Ela inicia a análise do seu momento e a continuidade do atendimento pelo WhatsApp.</p>
   </div>
 </section>
@@ -1405,13 +1405,15 @@ document.querySelectorAll('.faq-item').forEach(function(item){
      ============================================================ -->
 <script>
 (function () {
-  var FORM_URL = 'estude-ambiental-form.vercel.app'
+  // Cobre o formulário atual (Respondi) e o próprio, que vai substituí-lo
+  var FORM_HOSTS = ['form.respondi.app', 'estude-ambiental-form.vercel.app']
+  var SELECTOR = FORM_HOSTS.map(function (h) { return 'a[href*="' + h + '"]' }).join(',')
   var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid', 'gclid']
   var src = new URLSearchParams(window.location.search)
   var hasParams = UTM_KEYS.some(function (k) { return src.get(k) })
   if (!hasParams) return
   function patchLinks() {
-    document.querySelectorAll('a[href*="' + FORM_URL + '"]').forEach(function (el) {
+    document.querySelectorAll(SELECTOR).forEach(function (el) {
       try {
         var url = new URL(el.href)
         UTM_KEYS.forEach(function (k) { var v = src.get(k); if (v) url.searchParams.set(k, v) })
