@@ -538,6 +538,19 @@ section{ padding: var(--section-y) 0; }
 /* ============================================================
    CTA FINAL + FOOTER
    ============================================================ */
+/* garantia (mesmo desenho já usado nas páginas de Discursiva) */
+.guarantee{ display:grid; grid-template-columns: auto 1fr; gap:1.75rem; align-items:center; max-width:760px; margin:0 auto; }
+.guarantee-badge{ display:flex; flex-direction:column; align-items:center; width:172px; flex-shrink:0; }
+.badge-seal{ width:100%; height:auto; filter: drop-shadow(0 14px 22px -10px rgba(104,153,90,.55)); }
+.guarantee-badge-caption{ display:flex; flex-direction:column; align-items:center; margin-top:.3rem; }
+.guarantee-badge-caption strong{ font-size:1.05rem; font-weight:950; color:var(--verde-escuro); line-height:1.2; }
+.guarantee-badge-caption span{ font-size:.66rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; color:var(--grafite-soft); margin-top:.15rem; }
+.guarantee-text h3{ margin-bottom:.5rem; }
+.guarantee-text p{ color: var(--grafite-soft); margin-bottom:.8rem; }
+.guarantee-text p:last-child{ margin-bottom:0; }
+.guarantee-text .g-strong{ color: var(--verde-escuro); font-weight:700; }
+@media (max-width: 560px){ .guarantee{ grid-template-columns:1fr; text-align:center; justify-items:center; } }
+
 .final-cta{ background: var(--grafite); color: var(--branco); text-align:center; position:relative; overflow:hidden; }
 .final-cta h2{ color: var(--branco); margin-bottom: 1rem; }
 .final-cta p{ color: rgba(255,255,255,.72); max-width: 58ch; margin: 0 auto 2rem; font-size:1.02rem; }
@@ -1135,6 +1148,43 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         <div class="faq-a"><div class="faq-a-inner">Sim. A mentoria atende tanto preparações pré-edital quanto pós-edital. O plano muda de acordo com a fase do concurso.</div></div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GARANTIA
+     ============================================================ -->
+<section class="bg-tint">
+  <div class="container guarantee reveal">
+    <div class="guarantee-badge">
+      <svg class="badge-seal" viewBox="0 0 220 150" aria-hidden="true">
+        <g fill="var(--verde-claro)" stroke="var(--verde)" stroke-width="2">
+          <path d="M72 74 C56 63 45 46 42 24" fill="none"/>
+          <ellipse cx="68" cy="70" rx="8" ry="3.4" transform="rotate(-38 68 70)"/>
+          <ellipse cx="59" cy="58" rx="8" ry="3.4" transform="rotate(-54 59 58)"/>
+          <ellipse cx="52" cy="45" rx="7.5" ry="3.2" transform="rotate(-68 52 45)"/>
+          <ellipse cx="46" cy="32" rx="7" ry="3" transform="rotate(-82 46 32)"/>
+          <ellipse cx="43" cy="19" rx="6.5" ry="2.8" transform="rotate(-95 43 19)"/>
+        </g>
+        <g fill="var(--verde-claro)" stroke="var(--verde)" stroke-width="2" transform="translate(220,0) scale(-1,1)">
+          <path d="M72 74 C56 63 45 46 42 24" fill="none"/>
+          <ellipse cx="68" cy="70" rx="8" ry="3.4" transform="rotate(-38 68 70)"/>
+          <ellipse cx="59" cy="58" rx="8" ry="3.4" transform="rotate(-54 59 58)"/>
+          <ellipse cx="52" cy="45" rx="7.5" ry="3.2" transform="rotate(-68 52 45)"/>
+          <ellipse cx="46" cy="32" rx="7" ry="3" transform="rotate(-82 46 32)"/>
+          <ellipse cx="43" cy="19" rx="6.5" ry="2.8" transform="rotate(-95 43 19)"/>
+        </g>
+        <circle cx="110" cy="62" r="36" fill="var(--grafite)"/>
+        <text x="110" y="74" font-size="30" font-weight="800" fill="var(--verde-claro)" text-anchor="middle" font-family="inherit">7d</text>
+      </svg>
+      <div class="guarantee-badge-caption"><strong>7 dias</strong><span>dinheiro de volta</span></div>
+    </div>
+    <div class="guarantee-text">
+      <h3 class="h-card" style="font-size:1.2rem;">Você decide depois de ver por dentro</h3>
+      <p>Você entra, recebe o diagnóstico, vê o plano montado para o seu caso e acompanha como a mentoria funciona na prática. Se dentro de 7 dias corridos entender que não é para você, basta pedir o cancelamento: devolvemos 100% do valor pago, sem burocracia e sem letra miúda.</p>
+      <p>Esse é o direito de arrependimento previsto no artigo 49 do Código de Defesa do Consumidor, e está escrito no <a href="./institucional/contrato-mentoria/" target="_blank" rel="noopener">contrato da mentoria</a>.</p>
+      <p><span class="g-strong">É garantia de satisfação com a mentoria, não de aprovação.</span> A direção e o acompanhamento são meus; a execução continua sendo sua.</p>
     </div>
   </div>
 </section>
