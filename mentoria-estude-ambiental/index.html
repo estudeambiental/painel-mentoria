@@ -543,11 +543,51 @@ section{ padding: var(--section-y) 0; }
 /* ============================================================
    RESULTADOS / DEPOIMENTOS
    ============================================================ */
-.result-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
+.result-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
 .result-card{ background: var(--branco); border: 1px solid var(--border); border-radius: var(--radius-m); padding: 1.5rem 1.6rem; }
 .result-card .tag{ display:inline-block; background: var(--verde-claro); color: var(--verde-escuro); font-size:.68rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:.3rem .7rem; border-radius:999px; margin-bottom:.75rem; }
 .result-card h3{ font-size:1.05rem; margin-bottom:.3rem; }
 .result-card .meta{ font-size:.86rem; color: var(--grafite-soft); margin-bottom:.75rem; }
+.result-head{ display:flex; align-items:center; gap:.9rem; margin-bottom:.9rem; }
+.result-head h3, .result-head .meta{ margin-bottom:0; }
+.result-head .meta{ margin-top:.2rem; }
+.result-avatar{
+  width:58px; height:58px; flex:0 0 58px; border-radius:999px; object-fit:cover;
+  border:2px solid var(--verde-claro); background: var(--bg);
+}
+.result-monogram{
+  width:58px; height:58px; flex:0 0 58px; border-radius:999px;
+  display:grid; place-items:center; background: var(--verde-claro);
+  color: var(--verde-escuro); font-weight:950; font-size:1.3rem; border:2px solid var(--verde-claro);
+}
+
+/* quadro de aprovações confirmadas em resultado oficial */
+.approvals{
+  max-width: 900px; margin: 0 auto 3.25rem; background: var(--branco);
+  border: 1px solid var(--border); border-radius: var(--radius-l); overflow:hidden;
+  box-shadow: 0 18px 40px -28px rgba(68,60,66,.45);
+}
+.approvals table{ width:100%; border-collapse: collapse; }
+.approvals th{
+  text-align:left; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase;
+  color: var(--grafite-soft); background: var(--bg); padding:.9rem 1.15rem; font-weight:800;
+}
+.approvals td{ padding:.95rem 1.15rem; border-top:1px solid var(--border); font-size:.92rem; vertical-align:middle; }
+.approvals .org{ font-weight:800; color: var(--grafite); }
+.approvals .esfera{ display:block; font-size:.71rem; color: var(--grafite-soft); font-weight:700; letter-spacing:.03em; text-transform:uppercase; margin-top:.2rem; }
+.approvals .aluno{ font-weight:700; white-space:nowrap; }
+.approvals .pos{ font-weight:950; color: var(--verde-escuro); white-space:nowrap; }
+.approvals .pos small{ display:block; font-size:.68rem; font-weight:700; color: var(--grafite-soft); letter-spacing:.02em; }
+@media (max-width: 720px){
+  .approvals thead{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+  .approvals tr{ display:grid; grid-template-columns: 1fr auto; gap:.2rem .9rem; padding:1.1rem 1.15rem; border-top:1px solid var(--border); }
+  .approvals tr:first-child{ border-top:0; }
+  .approvals td{ padding:0; border:0; font-size:.9rem; }
+  .approvals td:nth-child(1){ grid-column:1; }
+  .approvals td:nth-child(2){ grid-column:1; color: var(--grafite-soft); }
+  .approvals td:nth-child(3){ grid-column:1; }
+  .approvals td:nth-child(4){ grid-column:2; grid-row:1 / span 3; align-self:center; text-align:right; }
+}
 .result-card p.quote{ font-size:.94rem; color: var(--grafite); font-style: italic; }
 .testimonial-grid{ columns: 3; column-gap: 1.25rem; }
 .testimonial-shot{
@@ -887,34 +927,158 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     <div class="result-grid stagger">
       <div class="result-card reveal">
         <span class="tag">IDEMA/RN</span>
-        <h3>Lucemir</h3>
-        <div class="meta">Fiscal Ambiental · 5º lugar (cotas) / 30º (ampla)</div>
+        <div class="result-head">
+          <img class="result-avatar" src="./assets/img/alunos/lucemir.jpg" alt="Lucemir, aluno aprovado para Fiscal Ambiental no IDEMA/RN" loading="lazy" width="58" height="58">
+          <div>
+            <h3>Lucemir</h3>
+            <div class="meta">Fiscal Ambiental · 5º lugar (cotas) / 30º (ampla)</div>
+          </div>
+        </div>
         <p class="quote">"Formado em Ciências Contábeis, sem nenhuma bagagem ambiental. Fechou 51% do edital, 83% de aproveitamento na objetiva e gabaritou a redação na prova."</p>
       </div>
       <div class="result-card reveal" style="--reveal-delay:.06s">
         <span class="tag">IDEMA/RN</span>
-        <h3>Arianne</h3>
-        <div class="meta">Fiscal Ambiental (2º lugar) e Analista/Arquitetura, no mesmo concurso</div>
+        <div class="result-head">
+          <img class="result-avatar" src="./assets/img/alunos/arianne.jpg" alt="Arianne, aluna aprovada em dois cargos no IDEMA/RN" loading="lazy" width="58" height="58">
+          <div>
+            <h3>Arianne</h3>
+            <div class="meta">Fiscal Ambiental (2º lugar) e Analista/Arquitetura, no mesmo concurso</div>
+          </div>
+        </div>
         <p class="quote">"Formada em Direito e Arquitetura, começou a estudar a área ambiental cerca de três semanas depois do edital. Foi de nota baixa a 30/30 na redação de Fiscal."</p>
       </div>
       <div class="result-card reveal" style="--reveal-delay:.12s">
         <span class="tag">IDEMA/RN</span>
-        <h3>Daniel</h3>
-        <div class="meta">Analista Ambiental (Geografia) · 4º lugar</div>
+        <div class="result-head">
+          <img class="result-avatar" src="./assets/img/alunos/daniel.jpg" alt="Daniel, aluno aprovado para Analista Ambiental no IDEMA/RN" loading="lazy" width="58" height="58">
+          <div>
+            <h3>Daniel</h3>
+            <div class="meta">Analista Ambiental (Geografia) · 4º lugar</div>
+          </div>
+        </div>
         <p class="quote">"Já tinha batido na trave em dois concursos anteriores por causa da nota mínima na discursiva. 87,5% de aproveitamento em mais de mil questões resolvidas."</p>
       </div>
       <div class="result-card reveal" style="--reveal-delay:.18s">
         <span class="tag">IDEMA/RN</span>
-        <h3>Luanna</h3>
-        <div class="meta">Analista Ambiental (Engenharia Florestal) · 4º lugar</div>
+        <div class="result-head">
+          <img class="result-avatar" src="./assets/img/alunos/luanna.jpg" alt="Luanna, aluna aprovada para Analista Ambiental no IDEMA/RN" loading="lazy" width="58" height="58">
+          <div>
+            <h3>Luanna</h3>
+            <div class="meta">Analista Ambiental (Engenharia Florestal) · 4º lugar</div>
+          </div>
+        </div>
         <p class="quote">"Fechou quase 50% do edital com 85% de aproveitamento. 'Eu senti uma leveza', foi a frase dela sobre sair do estudo por conta própria para um plano acompanhado."</p>
       </div>
       <div class="result-card reveal" style="--reveal-delay:.24s">
         <span class="tag">IPAAM/AM</span>
-        <h3>André</h3>
-        <div class="meta">Engenheiro Florestal · aprovado dentro das vagas, 481 inscritos para 12 vagas imediatas</div>
-        <p class="quote">"Entrou na mentoria já na reta final, poucas semanas antes da prova, com um plano focado no que ainda faltava fechar."</p>
+        <div class="result-head">
+          <div class="result-monogram" aria-hidden="true">A</div>
+          <div>
+            <h3>André</h3>
+            <div class="meta">Analista Ambiental (Eng. Florestal) · 2º lugar</div>
+          </div>
+        </div>
+        <p class="quote">"Entrou na mentoria já na reta final, poucas semanas antes da prova, com um plano focado no que ainda faltava fechar. 481 inscritos para 12 vagas imediatas."</p>
       </div>
+      <div class="result-card reveal" style="--reveal-delay:.3s">
+        <span class="tag">UFAC</span>
+        <div class="result-head">
+          <img class="result-avatar" src="./assets/img/alunos/sandra.jpg" alt="Sandra, aluna aprovada em concurso federal na UFAC" loading="lazy" width="58" height="58">
+          <div>
+            <h3>Sandra</h3>
+            <div class="meta">Técnica em Agropecuária · 5º lugar</div>
+          </div>
+        </div>
+        <p class="quote">Aprovação em concurso federal, na Universidade Federal do Acre, confirmada no resultado definitivo publicado pela banca.</p>
+      </div>
+    </div>
+
+    <!-- Aprovações confirmadas nos resultados oficiais das bancas -->
+    <h3 class="h-card" style="text-align:center; margin: 3.25rem 0 .75rem;">Aprovações confirmadas em resultado oficial</h3>
+    <p class="privacy-note">
+      Cada linha abaixo foi conferida no resultado publicado pela banca. Mostramos apenas o primeiro nome
+      do nosso aluno — os demais candidatos das listas não aparecem aqui.
+    </p>
+    <div class="approvals reveal">
+      <table>
+        <thead>
+          <tr><th scope="col">Órgão</th><th scope="col">Cargo</th><th scope="col">Aluno</th><th scope="col">Resultado</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="org">CPRH/PE</span><span class="esfera">Estadual · Recife</span></td>
+            <td>Analista em Gestão Ambiental (Biologia)</td>
+            <td class="aluno">Isadora</td>
+            <td class="pos">1º lugar</td>
+          </tr>
+          <tr>
+            <td><span class="org">IDEMA/RN</span><span class="esfera">Estadual</span></td>
+            <td>Fiscal Ambiental</td>
+            <td class="aluno">Arianne</td>
+            <td class="pos">2º lugar</td>
+          </tr>
+          <tr>
+            <td><span class="org">Prefeitura de Itabaiana/PB</span><span class="esfera">Municipal</span></td>
+            <td>Engenheiro Ambiental</td>
+            <td class="aluno">Hebert</td>
+            <td class="pos">2º lugar</td>
+          </tr>
+          <tr>
+            <td><span class="org">Prefeitura de Planaltina/GO</span><span class="esfera">Municipal</span></td>
+            <td>Fiscal Ambiental</td>
+            <td class="aluno">Thalyssa</td>
+            <td class="pos">2º lugar<small>já nomeada</small></td>
+          </tr>
+          <tr>
+            <td><span class="org">IPAAM/AM</span><span class="esfera">Estadual</span></td>
+            <td>Analista Ambiental (Eng. Florestal)</td>
+            <td class="aluno">André</td>
+            <td class="pos">2º lugar</td>
+          </tr>
+          <tr>
+            <td><span class="org">IDEMA/RN</span><span class="esfera">Estadual</span></td>
+            <td>Analista Ambiental (Arquitetura)</td>
+            <td class="aluno">Arianne</td>
+            <td class="pos">4º lugar</td>
+          </tr>
+          <tr>
+            <td><span class="org">IDEMA/RN</span><span class="esfera">Estadual</span></td>
+            <td>Analista Ambiental (Geografia)</td>
+            <td class="aluno">Daniel</td>
+            <td class="pos">4º lugar</td>
+          </tr>
+          <tr>
+            <td><span class="org">IDEMA/RN</span><span class="esfera">Estadual</span></td>
+            <td>Analista Ambiental (Eng. Florestal)</td>
+            <td class="aluno">Luanna</td>
+            <td class="pos">4º lugar</td>
+          </tr>
+          <tr>
+            <td><span class="org">UFAC</span><span class="esfera">Federal · Rio Branco</span></td>
+            <td>Técnico em Agropecuária</td>
+            <td class="aluno">Sandra</td>
+            <td class="pos">5º lugar</td>
+          </tr>
+          <tr>
+            <td><span class="org">IDEMA/RN</span><span class="esfera">Estadual</span></td>
+            <td>Fiscal Ambiental</td>
+            <td class="aluno">Lucemir</td>
+            <td class="pos">5º lugar<small>30º na ampla</small></td>
+          </tr>
+          <tr>
+            <td><span class="org">SEMMAS Manaus/AM</span><span class="esfera">Municipal</span></td>
+            <td>Analista Municipal II (Eng. Florestal)</td>
+            <td class="aluno">Jhonatan</td>
+            <td class="pos">8º lugar</td>
+          </tr>
+          <tr>
+            <td><span class="org">SEMMAS Manaus/AM</span><span class="esfera">Municipal</span></td>
+            <td>Analista Municipal II (Eng. Florestal)</td>
+            <td class="aluno">André</td>
+            <td class="pos">23º lugar</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <h3 class="h-card" style="text-align:center; margin-bottom:.75rem;">O que chega no meu WhatsApp</h3>
