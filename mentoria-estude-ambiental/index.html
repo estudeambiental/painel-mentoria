@@ -20,6 +20,13 @@ src="https://www.facebook.com/tr?id=706004184857947&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- as duas fontes da primeira tela (título e corpo) na frente da fila,
+     pra o texto já aparecer com a tipografia certa -->
+<link rel="preload" as="font" type="font/woff2" href="./assets/fonts/Gilroy-Heavy.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="./assets/fonts/Gilroy-Regular.woff2" crossorigin />
+<link rel="preload" as="image" href="./assets/img/dominique-estudando.jpg" fetchpriority="high" />
+
 <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="./assets/img/favicon-512.png" />
 <link rel="apple-touch-icon" href="./assets/img/apple-touch-icon.png" />
@@ -73,6 +80,9 @@ src="https://www.facebook.com/tr?id=706004184857947&ev=PageView&noscript=1"
    ============================================================ */
 :root{
   --verde: #68995A;
+  /* verde só do botão cheio: escuro o bastante pra o texto branco
+     passar no contraste mínimo (AA) — o #68995A dava 3.3:1 */
+  --verde-btn: #557F46;
   --verde-escuro: #4E594B;
   --verde-claro: #C5FFB5;
   --grafite: #443C42;
@@ -196,7 +206,8 @@ button{ font-family:inherit; cursor:pointer; }
 .quick-proof-stats{ display:flex; flex-wrap:wrap; gap:1.25rem 2rem; }
 .quick-proof-stat{ display:flex; flex-direction:column; align-items:center; text-align:center; }
 .quick-proof-stat strong{ font-size:1.5rem; font-weight:800; color: var(--verde-escuro); line-height:1; }
-.quick-proof-stat span{ font-size:.78rem; color: var(--grafite-soft); margin-top:.3rem; max-width:120px; }
+.quick-proof-stat span{ font-size:.78rem; color: var(--grafite-soft); margin-top:.3rem; max-width:130px; }
+.quick-proof-stat strong span{ font-size:inherit; color:inherit; margin:0; max-width:none; }
 .quick-proof-quotes{ display:flex; flex-wrap:wrap; gap:1rem 2rem; justify-content:center; }
 .quick-proof-quotes p{ font-size:.86rem; font-style:italic; color: var(--grafite); max-width:230px; margin:0; }
 .quick-proof-quotes cite{ display:block; font-style:normal; font-weight:700; font-size:.72rem; margin-top:.35rem; color: var(--verde-escuro); }
@@ -230,7 +241,7 @@ button{ font-family:inherit; cursor:pointer; }
 }
 .exit-overlay.show .exit-modal{ transform: translateY(0) scale(1); }
 .exit-close{
-  position:absolute; top:.9rem; right:.9rem; width:30px; height:30px; border-radius:50%;
+  position:absolute; top:.6rem; right:.6rem; width:44px; height:44px; border-radius:50%;
   background: var(--bg); border:none; color: var(--grafite-soft); font-size:1.1rem; line-height:1;
   display:flex; align-items:center; justify-content:center;
 }
@@ -297,7 +308,7 @@ h3.h-card{ font-weight: 800; font-size: clamp(1.02rem, 1.4vw, 1.15rem); color: v
    BUTTONS
    ============================================================ */
 .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.6rem; font-weight: 800; font-size: 1rem; padding: 1.05rem 2rem; border-radius: 999px; border: none; text-decoration:none; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; white-space: normal; text-align:center; }
-.btn-primary{ background: var(--verde); color: var(--branco); box-shadow: 0 10px 24px -10px rgba(104,153,90,.55); }
+.btn-primary{ background: var(--verde-btn); color: var(--branco); box-shadow: 0 10px 24px -10px rgba(85,127,70,.55); }
 .btn-primary:hover{ background: var(--verde-escuro); transform: translateY(-1px); }
 .btn-block{ width:100%; }
 .btn-lg{ font-size: 1.08rem; padding: 1.2rem 2.25rem; }
@@ -332,7 +343,15 @@ section{ padding: var(--section-y) 0; }
 .hero-copy .eyebrow{ margin-bottom: 1.1rem; }
 .hero-copy h1{ margin-bottom: .9rem; }
 .hero-copy .lede{ max-width: 48ch; margin-bottom: 1.9rem; }
-.hero-signature{ margin-top: 1.6rem; display:flex; align-items:center; gap: .7rem; font-size: .86rem; color: var(--grafite-soft); }
+/* prova social já na primeira tela: os órgãos onde alunos passaram */
+.hero-proof{ margin-top: 1.9rem; padding-top: 1.4rem; border-top: 1px solid rgba(255,255,255,.14); max-width: 46ch; }
+.hero-proof-label{
+  display:block; font-size:.68rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+  color: var(--verde-claro); margin-bottom:.45rem;
+}
+.hero-proof-orgs{ display:block; font-size:.84rem; line-height:1.65; color: rgba(255,255,255,.78); font-weight:600; }
+
+.hero-signature{ margin-top: 1.4rem; display:flex; align-items:center; gap: .7rem; font-size: .86rem; color: var(--grafite-soft); }
 .hero-signature strong{ color: var(--grafite); font-weight: 700; }
 .hero-signature .dot{ width:4px; height:4px; border-radius:50%; background: var(--grafite-soft); flex-shrink:0; }
 
@@ -544,7 +563,13 @@ section{ padding: var(--section-y) 0; }
    RESULTADOS / DEPOIMENTOS
    ============================================================ */
 .result-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
-.result-card{ background: var(--branco); border: 1px solid var(--border); border-radius: var(--radius-m); padding: 1.5rem 1.6rem; }
+.result-card{
+  background: var(--branco); border: 1px solid var(--border); border-radius: var(--radius-m);
+  padding: 1.5rem 1.6rem; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+@media (hover: hover){
+  .result-card:hover{ transform: translateY(-4px); border-color: var(--verde); box-shadow: 0 22px 44px -26px rgba(68,60,66,.45); }
+}
 .result-card .tag{ display:inline-block; background: var(--verde-claro); color: var(--verde-escuro); font-size:.68rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:.3rem .7rem; border-radius:999px; margin-bottom:.75rem; }
 .result-card h3{ font-size:1.05rem; margin-bottom:.3rem; }
 .result-card .meta{ font-size:.86rem; color: var(--grafite-soft); margin-bottom:.75rem; }
@@ -561,6 +586,36 @@ section{ padding: var(--section-y) 0; }
   color: var(--verde-escuro); font-weight:950; font-size:1.3rem; border:2px solid var(--verde-claro);
 }
 
+/* entrevistas em vídeo: capa leve, player só entra no clique */
+.talks{ display:grid; grid-template-columns: 1fr; gap:1.25rem; max-width:860px; margin:0 auto 3.25rem; }
+.yt-facade{
+  position:relative; aspect-ratio:16/9; border-radius: var(--radius-l); overflow:hidden;
+  background: var(--grafite); cursor:pointer; border:1px solid var(--border);
+  box-shadow: 0 22px 46px -28px rgba(68,60,66,.55);
+}
+.yt-facade img{ width:100%; height:100%; object-fit:cover; transition: transform .5s ease, filter .3s ease; }
+.yt-facade::before{
+  content:''; position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(31,27,30,.12) 0%, rgba(31,27,30,.55) 100%);
+}
+.yt-facade:hover img{ transform: scale(1.03); }
+.yt-play{
+  position:absolute; z-index:2; left:50%; top:50%; transform: translate(-50%,-50%);
+  width:76px; height:76px; border-radius:999px; border:0; cursor:pointer;
+  background: rgba(255,255,255,.94); display:grid; place-items:center;
+  box-shadow: 0 14px 34px -14px rgba(0,0,0,.6);
+  transition: transform .25s ease, background-color .25s ease;
+}
+.yt-play svg{ width:30px; height:30px; margin-left:4px; fill: var(--verde-escuro); }
+.yt-facade:hover .yt-play{ transform: translate(-50%,-50%) scale(1.08); background: var(--verde-claro); }
+.yt-label{
+  position:absolute; z-index:2; left:1.1rem; bottom:1rem; color:#fff;
+  font-size:.82rem; font-weight:800; letter-spacing:.02em;
+  text-shadow: 0 2px 10px rgba(0,0,0,.5);
+}
+.yt-facade iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; z-index:3; }
+@media (max-width: 560px){ .yt-play{ width:62px; height:62px; } .yt-play svg{ width:24px; height:24px; } }
+
 /* quadro de aprovações confirmadas em resultado oficial */
 .approvals{
   max-width: 900px; margin: 0 auto 3.25rem; background: var(--branco);
@@ -573,6 +628,8 @@ section{ padding: var(--section-y) 0; }
   color: var(--grafite-soft); background: var(--bg); padding:.9rem 1.15rem; font-weight:800;
 }
 .approvals td{ padding:.95rem 1.15rem; border-top:1px solid var(--border); font-size:.92rem; vertical-align:middle; }
+.approvals tbody tr{ transition: background-color .2s ease; }
+@media (hover: hover){ .approvals tbody tr:hover{ background: var(--bg-verde); } }
 .approvals .org{ font-weight:800; color: var(--grafite); }
 .approvals .esfera{ display:block; font-size:.71rem; color: var(--grafite-soft); font-weight:700; letter-spacing:.03em; text-transform:uppercase; margin-top:.2rem; }
 .approvals .aluno{ font-weight:700; white-space:nowrap; }
@@ -686,17 +743,14 @@ section{ padding: var(--section-y) 0; }
 .final-cta .btn-primary{ background: var(--verde-claro); color: var(--verde-escuro); }
 .final-cta .btn-primary:hover{ background: var(--branco); }
 .final-cta .micro-note{ color: rgba(255,255,255,.55); }
-.agree-row{ display:flex; align-items:flex-start; gap:.6rem; justify-content:center; max-width:46ch; margin:0 auto 1.4rem; text-align:left; }
-.agree-row input[type="checkbox"]{ width:18px; height:18px; margin-top:.15rem; accent-color: var(--verde-claro); cursor:pointer; flex-shrink:0; }
-.agree-row label{ font-size:.86rem; color: rgba(255,255,255,.72); cursor:pointer; line-height:1.5; }
-.agree-row a{ color: var(--verde-claro); text-decoration: underline; }
-.agree-hint{ font-size:.8rem; color:#ffb4b4; max-width:46ch; margin:-.9rem auto 1.2rem; display:none; }
-.agree-hint.show{ display:block; }
+.agree-note{ font-size:.78rem; color: rgba(255,255,255,.68); max-width:52ch; margin:.9rem auto 0; line-height:1.5; }
+.agree-note a{ color: rgba(255,255,255,.78); text-decoration: underline; }
+.agree-note a:hover{ color: var(--verde-claro); }
 
 footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; font-size: .82rem; }
 .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap: 1rem; }
 .footer-links{ display:flex; gap:1.5rem; flex-wrap:wrap; }
-.footer-links a{ text-decoration:none; color: inherit; }
+.footer-links a{ text-decoration:none; color: inherit; display:inline-block; padding:.65rem 0; }
 .footer-links a:hover{ color: var(--verde-claro); }
 .footer-brand{ display:flex; align-items:center; gap:.6rem; }
 .footer-logo{ height:26px; width:auto; display:block; }
@@ -712,8 +766,17 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 .brand{ display:flex; align-items:center; gap:.55rem; font-weight:800; font-size:1.02rem; color:var(--grafite); text-decoration:none; }
 .brand-logo{ height:42px; width:auto; display:block; }
 .nav-links{ display:none; gap: 1.5rem; font-weight:700; font-size:.85rem; color: var(--grafite-soft); }
-.nav-links a{ text-decoration:none; }
+.nav-links a{ text-decoration:none; position:relative; padding-bottom:.3rem; transition: color .2s ease; }
 .nav-links a:hover{ color: var(--verde-escuro); }
+/* marca no menu a seção em que a pessoa está */
+.nav-links a::after{
+  content:''; position:absolute; left:0; right:0; bottom:0; height:2px; border-radius:2px;
+  background: var(--verde); transform: scaleX(0); transform-origin:left;
+  transition: transform .28s ease;
+}
+.nav-links a.is-active{ color: var(--verde-escuro); font-weight:800; }
+.nav-links a.is-active::after{ transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce){ .nav-links a::after{ transition:none; } }
 .header-cta{ display:none; }
 @media (min-width: 720px){ .header-cta{ display:inline-flex; padding: .65rem 1.3rem; font-size:.85rem; } .nav-links{ display:flex; } }
 
@@ -755,15 +818,17 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       <p class="lede hero-anim d3">A Mentoria Estude Ambiental transforma editais extensos, rotinas apertadas e dificuldades nos estudos em uma preparação organizada, com plano personalizado, metas diárias, revisões, questões, simulados e acompanhamento próximo.</p>
       <a href="#aplicar" class="btn btn-primary btn-lg hero-anim d4">Quero aplicar para a Mentoria</a>
       <p class="micro-note hero-anim d5" style="text-align:left;">Preencha a aplicação em poucos minutos e conclua seu atendimento pelo WhatsApp.</p>
+      <div class="hero-proof hero-anim d5">
+        <span class="hero-proof-label">Alunos aprovados em</span>
+        <span class="hero-proof-orgs">IDEMA/RN · IPAAM/AM · CPRH/PE · UFAC · SEMMAS Manaus · Planaltina/GO</span>
+      </div>
       <div class="hero-signature hero-anim d6">
-        <span>Por <strong>Dominique Martins Sala</strong></span>
-        <span class="dot"></span>
-        <span>Engenheira Ambiental e fundadora da Estude Ambiental</span>
+        <span>Por <strong>Dominique Martins Sala</strong>, Engenheira Ambiental e fundadora da Estude Ambiental</span>
       </div>
     </div>
     <div class="hero-visual hero-anim d3" id="heroVisual">
       <div class="photo-frame">
-        <img src="./assets/img/dominique-estudando.jpg" alt="Dominique Martins Sala estudando" style="object-position: center 20%;" />
+        <img src="./assets/img/dominique-estudando.jpg" alt="Dominique Martins Sala estudando" style="object-position: center 20%;" width="1000" height="1500" fetchpriority="high" decoding="async" />
         <div class="photo-caption">Dominique Martins Sala, fundadora da Estude Ambiental</div>
       </div>
       <div class="hero-badge-float">
@@ -788,9 +853,10 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 <section class="quick-proof">
   <div class="container quick-proof-inner">
     <div class="quick-proof-stats">
-      <div class="quick-proof-stat"><strong>Aprovados</strong><span>nas 3 esferas: municipal, estadual e federal</span></div>
-      <div class="quick-proof-stat"><strong>IDEMA/RN</strong><span>e IPAAM/AM</span></div>
-      <div class="quick-proof-stat"><strong>83%+</strong><span>de aproveitamento nas questões, em mais de um caso</span></div>
+      <div class="quick-proof-stat"><strong><span class="count-up" data-to="6">6</span> órgãos</strong><span>onde alunos da mentoria já passaram</span></div>
+      <div class="quick-proof-stat"><strong><span class="count-up" data-to="5">5</span> estados</strong><span>RN · AM · PE · AC · GO</span></div>
+      <div class="quick-proof-stat"><strong>3 esferas</strong><span>municipal, estadual e federal</span></div>
+      <div class="quick-proof-stat"><strong><span class="count-up" data-to="83" data-suffix="%+">83%+</span></strong><span>de aproveitamento nas questões, em mais de um caso</span></div>
     </div>
     <div class="quick-proof-quotes">
       <p>"Fechou 51% do edital, 83% de aproveitamento na objetiva e gabaritou a redação na prova."<cite>Lucemir — Fiscal Ambiental, IDEMA/RN</cite></p>
@@ -810,7 +876,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     </div>
     <!-- PLACEHOLDER: substituir por embed real do vídeo (YouTube não-listado/Vimeo/Panda) quando a VSL estiver gravada. Roteiro final: ~9 min, 8 blocos + abertura. -->
     <div class="vsl-player reveal" id="vslPlayer">
-      <img src="./assets/img/dominique-retrato.jpg" alt="" />
+      <img src="./assets/img/dominique-retrato.jpg" alt="" width="1000" height="1499" decoding="async" />
       <div class="vsl-play">
         <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <span>Vídeo em produção</span>
@@ -1018,12 +1084,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
             <td class="pos">2º lugar</td>
           </tr>
           <tr>
-            <td><span class="org">Prefeitura de Itabaiana/PB</span><span class="esfera">Municipal</span></td>
-            <td>Engenheiro Ambiental</td>
-            <td class="aluno">Hebert</td>
-            <td class="pos">2º lugar</td>
-          </tr>
-          <tr>
             <td><span class="org">Prefeitura de Planaltina/GO</span><span class="esfera">Municipal</span></td>
             <td>Fiscal Ambiental</td>
             <td class="aluno">Thalyssa</td>
@@ -1081,7 +1141,25 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </table>
     </div>
 
-    <h3 class="h-card" style="text-align:center; margin-bottom:.75rem;">O que chega no meu WhatsApp</h3>
+    <!-- Entrevistas em vídeo com os aprovados (playlist no YouTube).
+         O player só é carregado quando a pessoa clica: antes disso é
+         só a capa, sem nenhum script do YouTube pesando na página. -->
+    <h3 class="h-card" style="text-align:center; margin: 0 0 .75rem;">Conversas com quem passou</h3>
+    <p class="privacy-note">
+      Entrevistas completas, sem corte e sem roteiro, com alunos aprovados contando como era a
+      preparação antes da mentoria e o que mudou depois.
+    </p>
+    <div class="talks">
+      <div class="yt-facade reveal" data-yt="ppwjs0xD3N0" data-list="PLKaRyxtns2Mnhpjm1hrJMNJKRzedLTnka">
+        <img src="https://i.ytimg.com/vi/ppwjs0xD3N0/hqdefault.jpg" alt="Conversa em vídeo com aluno aprovado da Mentoria Estude Ambiental" loading="lazy" decoding="async">
+        <button type="button" class="yt-play" aria-label="Reproduzir a conversa">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <span class="yt-label">Entrevistas com aprovados</span>
+      </div>
+    </div>
+
+    <h3 class="h-card" style="text-align:center; margin: 3.25rem 0 .75rem;">O que chega no meu WhatsApp</h3>
     <p class="privacy-note">
       Prints reais de alunos, publicados com autorização. Os nomes estão borrados por privacidade.
       Clique ou toque em qualquer print para ampliar.<span class="only-mobile"> Arraste a faixa para o lado para ver todos.</span>
@@ -1224,32 +1302,32 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     </div>
     <div class="screens-grid stagger">
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/missoes.jpg"><source src="./assets/video/missoes.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" data-poster="./assets/video/missoes.jpg" data-src="./assets/video/missoes.mp4"></video>
         <h3 class="h-card">Missões diárias</h3>
         <p>Visualize as tarefas previstas, conclua o que estudou e acompanhe o cumprimento do plano.</p>
       </div>
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/cronograma.jpg"><source src="./assets/video/cronograma.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" data-poster="./assets/video/cronograma.jpg" data-src="./assets/video/cronograma.mp4"></video>
         <h3 class="h-card">Cronograma semanal</h3>
         <p>Sua semana já montada: o que estudar em cada dia, com as matérias distribuídas conforme o tempo que você tem.</p>
       </div>
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/desempenho.jpg"><source src="./assets/video/desempenho.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" data-poster="./assets/video/desempenho.jpg" data-src="./assets/video/desempenho.mp4"></video>
         <h3 class="h-card">Desempenho e evolução</h3>
         <p>Acompanhe horas estudadas, evolução por disciplina e onde seu desempenho precisa de mais atenção.</p>
       </div>
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/questoes.jpg"><source src="./assets/video/questoes.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" data-poster="./assets/video/questoes.jpg" data-src="./assets/video/questoes.mp4"></video>
         <h3 class="h-card">Questões</h3>
         <p>Registre e acompanhe a resolução de questões, os erros e a evolução por conteúdo.</p>
       </div>
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/simulados.jpg"><source src="./assets/video/simulados.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" data-poster="./assets/video/simulados.jpg" data-src="./assets/video/simulados.mp4"></video>
         <h3 class="h-card">Simulados e discursivas <span style="font-weight:600;font-size:.75em;opacity:.7;">(bônus)</span></h3>
         <p>Treine o formato da prova, organize seus envios e receba orientações para melhorar. Guia, simulados e correção de discursiva são bônus para quem tem essa fase no edital.</p>
       </div>
       <div class="screen-card reveal">
-        <video class="screen-video" autoplay muted loop playsinline preload="none" poster="./assets/video/replanejamento.jpg"><source src="./assets/video/replanejamento.mp4" type="video/mp4"></video>
+        <video class="screen-video" autoplay muted loop playsinline preload="none" data-poster="./assets/video/replanejamento.jpg" data-src="./assets/video/replanejamento.mp4"></video>
         <h3 class="h-card">Replanejamento</h3>
         <p>Quando algo sair do previsto, o plano é reorganizado — e você recebe o novo caminho, sem precisar remontar nada sozinho.</p>
       </div>
@@ -1560,13 +1638,9 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     <span class="eyebrow" style="margin-bottom:1rem;"><span class="pulse-dot"></span> Vagas limitadas</span>
     <h2 class="h-section">Sua preparação precisa de direção, não de mais improviso.</h2>
     <p>O acompanhamento é individual, então o número de alunos que entram por período é limitado. Se você quer construir uma preparação organizada para concursos da área ambiental, preencha a aplicação: suas respostas serão analisadas para entender seu momento e verificar se a Mentoria Estude Ambiental faz sentido para você.</p>
-    <div class="agree-row">
-      <input type="checkbox" id="agreeTerms" />
-      <label for="agreeTerms">Ao clicar em "Quero aplicar", você concorda com os <a href="./institucional/termos-e-condicoes/" target="_blank" rel="noopener">Termos de Uso</a> e com o <a href="./institucional/contrato-mentoria/" target="_blank" rel="noopener">Contrato de Prestação de Serviços</a> da Mentoria.</label>
-    </div>
-    <p class="agree-hint" id="agreeHint">Marque a caixinha acima concordando com os termos pra continuar.</p>
     <a href="https://form.respondi.app/USGGUf9h" target="_blank" rel="noopener" class="btn btn-primary btn-lg" id="ctaAplicar">Quero aplicar para a Mentoria</a>
     <p class="micro-note">A aplicação não garante uma vaga e não gera cobrança. Ela inicia a análise do seu momento e a continuidade do atendimento pelo WhatsApp.</p>
+    <p class="agree-note">Ao aplicar, você concorda com os <a href="./institucional/termos-e-condicoes/" target="_blank" rel="noopener">Termos de Uso</a> e com o <a href="./institucional/contrato-mentoria/" target="_blank" rel="noopener">Contrato de Prestação de Serviços</a> da Mentoria.</p>
   </div>
 </section>
 
@@ -1728,23 +1802,9 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   });
 
   var realCta = document.getElementById('ctaAplicar');
-  var agreeCheckbox = document.getElementById('agreeTerms');
-  var agreeHint = document.getElementById('agreeHint');
   if(realCta){
-    realCta.addEventListener('click', function(e){
-      if(agreeCheckbox && !agreeCheckbox.checked){
-        e.preventDefault();
-        if(agreeHint){ agreeHint.classList.add('show'); }
-        agreeCheckbox.focus();
-        return;
-      }
-      if(agreeHint){ agreeHint.classList.remove('show'); }
+    realCta.addEventListener('click', function(){
       if(typeof fbq === 'function'){ fbq('track', 'Lead'); }
-    });
-  }
-  if(agreeCheckbox && agreeHint){
-    agreeCheckbox.addEventListener('change', function(){
-      if(agreeCheckbox.checked){ agreeHint.classList.remove('show'); }
     });
   }
 })();
@@ -1807,6 +1867,178 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     close();
   });
 })();
+</script>
+
+<!-- ============================================================
+     ENTREVISTAS: o player do YouTube só entra depois do clique.
+     Antes disso a página não carrega nada do YouTube — só a capa.
+     ============================================================ -->
+<script>
+(function () {
+  var caixas = document.querySelectorAll('.yt-facade[data-yt]')
+  if (!caixas.length) return
+
+  function abrir(box) {
+    if (box.dataset.aberto) return
+    box.dataset.aberto = '1'
+    var p = new URLSearchParams({ autoplay: '1', rel: '0', modestbranding: '1' })
+    if (box.dataset.list) p.set('list', box.dataset.list)
+    var f = document.createElement('iframe')
+    f.src = 'https://www.youtube-nocookie.com/embed/' + box.dataset.yt + '?' + p.toString()
+    f.title = 'Entrevista com aluno aprovado da Mentoria Estude Ambiental'
+    f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture; web-share'
+    f.allowFullscreen = true
+    box.appendChild(f)
+    if (typeof fbq === 'function') { fbq('trackCustom', 'AssistiuEntrevista') }
+  }
+
+  caixas.forEach(function (box) {
+    // se a capa do YouTube não carregar, some com ela: o cartão escuro
+    // com o botão de play já se sustenta sozinho
+    var capa = box.querySelector('img')
+    if (capa) { capa.addEventListener('error', function () { capa.style.display = 'none' }) }
+    box.addEventListener('click', function () { abrir(box) })
+    var btn = box.querySelector('.yt-play')
+    if (btn) {
+      btn.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(box) }
+      })
+    }
+  })
+})()
+</script>
+
+<!-- ============================================================
+     MENU: destaca a seção em que a pessoa está
+     ============================================================ -->
+<script>
+(function () {
+  var links = [].slice.call(document.querySelectorAll('.nav-links a[href^="#"]'))
+  if (!links.length || !('IntersectionObserver' in window)) return
+
+  var mapa = {}
+  links.forEach(function (a) {
+    var alvo = document.querySelector(a.getAttribute('href'))
+    if (alvo) mapa[alvo.id] = a
+  })
+  var secoes = Object.keys(mapa).map(function (id) { return document.getElementById(id) })
+  if (!secoes.length) return
+
+  var visiveis = {}
+  function pintar() {
+    var atual = null, melhor = -1
+    secoes.forEach(function (s) {
+      var r = visiveis[s.id] || 0
+      if (r > melhor) { melhor = r; atual = s.id }
+    })
+    links.forEach(function (a) { a.classList.remove('is-active') })
+    if (atual && melhor > 0) mapa[atual].classList.add('is-active')
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { visiveis[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0 })
+    pintar()
+  }, { threshold: [0, .12, .3, .6], rootMargin: '-68px 0px -45% 0px' })
+
+  secoes.forEach(function (s) { io.observe(s) })
+})()
+</script>
+
+<!-- ============================================================
+     CONTAGEM DOS NÚMEROS
+     Os números da barra de prova social sobem até o valor final
+     quando entram na tela. Respeita "reduzir movimento".
+     ============================================================ -->
+<script>
+(function () {
+  var els = document.querySelectorAll('.count-up')
+  if (!els.length) return
+  var semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (semMovimento || !('IntersectionObserver' in window)) return
+
+  function contar(el) {
+    var alvo = parseInt(el.dataset.to, 10)
+    var sufixo = el.dataset.suffix || ''
+    if (isNaN(alvo)) return
+    var dur = 900, t0 = null
+    function passo(t) {
+      if (t0 === null) t0 = t
+      var p = Math.min((t - t0) / dur, 1)
+      var eased = 1 - Math.pow(1 - p, 3)
+      el.textContent = Math.round(alvo * eased) + sufixo
+      if (p < 1) requestAnimationFrame(passo)
+    }
+    requestAnimationFrame(passo)
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return
+      io.unobserve(e.target)
+      contar(e.target)
+    })
+  }, { threshold: .6 })
+
+  els.forEach(function (el) { el.textContent = '0' + (el.dataset.suffix || ''); io.observe(el) })
+})()
+</script>
+
+<!-- ============================================================
+     VÍDEOS DA PLATAFORMA SOB DEMANDA
+     Os clipes só são baixados quando o card entra na tela. Antes disso
+     a pessoa vê só o poster (alguns KB), em vez de ~740 KB de vídeo
+     que ela talvez nunca role até ver.
+     ============================================================ -->
+<script>
+(function () {
+  var vids = document.querySelectorAll('video.screen-video[data-src]')
+  if (!vids.length) return
+
+  function poster(v) {
+    if (v.dataset.posterSet || !v.dataset.poster) return
+    v.dataset.posterSet = '1'
+    v.poster = v.dataset.poster
+  }
+
+  function carregar(v) {
+    poster(v)
+    if (v.dataset.loaded) return
+    v.dataset.loaded = '1'
+    var s = document.createElement('source')
+    s.src = v.dataset.src
+    s.type = 'video/mp4'
+    v.appendChild(s)
+    v.load()
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    vids.forEach(function (v) { carregar(v); v.play().catch(function () {}) })
+    return
+  }
+
+  // o poster entra bem antes, pro card nunca aparecer vazio
+  var ioPoster = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return
+      ioPoster.unobserve(e.target)
+      poster(e.target)
+    })
+  }, { rootMargin: '900px 0px' })
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var v = e.target
+      if (e.isIntersecting) {
+        carregar(v)
+        v.play().catch(function () {})
+      } else if (v.dataset.loaded) {
+        v.pause()
+      }
+    })
+  }, { rootMargin: '200px 0px', threshold: .2 })
+
+  vids.forEach(function (v) { ioPoster.observe(v); io.observe(v) })
+})()
 </script>
 
 <!-- ============================================================
