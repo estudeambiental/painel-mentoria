@@ -52,15 +52,20 @@ src="https://www.facebook.com/tr?id=706004184857947&ev=PageView&noscript=1"
 
 <style>
 /* ============================================================
-   NOTA INTERNA (comentário HTML, não renderiza para o visitante):
-   Este é o primeiro rascunho estrutural completo da nova home,
-   construído em cima do documento mestre da Dominique. Pendências
-   marcadas com PLACEHOLDER ao longo do arquivo:
-     - Link real do formulário Respondi (hoje aponta para "#aplicar")
-     - Screenshots reais da Tutory (bloco "dia a dia do aluno")
-     - Vídeo real da VSL + thumbnail
-     - Depoimentos e resultados reais, com autorização
-     - Lista final de entregas/bônus e descrição dos planos 3/6/12 meses
+   NOTA INTERNA (não renderiza para o visitante)
+
+   Home da Mentoria Estude Ambiental. Já resolvido:
+     - Formulário de aplicação no Respondi, com repasse de UTM
+     - Clipes reais da plataforma (carregam só quando entram na tela)
+     - VSL no YouTube, com o CTA liberado aos 7:25
+     - Depoimentos em vídeo, prints do WhatsApp e quadro de aprovações
+       conferido nos resultados oficiais
+
+   Pendente:
+     - Tag do Google Analytics: os eventos já estão escritos e disparam
+       sozinhos assim que o gtag existir na página
+     - Fechar a lista de entregas/bônus e a descrição dos planos de
+       3, 6 e 12 meses (hoje o texto remete à conversa da aplicação)
    ============================================================ */
 
 /* ============================================================
@@ -385,17 +390,6 @@ section{ padding: var(--section-y) 0; }
 .vsl{ text-align:center; }
 .vsl-wrap{ max-width: 860px; margin: 0 auto; }
 .vsl-text{ color: var(--grafite-soft); font-size: 1.02rem; max-width: 62ch; margin: .9rem auto 2.25rem; }
-.vsl-player{
-  position:relative; border-radius: var(--radius-l); overflow:hidden; aspect-ratio: 16/9;
-  background: linear-gradient(150deg, var(--verde-escuro) 0%, var(--grafite) 100%);
-  display:flex; align-items:center; justify-content:center; box-shadow: 0 30px 60px -25px rgba(68,60,66,.45);
-  border: 2px dashed rgba(255,255,255,.25);
-}
-.vsl-player img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.35; }
-.vsl-play{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:1rem; color:#fff; }
-.vsl-play .play-circle{ width:76px; height:76px; border-radius:50%; background: rgba(255,255,255,.16); border: 2px solid rgba(255,255,255,.5); display:flex; align-items:center; justify-content:center; }
-.vsl-play .play-circle svg{ width:26px; height:26px; fill:#fff; margin-left:4px; }
-.vsl-play span{ font-size:.82rem; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color: var(--verde-claro); }
 .vsl-caption{ margin-top:1.5rem; font-size:.8rem; color:var(--grafite-soft); }
 
 /* ============================================================
@@ -466,13 +460,6 @@ section{ padding: var(--section-y) 0; }
 @media (max-width: 900px){ .screens-grid{ grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px){ .screens-grid{ grid-template-columns: 1fr; } }
 
-/* placeholder de imagem reutilizável */
-.placeholder-img{
-  aspect-ratio: 4/3; background: repeating-linear-gradient(135deg, var(--bg) 0 10px, #EFF3EC 10px 20px);
-  border: 1.5px dashed var(--border); display:flex; align-items:center; justify-content:center; text-align:center;
-  color: var(--grafite-soft); font-size:.74rem; font-weight:700; padding: 1rem; line-height:1.4;
-}
-.placeholder-img svg{ width:22px; height:22px; stroke: var(--grafite-soft); margin-bottom:.5rem; }
 
 /* telas reais da plataforma: clipes curtos, mudos, em loop */
 .screen-video{
@@ -682,93 +669,6 @@ section{ padding: var(--section-y) 0; }
 .tcard-who span{ display:block; font-size:.74rem; color: var(--grafite-soft); margin-top:.1rem; }
 @media (max-width: 720px){ .talks-grid{ grid-template-columns: 1fr; gap:1.25rem; } }
 
-/* ============================================================
-   DEPOIMENTO EM VÍDEO — cartão que responde a uma objeção
-   ============================================================ */
-.vcard{
-  display:grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr);
-  gap: clamp(1.25rem, 3vw, 2.25rem); align-items:center;
-  max-width: 900px; margin: 3rem auto 0;
-  grid-column: 1 / -1;   /* quando a seção em volta é uma grade, ocupa a largura toda */
-  background: var(--branco); border:1px solid var(--border);
-  border-radius: var(--radius-l); padding: clamp(1.1rem, 2.4vw, 1.5rem);
-  box-shadow: 0 22px 46px -30px rgba(68,60,66,.45);
-}
-.bg-dark .vcard{ background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.14); box-shadow:none; }
-.vcard-player{
-  position:relative; aspect-ratio:16/9; border-radius: var(--radius-m); overflow:hidden;
-  background: var(--grafite); cursor:pointer; border:1px solid var(--border);
-}
-.bg-dark .vcard-player{ border-color: rgba(255,255,255,.14); }
-.vcard-player img{ width:100%; height:100%; object-fit:cover; transition: transform .5s ease; }
-.vcard-player::before{
-  content:''; position:absolute; inset:0; z-index:1;
-  background: linear-gradient(180deg, rgba(31,27,30,.05) 0%, rgba(31,27,30,.5) 100%);
-}
-.vcard-player:hover img{ transform: scale(1.04); }
-.vcard-player iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; z-index:3; }
-.vcard-play{
-  position:absolute; z-index:2; left:50%; top:50%; transform: translate(-50%,-50%);
-  width:60px; height:60px; border-radius:999px; border:0; cursor:pointer;
-  background: rgba(255,255,255,.94); display:grid; place-items:center;
-  box-shadow: 0 12px 28px -12px rgba(0,0,0,.6);
-  transition: transform .25s ease, background-color .25s ease;
-}
-.vcard-play svg{ width:24px; height:24px; margin-left:3px; fill: var(--verde-escuro); }
-.vcard-player:hover .vcard-play{ transform: translate(-50%,-50%) scale(1.09); background: var(--verde-claro); }
-.vcard-q{
-  display:block; font-size:.68rem; font-weight:900; letter-spacing:.09em; text-transform:uppercase;
-  color: var(--verde-escuro); margin-bottom:.6rem;
-}
-.bg-dark .vcard-q{ color: var(--verde-claro); }
-.vcard-copy h3{ font-size: clamp(1.05rem, 2.2vw, 1.28rem); font-weight:900; margin-bottom:.6rem; color: var(--grafite); }
-.bg-dark .vcard-copy h3{ color: var(--branco); }
-.vcard-copy p{ font-size:.94rem; color: var(--grafite-soft); }
-.bg-dark .vcard-copy p{ color: rgba(255,255,255,.74); }
-.vcard-who{
-  display:flex; align-items:center; gap:.7rem; margin-top:1.1rem;
-  padding-top:1rem; border-top:1px solid var(--border);
-}
-.bg-dark .vcard-who{ border-top-color: rgba(255,255,255,.14); }
-.vcard-who img{ width:44px; height:44px; flex:0 0 44px; border-radius:999px; object-fit:cover; border:2px solid var(--verde-claro); }
-.vcard-who b{ display:block; font-size:.95rem; font-weight:900; color: var(--grafite); }
-.bg-dark .vcard-who b{ color: var(--branco); }
-.vcard-who span{ display:block; font-size:.78rem; color: var(--grafite-soft); margin-top:.1rem; }
-.bg-dark .vcard-who span{ color: rgba(255,255,255,.68); }
-@media (max-width: 760px){
-  .vcard{ grid-template-columns: 1fr; gap:1.25rem; }
-  .vcard-player{ order:-1; }
-}
-
-/* entrevistas em vídeo: capa leve, player só entra no clique */
-.talks{ display:grid; grid-template-columns: 1fr; gap:1.25rem; max-width:860px; margin:0 auto 3.25rem; }
-.yt-facade{
-  position:relative; aspect-ratio:16/9; border-radius: var(--radius-l); overflow:hidden;
-  background: var(--grafite); cursor:pointer; border:1px solid var(--border);
-  box-shadow: 0 22px 46px -28px rgba(68,60,66,.55);
-}
-.yt-facade img{ width:100%; height:100%; object-fit:cover; transition: transform .5s ease, filter .3s ease; }
-.yt-facade::before{
-  content:''; position:absolute; inset:0; z-index:1;
-  background: linear-gradient(180deg, rgba(31,27,30,.12) 0%, rgba(31,27,30,.55) 100%);
-}
-.yt-facade:hover img{ transform: scale(1.03); }
-.yt-play{
-  position:absolute; z-index:2; left:50%; top:50%; transform: translate(-50%,-50%);
-  width:76px; height:76px; border-radius:999px; border:0; cursor:pointer;
-  background: rgba(255,255,255,.94); display:grid; place-items:center;
-  box-shadow: 0 14px 34px -14px rgba(0,0,0,.6);
-  transition: transform .25s ease, background-color .25s ease;
-}
-.yt-play svg{ width:30px; height:30px; margin-left:4px; fill: var(--verde-escuro); }
-.yt-facade:hover .yt-play{ transform: translate(-50%,-50%) scale(1.08); background: var(--verde-claro); }
-.yt-label{
-  position:absolute; z-index:2; left:1.1rem; bottom:1rem; color:#fff;
-  font-size:.82rem; font-weight:800; letter-spacing:.02em;
-  text-shadow: 0 2px 10px rgba(0,0,0,.5);
-}
-.yt-facade iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; z-index:3; }
-@media (max-width: 560px){ .yt-play{ width:62px; height:62px; } .yt-play svg{ width:24px; height:24px; } }
 
 /* quadro de aprovações confirmadas em resultado oficial */
 .approvals{
@@ -1071,15 +971,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     </div>
 
         </div>
-      </div>
-      <div class="vcard-player" data-yt="VkXaHq601i4">
-        <img src="https://i.ytimg.com/vi/VkXaHq601i4/hqdefault.jpg" alt="Conversa em vídeo com Daniel, aprovado no IDEMA/RN" loading="lazy" decoding="async">
-        <button type="button" class="vcard-play" aria-label="Reproduzir a conversa com Daniel">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- ============================================================
@@ -1119,15 +1010,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     </div>
 
         </div>
-      </div>
-      <div class="vcard-player" data-yt="CjDCH91p6cA">
-        <img src="https://i.ytimg.com/vi/CjDCH91p6cA/hqdefault.jpg" alt="Conversa em vídeo com Luanna, aprovada no IDEMA/RN" loading="lazy" decoding="async">
-        <button type="button" class="vcard-play" aria-label="Reproduzir a conversa com Luanna">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- ============================================================
@@ -1421,8 +1303,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 
     <h3 class="h-card" style="text-align:center; margin: 3.25rem 0 .75rem;">O que chega no meu WhatsApp</h3>
     <p class="privacy-note">
-      Prints reais de alunos, publicados com autorização. Os nomes estão borrados por privacidade.
-      Clique ou toque em qualquer print para ampliar.<span class="only-mobile"> Arraste a faixa para o lado para ver todos.</span>
+      Nomes borrados para preservar os alunos. Clique para ampliar.<span class="only-mobile"> Arraste a faixa para o lado para ver todos.</span>
     </p>
     <div class="testimonial-grid stagger">
       <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="1326"
@@ -1593,19 +1474,10 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </div>
     </div>
         </div>
-      </div>
-      <div class="vcard-player" data-yt="FHLAsuT8Twk">
-        <img src="https://i.ytimg.com/vi/FHLAsuT8Twk/hqdefault.jpg" alt="Conversa em vídeo com Arianne, aprovada no IDEMA/RN" loading="lazy" decoding="async">
-        <button type="button" class="vcard-play" aria-label="Reproduzir a conversa com Arianne">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-      </div>
-    </div>
 
     <div class="cta-solo" style="padding-top:2.5rem;">
       <a href="#aplicar" class="btn btn-primary btn-lg">Quero estudar assim</a>
     </div>
-  </div>
 </section>
 
 <!-- ============================================================
@@ -1650,7 +1522,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         </ul>
       </div>
     </div>
-    <!-- PLACEHOLDER: confirmar lista final de entregas/bônus e descrição dos planos de 3, 6 e 12 meses -->
     <p class="include-note">Esta oferta contempla o acompanhamento descrito acima dentro do plano escolhido. Os detalhes de cada plano (3, 6 ou 12 meses) são apresentados durante a aplicação. Como o acompanhamento é individual, as vagas por período são limitadas.</p>
     <div class="cta-solo" style="padding-top:2.5rem;">
       <a href="#aplicar" class="btn btn-primary btn-lg">Quero essa estrutura na minha preparação</a>
@@ -1700,20 +1571,11 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     <p class="fit-close">A mentoria oferece direção, método e acompanhamento. A execução continua sendo responsabilidade do aluno.</p>
 
         </div>
-      </div>
-      <div class="vcard-player" data-yt="xNrKYavJyS0">
-        <img src="https://i.ytimg.com/vi/xNrKYavJyS0/hqdefault.jpg" alt="Conversa em vídeo com Lucemir, aprovado no IDEMA/RN" loading="lazy" decoding="async">
-        <button type="button" class="vcard-play" aria-label="Reproduzir a conversa com Lucemir">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-      </div>
-    </div>
 
     <div class="cta-solo" style="padding-top:2.5rem;">
       <a href="#aplicar" class="btn btn-primary btn-lg">Me identifiquei. Quero aplicar</a>
       <p>A aplicação leva poucos minutos e não gera cobrança.</p>
     </div>
-  </div>
 </section>
 
 <!-- ============================================================
@@ -2314,7 +2176,7 @@ document.querySelectorAll('.faq-item').forEach(function(item){
      ============================================================ -->
 <script>
 (function () {
-  var caixas = document.querySelectorAll('.yt-facade[data-yt], .vcard-player[data-yt], .tcard-player[data-yt]')
+  var caixas = document.querySelectorAll('.tcard-player[data-yt]')
   if (!caixas.length) return
 
   function medir(nome, dados) {
@@ -2345,7 +2207,7 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     var capa = box.querySelector('img')
     if (capa) { capa.addEventListener('error', function () { capa.style.display = 'none' }) }
     box.addEventListener('click', function () { abrir(box) })
-    var btn = box.querySelector('.yt-play, .vcard-play, .tcard-play')
+    var btn = box.querySelector('.tcard-play')
     if (btn) {
       btn.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(box) }
