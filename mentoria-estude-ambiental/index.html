@@ -629,6 +629,60 @@ section{ padding: var(--section-y) 0; }
 .vsl-skip a:hover{ color: var(--branco); }
 
 /* ============================================================
+   DEPOIMENTOS EM VÍDEO — os quatro juntos, cada um marcado com a
+   dúvida que responde
+   ============================================================ */
+.talks-grid{
+  display:grid; grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 1.5rem; max-width: 940px; margin: 0 auto 3.25rem;
+}
+.tcard{
+  background: var(--branco); border:1px solid var(--border);
+  border-radius: var(--radius-l); overflow:hidden;
+  display:flex; flex-direction:column;
+  box-shadow: 0 20px 44px -30px rgba(68,60,66,.45);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+@media (hover: hover){
+  .tcard:hover{ transform: translateY(-4px); border-color: var(--verde); box-shadow: 0 26px 52px -28px rgba(68,60,66,.5); }
+}
+.tcard-player{
+  position:relative; aspect-ratio:16/9; background: var(--grafite);
+  cursor:pointer; border-bottom:1px solid var(--border);
+}
+.tcard-player img{ width:100%; height:100%; object-fit:cover; transition: transform .5s ease; }
+.tcard-player::before{
+  content:''; position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(31,27,30,.05) 0%, rgba(31,27,30,.45) 100%);
+}
+.tcard-player:hover img{ transform: scale(1.04); }
+.tcard-player iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; z-index:3; }
+.tcard-play{
+  position:absolute; z-index:2; left:50%; top:50%; transform: translate(-50%,-50%);
+  width:56px; height:56px; border-radius:999px; border:0; cursor:pointer;
+  background: rgba(255,255,255,.94); display:grid; place-items:center;
+  box-shadow: 0 12px 26px -12px rgba(0,0,0,.6);
+  transition: transform .25s ease, background-color .25s ease;
+}
+.tcard-play svg{ width:22px; height:22px; margin-left:3px; fill: var(--verde-escuro); }
+.tcard-player:hover .tcard-play{ transform: translate(-50%,-50%) scale(1.09); background: var(--verde-claro); }
+.tcard-body{ padding: 1.15rem 1.25rem 1.25rem; display:flex; flex-direction:column; flex:1; }
+.tcard-q{
+  display:block; font-size:.67rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase;
+  color: var(--verde-escuro); margin-bottom:.5rem;
+}
+.tcard-body h4{ font-size:1rem; font-weight:900; color: var(--grafite); margin:0 0 .45rem; line-height:1.3; }
+.tcard-body p{ font-size:.88rem; color: var(--grafite-soft); margin:0; }
+.tcard-who{
+  display:flex; align-items:center; gap:.65rem; margin-top:auto;
+  padding-top:.95rem; border-top:1px solid var(--border);
+}
+.tcard-who img{ width:40px; height:40px; flex:0 0 40px; border-radius:999px; object-fit:cover; border:2px solid var(--verde-claro); }
+.tcard-who b{ display:block; font-size:.9rem; font-weight:900; color: var(--grafite); }
+.tcard-who span{ display:block; font-size:.74rem; color: var(--grafite-soft); margin-top:.1rem; }
+@media (max-width: 720px){ .talks-grid{ grid-template-columns: 1fr; gap:1.25rem; } }
+
+/* ============================================================
    DEPOIMENTO EM VÍDEO — cartão que responde a uma objeção
    ============================================================ */
 .vcard{
@@ -1016,18 +1070,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       <div class="pain-card reveal"><span class="dash">•</span>Sente que precisa recomeçar quando o edital sai</div>
     </div>
 
-    <!-- objeção: "já tentei e não passei" -->
-    <div class="vcard reveal">
-      <div class="vcard-copy">
-        <span class="vcard-q">"Já tentei e não passei"</span>
-        <h3>Ele já tinha batido na trave duas vezes antes.</h3>
-        <p>Daniel reprovou em dois concursos anteriores pela nota mínima na discursiva. Nesta conversa ele conta o que mudou na terceira tentativa — e por que o problema nunca tinha sido falta de estudo.</p>
-        <div class="vcard-who">
-          <img src="./assets/img/alunos/daniel.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
-          <div>
-            <b>Daniel</b>
-            <span>Analista Ambiental (Geografia) · IDEMA/RN · 4º lugar</span>
-          </div>
         </div>
       </div>
       <div class="vcard-player" data-yt="VkXaHq601i4">
@@ -1076,18 +1118,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </div>
     </div>
 
-    <!-- objeção: "já tenho material, não preciso de mentoria" -->
-    <div class="vcard reveal">
-      <div class="vcard-copy">
-        <span class="vcard-q">"Eu já tenho material"</span>
-        <h3>Ela também tinha. E continuava perdida no meio dele.</h3>
-        <p>Luanna estudava por conta própria e não faltava conteúdo: faltava saber o que fazer com ele. Aqui ela conta como era decidir sozinha todo dia e o que mudou quando passou a seguir um plano.</p>
-        <div class="vcard-who">
-          <img src="./assets/img/alunos/luanna.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
-          <div>
-            <b>Luanna</b>
-            <span>Analista Ambiental (Eng. Florestal) · IDEMA/RN · 4º lugar</span>
-          </div>
         </div>
       </div>
       <div class="vcard-player" data-yt="CjDCH91p6cA">
@@ -1213,6 +1243,101 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     </div>
 
     <!-- Aprovações confirmadas nos resultados oficiais das bancas -->
+    <!-- Conversas em vídeo com os aprovados. Cada uma responde a uma
+         dúvida diferente. O player do YouTube só carrega no clique. -->
+    <h3 class="h-card" style="text-align:center; margin: 3.25rem 0 .75rem;">Conversas com quem passou</h3>
+    <p class="privacy-note">
+      Entrevistas completas, sem corte e sem roteiro. Cada uma responde a uma dúvida
+      diferente de quem está pensando em entrar.
+    </p>
+    <div class="talks-grid stagger">
+
+      <div class="tcard reveal">
+        <div class="tcard-player" data-yt="xNrKYavJyS0">
+          <img src="https://i.ytimg.com/vi/xNrKYavJyS0/hqdefault.jpg" alt="Conversa em vídeo com Lucemir, aprovado no IDEMA/RN" loading="lazy" decoding="async">
+          <button type="button" class="tcard-play" aria-label="Reproduzir a conversa com Lucemir">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="tcard-body">
+          <span class="tcard-q">"Mas eu não sou da área ambiental"</span>
+          <h4>Ele é formado em Ciências Contábeis.</h4>
+          <p>Entrou sem nenhuma bagagem ambiental e conta como construiu a base do zero.</p>
+          <div class="tcard-who">
+            <img src="./assets/img/alunos/lucemir.jpg" alt="" width="40" height="40" loading="lazy" decoding="async">
+            <div>
+              <b>Lucemir</b>
+              <span>Fiscal Ambiental · IDEMA/RN · 5º lugar (cotas)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard reveal" style="--reveal-delay:.08s">
+        <div class="tcard-player" data-yt="VkXaHq601i4">
+          <img src="https://i.ytimg.com/vi/VkXaHq601i4/hqdefault.jpg" alt="Conversa em vídeo com Daniel, aprovado no IDEMA/RN" loading="lazy" decoding="async">
+          <button type="button" class="tcard-play" aria-label="Reproduzir a conversa com Daniel">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="tcard-body">
+          <span class="tcard-q">"Já tentei e não passei"</span>
+          <h4>Ele já tinha batido na trave duas vezes.</h4>
+          <p>Reprovou em dois concursos pela nota da discursiva e conta o que mudou na terceira tentativa.</p>
+          <div class="tcard-who">
+            <img src="./assets/img/alunos/daniel.jpg" alt="" width="40" height="40" loading="lazy" decoding="async">
+            <div>
+              <b>Daniel</b>
+              <span>Analista Ambiental (Geografia) · IDEMA/RN · 4º lugar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard reveal" style="--reveal-delay:.16s">
+        <div class="tcard-player" data-yt="CjDCH91p6cA">
+          <img src="https://i.ytimg.com/vi/CjDCH91p6cA/hqdefault.jpg" alt="Conversa em vídeo com Luanna, aprovada no IDEMA/RN" loading="lazy" decoding="async">
+          <button type="button" class="tcard-play" aria-label="Reproduzir a conversa com Luanna">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="tcard-body">
+          <span class="tcard-q">"Eu já tenho material"</span>
+          <h4>Ela também tinha, e continuava perdida.</h4>
+          <p>Estudava por conta própria e conta o que mudou quando passou a seguir um plano.</p>
+          <div class="tcard-who">
+            <img src="./assets/img/alunos/luanna.jpg" alt="" width="40" height="40" loading="lazy" decoding="async">
+            <div>
+              <b>Luanna</b>
+              <span>Analista Ambiental (Eng. Florestal) · IDEMA/RN · 4º lugar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard reveal" style="--reveal-delay:.24s">
+        <div class="tcard-player" data-yt="FHLAsuT8Twk">
+          <img src="https://i.ytimg.com/vi/FHLAsuT8Twk/hqdefault.jpg" alt="Conversa em vídeo com Arianne, aprovada no IDEMA/RN" loading="lazy" decoding="async">
+          <button type="button" class="tcard-play" aria-label="Reproduzir a conversa com Arianne">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="tcard-body">
+          <span class="tcard-q">"Não tenho tempo"</span>
+          <h4>Ela entrou três semanas depois do edital.</h4>
+          <p>Conta como encaixou a preparação na rotina que tinha, e não na rotina ideal.</p>
+          <div class="tcard-who">
+            <img src="./assets/img/alunos/arianne.jpg" alt="" width="40" height="40" loading="lazy" decoding="async">
+            <div>
+              <b>Arianne</b>
+              <span>Fiscal Ambiental · IDEMA/RN · 2º lugar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
     <h3 class="h-card" style="text-align:center; margin: 3.25rem 0 .75rem;">Aprovações confirmadas em resultado oficial</h3>
     <p class="privacy-note">
       Cada linha abaixo foi conferida no resultado publicado pela banca. Mostramos apenas o primeiro nome
@@ -1467,18 +1592,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         <p>Quando algo sair do previsto, o plano é reorganizado — e você recebe o novo caminho, sem precisar remontar nada sozinho.</p>
       </div>
     </div>
-    <!-- objeção: "não tenho tempo" -->
-    <div class="vcard reveal">
-      <div class="vcard-copy">
-        <span class="vcard-q">"Não tenho tempo"</span>
-        <h3>Ela entrou três semanas depois do edital já publicado.</h3>
-        <p>Arianne é formada em Direito e Arquitetura e começou a estudar a área ambiental com o relógio correndo. Nesta conversa ela conta como encaixou a preparação na rotina que tinha — e não na rotina ideal.</p>
-        <div class="vcard-who">
-          <img src="./assets/img/alunos/arianne.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
-          <div>
-            <b>Arianne</b>
-            <span>Fiscal Ambiental · IDEMA/RN · 2º lugar</span>
-          </div>
         </div>
       </div>
       <div class="vcard-player" data-yt="FHLAsuT8Twk">
@@ -1586,18 +1699,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     </div>
     <p class="fit-close">A mentoria oferece direção, método e acompanhamento. A execução continua sendo responsabilidade do aluno.</p>
 
-    <!-- objeção: "preciso ser formado na área ambiental" -->
-    <div class="vcard reveal">
-      <div class="vcard-copy">
-        <span class="vcard-q">"Mas eu não sou da área ambiental"</span>
-        <h3>Ele é formado em Ciências Contábeis.</h3>
-        <p>Lucemir entrou sem nenhuma bagagem ambiental e passou em Fiscal Ambiental. Nesta conversa ele explica como foi construir a base do zero — e por que a formação de origem importou menos do que ele imaginava.</p>
-        <div class="vcard-who">
-          <img src="./assets/img/alunos/lucemir.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
-          <div>
-            <b>Lucemir</b>
-            <span>Fiscal Ambiental · IDEMA/RN · 5º lugar (cotas)</span>
-          </div>
         </div>
       </div>
       <div class="vcard-player" data-yt="xNrKYavJyS0">
@@ -2213,7 +2314,7 @@ document.querySelectorAll('.faq-item').forEach(function(item){
      ============================================================ -->
 <script>
 (function () {
-  var caixas = document.querySelectorAll('.yt-facade[data-yt], .vcard-player[data-yt]')
+  var caixas = document.querySelectorAll('.yt-facade[data-yt], .vcard-player[data-yt], .tcard-player[data-yt]')
   if (!caixas.length) return
 
   function medir(nome, dados) {
@@ -2244,7 +2345,7 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     var capa = box.querySelector('img')
     if (capa) { capa.addEventListener('error', function () { capa.style.display = 'none' }) }
     box.addEventListener('click', function () { abrir(box) })
-    var btn = box.querySelector('.yt-play, .vcard-play')
+    var btn = box.querySelector('.yt-play, .vcard-play, .tcard-play')
     if (btn) {
       btn.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(box) }
