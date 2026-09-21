@@ -80,9 +80,6 @@ src="https://www.facebook.com/tr?id=706004184857947&ev=PageView&noscript=1"
    ============================================================ */
 :root{
   --verde: #68995A;
-  /* verde só do botão cheio: escuro o bastante pra o texto branco
-     passar no contraste mínimo (AA) — o #68995A dava 3.3:1 */
-  --verde-btn: #557F46;
   --verde-escuro: #4E594B;
   --verde-claro: #C5FFB5;
   --grafite: #443C42;
@@ -308,10 +305,10 @@ h3.h-card{ font-weight: 800; font-size: clamp(1.02rem, 1.4vw, 1.15rem); color: v
    BUTTONS
    ============================================================ */
 .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.6rem; font-weight: 800; font-size: 1rem; padding: 1.05rem 2rem; border-radius: 999px; border: none; text-decoration:none; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; white-space: normal; text-align:center; }
-.btn-primary{ background: var(--verde-btn); color: var(--branco); box-shadow: 0 10px 24px -10px rgba(85,127,70,.55); }
+.btn-primary{ background: var(--verde); color: var(--branco); box-shadow: 0 10px 24px -10px rgba(104,153,90,.55); }
 .btn-primary:hover{ background: var(--verde-escuro); transform: translateY(-1px); }
 .btn-block{ width:100%; }
-.btn-lg{ font-size: 1.08rem; padding: 1.2rem 2.25rem; }
+.btn-lg{ font-size: 1.18rem; padding: 1.2rem 2.25rem; }
 
 .micro-list{ display:flex; flex-wrap:wrap; gap: .5rem 1.4rem; justify-content:center; margin-top: 1.1rem; font-size: .85rem; font-weight: 600; color: var(--verde-escuro); }
 .micro-list span{ display:inline-flex; align-items:center; gap:.4rem; }
@@ -584,6 +581,109 @@ section{ padding: var(--section-y) 0; }
   width:58px; height:58px; flex:0 0 58px; border-radius:999px;
   display:grid; place-items:center; background: var(--verde-claro);
   color: var(--verde-escuro); font-weight:950; font-size:1.3rem; border:2px solid var(--verde-claro);
+}
+
+/* ============================================================
+   VSL — player principal, 16:9 responsivo
+   ============================================================ */
+.vsl-embed{
+  position:relative; width:100%; aspect-ratio:16/9;
+  border-radius: var(--radius-l); overflow:hidden; background:#000;
+  box-shadow: 0 30px 60px -32px rgba(0,0,0,.65);
+}
+.vsl-embed iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+/* camada "clique para ouvir" por cima do vídeo mudo */
+.vsl-unmute{
+  position:absolute; inset:0; z-index:4; border:0; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.9rem;
+  background: rgba(31,27,30,.42); backdrop-filter: blur(1.5px);
+  color: var(--branco); font-family:inherit;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+.vsl-unmute[hidden]{ display:none; }
+.vsl-unmute.is-gone{ opacity:0; visibility:hidden; pointer-events:none; }
+.vsl-unmute-icon{
+  width:84px; height:84px; border-radius:999px; background: var(--verde-claro);
+  display:grid; place-items:center; box-shadow: 0 16px 38px -14px rgba(0,0,0,.7);
+  animation: vslPulse 2.4s ease-in-out infinite;
+}
+.vsl-unmute-icon svg{ width:36px; height:36px; fill: var(--verde-escuro); }
+.vsl-unmute-text{ font-size: clamp(1.05rem, 2.6vw, 1.4rem); font-weight:950; letter-spacing:-.01em; }
+.vsl-unmute-sub{ font-size:.82rem; font-weight:600; color: rgba(255,255,255,.8); }
+@keyframes vslPulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.07); } }
+@media (prefers-reduced-motion: reduce){ .vsl-unmute-icon{ animation:none; } }
+@media (max-width:560px){ .vsl-unmute-icon{ width:66px; height:66px; } .vsl-unmute-icon svg{ width:28px; height:28px; } }
+
+/* CTA que só aparece no minuto combinado */
+.vsl-cta{
+  margin-top:2rem; display:none;
+  animation: vslReveal .5s ease both;
+}
+.vsl-cta.is-visible{ display:block; }
+@keyframes vslReveal{ from{ opacity:0; transform: translateY(14px); } to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce){ .vsl-cta{ animation:none; } }
+/* link discreto pra quem não assiste até lá */
+.vsl-skip{ margin-top:1.5rem; font-size:.88rem; color: rgba(255,255,255,.72); }
+.vsl-skip a{ color: var(--verde-claro); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+.vsl-skip a:hover{ color: var(--branco); }
+
+/* ============================================================
+   DEPOIMENTO EM VÍDEO — cartão que responde a uma objeção
+   ============================================================ */
+.vcard{
+  display:grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr);
+  gap: clamp(1.25rem, 3vw, 2.25rem); align-items:center;
+  max-width: 900px; margin: 3rem auto 0;
+  grid-column: 1 / -1;   /* quando a seção em volta é uma grade, ocupa a largura toda */
+  background: var(--branco); border:1px solid var(--border);
+  border-radius: var(--radius-l); padding: clamp(1.1rem, 2.4vw, 1.5rem);
+  box-shadow: 0 22px 46px -30px rgba(68,60,66,.45);
+}
+.bg-dark .vcard{ background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.14); box-shadow:none; }
+.vcard-player{
+  position:relative; aspect-ratio:16/9; border-radius: var(--radius-m); overflow:hidden;
+  background: var(--grafite); cursor:pointer; border:1px solid var(--border);
+}
+.bg-dark .vcard-player{ border-color: rgba(255,255,255,.14); }
+.vcard-player img{ width:100%; height:100%; object-fit:cover; transition: transform .5s ease; }
+.vcard-player::before{
+  content:''; position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(31,27,30,.05) 0%, rgba(31,27,30,.5) 100%);
+}
+.vcard-player:hover img{ transform: scale(1.04); }
+.vcard-player iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; z-index:3; }
+.vcard-play{
+  position:absolute; z-index:2; left:50%; top:50%; transform: translate(-50%,-50%);
+  width:60px; height:60px; border-radius:999px; border:0; cursor:pointer;
+  background: rgba(255,255,255,.94); display:grid; place-items:center;
+  box-shadow: 0 12px 28px -12px rgba(0,0,0,.6);
+  transition: transform .25s ease, background-color .25s ease;
+}
+.vcard-play svg{ width:24px; height:24px; margin-left:3px; fill: var(--verde-escuro); }
+.vcard-player:hover .vcard-play{ transform: translate(-50%,-50%) scale(1.09); background: var(--verde-claro); }
+.vcard-q{
+  display:block; font-size:.68rem; font-weight:900; letter-spacing:.09em; text-transform:uppercase;
+  color: var(--verde-escuro); margin-bottom:.6rem;
+}
+.bg-dark .vcard-q{ color: var(--verde-claro); }
+.vcard-copy h3{ font-size: clamp(1.05rem, 2.2vw, 1.28rem); font-weight:900; margin-bottom:.6rem; color: var(--grafite); }
+.bg-dark .vcard-copy h3{ color: var(--branco); }
+.vcard-copy p{ font-size:.94rem; color: var(--grafite-soft); }
+.bg-dark .vcard-copy p{ color: rgba(255,255,255,.74); }
+.vcard-who{
+  display:flex; align-items:center; gap:.7rem; margin-top:1.1rem;
+  padding-top:1rem; border-top:1px solid var(--border);
+}
+.bg-dark .vcard-who{ border-top-color: rgba(255,255,255,.14); }
+.vcard-who img{ width:44px; height:44px; flex:0 0 44px; border-radius:999px; object-fit:cover; border:2px solid var(--verde-claro); }
+.vcard-who b{ display:block; font-size:.95rem; font-weight:900; color: var(--grafite); }
+.bg-dark .vcard-who b{ color: var(--branco); }
+.vcard-who span{ display:block; font-size:.78rem; color: var(--grafite-soft); margin-top:.1rem; }
+.bg-dark .vcard-who span{ color: rgba(255,255,255,.68); }
+@media (max-width: 760px){
+  .vcard{ grid-template-columns: 1fr; gap:1.25rem; }
+  .vcard-player{ order:-1; }
 }
 
 /* entrevistas em vídeo: capa leve, player só entra no clique */
@@ -874,16 +974,25 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       <h2 class="h-section">Antes de aplicar, entenda por que estudar mais nem sempre significa avançar mais.</h2>
       <p class="lede vsl-text">Neste vídeo, eu vou mostrar por que tantos concurseiros ambientais acumulam materiais, passam horas estudando e continuam sem saber se estão no caminho certo. Você também vai entender como funciona a Mentoria Estude Ambiental e o que muda quando sua preparação deixa de depender de improviso.</p>
     </div>
-    <!-- PLACEHOLDER: substituir por embed real do vídeo (YouTube não-listado/Vimeo/Panda) quando a VSL estiver gravada. Roteiro final: ~9 min, 8 blocos + abertura. -->
-    <div class="vsl-player reveal" id="vslPlayer">
-      <img src="./assets/img/dominique-retrato.jpg" alt="" width="1000" height="1499" decoding="async" />
-      <div class="vsl-play">
-        <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <span>Vídeo em produção</span>
-      </div>
+    <!-- VSL: começa mudo com autoplay (única forma que iPhone e Android
+         deixam tocar sozinho). O botão por cima tira o mudo e reinicia
+         do zero. O CTA aparece aos 7:25, controlado pela API do YouTube. -->
+    <div class="vsl-embed reveal" id="vslEmbed" data-yt="POIGtgzNSs8" data-cta-em="445">
+      <div id="vslFrame"></div>
+      <button type="button" class="vsl-unmute" id="vslUnmute">
+        <span class="vsl-unmute-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a6.8 6.8 0 0 1 0 13.4v2.1a8.9 8.9 0 0 0 0-17.6z"/></svg>
+        </span>
+        <span class="vsl-unmute-text">Clique para ouvir</span>
+        <span class="vsl-unmute-sub">o vídeo recomeça do início com som</span>
+      </button>
     </div>
     <p class="vsl-caption">Assista até o final para entender o Método TEIA antes de aplicar.</p>
-    <a href="#aplicar" class="btn btn-primary btn-lg" style="margin-top:2rem;">Quero uma preparação com direção</a>
+
+    <div class="vsl-cta" id="vslCta">
+      <a href="#aplicar" class="btn btn-primary btn-lg">Quero uma preparação com direção</a>
+    </div>
+    <p class="vsl-skip">Prefere não assistir agora? <a href="#aplicar">Ir direto para a aplicação</a></p>
   </div>
 </section>
 
@@ -905,6 +1014,28 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       <div class="pain-card reveal"><span class="dash">•</span>Esquece boa parte do que já estudou</div>
       <div class="pain-card reveal"><span class="dash">•</span>Resolve questões, mas não transforma erros em evolução</div>
       <div class="pain-card reveal"><span class="dash">•</span>Sente que precisa recomeçar quando o edital sai</div>
+    </div>
+
+    <!-- objeção: "já tentei e não passei" -->
+    <div class="vcard reveal">
+      <div class="vcard-copy">
+        <span class="vcard-q">"Já tentei e não passei"</span>
+        <h3>Ele já tinha batido na trave duas vezes antes.</h3>
+        <p>Daniel reprovou em dois concursos anteriores pela nota mínima na discursiva. Nesta conversa ele conta o que mudou na terceira tentativa — e por que o problema nunca tinha sido falta de estudo.</p>
+        <div class="vcard-who">
+          <img src="./assets/img/alunos/daniel.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+          <div>
+            <b>Daniel</b>
+            <span>Analista Ambiental (Geografia) · IDEMA/RN · 4º lugar</span>
+          </div>
+        </div>
+      </div>
+      <div class="vcard-player" data-yt="VkXaHq601i4">
+        <img src="https://i.ytimg.com/vi/VkXaHq601i4/hqdefault.jpg" alt="Conversa em vídeo com Daniel, aprovado no IDEMA/RN" loading="lazy" decoding="async">
+        <button type="button" class="vcard-play" aria-label="Reproduzir a conversa com Daniel">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -942,6 +1073,28 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
           <li><span class="mark">✓</span>Ajusta o plano quando surgem dificuldades</li>
           <li><span class="mark">✓</span>Chega à prova conhecendo seus pontos fortes e fracos</li>
         </ul>
+      </div>
+    </div>
+
+    <!-- objeção: "já tenho material, não preciso de mentoria" -->
+    <div class="vcard reveal">
+      <div class="vcard-copy">
+        <span class="vcard-q">"Eu já tenho material"</span>
+        <h3>Ela também tinha. E continuava perdida no meio dele.</h3>
+        <p>Luanna estudava por conta própria e não faltava conteúdo: faltava saber o que fazer com ele. Aqui ela conta como era decidir sozinha todo dia e o que mudou quando passou a seguir um plano.</p>
+        <div class="vcard-who">
+          <img src="./assets/img/alunos/luanna.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+          <div>
+            <b>Luanna</b>
+            <span>Analista Ambiental (Eng. Florestal) · IDEMA/RN · 4º lugar</span>
+          </div>
+        </div>
+      </div>
+      <div class="vcard-player" data-yt="CjDCH91p6cA">
+        <img src="https://i.ytimg.com/vi/CjDCH91p6cA/hqdefault.jpg" alt="Conversa em vídeo com Luanna, aprovada no IDEMA/RN" loading="lazy" decoding="async">
+        <button type="button" class="vcard-play" aria-label="Reproduzir a conversa com Luanna">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>
       </div>
     </div>
   </div>
@@ -1141,24 +1294,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </table>
     </div>
 
-    <!-- Entrevistas em vídeo com os aprovados (playlist no YouTube).
-         O player só é carregado quando a pessoa clica: antes disso é
-         só a capa, sem nenhum script do YouTube pesando na página. -->
-    <h3 class="h-card" style="text-align:center; margin: 0 0 .75rem;">Conversas com quem passou</h3>
-    <p class="privacy-note">
-      Entrevistas completas, sem corte e sem roteiro, com alunos aprovados contando como era a
-      preparação antes da mentoria e o que mudou depois.
-    </p>
-    <div class="talks">
-      <div class="yt-facade reveal" data-yt="ppwjs0xD3N0" data-list="PLKaRyxtns2Mnhpjm1hrJMNJKRzedLTnka">
-        <img src="https://i.ytimg.com/vi/ppwjs0xD3N0/hqdefault.jpg" alt="Conversa em vídeo com aluno aprovado da Mentoria Estude Ambiental" loading="lazy" decoding="async">
-        <button type="button" class="yt-play" aria-label="Reproduzir a conversa">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-        <span class="yt-label">Entrevistas com aprovados</span>
-      </div>
-    </div>
-
     <h3 class="h-card" style="text-align:center; margin: 3.25rem 0 .75rem;">O que chega no meu WhatsApp</h3>
     <p class="privacy-note">
       Prints reais de alunos, publicados com autorização. Os nomes estão borrados por privacidade.
@@ -1332,6 +1467,28 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
         <p>Quando algo sair do previsto, o plano é reorganizado — e você recebe o novo caminho, sem precisar remontar nada sozinho.</p>
       </div>
     </div>
+    <!-- objeção: "não tenho tempo" -->
+    <div class="vcard reveal">
+      <div class="vcard-copy">
+        <span class="vcard-q">"Não tenho tempo"</span>
+        <h3>Ela entrou três semanas depois do edital já publicado.</h3>
+        <p>Arianne é formada em Direito e Arquitetura e começou a estudar a área ambiental com o relógio correndo. Nesta conversa ela conta como encaixou a preparação na rotina que tinha — e não na rotina ideal.</p>
+        <div class="vcard-who">
+          <img src="./assets/img/alunos/arianne.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+          <div>
+            <b>Arianne</b>
+            <span>Fiscal Ambiental · IDEMA/RN · 2º lugar</span>
+          </div>
+        </div>
+      </div>
+      <div class="vcard-player" data-yt="FHLAsuT8Twk">
+        <img src="https://i.ytimg.com/vi/FHLAsuT8Twk/hqdefault.jpg" alt="Conversa em vídeo com Arianne, aprovada no IDEMA/RN" loading="lazy" decoding="async">
+        <button type="button" class="vcard-play" aria-label="Reproduzir a conversa com Arianne">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+    </div>
+
     <div class="cta-solo" style="padding-top:2.5rem;">
       <a href="#aplicar" class="btn btn-primary btn-lg">Quero estudar assim</a>
     </div>
@@ -1428,6 +1585,29 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </div>
     </div>
     <p class="fit-close">A mentoria oferece direção, método e acompanhamento. A execução continua sendo responsabilidade do aluno.</p>
+
+    <!-- objeção: "preciso ser formado na área ambiental" -->
+    <div class="vcard reveal">
+      <div class="vcard-copy">
+        <span class="vcard-q">"Mas eu não sou da área ambiental"</span>
+        <h3>Ele é formado em Ciências Contábeis.</h3>
+        <p>Lucemir entrou sem nenhuma bagagem ambiental e passou em Fiscal Ambiental. Nesta conversa ele explica como foi construir a base do zero — e por que a formação de origem importou menos do que ele imaginava.</p>
+        <div class="vcard-who">
+          <img src="./assets/img/alunos/lucemir.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+          <div>
+            <b>Lucemir</b>
+            <span>Fiscal Ambiental · IDEMA/RN · 5º lugar (cotas)</span>
+          </div>
+        </div>
+      </div>
+      <div class="vcard-player" data-yt="xNrKYavJyS0">
+        <img src="https://i.ytimg.com/vi/xNrKYavJyS0/hqdefault.jpg" alt="Conversa em vídeo com Lucemir, aprovado no IDEMA/RN" loading="lazy" decoding="async">
+        <button type="button" class="vcard-play" aria-label="Reproduzir a conversa com Lucemir">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+    </div>
+
     <div class="cta-solo" style="padding-top:2.5rem;">
       <a href="#aplicar" class="btn btn-primary btn-lg">Me identifiquei. Quero aplicar</a>
       <p>A aplicação leva poucos minutos e não gera cobrança.</p>
@@ -1787,24 +1967,34 @@ document.querySelectorAll('.faq-item').forEach(function(item){
 
 // Tracking: cliques nos CTAs "Quero aplicar" (Meta Pixel)
 // Distingue dois momentos: rolar até a seção de oferta (engajamento) e
-// clicar no botão que de fato sai para o Respondi (intenção real de
-// aplicar — dispara o evento padrão "Lead" para otimizar os anúncios).
-// PLACEHOLDER: quando o link do Respondi for definido no href de #ctaAplicar,
-// os parâmetros de UTM da URL atual devem ser anexados a ele automaticamente
-// (o Respondi também tem sua própria captura de UTM nativa — confirmar qual
-// caminho usar antes de duplicar).
+// Cliques nas chamadas para aplicar. Cada evento vai para o Meta Pixel
+// e para o Google Analytics (assim que a tag do GA estiver instalada:
+// o código abaixo só dispara se gtag/dataLayer existirem).
 (function(){
-  var scrollCtas = document.querySelectorAll('a[href="#aplicar"]');
-  scrollCtas.forEach(function(el){
+  function medir(nome, dados, padraoDoPixel){
+    dados = dados || {};
+    try {
+      if(typeof fbq === 'function'){
+        if(padraoDoPixel){ fbq('track', nome, dados); }
+        else { fbq('trackCustom', nome, dados); }
+      }
+    } catch(e) {}
+    try {
+      if(typeof gtag === 'function'){ gtag('event', nome, dados); }
+      else if(window.dataLayer && window.dataLayer.push){ window.dataLayer.push(Object.assign({ event: nome }, dados)); }
+    } catch(e) {}
+  }
+
+  document.querySelectorAll('a[href="#aplicar"]').forEach(function(el){
     el.addEventListener('click', function(){
-      if(typeof fbq === 'function'){ fbq('trackCustom', 'CliqueChamadaAplicar'); }
+      medir('CliqueChamadaAplicar', { texto: (el.innerText || '').trim().slice(0, 60) });
     });
   });
 
   var realCta = document.getElementById('ctaAplicar');
   if(realCta){
     realCta.addEventListener('click', function(){
-      if(typeof fbq === 'function'){ fbq('track', 'Lead'); }
+      medir('Lead', {}, true);
     });
   }
 })();
@@ -1870,26 +2060,182 @@ document.querySelectorAll('.faq-item').forEach(function(item){
 </script>
 
 <!-- ============================================================
+     VSL — player do YouTube pela IFrame API
+     - começa mudo com autoplay (única forma que iPhone e Android
+       permitem reprodução automática)
+     - o botão "Clique para ouvir" tira o mudo e reinicia do zero
+     - o CTA aparece no segundo combinado (data-cta-em)
+     - dispara os eventos de audiência pro Pixel e pro GA
+     ============================================================ -->
+<script>
+(function () {
+  var caixa = document.getElementById('vslEmbed')
+  if (!caixa) return
+
+  var VIDEO = caixa.dataset.yt
+  var CTA_EM = parseInt(caixa.dataset.ctaEm, 10) || 445
+  var botao = document.getElementById('vslUnmute')
+  var cta = document.getElementById('vslCta')
+  var player = null
+  var relogio = null
+  var marcos = { 25: false, 50: false, 75: false, 100: false }
+  var jaDeuPlay = false
+  var ctaLiberado = false
+
+  // --- medição: manda o mesmo evento pro Meta Pixel e pro Google Analytics
+  function medir(nome, dados) {
+    dados = dados || {}
+    try { if (typeof fbq === 'function') fbq('trackCustom', nome, dados) } catch (e) {}
+    try {
+      if (typeof gtag === 'function') gtag('event', nome, dados)
+      else if (window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({ event: nome }, dados))
+    } catch (e) {}
+  }
+
+  function mostrarCta() {
+    if (ctaLiberado || !cta) return
+    ctaLiberado = true
+    cta.classList.add('is-visible')
+    medir('VSLCtaExibido', { segundo: CTA_EM })
+  }
+
+  function acompanhar() {
+    if (!player || typeof player.getCurrentTime !== 'function') return
+    var t = player.getCurrentTime() || 0
+    var total = player.getDuration() || 0
+
+    if (!ctaLiberado && t >= CTA_EM) mostrarCta()
+
+    if (total > 0) {
+      var pct = (t / total) * 100
+      ;[25, 50, 75].forEach(function (m) {
+        if (!marcos[m] && pct >= m) {
+          marcos[m] = true
+          medir('VSLProgresso', { percentual: m, segundo: Math.round(t) })
+        }
+      })
+    }
+  }
+
+  function ligarRelogio() {
+    if (relogio) return
+    relogio = setInterval(acompanhar, 1000)
+  }
+  function desligarRelogio() {
+    if (!relogio) return
+    clearInterval(relogio); relogio = null
+  }
+
+  function aoMudarEstado(e) {
+    if (e.data === YT.PlayerState.PLAYING) {
+      if (!jaDeuPlay) { jaDeuPlay = true; medir('VSLPlay', { video: VIDEO }) }
+      ligarRelogio()
+    } else if (e.data === YT.PlayerState.ENDED) {
+      desligarRelogio()
+      if (!marcos[100]) { marcos[100] = true; medir('VSLProgresso', { percentual: 100 }) }
+      mostrarCta()
+    } else {
+      desligarRelogio()
+    }
+  }
+
+  function aoFicarPronto() {
+    try { player.mute(); player.playVideo() } catch (e) {}
+    if (!botao) return
+    botao.addEventListener('click', function () {
+      try {
+        player.unMute()
+        player.setVolume(100)
+        player.seekTo(0, true)
+        player.playVideo()
+      } catch (e) {}
+      botao.classList.add('is-gone')
+      setTimeout(function () { botao.hidden = true }, 350)
+      medir('VSLSom', { video: VIDEO })
+    })
+  }
+
+  function criarPlayer() {
+    player = new YT.Player('vslFrame', {
+      host: 'https://www.youtube-nocookie.com',
+      videoId: VIDEO,
+      playerVars: {
+        autoplay: 1, mute: 1, playsinline: 1,
+        rel: 0, modestbranding: 1, controls: 1, fs: 1
+      },
+      events: { onReady: aoFicarPronto, onStateChange: aoMudarEstado }
+    })
+  }
+
+  // a API do YouTube só entra quando a pessoa chega perto do vídeo,
+  // pra não pesar o primeiro carregamento de quem nem rolou a página
+  var iniciado = false
+  function iniciar() {
+    if (iniciado) return
+    iniciado = true
+    if (window.YT && window.YT.Player) { criarPlayer(); return }
+    var anterior = window.onYouTubeIframeAPIReady
+    window.onYouTubeIframeAPIReady = function () {
+      if (typeof anterior === 'function') anterior()
+      criarPlayer()
+    }
+    var s = document.createElement('script')
+    s.src = 'https://www.youtube.com/iframe_api'
+    document.head.appendChild(s)
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return
+        io.disconnect()
+        iniciar()
+      })
+    }, { rootMargin: '400px 0px' })
+    io.observe(caixa)
+  } else {
+    iniciar()
+  }
+
+  // o CTA principal continua sendo medido mesmo sem o vídeo
+  var ctaLink = cta && cta.querySelector('a')
+  if (ctaLink) {
+    ctaLink.addEventListener('click', function () {
+      medir('VSLCtaClique', { segundo: player && player.getCurrentTime ? Math.round(player.getCurrentTime()) : null })
+    })
+  }
+})()
+</script>
+
+<!-- ============================================================
      ENTREVISTAS: o player do YouTube só entra depois do clique.
      Antes disso a página não carrega nada do YouTube — só a capa.
      ============================================================ -->
 <script>
 (function () {
-  var caixas = document.querySelectorAll('.yt-facade[data-yt]')
+  var caixas = document.querySelectorAll('.yt-facade[data-yt], .vcard-player[data-yt]')
   if (!caixas.length) return
+
+  function medir(nome, dados) {
+    try { if (typeof fbq === 'function') fbq('trackCustom', nome, dados || {}) } catch (e) {}
+    try {
+      if (typeof gtag === 'function') gtag('event', nome, dados || {})
+      else if (window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({ event: nome }, dados || {}))
+    } catch (e) {}
+  }
 
   function abrir(box) {
     if (box.dataset.aberto) return
     box.dataset.aberto = '1'
-    var p = new URLSearchParams({ autoplay: '1', rel: '0', modestbranding: '1' })
+    var p = new URLSearchParams({ autoplay: '1', rel: '0', modestbranding: '1', playsinline: '1' })
     if (box.dataset.list) p.set('list', box.dataset.list)
     var f = document.createElement('iframe')
     f.src = 'https://www.youtube-nocookie.com/embed/' + box.dataset.yt + '?' + p.toString()
-    f.title = 'Entrevista com aluno aprovado da Mentoria Estude Ambiental'
+    f.title = 'Conversa com aluno aprovado da Mentoria Estude Ambiental'
     f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture; web-share'
     f.allowFullscreen = true
     box.appendChild(f)
-    if (typeof fbq === 'function') { fbq('trackCustom', 'AssistiuEntrevista') }
+    medir('DepoimentoPlay', { video: box.dataset.yt })
   }
 
   caixas.forEach(function (box) {
@@ -1898,7 +2244,7 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     var capa = box.querySelector('img')
     if (capa) { capa.addEventListener('error', function () { capa.style.display = 'none' }) }
     box.addEventListener('click', function () { abrir(box) })
-    var btn = box.querySelector('.yt-play')
+    var btn = box.querySelector('.yt-play, .vcard-play')
     if (btn) {
       btn.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(box) }
