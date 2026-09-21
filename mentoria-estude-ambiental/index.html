@@ -549,9 +549,53 @@ section{ padding: var(--section-y) 0; }
 .result-card h3{ font-size:1.05rem; margin-bottom:.3rem; }
 .result-card .meta{ font-size:.86rem; color: var(--grafite-soft); margin-bottom:.75rem; }
 .result-card p.quote{ font-size:.94rem; color: var(--grafite); font-style: italic; }
-.testimonial-grid{ columns: 2; column-gap: 1.25rem; }
-.testimonial-shot{ display:block; width:100%; border-radius: var(--radius-m); box-shadow: 0 20px 40px -24px rgba(68,60,66,.35); margin-bottom: 1.25rem; break-inside: avoid; }
-@media (max-width: 780px){ .result-grid{ grid-template-columns: 1fr; } .testimonial-grid{ columns:1; } }
+.testimonial-grid{ columns: 3; column-gap: 1.25rem; }
+.testimonial-shot{
+  display:block; width:100%; height:auto; border-radius: var(--radius-m);
+  box-shadow: 0 20px 40px -24px rgba(68,60,66,.35); margin-bottom: 1.25rem;
+  break-inside: avoid; cursor: zoom-in; background: var(--branco);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.testimonial-shot:hover{ transform: translateY(-3px); box-shadow: 0 26px 48px -22px rgba(68,60,66,.45); }
+.privacy-note{
+  text-align:center; font-size:.8rem; color: var(--grafite-soft);
+  max-width: 54ch; margin: 0 auto 1.75rem; line-height:1.5;
+}
+.only-mobile{ display:none; }
+@media (max-width: 900px){ .only-mobile{ display:inline; } }
+@media (max-width: 780px){ .result-grid{ grid-template-columns: 1fr; } }
+/* no celular e no tablet vira uma faixa que desliza pro lado, pra não esticar a página */
+@media (max-width: 900px){
+  .testimonial-grid{
+    columns: auto; display:flex; gap: .9rem; overflow-x:auto; align-items:flex-start;
+    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    padding: .25rem 1.25rem 1.25rem; margin: 0 -1.25rem;
+    scrollbar-width: none;
+  }
+  .testimonial-grid::-webkit-scrollbar{ display:none; }
+  .testimonial-shot{
+    flex: 0 0 auto; width: 80%; max-width: 360px; min-width: 0;
+    margin-bottom: 0; scroll-snap-align: center;
+  }
+}
+
+/* lightbox dos prints: abrir em tamanho cheio pra leitura no celular */
+.lightbox{
+  position: fixed; inset: 0; z-index: 200; display:none;
+  align-items:center; justify-content:center; padding: clamp(.75rem, 3vw, 2rem);
+  background: rgba(31,27,30,.92); backdrop-filter: blur(4px); cursor: zoom-out;
+}
+.lightbox.is-open{ display:flex; }
+.lightbox img{
+  max-width: min(100%, 560px); max-height: 100%; width:auto; height:auto;
+  border-radius: var(--radius-m); box-shadow: 0 30px 70px -30px rgba(0,0,0,.7);
+}
+.lightbox-close{
+  position:absolute; top: .75rem; right: .75rem; width: 42px; height: 42px;
+  border:0; border-radius:999px; background: rgba(255,255,255,.14); color:#fff;
+  font-size: 1.4rem; line-height:1; cursor:pointer;
+}
+.lightbox-close:hover{ background: rgba(255,255,255,.26); }
 
 /* ============================================================
    SOBRE
@@ -873,13 +917,48 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       </div>
     </div>
 
-    <!-- PLACEHOLDER: depoimentos sobre transformação no processo (constância, organização, confiança) — substituir por prints reais e legíveis -->
-    <h3 class="h-card" style="text-align:center; margin-bottom:1.25rem;">Transformações durante a preparação</h3>
+    <h3 class="h-card" style="text-align:center; margin-bottom:.75rem;">O que chega no meu WhatsApp</h3>
+    <p class="privacy-note">
+      Prints reais de alunos, publicados com autorização. Os nomes estão borrados por privacidade.
+      Clique ou toque em qualquer print para ampliar.<span class="only-mobile"> Arraste a faixa para o lado para ver todos.</span>
+    </p>
     <div class="testimonial-grid stagger">
-      <div class="placeholder-img reveal" style="aspect-ratio: 3/4; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre sair da desorganização</div>
-      <div class="placeholder-img reveal" style="aspect-ratio: 4/5; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre constância e metas</div>
-      <div class="placeholder-img reveal" style="aspect-ratio: 4/3; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre melhora na taxa de acertos</div>
-      <div class="placeholder-img reveal" style="aspect-ratio: 3/4; border-radius: var(--radius-m); margin-bottom:1.25rem;">PRINT REAL: depoimento sobre segurança antes da prova</div>
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="1326"
+           src="./assets/img/depoimentos/dep-1822.jpg"
+           alt="Aluna avisa que ficou em 2º lugar para cotas no concurso do IFAM.">
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="430"
+           src="./assets/img/depoimentos/dep-1812.jpg"
+           alt="Aluno conta que passou no concurso de Recife dentro das vagas.">
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="1082"
+           src="./assets/img/depoimentos/dep-1824.jpg"
+           alt="Aluna envia o Diário Oficial com a nomeação dela: 'Fui nomeada'.">
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="1306"
+           src="./assets/img/depoimentos/dep-1797.jpg"
+           alt="Aluna tira 26 de 30 e 27 de 30 nas provas discursivas.">
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="1200"
+           src="./assets/img/depoimentos/dep-1815.jpg"
+           alt="Recurso na discursiva rende mais 7,5 pontos e garante a vaga da aluna.">
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="1250"
+           src="./assets/img/depoimentos/dep-1790.jpg"
+           alt="Aluno contador comemora ter chance de vaga em concurso da área ambiental.">
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="1206"
+           src="./assets/img/depoimentos/dep-1788.jpg"
+           alt="Depoimento sobre sair da falta de disciplina e organização até a aprovação.">
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="488"
+           src="./assets/img/depoimentos/dep-1780.jpg"
+           alt="Aluna parte do zero em janeiro e chega a quase 80% de aproveitamento em mais de 1.400 questões.">
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="496"
+           src="./assets/img/depoimentos/dep-1775.jpg"
+           alt="Aluna com TDAH conta que encontrou na mentoria os lembretes e as metas que precisava.">
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="1266"
+           src="./assets/img/depoimentos/dep-1774.jpg"
+           alt="Feedback de ciclo: 'essa organização era o que eu precisava, com planejamento consigo ter direção'.">
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="826"
+           src="./assets/img/depoimentos/dep-1826.jpg"
+           alt="Aluna comenta os relatórios: vê com clareza onde precisa melhorar e como estão os estudos.">
+      <img class="testimonial-shot reveal" loading="lazy" decoding="async" width="860" height="1156"
+           src="./assets/img/depoimentos/dep-1825.jpg"
+           alt="Aluna diz que a mentoria foi a coisa mais sensata que fez com o dinheiro da demissão.">
     </div>
     <div style="text-align:center; margin-top:2.5rem;">
       <a href="#aplicar" class="btn btn-primary btn-lg">Quero um plano baseado em resultados reais</a>
@@ -1134,6 +1213,40 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       <p>Criei a Estude Ambiental porque percebi que muitos candidatos não precisavam apenas de mais aulas. Eles precisavam de alguém que os ajudasse a decidir o que fazer com todo o conteúdo disponível. Meu trabalho não é prometer um caminho fácil. É reduzir o improviso, orientar suas decisões e acompanhar a evolução da sua preparação.</p>
       <div class="about-quote">Você não entra para receber uma planilha e se virar. Entra para ter direção, método e ajustes ao longo do caminho.</div>
       <p class="about-sign" style="margin-top:1.5rem;">Dominique Martins Sala<span>Fundadora da Estude Ambiental</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     POR QUE AGORA
+     ============================================================ -->
+<section class="bg-dark">
+  <div class="blob blob-5"></div>
+  <div class="container shift">
+    <span class="eyebrow">Por que agora</span>
+    <h2 class="h-section" style="margin:1rem 0 1.1rem;">O melhor momento para começar não é quando sai o edital.</h2>
+    <p class="lede" style="margin:0 auto 3rem;">Quando o edital sai, o relógio já está correndo — e ele corre contra quem começou naquele dia.</p>
+    <div class="after-grid">
+      <div class="after-item reveal">
+        <h3>Entre o edital e a prova cabem poucas semanas</h3>
+        <p>Esse intervalo serve para revisar, treinar questões da banca e ajustar o foco. Não serve para aprender do zero licenciamento, resíduos, unidades de conservação e legislação ambiental.</p>
+      </div>
+      <div class="after-item reveal" style="--reveal-delay:.08s">
+        <h3>O conteúdo base se repete de edital em edital</h3>
+        <p>Muda a banca, muda o peso de cada tema, mas o núcleo da área ambiental é o mesmo. Quem já construiu essa base não recomeça a cada edital: só redistribui prioridades.</p>
+      </div>
+      <div class="after-item reveal" style="--reveal-delay:.16s">
+        <h3>Você não disputa com o edital. Disputa com pessoas.</h3>
+        <p>E quem passa quase nunca começou no mês da publicação. Começou meses antes, com uma base pronta esperando o edital chegar.</p>
+      </div>
+      <div class="after-item reveal" style="--reveal-delay:.24s">
+        <h3>Um ciclo perdido custa anos</h3>
+        <p>Concurso da área ambiental não abre todo mês. Deixar passar um edital por falta de preparo significa esperar o próximo — e ele pode levar anos para sair.</p>
+      </div>
+    </div>
+    <p class="lede" style="margin:3rem auto 2rem; text-align:center;">Não existe momento perfeito. Existe o momento em que você decide parar de estudar no escuro.</p>
+    <div style="text-align:center;">
+      <a href="#aplicar" class="btn btn-primary btn-lg">Quero começar antes do edital</a>
     </div>
   </div>
 </section>
@@ -1530,6 +1643,47 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     close();
   });
 })();
+</script>
+
+<!-- ============================================================
+     LIGHTBOX: amplia os prints de depoimento pra leitura no celular
+     ============================================================ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Print ampliado">
+  <button class="lightbox-close" type="button" aria-label="Fechar">&times;</button>
+  <img id="lightboxImg" alt="">
+</div>
+<script>
+(function () {
+  var box = document.getElementById('lightbox')
+  var img = document.getElementById('lightboxImg')
+  if (!box || !img) return
+  var lastFocus = null
+  function open(src, alt) {
+    lastFocus = document.activeElement
+    img.src = src
+    img.alt = alt || ''
+    box.classList.add('is-open')
+    document.body.style.overflow = 'hidden'
+    box.querySelector('.lightbox-close').focus()
+  }
+  function close() {
+    box.classList.remove('is-open')
+    document.body.style.overflow = ''
+    img.removeAttribute('src')
+    if (lastFocus && lastFocus.focus) lastFocus.focus()
+  }
+  document.querySelectorAll('.testimonial-shot').forEach(function (el) {
+    el.tabIndex = 0
+    el.addEventListener('click', function () { open(el.currentSrc || el.src, el.alt) })
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(el.currentSrc || el.src, el.alt) }
+    })
+  })
+  box.addEventListener('click', close)
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && box.classList.contains('is-open')) close()
+  })
+})()
 </script>
 
 <!-- ============================================================
