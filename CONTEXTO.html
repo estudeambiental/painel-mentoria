@@ -1,341 +1,403 @@
-<title>Dossiê Estude Ambiental</title>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contexto do projeto — Estude Ambiental</title>
+<meta name="robots" content="noindex, nofollow" />
 <style>
 :root{
-  --ground:#F4F7F1;
-  --surface:#FFFFFF;
-  --ink:#2B2E27;
-  --ink-soft:#6B7268;
-  --heading:#2F4A2A;
-  --accent:#4C7A40;
-  --accent-soft:#DCF3D2;
-  --warn:#9A6B23;
-  --warn-soft:#FBF0DC;
-  --border:#DCE6D5;
-  --mono-tint:#EDF3E9;
+  --verde:#68995A; --verde-escuro:#4E594B; --verde-claro:#C5FFB5;
+  --grafite:#443C42; --grafite-soft:#6b6069; --branco:#fff;
+  --bg:#F6F8F4; --bg-verde:#EEF6EA; --border:#E1E8DC;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --ground:#1A1F18;
-    --surface:#222922;
-    --ink:#E7ECE3;
-    --ink-soft:#A3AC9C;
-    --heading:#BFE8AE;
-    --accent:#8FCB7C;
-    --accent-soft:#2C3B26;
-    --warn:#E0B463;
-    --warn-soft:#3A3020;
-    --border:#333D2E;
-    --mono-tint:#212820;
-  }
-}
-:root[data-theme="dark"]{
-  --ground:#1A1F18;
-  --surface:#222922;
-  --ink:#E7ECE3;
-  --ink-soft:#A3AC9C;
-  --heading:#BFE8AE;
-  --accent:#8FCB7C;
-  --accent-soft:#2C3B26;
-  --warn:#E0B463;
-  --warn-soft:#3A3020;
-  --border:#333D2E;
-  --mono-tint:#212820;
-}
-
-*,*::before,*::after{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
+*{box-sizing:border-box}
 body{
-  margin:0;
-  background:var(--ground);
-  color:var(--ink);
-  font-family:'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
+  margin:0; background:var(--bg); color:var(--grafite);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.65; -webkit-font-smoothing:antialiased;
 }
-h1,h2,h3{
-  font-family:'Zilla Slab', Georgia, serif;
-  color:var(--heading);
-  text-wrap:balance;
-  margin:0;
+.wrap{max-width:820px; margin:0 auto; padding:clamp(1.5rem,4vw,3.5rem) clamp(1.1rem,4vw,2rem) 5rem;}
+.tag{
+  display:inline-block; background:var(--verde-claro); color:var(--verde-escuro);
+  font-size:.68rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase;
+  padding:.35rem .8rem; border-radius:999px; margin-bottom:1rem;
 }
-a{ color:var(--accent); }
-code, .mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; }
-
-.wrap{ max-width:760px; margin:0 auto; padding:0 1.25rem 5rem; }
-
-/* ---- top bar ---- */
-.topbar{
-  position:sticky; top:0; z-index:10;
-  background:color-mix(in srgb, var(--ground) 92%, transparent);
-  backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--border);
+h1{font-size:clamp(1.7rem,5vw,2.4rem); line-height:1.15; margin:0 0 .6rem; letter-spacing:-.01em;}
+h2{
+  font-size:clamp(1.15rem,3.2vw,1.45rem); margin:3rem 0 1rem; padding-top:1.5rem;
+  border-top:1px solid var(--border); line-height:1.25;
 }
-.topbar-inner{
-  max-width:760px; margin:0 auto; padding:0 1.25rem;
-  display:flex; align-items:center; gap:1.25rem;
-  height:52px; overflow-x:auto; white-space:nowrap;
+h3{font-size:1.02rem; margin:1.8rem 0 .6rem;}
+p{margin:0 0 1rem;}
+a{color:var(--verde-escuro); text-decoration:underline; text-underline-offset:2px; word-break:break-word;}
+a:hover{color:var(--verde);}
+code{
+  background:var(--bg-verde); border:1px solid var(--border); border-radius:5px;
+  padding:.1rem .35rem; font-size:.86em; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  word-break:break-word;
 }
-.topbar-inner::-webkit-scrollbar{ display:none; }
-.topbar a{
-  font-size:.82rem; font-weight:600; color:var(--ink-soft);
-  text-decoration:none; letter-spacing:.01em;
+ul,ol{margin:0 0 1rem; padding-left:1.4rem;}
+li{margin-bottom:.45rem;}
+blockquote{
+  margin:1.4rem 0; padding:1rem 1.2rem; background:#FBEFEC; border-left:3px solid #C2705A;
+  border-radius:0 10px 10px 0; font-size:.95rem;
 }
-.topbar a.active, .topbar a:hover{ color:var(--accent); }
-
-/* ---- header ---- */
-header{ padding:2.75rem 0 2rem; }
-.eyebrow{
-  display:inline-flex; align-items:center; gap:.4rem;
-  font-family:'IBM Plex Mono', monospace;
-  font-size:.72rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase;
-  color:var(--accent); background:var(--accent-soft);
-  padding:.3rem .7rem; border-radius:999px; margin-bottom:1rem;
-}
-h1{ font-size:clamp(1.9rem, 5vw, 2.5rem); font-weight:700; margin-bottom:.6rem; }
-.dek{ color:var(--ink-soft); font-size:1.02rem; max-width:52ch; }
-.updated{ color:var(--ink-soft); font-size:.82rem; margin-top:1.1rem; font-family:'IBM Plex Mono',monospace; }
-
-/* ---- status strip ---- */
-.status-strip{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:1px; background:var(--border);
-  border:1px solid var(--border); border-radius:12px; overflow:hidden;
-  margin-top:1.75rem;
-}
-.status-tile{ background:var(--surface); padding:1rem 1.1rem; }
-.status-tile strong{
-  display:block; font-family:'Zilla Slab',serif; font-size:1.6rem; font-weight:700;
-  font-variant-numeric:tabular-nums; color:var(--heading); line-height:1;
-}
-.status-tile span{ display:block; font-size:.76rem; color:var(--ink-soft); margin-top:.35rem; }
-.status-tile.warn strong{ color:var(--warn); }
-
-/* ---- sections ---- */
-section{ padding:2.75rem 0; border-top:1px solid var(--border); }
-section:first-of-type{ border-top:none; }
-.section-num{
-  font-family:'IBM Plex Mono',monospace; font-size:.76rem; color:var(--ink-soft);
-  letter-spacing:.06em;
-}
-h2{ font-size:1.4rem; font-weight:700; margin:.35rem 0 1.25rem; }
-h3{ font-size:1.02rem; font-weight:700; color:var(--ink); margin:1.5rem 0 .6rem; }
-p{ margin:0 0 1rem; }
-ul,ol{ margin:0 0 1.1rem; padding-left:1.3rem; }
-li{ margin-bottom:.5rem; }
-li::marker{ color:var(--accent); }
-
-/* ---- table ---- */
-.table-scroll{ overflow-x:auto; border:1px solid var(--border); border-radius:10px; }
-table{ width:100%; border-collapse:collapse; font-size:.86rem; }
-th{
-  text-align:left; font-size:.72rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
-  color:var(--ink-soft); background:var(--mono-tint);
-  padding:.7rem .9rem; border-bottom:1px solid var(--border); white-space:nowrap;
-}
-td{ padding:.75rem .9rem; border-bottom:1px solid var(--border); vertical-align:top; }
-tr:last-child td{ border-bottom:none; }
-td .mono{ font-size:.82rem; color:var(--heading); }
-
-/* ---- runbook ---- */
-.runbook{ list-style:none; padding:0; counter-reset:step; }
-.runbook li{
-  counter-increment:step;
-  display:grid; grid-template-columns:1.9rem 1fr; gap:.9rem;
-  margin-bottom:1rem;
-}
-.runbook li::before{
-  content:counter(step);
-  font-family:'Zilla Slab',serif; font-weight:700; font-size:.95rem;
-  color:var(--accent); background:var(--accent-soft);
-  width:1.9rem; height:1.9rem; border-radius:999px;
-  display:flex; align-items:center; justify-content:center;
-}
-.runbook li::marker{ content:none; }
-.callout{
-  background:var(--warn-soft); border:1px solid color-mix(in srgb, var(--warn) 35%, var(--border));
-  border-radius:10px; padding:.9rem 1.1rem; font-size:.88rem; color:var(--ink);
-  margin-top:1.25rem;
-}
-.callout strong{ color:var(--warn); }
-
-/* ---- code block ---- */
-pre{
-  background:var(--mono-tint); border:1px solid var(--border); border-radius:10px;
-  padding:1rem 1.1rem; overflow-x:auto; font-size:.8rem; line-height:1.55;
-  color:var(--ink);
-}
-
-/* ---- reference grid ---- */
-.ref-grid{ display:grid; grid-template-columns:1fr; gap:0; border:1px solid var(--border); border-radius:10px; overflow:hidden; }
-.ref-row{
-  display:grid; grid-template-columns:11rem 1fr; gap:1rem;
-  padding:.8rem 1.1rem; border-bottom:1px solid var(--border);
-  font-size:.88rem;
-}
-.ref-row:last-child{ border-bottom:none; }
-.ref-row:nth-child(even){ background:var(--mono-tint); }
-.ref-label{ color:var(--ink-soft); font-weight:600; }
-.ref-value{ font-family:'IBM Plex Mono',monospace; font-size:.83rem; word-break:break-word; }
-@media (max-width:560px){ .ref-row{ grid-template-columns:1fr; gap:.2rem; } }
-
-/* ---- open items ---- */
-.item-list{ list-style:none; padding:0; }
-.item-list li{
-  display:flex; gap:.8rem; align-items:flex-start;
-  background:var(--surface); border:1px solid var(--border); border-radius:10px;
-  padding:.9rem 1.1rem; margin-bottom:.7rem;
-}
-.item-list li::marker{ content:none; }
-.item-dot{
-  flex-shrink:0; width:.55rem; height:.55rem; border-radius:999px;
-  background:var(--warn); margin-top:.45rem;
-}
-.item-list p{ margin:0; }
-.item-list .item-title{ font-weight:700; color:var(--ink); display:block; margin-bottom:.2rem; }
-
-footer{ padding-top:2rem; border-top:1px solid var(--border); color:var(--ink-soft); font-size:.8rem; }
+blockquote p:last-child{margin-bottom:0;}
+.tabela{overflow-x:auto; margin:0 0 1.4rem; -webkit-overflow-scrolling:touch;}
+table{width:100%; border-collapse:collapse; background:var(--branco); font-size:.9rem;
+  border:1px solid var(--border); border-radius:10px; overflow:hidden; min-width:340px;}
+th{background:var(--bg-verde); text-align:left; padding:.7rem .85rem; font-size:.72rem;
+  text-transform:uppercase; letter-spacing:.05em; color:var(--grafite-soft);}
+td{padding:.7rem .85rem; border-top:1px solid var(--border); vertical-align:top;}
+hr{border:0; border-top:1px solid var(--border); margin:2.5rem 0;}
+strong{font-weight:700;}
+.rodape{margin-top:4rem; padding-top:1.5rem; border-top:1px solid var(--border);
+  font-size:.82rem; color:var(--grafite-soft);}
+@media (max-width:560px){ table{font-size:.84rem} th,td{padding:.6rem .6rem} code{font-size:.8em} }
+@media print{ body{background:#fff} .wrap{padding:0} h2{page-break-after:avoid} }
 </style>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-<nav class="topbar"><div class="topbar-inner">
-  <a href="#mapa">Mapa do site</a>
-  <a href="#publicar">Publicar</a>
-  <a href="#decisoes">Decisões</a>
-  <a href="#utm">Script UTM</a>
-  <a href="#referencias">Referências</a>
-  <a href="#pendencias">Pendências</a>
-</div></nav>
-
+</head>
+<body>
 <div class="wrap">
-
-<header>
-  <span class="eyebrow">🌱 estude ambiental · projeto de páginas de vendas</span>
-  <h1>Dossiê do projeto</h1>
-  <p class="dek">Tudo que foi decidido, publicado e ainda falta nas páginas de vendas — pra abrir de qualquer aparelho, sem depender do histórico do chat.</p>
-  <p class="updated">Última atualização: 05/09/2026</p>
-
-  <div class="status-strip">
-    <div class="status-tile"><strong>3</strong><span>páginas no ar</span></div>
-    <div class="status-tile"><strong>67</strong><span>preço padrão (R$), Discursiva</span></div>
-    <div class="status-tile"><strong>30/08</strong><span>prova FCC e FEPESE, 2026</span></div>
-    <div class="status-tile warn"><strong>3</strong><span>pendências em aberto</span></div>
-  </div>
-</header>
-
-<section id="mapa">
-  <span class="section-num">01</span>
-  <h2>Mapa do site</h2>
-  <p>A hospedagem real é o <strong>cPanel da Hostgator</strong> — não é GitHub Pages, mesmo o repositório tendo uma pasta <code>docs/</code> (essa pasta não é o que serve o site ao vivo).</p>
-  <div class="table-scroll">
-    <table>
-      <thead><tr><th>Pasta no repositório</th><th>URL ao vivo</th><th>Pasta no cPanel</th></tr></thead>
-      <tbody>
-        <tr><td><span class="mono">mentoria-estude-ambiental/</span></td><td><span class="mono">estudeambiental.com.br</span> (raiz)</td><td><span class="mono">public_html/</span></td></tr>
-        <tr><td><span class="mono">mentoria-estude-ambiental/institucional/</span></td><td><span class="mono">estudeambiental.com.br/institucional/</span></td><td style="color:var(--warn);">ainda não publicada</td></tr>
-        <tr><td><span class="mono">docs/discursiva-fcc-fundacao-florestal-sp/</span></td><td><span class="mono">.../discursiva-fcc-fundacao-florestal-sp/</span></td><td><span class="mono">public_html/discursiva-fcc-fundacao-florestal-sp/</span></td></tr>
-        <tr><td><span class="mono">docs/discursiva-fepese-itajaisc/</span></td><td><span class="mono">.../discursiva-fepese-itajai-sc/</span></td><td><span class="mono">public_html/discursiva-fepese-itajai-sc/</span> (nome com hífen antes do "sc", diferente da pasta do repo)</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="margin-top:1.1rem;"><strong>estudeambiental.com</strong> (sem <strong>.br</strong>) é um site novo, ainda em construção, separado deste repositório — não confundir com o <strong>.com.br</strong>, que é o site atual no ar.</p>
-</section>
-
-<section id="publicar">
-  <span class="section-num">02</span>
-  <h2>Como publicar uma alteração</h2>
-  <ol class="runbook">
-    <li><span>Faço a alteração no código e gero um <code>.zip</code> da pasta correspondente.</span></li>
-    <li><span>No Gerenciador de Arquivos do cPanel, <strong>entrar dentro da pasta de destino exata</strong> antes de qualquer coisa — ex.: <code>public_html/discursiva-fepese-itajai-sc/</code>, ou <code>public_html/</code> raiz pra home da mentoria.</span></li>
-    <li><span>Clicar em <strong>Carregar</strong> estando dentro dessa pasta e subir o zip ali.</span></li>
-    <li><span>Clicar com o botão direito no zip → <strong>Extrair</strong>, confirmando a sobrescrita do <code>index.html</code> e <code>assets/</code> existentes.</span></li>
-    <li><span>Conferir em aba anônima — evita o cache do navegador mostrar a versão antiga.</span></li>
-  </ol>
-  <div class="callout"><strong>Cuidado:</strong> extrair o zip no nível errado (ex. na raiz do <code>public_html/</code> quando era pra estar dentro de uma subpasta) já sobrescreveu por engano o <code>index.html</code> da home com o conteúdo de outra página. Sempre confirmar em qual pasta está antes de extrair.</div>
-</section>
-
-<section id="decisoes">
-  <span class="section-num">03</span>
-  <h2>Decisões de conteúdo já tomadas</h2>
-  <h3>Ordem das seções da home</h3>
-  <p>Pensada pra conversão, tráfego de anúncio e atenção curta: Hero → faixa curta de prova social → VSL → dor → mecanismo/reposicionamento → <strong>depoimentos/resultados</strong> (movido pra logo após o mecanismo — antes só aparecia no fim) → Método TEIA → como funciona → dia a dia → o que recebe → especialização → para quem → sobre Dominique → FAQ → CTA final.</p>
-  <h3>Posicionamento da oferta</h3>
-  <ul>
-    <li>A mentoria <strong>não entrega material de conteúdo</strong> (apostilas, PDFs, videoaulas) — só organiza a preparação e indica fontes. Alinhado na seção "O que você recebe", no contrato e nas páginas de Discursiva.</li>
-    <li><strong>Discursiva é bônus condicionado</strong> a quem tem essa fase no edital, não item padrão da oferta.</li>
-    <li>Nome <strong>"Tutory"</strong> (fornecedor da plataforma) removido de todo texto visível ao aluno — pra ele é só "a área exclusiva"/"a plataforma da mentoria", nunca o nome do fornecedor.</li>
-    <li>Não mostrar o número exato de aprovados por enquanto (são 10 no total, considerado pouco) — a faixa de prova social fala "Aprovados nas 3 esferas: municipal, estadual e federal", sem número.</li>
-  </ul>
-  <h3>Páginas de Discursiva (FCC / FEPESE)</h3>
-  <ul>
-    <li>Nome do concurso/banca em destaque (negrito mais forte) no badge do hero, e citado na headline — pedido do gestor de tráfego.</li>
-    <li>Logo do header da home aumentada de 34px pra 42px de altura.</li>
-  </ul>
-</section>
-
-<section id="utm">
-  <span class="section-num">04</span>
-  <h2>Script de rastreamento de UTM</h2>
-  <p>Adicionado <strong>só na home da mentoria</strong> (<code>mentoria-estude-ambiental/index.html</code>, antes do <code>&lt;/body&gt;</code>) — propaga <code>utm_source</code>, <code>utm_medium</code>, <code>utm_campaign</code>, <code>utm_term</code>, <code>utm_content</code>, <code>fbclid</code> e <code>gclid</code> da URL da página pro link do formulário de aplicação, antes do clique. Não muda nada visualmente. Não foi adicionado nas páginas de Discursiva nem nas institucionais — só onde tem o link do formulário.</p>
-  <pre><code>(function () {
-  var FORM_URL = 'estude-ambiental-form.vercel.app'
-  var UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','gclid']
-  var src = new URLSearchParams(window.location.search)
-  if (!UTM_KEYS.some(function (k) { return src.get(k) })) return
-  document.querySelectorAll('a[href*="' + FORM_URL + '"]').forEach(function (el) {
-    var url = new URL(el.href)
-    UTM_KEYS.forEach(function (k) { var v = src.get(k); if (v) url.searchParams.set(k, v) })
-    el.href = url.toString()
-  })
-})()</code></pre>
-</section>
-
-<section id="referencias">
-  <span class="section-num">05</span>
-  <h2>Referências e números</h2>
-  <div class="ref-grid">
-    <div class="ref-row"><span class="ref-label">WhatsApp comercial</span><span class="ref-value">55 48 99818-8078 (Florianópolis/SC)</span></div>
-    <div class="ref-row"><span class="ref-label">CNPJ</span><span class="ref-value">55.491.669/0001-15 (Dominique Martins Sala, MEI)</span></div>
-    <div class="ref-row"><span class="ref-label">Meta Pixel ID</span><span class="ref-value">706004184857947</span></div>
-    <div class="ref-row"><span class="ref-label">Preço Discursiva</span><span class="ref-value">R$ 67,00 à vista (Pix/boleto) ou 12x de R$ 6,93</span></div>
-    <div class="ref-row"><span class="ref-label">Prova FCC e FEPESE</span><span class="ref-value">30/08/2026</span></div>
-    <div class="ref-row"><span class="ref-label">Checkout Tutory — FCC</span><span class="ref-value">pay.plataformatutory.com.br/checkout/15bba2f8-43f7-4274-8c46-889e888bb8a3</span></div>
-    <div class="ref-row"><span class="ref-label">Checkout Tutory — FEPESE</span><span class="ref-value">pay.plataformatutory.com.br/checkout/d0f2b420-9b60-473f-8a6e-6f4a45c63f56</span></div>
-    <div class="ref-row"><span class="ref-label">Formulário novo</span><span class="ref-value">estude-ambiental-form.vercel.app (substituindo o Respondi)</span></div>
-    <div class="ref-row"><span class="ref-label">Time Vercel</span><span class="ref-value">Dominique - Estude Ambiental's projects (team_HEObyZTRX4G302hhceXEalDf)</span></div>
-    <div class="ref-row"><span class="ref-label">Projetos Vercel</span><span class="ref-value">estude-ambiental-app, estude-ambiental-form, estude-ambiental-carrossel, estude-ambiental-feedbacks, ea-deploy-schema-check</span></div>
-  </div>
-</section>
-
-<section id="pendencias">
-  <span class="section-num">06</span>
-  <h2>Pendências em aberto</h2>
-  <ul class="item-list">
-    <li><span class="item-dot"></span><p><span class="item-title">Publicar institucional/</span>Termos, Política e Contrato precisam ir pra <code>estudeambiental.com.br/institucional/</code> — os links do rodapé na home e nas páginas de Discursiva já apontam pra lá, mas ainda dão 404 até isso ser subido.</p></li>
-    <li><span class="item-dot"></span><p><span class="item-title">Localizar o site estudeambiental.com</span>O site novo (sem <strong>.br</strong>) ainda não foi identificado neste repositório nem nos projetos Vercel conectados aqui.</p></li>
-    <li><span class="item-dot"></span><p><span class="item-title">Confirmar home na raiz do domínio</span>Hoje já está assim na prática, depois do incidente de recuperação — vale uma confirmação definitiva.</p></li>
-  </ul>
-</section>
-
-<footer>Espelho de <code class="mono">CONTEXTO.md</code>, no repositório <span class="mono">painel-mentoria</span>, branch <span class="mono">claude/sales-page-design-9l9omo</span>.</footer>
-
+<span class="tag">Documento interno</span>
+<h1>Contexto do projeto — Estude Ambiental</h1>
+<p>Documento de referência do trabalho feito na branch <code>claude/sales-page-design-9l9omo</code>,
+para não depender de vasculhar histórico de conversa. <strong>Atualize conforme o projeto evoluir.</strong></p>
+<p>Última atualização: <strong>22 de setembro de 2026</strong></p>
+<hr />
+<h2>1. Links que não podem ser perdidos</h2>
+<p>Os vídeos do YouTube são <strong>não listados</strong>: não aparecem em busca nem no canal.
+Se estes links se perderem, o acesso se perde junto.</p>
+<div class="tabela"><table>
+<thead>
+<tr>
+<th>O que</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VSL (8:27)</td>
+<td><code>https://youtu.be/POIGtgzNSs8</code></td>
+</tr>
+<tr>
+<td>Depoimento Lucemir</td>
+<td><code>https://youtu.be/xNrKYavJyS0</code></td>
+</tr>
+<tr>
+<td>Depoimento Daniel</td>
+<td><code>https://youtu.be/VkXaHq601i4</code></td>
+</tr>
+<tr>
+<td>Depoimento Luanna</td>
+<td><code>https://youtu.be/CjDCH91p6cA</code></td>
+</tr>
+<tr>
+<td>Depoimento Arianne</td>
+<td><code>https://youtu.be/FHLAsuT8Twk</code></td>
+</tr>
+<tr>
+<td>Playlist das entrevistas</td>
+<td><code>PLKaRyxtns2Mnhpjm1hrJMNJKRzedLTnka</code></td>
+</tr>
+<tr>
+<td>Formulário de aplicação</td>
+<td><code>https://form.respondi.app/USGGUf9h</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Outros dados fixos:</p>
+<ul>
+<li><strong>Domínio definitivo</strong>: <code>estudeambiental.com</code> (o <code>.com.br</code> é o site antigo)</li>
+<li><strong>Hospedagem</strong>: HostGator, Plano M, ativo até 20/03/2027</li>
+<li><strong>Nameservers</strong>: <code>ns1090.hostgator.com.br</code> / <code>ns1091.hostgator.com.br</code> → IP <code>69.49.241.120</code></li>
+<li><strong>CNPJ</strong>: 55.491.669/0001-15 — 55.491.669 Dominique Martins Sala (MEI)</li>
+<li><strong>Endereço</strong>: Rua Dario Manoel Cardoso, 132, Ingleses do Rio Vermelho, Florianópolis/SC, CEP 88058-400</li>
+<li><strong>E-mail</strong>: estudeambiental@gmail.com</li>
+<li><strong>WhatsApp comercial</strong>: 55 48 99818-8078</li>
+<li><strong>Meta Pixel ID</strong>: 706004184857947</li>
+<li><strong>Google Analytics</strong>: ainda não instalado (os eventos já estão escritos, esperando a tag)</li>
+</ul>
+<hr />
+<h2>2. Onde cada pasta do repositório vai parar</h2>
+<p>A hospedagem é o <strong>cPanel da HostGator</strong>. A pasta <code>docs/</code> do repositório <strong>não</strong> serve o site
+(não é GitHub Pages).</p>
+<div class="tabela"><table>
+<thead>
+<tr>
+<th>Pasta no repositório</th>
+<th>URL ao vivo</th>
+<th>Pasta no cPanel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mentoria-estude-ambiental/</code></td>
+<td><code>estudeambiental.com</code> (raiz)</td>
+<td><code>public_html/</code></td>
+</tr>
+<tr>
+<td><code>mentoria-estude-ambiental/institucional/</code></td>
+<td><code>estudeambiental.com/institucional/</code></td>
+<td><code>public_html/institucional/</code></td>
+</tr>
+<tr>
+<td><code>docs/discursiva-fcc-fundacao-florestal-sp/</code></td>
+<td><code>.../discursiva-fcc-fundacao-florestal-sp/</code></td>
+<td>mesma pasta</td>
+</tr>
+<tr>
+<td><code>docs/discursiva-fepese-itajaisc/</code></td>
+<td><code>.../discursiva-fepese-itajai-sc/</code></td>
+<td><strong>atenção</strong>: no servidor o nome tem hífen antes do "sc"</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Como publicar</h3>
+<ol>
+<li>Gerar um <code>.zip</code> da pasta correspondente.</li>
+<li>No Gerenciador de Arquivos, <strong>entrar dentro da pasta de destino</strong> antes de qualquer coisa.</li>
+<li><strong>Carregar</strong> o zip <em>estando dentro dessa pasta</em>.</li>
+<li>Botão direito no zip → <strong>Extrair</strong>, confirmando a sobrescrita.</li>
+<li>Conferir em aba anônima, para o cache não mostrar a versão antiga.</li>
+</ol>
+<blockquote>
+<p><strong>Cuidado que já custou caro:</strong> extrair na raiz quando era para ser numa subpasta
+sobrescreveu o <code>index.html</code> da home com o conteúdo de outra página. Confirme a pasta
+antes de extrair.</p>
+</blockquote>
+<hr />
+<h2>3. A home hoje (<code>mentoria-estude-ambiental/index.html</code>)</h2>
+<p>Arquivo único, sem build. ~21.500px no desktop, <strong>628 KB no primeiro carregamento</strong>.</p>
+<h3>Ordem das seções</h3>
+<p>Hero → barra de prova social → <strong>VSL</strong> → dor → "não precisa de mais conteúdo" (comparativo) →
+"do outro lado" (o que muda com a aprovação) → <strong>Depoimentos</strong> (cards + 4 vídeos + quadro de
+aprovações + prints) → frase de transição → Método TEIA → como funciona → dia a dia (6 clipes) →
+o que você recebe → para quem é → Sobre Dominique → <strong>Por que agora</strong> → FAQ (11) →
+Recapitulando → Garantia 7 dias → CTA final.</p>
+<p>São 11 CTAs distribuídas ao longo da página.</p>
+<h3>VSL — como funciona</h3>
+<ul>
+<li>Embed pela <strong>IFrame API</strong> do YouTube em <code>youtube-nocookie.com</code>, 16:9 fluido.</li>
+<li>Começa com <strong>autoplay mudo + playsinline</strong> — única combinação que iPhone e Android
+  deixam tocar sozinho.</li>
+<li>Camada <strong>"Clique para ouvir"</strong> por cima: no clique tira o mudo, volta para o segundo 0,
+  dá play e some. Funciona no iOS porque acontece dentro de um gesto do usuário.</li>
+<li>O CTA <strong>"Quero uma preparação com direção" só aparece aos 445s (7:25)</strong>, lido do
+  <code>getCurrentTime</code>. É o ponto em que a Domi fala "logo abaixo desse vídeo está a aplicação".
+  Para mudar esse momento, altere <code>data-cta-em</code> no elemento <code>#vslEmbed</code>.</li>
+<li>Link discreto "Ir direto para a aplicação" sempre visível, para quem não assiste até o fim.</li>
+<li>A API do YouTube só é baixada quando a pessoa chega perto do vídeo.</li>
+</ul>
+<h3>Eventos de medição</h3>
+<p>Disparam no <strong>Meta Pixel</strong> e no <strong>Google Analytics</strong> (o GA só passa a receber quando a tag
+for instalada; o código já está pronto e não quebra nada enquanto isso):</p>
+<p><code>VSLPlay</code> · <code>VSLSom</code> · <code>VSLProgresso</code> (25/50/75/100%) · <code>VSLCtaExibido</code> · <code>VSLCtaClique</code> ·
+<code>DepoimentoPlay</code> · <code>CliqueChamadaAplicar</code> · <code>Lead</code></p>
+<h3>Performance — decisões que não devem ser desfeitas</h3>
+<p>O primeiro carregamento já foi <strong>2.034 KB</strong> e hoje é <strong>628 KB</strong>. O que segura isso:</p>
+<ul>
+<li>Os 6 clipes da plataforma e seus posters <strong>só baixam quando o card entra na tela</strong>.
+  Antes o <code>autoplay</code> forçava ~740 KB de vídeo mesmo para quem nunca rolava até lá.
+  Se alguém remover o carregamento sob demanda, a página volta a pesar 2 MB.</li>
+<li>Fotos da Dominique reduzidas para 1000px de largura (343 KB → 126 KB e 303 KB → 85 KB).</li>
+<li>Preload das duas fontes e da imagem da primeira tela.</li>
+<li>Os players do YouTube (VSL e depoimentos) só carregam sob demanda.</li>
+</ul>
+<hr />
+<h2>4. Provas sociais — o que está publicado e de onde veio</h2>
+<h3>Cards de resultado (6)</h3>
+<p>Lucemir, Arianne, Daniel, Luanna, André e Sandra. Todos com foto, menos <strong>André</strong>, que não
+tem foto disponível e usa um monograma "A".</p>
+<h3>Quadro de aprovações oficiais (11 linhas)</h3>
+<p>Cada linha foi conferida no resultado publicado pela banca:</p>
+<div class="tabela"><table>
+<thead>
+<tr>
+<th>Órgão</th>
+<th>Cargo</th>
+<th>Aluno</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPRH/PE</td>
+<td>Analista em Gestão Ambiental (Biologia)</td>
+<td>Isadora</td>
+<td>1º</td>
+</tr>
+<tr>
+<td>IDEMA/RN</td>
+<td>Fiscal Ambiental</td>
+<td>Arianne</td>
+<td>2º</td>
+</tr>
+<tr>
+<td>Pref. Planaltina/GO</td>
+<td>Fiscal Ambiental</td>
+<td>Thalyssa</td>
+<td>2º, já nomeada</td>
+</tr>
+<tr>
+<td>IPAAM/AM</td>
+<td>Analista Ambiental (Eng. Florestal)</td>
+<td>André</td>
+<td>2º</td>
+</tr>
+<tr>
+<td>IDEMA/RN</td>
+<td>Analista Ambiental (Arquitetura)</td>
+<td>Arianne</td>
+<td>4º</td>
+</tr>
+<tr>
+<td>IDEMA/RN</td>
+<td>Analista Ambiental (Geografia)</td>
+<td>Daniel</td>
+<td>4º</td>
+</tr>
+<tr>
+<td>IDEMA/RN</td>
+<td>Analista Ambiental (Eng. Florestal)</td>
+<td>Luanna</td>
+<td>4º</td>
+</tr>
+<tr>
+<td>UFAC</td>
+<td>Técnico em Agropecuária</td>
+<td>Sandra</td>
+<td>5º</td>
+</tr>
+<tr>
+<td>IDEMA/RN</td>
+<td>Fiscal Ambiental</td>
+<td>Lucemir</td>
+<td>5º (cotas) / 30º (ampla)</td>
+</tr>
+<tr>
+<td>SEMMAS Manaus</td>
+<td>Analista Municipal II (Eng. Florestal)</td>
+<td>Jhonatan</td>
+<td>8º</td>
+</tr>
+<tr>
+<td>SEMMAS Manaus</td>
+<td>Analista Municipal II (Eng. Florestal)</td>
+<td>André</td>
+<td>23º</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Fora da página de propósito:</strong> Hebert, Prefeitura de Itabaiana/PB, 2º lugar em Engenheiro
+Ambiental. Ele está <strong>classificado fora das vagas</strong>, sem convocação até agora, e a Domi ainda
+não divulgou. Entra quando houver convocação.</p>
+<p><strong>Por que o quadro é em HTML e não são os prints das listas:</strong> os prints oficiais são listas
+completas, com dezenas de nomes, números de inscrição e datas de nascimento de candidatos que
+não são alunos. Publicar aquilo vazaria dado pessoal de terceiros. O quadro mostra só a linha
+da aluna, primeiro nome apenas. Os prints originais continuam com a Domi como comprovação.</p>
+<h3>Prints de WhatsApp (12)</h3>
+<p>Em <code>assets/img/depoimentos/</code>. Todos autorizados pelos alunos. Nomes borrados, e no print da
+nomeação (dep-1824) também foram borrados o nome completo, o nome de um terceiro e os números
+de inscrição que apareciam no documento oficial — preservando só o cabeçalho que prova o cargo.</p>
+<p>Mosaico de 3 colunas no desktop; no celular vira faixa deslizante, para 12 prints não
+esticarem a página. Clique amplia (lightbox com Esc, clique fora e teclado).</p>
+<hr />
+<h2>5. Decisões de conteúdo já tomadas</h2>
+<ul>
+<li><strong>Preço não aparece na página.</strong> O interessado vai para a aplicação e o preço é apresentado
+  na conversa no WhatsApp, conforme o perfil.</li>
+<li><strong>A entrega é a mesma nos três planos</strong> (3, 6 e 12 meses). Muda só a duração e o valor.
+  Isso está dito na página, no FAQ e no Parágrafo Único do Inciso II da Cláusula Segunda.</li>
+<li><strong>A mentoria não entrega material de conteúdo</strong> (apostilas/PDFs/videoaulas) — organiza a
+  preparação e indica fontes.</li>
+<li><strong>Discursiva é bônus condicionado</strong> a quem tem essa fase no edital.</li>
+<li><strong>Nome "Tutory" não aparece</strong> para o aluno — é "a plataforma da mentoria".</li>
+<li><strong>Não mostrar número de aprovados.</strong> O quadro de aprovações fala por si.</li>
+<li><strong>Escassez</strong>: "vagas limitadas", sem número.</li>
+<li><strong>Garantia de 7 dias</strong> (art. 49 do CDC), de satisfação e não de aprovação.</li>
+<li><strong>Depoimentos em vídeo são autorizados só para site e feed</strong> — não usar em anúncio pago.</li>
+<li>Cada depoimento responde a uma objeção: Lucemir (não sou da área), Daniel (já tentei e não
+  passei), Luanna (já tenho material), Arianne (não tenho tempo). Ficam <strong>os quatro juntos</strong>
+  na seção Depoimentos — foram testados espalhados pela página e a Domi preferiu agrupados.</li>
+</ul>
+<hr />
+<h2>6. Documentos institucionais</h2>
+<p>Os três estão em <code>mentoria-estude-ambiental/institucional/</code>, datados de <strong>21/09/2026</strong>,
+sem lacunas, e linkados no rodapé do site.</p>
+<ul>
+<li><code>contrato-mentoria/</code> — Contrato de Prestação de Serviços Educacionais (~2.700 palavras)</li>
+<li><code>termos-e-condicoes/</code></li>
+<li><code>politica-de-privacidade/</code></li>
+</ul>
+<p><strong>Pendência que não é técnica:</strong> o contrato precisa de <strong>revisão por advogado</strong> antes de ser
+tratado como definitivo, em especial a <strong>multa rescisória de 80%</strong> (Cláusula Nona, Inciso II).
+Ela veio do contrato real já usado pela Domi, mas multa nesse patamar em relação de consumo é
+o tipo de cláusula que costuma ser contestada.</p>
+<hr />
+<h2>7. Regras de marca</h2>
+<ul>
+<li>Verde <code>#68995A</code>, grafite <code>#443C42</code>, verde claro <code>#C5FFB5</code>, fonte <strong>Gilroy</strong>.</li>
+<li><strong>Não trocar essas cores.</strong> Decisão da Domi.</li>
+<li>Consequência conhecida: texto branco sobre <code>#68995A</code> dá <strong>3,3:1</strong> de contraste, abaixo do
+  mínimo de 4,5:1. Foi resolvido no botão grande subindo o texto para 18,9px (entra no
+  critério de "texto grande", que exige 3:1). Os botões menores — topo e barra fixa —
+  seguem abaixo do ideal. Para resolver sem mexer na marca, bastaria escurecer só o fundo
+  do botão.</li>
+</ul>
+<hr />
+<h2>8. Ambiente e limitações conhecidas</h2>
+<ul>
+<li><strong>Egress bloqueado</strong> no ambiente de trabalho do Claude: <code>estudeambiental.com</code>, YouTube,
+  Google Drive, HostGator. Por isso o site publicado e os vídeos do YouTube <strong>não podem ser
+  testados daqui</strong> — o teste real é sempre no domínio, depois de subir.</li>
+<li>O Chromium usado para verificação <strong>não tem codec H.264</strong>, então a reprodução dos MP4 da
+  plataforma não pode ser confirmada localmente (o carregamento e o poster, sim).</li>
+<li>Arquivos anexados no chat têm <strong>limite de 30 MB</strong>.</li>
+</ul>
+<h3>Incidente de DNS (21/09/2026)</h3>
+<p><code>estudeambiental.com</code> saiu do ar com <code>DNS_PROBE_FINISHED_NXDOMAIN</code>. Não era o site nem a
+hospedagem: os nameservers da HostGator estavam retornando <strong>SERVFAIL</strong> para a zona. Voltou
+sozinho. Se repetir, a frase que resolve rápido no suporte é:</p>
+<blockquote>
+<p>"Os nameservers ns1090 e ns1091 estão retornando SERVFAIL para a zona do meu domínio.
+A delegação no registro está correta e a hospedagem está ativa. O problema é na zona DNS
+do servidor de vocês."</p>
+</blockquote>
+<p>Depois, limpar o cache local: <code>ipconfig /flushdns</code> e <code>chrome://net-internals/#dns</code>.</p>
+<hr />
+<h2>9. Pendências em aberto</h2>
+<ol>
+<li><strong>Instalar a tag do Google Analytics.</strong> Os eventos já estão programados e passam a
+   funcionar sozinhos assim que o <code>gtag</code> existir na página.</li>
+<li><strong>Revisão do contrato por advogado</strong> (ver seção 6).</li>
+<li><strong>Foto do André</strong> para substituir o monograma nos cards de resultado.</li>
+<li><strong>Hebert / Itabaiana</strong> entra no quadro de aprovações quando houver convocação.</li>
+<li><strong>Página de link na bio</strong> (estilo <code>luanacarolinas.com.br/bio</code>), reunindo site, aplicação,
+   Discursiva SEMA MT, Discursiva MMA/IBAMA/ICMBio, guia "do zero ao concursado ambiental" e
+   comunidade gratuita no WhatsApp. Combinada, ainda não começada.</li>
+<li><strong>Escurecer o fundo dos botões pequenos</strong> se um dia a acessibilidade virar prioridade
+   (ver seção 7).</li>
+</ol>
+<hr />
+<h2>10. Backup — o que está e o que não está aqui</h2>
+<p><strong>Está versionado no GitHub:</strong> todo o código do site, os documentos institucionais, os 12
+prints já tratados, as fotos recortadas dos alunos, os 6 clipes da plataforma já cortados e
+comprimidos, e este documento.</p>
+<p><strong>Não está, e só existe na máquina da Domi:</strong></p>
+<ul>
+<li>os dois <code>.rar</code> com os 68 prints originais e os 11 prints de resultado oficial;</li>
+<li>os vídeos brutos de tela da plataforma;</li>
+<li>os arquivos originais das entrevistas (as versões publicadas estão no YouTube).</li>
+</ul>
+<p>Vale manter uma cópia desses originais em outro lugar (HD externo ou nuvem), porque são a
+comprovação documental das aprovações e o material-fonte de tudo que está publicado.</p>
+<p class="rodape">
+  Cópia em HTML de <code>CONTEXTO.md</code>, versionado no repositório
+  <code>estudeambiental/painel-mentoria</code>. Se este documento e o arquivo do repositório
+  divergirem, o do repositório vale.
+</p>
 </div>
-
-<script>
-(function(){
-  var links = document.querySelectorAll('.topbar a');
-  var sections = Array.prototype.map.call(links, function(a){ return document.querySelector(a.getAttribute('href')); });
-  if(!('IntersectionObserver' in window)) return;
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        var idx = sections.indexOf(e.target);
-        links.forEach(function(l){ l.classList.remove('active'); });
-        if(idx > -1) links[idx].classList.add('active');
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  sections.forEach(function(s){ if(s) io.observe(s); });
-})();
-</script>
+</body>
+</html>
