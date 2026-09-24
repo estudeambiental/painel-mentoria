@@ -24,7 +24,12 @@ Se estes links se perderem, o acesso se perde junto.
 
 Outros dados fixos:
 
-- **Domínio definitivo**: `estudeambiental.com` (o `.com.br` é o site antigo)
+- **Domínio definitivo**: `estudeambiental.com`
+- **`estudeambiental.com.br`**: o domínio está registrado na HostGator, mas o site **está no
+  Framer** (A `31.43.160.6`/`31.43.161.6`, `www` → CNAME `sites.framer.app`), verificado em
+  24/09/2026. A pasta `estudeambiental.com.br` do cPanel **não é servida**: subir arquivo lá
+  não muda o site. Recomendação: redirecionar o `.com.br` para o `.com` (301), em vez de
+  manter duas cópias.
 - **Hospedagem**: HostGator, Plano M, ativo até 20/03/2027
 - **Nameservers**: `ns1090.hostgator.com.br` / `ns1091.hostgator.com.br` → IP `69.49.241.120`
 - **CNPJ**: 55.491.669/0001-15 — 55.491.669 Dominique Martins Sala (MEI)
