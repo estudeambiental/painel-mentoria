@@ -164,6 +164,26 @@ Se estes links se perderem, o acesso se perde junto.</p>
 </tr>
 </tbody>
 </table></div>
+<h3>HTTPS forçado (<code>.htaccess</code>, só no servidor)</h3>
+<p>O botão "Force HTTPS Redirect" do cPanel <strong>não funciona</strong> nesta conta: no <code>.com</code> fica bloqueado,
+e no <code>.com.br</code> o cPanel diz que domínios adicionais herdam a configuração de um subdomínio
+interno que nem aparece na tela. Os certificados são Let's Encrypt emitidos pela HostGator.</p>
+<p>Em 24/09/2026 foi colocada esta regra no <strong>topo</strong> do <code>.htaccess</code> de <code>public_html/</code> e de
+<code>estudeambiental.com.br/</code>, acima do bloco do PHP que o cPanel gera:</p>
+<pre><code># forca https
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/\.well-known/
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</code></pre>
+<p>Testada no httpstatus.io: <code>http://</code> → 301 → <code>https://</code> → 200, um redirecionamento só.
+O <code>.htaccess</code> <strong>não vai no zip</strong>, então extrair o site não apaga essa regra.</p>
+<blockquote>
+<p><strong>Cuidado ao editar o <code>.htaccess</code> pelo cPanel:</strong> o tradutor automático do Chrome traduz o
+código na tela (<code>RewriteEngine On</code> vira "Reescrever mecanismo ligado") e, se salvar assim,
+o site cai com erro 500. Desligar a tradução para o cPanel antes ("Nunca traduzir este site").</p>
+</blockquote>
 <h3>Como publicar</h3>
 <ol>
 <li>Gerar um <code>.zip</code> da pasta correspondente.</li>

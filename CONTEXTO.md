@@ -58,6 +58,31 @@ A hospedagem é o **cPanel da HostGator**. A pasta `docs/` do repositório **nã
 | `docs/discursiva-fcc-fundacao-florestal-sp/` | `.../discursiva-fcc-fundacao-florestal-sp/` | mesma pasta |
 | `docs/discursiva-fepese-itajaisc/` | `.../discursiva-fepese-itajai-sc/` | **atenção**: no servidor o nome tem hífen antes do "sc" |
 
+### HTTPS forçado (`.htaccess`, só no servidor)
+
+O botão "Force HTTPS Redirect" do cPanel **não funciona** nesta conta: no `.com` fica bloqueado,
+e no `.com.br` o cPanel diz que domínios adicionais herdam a configuração de um subdomínio
+interno que nem aparece na tela. Os certificados são Let's Encrypt emitidos pela HostGator.
+
+Em 24/09/2026 foi colocada esta regra no **topo** do `.htaccess` de `public_html/` e de
+`estudeambiental.com.br/`, acima do bloco do PHP que o cPanel gera:
+
+```
+# forca https
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/\.well-known/
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+```
+
+Testada no httpstatus.io: `http://` → 301 → `https://` → 200, um redirecionamento só.
+O `.htaccess` **não vai no zip**, então extrair o site não apaga essa regra.
+
+> **Cuidado ao editar o `.htaccess` pelo cPanel:** o tradutor automático do Chrome traduz o
+> código na tela (`RewriteEngine On` vira "Reescrever mecanismo ligado") e, se salvar assim,
+> o site cai com erro 500. Desligar a tradução para o cPanel antes ("Nunca traduzir este site").
+
 ### Como publicar
 
 1. Gerar um `.zip` da pasta correspondente.
