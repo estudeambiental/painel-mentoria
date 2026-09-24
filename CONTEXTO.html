@@ -110,11 +110,16 @@ Se estes links se perderem, o acesso se perde junto.</p>
 <p>Outros dados fixos:</p>
 <ul>
 <li><strong>Domínio definitivo</strong>: <code>estudeambiental.com</code></li>
-<li><strong><code>estudeambiental.com.br</code></strong>: o domínio está registrado na HostGator, mas o site <strong>está no
-  Framer</strong> (A <code>31.43.160.6</code>/<code>31.43.161.6</code>, <code>www</code> → CNAME <code>sites.framer.app</code>), verificado em
-  24/09/2026. A pasta <code>estudeambiental.com.br</code> do cPanel <strong>não é servida</strong>: subir arquivo lá
-  não muda o site. Recomendação: redirecionar o <code>.com.br</code> para o <code>.com</code> (301), em vez de
-  manter duas cópias.</li>
+<li><strong><code>estudeambiental.com.br</code></strong>: até 24/09/2026 apontava para o <strong>Framer</strong> (site institucional
+  antigo, abandonado). Nesse dia o DNS foi trocado: A → <code>69.49.241.120</code> e <code>www</code> → CNAME
+  <code>estudeambiental.com.br</code>. Agora serve a pasta <strong><code>/estudeambiental.com.br</code></strong> do cPanel, onde
+  está uma <strong>cópia</strong> do site. Enquanto houver duas cópias, <strong>toda atualização precisa ser
+  extraída nas duas pastas</strong> (<code>public_html</code> e <code>estudeambiental.com.br</code>). Pendente: escolher
+  o domínio principal e redirecionar o outro (301), para voltar a um upload só.</li>
+<li><strong>E-mail do <code>.com.br</code></strong>: os registros MX, o SPF e os CNAME <code>mail/imap/pop/smtp</code> apontam
+  para o <strong>Google Workspace</strong>. Não existe e-mail de boas-vindas nem cobrança no Gmail
+  pessoal da Domi; pode ser configuração que nunca foi concluída, ou conta criada com
+  <code>estudeambiental@gmail.com</code>. <strong>Nunca apagar essas linhas</strong> sem confirmar.</li>
 <li><strong>Hospedagem</strong>: HostGator, Plano M, ativo até 20/03/2027</li>
 <li><strong>Nameservers</strong>: <code>ns1090.hostgator.com.br</code> / <code>ns1091.hostgator.com.br</code> → IP <code>69.49.241.120</code></li>
 <li><strong>CNPJ</strong>: 55.491.669/0001-15 — 55.491.669 Dominique Martins Sala (MEI)</li>
