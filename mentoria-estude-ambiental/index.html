@@ -215,39 +215,6 @@ button{ font-family:inherit; cursor:pointer; }
 .quick-proof-quotes cite{ display:block; font-style:normal; font-weight:700; font-size:.72rem; margin-top:.35rem; color: var(--verde-escuro); }
 @media (max-width: 640px){ .quick-proof-quotes p{ max-width:100%; } }
 
-/* ============================================================
-   POPUP DE SAÍDA / INATIVIDADE
-   ============================================================ */
-.exit-overlay{
-  position: fixed; inset:0; z-index: 90;
-  background: rgba(68,60,66,.55); backdrop-filter: blur(3px);
-  display:flex; align-items:center; justify-content:center; padding: 1.25rem;
-  opacity:0; pointer-events:none; transition: opacity .3s ease;
-}
-.exit-overlay.show{ opacity:1; pointer-events:auto; }
-.exit-modal{
-  position:relative; width:100%; max-width: 420px; background: var(--branco);
-  border-radius: var(--radius-l); padding: clamp(1.75rem, 4vw, 2.25rem);
-  box-shadow: 0 40px 80px -20px rgba(0,0,0,.35);
-  transform: translateY(16px) scale(.98); transition: transform .3s cubic-bezier(.22,1,.36,1);
-}
-.exit-overlay.show .exit-modal{ transform: translateY(0) scale(1); }
-.exit-close{
-  position:absolute; top:.6rem; right:.6rem; width:44px; height:44px; border-radius:50%;
-  background: var(--bg); border:none; color: var(--grafite-soft); font-size:1.1rem; line-height:1;
-  display:flex; align-items:center; justify-content:center;
-}
-.exit-close:hover{ background: var(--border); }
-.exit-modal h3{ font-weight:900; font-size:1.25rem; color: var(--grafite); margin-bottom:.5rem; padding-right:1.5rem; }
-.exit-modal p{ color: var(--grafite-soft); font-size:.92rem; margin-bottom:1.4rem; }
-.exit-field{ margin-bottom:.85rem; }
-.exit-field input{
-  width:100%; padding: .85rem 1rem; border-radius: var(--radius-s); border: 1.5px solid var(--border);
-  font-family:'Gilroy'; font-size:.94rem; color: var(--grafite); background: var(--bg);
-}
-.exit-field input:focus{ outline:none; border-color: var(--verde); background: var(--branco); }
-.exit-trust{ text-align:center; font-size:.72rem; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color: var(--verde-escuro); margin-top:.9rem; }
-
 .include-card, .benefit-card, .fit-card.yes, .teia-card, .step-card{
   transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s cubic-bezier(.22,1,.36,1), border-color .35s ease;
 }
@@ -933,7 +900,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     <p class="vsl-caption">Assista até o final para entender o Método TEIA antes de aplicar.</p>
 
     <div class="vsl-cta" id="vslCta">
-      <a href="#aplicar" class="btn btn-primary btn-lg">Quero uma preparação com direção</a>
+      <a href="https://form.respondi.app/USGGUf9h" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Quero uma preparação com direção</a>
     </div>
   </div>
 </section>
@@ -1792,34 +1759,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
   </div>
 </footer>
 
-<!-- ============================================================
-     POPUP DE SAÍDA / INATIVIDADE
-     Aparece uma vez por sessão quando a pessoa tenta sair (mouse
-     sobe em direção à barra do navegador) ou fica ociosa por um
-     tempo. Ao enviar, abre o WhatsApp comercial com os dados já
-     preenchidos na mensagem — não depende de nenhum backend novo.
-     ============================================================ -->
-<div class="exit-overlay" id="exitOverlay">
-  <div class="exit-modal">
-    <button class="exit-close" id="exitClose" aria-label="Fechar">✕</button>
-    <h3>Calma! Não desista da sua aprovação.</h3>
-    <p>Deixe seu contato que a Dominique te chama pessoalmente para entender seu momento.</p>
-    <form id="exitForm">
-      <div class="exit-field"><input type="text" id="exitNome" placeholder="Seu nome" required /></div>
-      <div class="exit-field"><input type="email" id="exitEmail" placeholder="Seu e-mail" required /></div>
-      <div class="exit-field"><input type="tel" id="exitWhats" placeholder="Seu WhatsApp" required /></div>
-      <button type="submit" class="btn btn-primary btn-block">Quero ser chamado(a)</button>
-    </form>
-    <p class="exit-trust">Seus dados estão protegidos</p>
-  </div>
-</div>
-
 <script>
-// WhatsApp comercial oficial da Estude Ambiental (DDD 48, Florianópolis/SC).
-// Usado no popup de saída/inatividade abaixo. O fluxo principal (CTA "Quero
-// aplicar") continua indo para o Respondi, por orientação do documento mestre.
-var WHATSAPP_NUMBER = '5548998188078';
-
 document.querySelectorAll('.faq-item').forEach(function(item){
   var q = item.querySelector('.faq-q');
   var a = item.querySelector('.faq-a');
@@ -1921,72 +1861,14 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     });
   });
 
-  var realCta = document.getElementById('ctaAplicar');
-  if(realCta){
-    realCta.addEventListener('click', function(){
-      medir('Lead', {}, true);
+  // todo clique que sai para o formulário de aplicação conta como Lead
+  document.querySelectorAll('a[href*="form.respondi.app"]').forEach(function(el){
+    el.addEventListener('click', function(){
+      medir('Lead', { origem: el.id === 'ctaAplicar' ? 'final' : (el.closest('#vslCta') ? 'vsl' : 'outro') }, true);
     });
-  }
-})();
-
-// Popup de saída / inatividade
-(function(){
-  var overlay = document.getElementById('exitOverlay');
-  var closeBtn = document.getElementById('exitClose');
-  var form = document.getElementById('exitForm');
-  if(!overlay || !form) return;
-
-  var STORAGE_KEY = 'ea_exit_popup_shown';
-  var IDLE_MS = 45000; // 45s ociosa
-  var shown = false;
-  var idleTimer = null;
-
-  function alreadyShown(){
-    try { return sessionStorage.getItem(STORAGE_KEY) === '1'; } catch(e){ return shown; }
-  }
-  function markShown(){
-    shown = true;
-    try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch(e){}
-  }
-  function open(){
-    if(alreadyShown()) return;
-    markShown();
-    overlay.classList.add('show');
-    if(typeof fbq === 'function'){ fbq('trackCustom', 'ExitPopupExibido'); }
-  }
-  function close(){ overlay.classList.remove('show'); }
-
-  closeBtn.addEventListener('click', close);
-  overlay.addEventListener('click', function(e){ if(e.target === overlay) close(); });
-
-  // Exit-intent: mouse sobe em direção à barra do navegador
-  document.addEventListener('mouseout', function(e){
-    if(!e.relatedTarget && e.clientY <= 0){ open(); }
-  });
-
-  // Inatividade
-  function resetIdle(){
-    if(idleTimer) clearTimeout(idleTimer);
-    idleTimer = setTimeout(open, IDLE_MS);
-  }
-  ['mousemove','keydown','scroll','touchstart'].forEach(function(evt){
-    window.addEventListener(evt, resetIdle, { passive:true });
-  });
-  resetIdle();
-
-  // Envio: abre o WhatsApp comercial com os dados preenchidos na mensagem
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var nome = document.getElementById('exitNome').value.trim();
-    var email = document.getElementById('exitEmail').value.trim();
-    var whats = document.getElementById('exitWhats').value.trim();
-    var msg = 'Oi! Sou ' + nome + ' e quero saber mais sobre a Mentoria Estude Ambiental.\n'
-      + 'Meu e-mail: ' + email + '\nMeu WhatsApp: ' + whats;
-    if(typeof fbq === 'function'){ fbq('track', 'Lead'); }
-    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
-    close();
   });
 })();
+
 </script>
 
 <!-- ============================================================

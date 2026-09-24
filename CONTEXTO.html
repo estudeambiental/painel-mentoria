@@ -64,7 +64,7 @@ strong{font-weight:700;}
 <h1>Contexto do projeto — Estude Ambiental</h1>
 <p>Documento de referência do trabalho feito na branch <code>claude/sales-page-design-9l9omo</code>,
 para não depender de vasculhar histórico de conversa. <strong>Atualize conforme o projeto evoluir.</strong></p>
-<p>Última atualização: <strong>22 de setembro de 2026</strong></p>
+<p>Última atualização: <strong>24 de setembro de 2026</strong></p>
 <hr />
 <h2>1. Links que não podem ser perdidos</h2>
 <p>Os vídeos do YouTube são <strong>não listados</strong>: não aparecem em busca nem no canal.
@@ -187,14 +187,18 @@ Recapitulando → Garantia 7 dias → CTA final.</p>
 <li>O CTA <strong>"Quero uma preparação com direção" só aparece aos 445s (7:25)</strong>, lido do
   <code>getCurrentTime</code>. É o ponto em que a Domi fala "logo abaixo desse vídeo está a aplicação".
   Para mudar esse momento, altere <code>data-cta-em</code> no elemento <code>#vslEmbed</code>.</li>
-<li>Link discreto "Ir direto para a aplicação" sempre visível, para quem não assiste até o fim.</li>
+<li>Esse CTA leva <strong>direto ao formulário do Respondi</strong>, em nova aba, com as UTMs do anúncio
+  repassadas automaticamente.</li>
 <li>A API do YouTube só é baixada quando a pessoa chega perto do vídeo.</li>
 </ul>
 <h3>Eventos de medição</h3>
 <p>Disparam no <strong>Meta Pixel</strong> e no <strong>Google Analytics</strong> (o GA só passa a receber quando a tag
 for instalada; o código já está pronto e não quebra nada enquanto isso):</p>
-<p><code>VSLPlay</code> · <code>VSLSom</code> · <code>VSLProgresso</code> (25/50/75/100%) · <code>VSLCtaExibido</code> · <code>VSLCtaClique</code> ·
-<code>DepoimentoPlay</code> · <code>CliqueChamadaAplicar</code> · <code>Lead</code></p>
+<p><code>CliqueHeroParaVSL</code> · <code>VSLPlay</code> · <code>VSLSom</code> · <code>VSLProgresso</code> (25/50/75/100%) · <code>VSLCtaExibido</code> ·
+<code>VSLCtaClique</code> · <code>DepoimentoPlay</code> · <code>CliqueChamadaAplicar</code> · <code>Lead</code></p>
+<p><code>Lead</code> (evento padrão do Pixel, o que o Meta usa para otimizar) dispara em <strong>todo clique que
+sai para o formulário</strong>, com o parâmetro <code>origem</code> (<code>vsl</code> ou <code>final</code>). Até 24/09 ele também
+disparava no envio do popup de saída, o que misturava contatos de popup com aplicações.</p>
 <h3>Performance — decisões que não devem ser desfeitas</h3>
 <p>O primeiro carregamento já foi <strong>2.034 KB</strong> e hoje é <strong>628 KB</strong>. O que segura isso:</p>
 <ul>
@@ -304,7 +308,22 @@ de inscrição que apareciam no documento oficial — preservando só o cabeçal
 <p>Mosaico de 3 colunas no desktop; no celular vira faixa deslizante, para 12 prints não
 esticarem a página. Clique amplia (lightbox com Esc, clique fora e teclado).</p>
 <hr />
-<h2>5. Decisões de conteúdo já tomadas</h2>
+<h2>5. Funil da página (sugestões do Ítalo, gestor de tráfego — 24/09/2026)</h2>
+<p>A página é <strong>carta de apresentação e funil de qualificação</strong>: a pessoa deve ler e assistir
+antes de aplicar. Por isso:</p>
+<ul>
+<li><strong>Botão do topo → VSL</strong>, e não mais para o fim da página.</li>
+<li><strong>Botão da VSL (7:25) → direto no formulário do Respondi.</strong></li>
+<li><strong>Sem barra fixa</strong> de "Quero aplicar" no rodapé do celular.</li>
+<li><strong>Sem o link "Prefere não assistir agora?"</strong> abaixo da VSL.</li>
+<li><strong>Sem popup de saída</strong> pedindo nome, e-mail e WhatsApp. Motivo do Ítalo: capta dado
+  incompleto e pula a qualificação do Respondi; funciona para infoproduto, não para
+  mentoria. Além disso, o popup abria após 45s sem mexer no mouse — ou seja, <strong>em cima
+  da VSL</strong> para quem estava assistindo parado.</li>
+</ul>
+<p>A aplicação continua acessível pelos botões ao longo da leitura (que levam à seção final)
+e pelo CTA da VSL.</p>
+<h2>5b. Decisões de conteúdo já tomadas</h2>
 <ul>
 <li><strong>Preço não aparece na página.</strong> O interessado vai para a aplicação e o preço é apresentado
   na conversa no WhatsApp, conforme o perfil.</li>

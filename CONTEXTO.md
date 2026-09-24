@@ -3,7 +3,7 @@
 Documento de referência do trabalho feito na branch `claude/sales-page-design-9l9omo`,
 para não depender de vasculhar histórico de conversa. **Atualize conforme o projeto evoluir.**
 
-Última atualização: **22 de setembro de 2026**
+Última atualização: **24 de setembro de 2026**
 
 ---
 
@@ -86,7 +86,8 @@ São 11 CTAs distribuídas ao longo da página.
 - O CTA **"Quero uma preparação com direção" só aparece aos 445s (7:25)**, lido do
   `getCurrentTime`. É o ponto em que a Domi fala "logo abaixo desse vídeo está a aplicação".
   Para mudar esse momento, altere `data-cta-em` no elemento `#vslEmbed`.
-- Link discreto "Ir direto para a aplicação" sempre visível, para quem não assiste até o fim.
+- Esse CTA leva **direto ao formulário do Respondi**, em nova aba, com as UTMs do anúncio
+  repassadas automaticamente.
 - A API do YouTube só é baixada quando a pessoa chega perto do vídeo.
 
 ### Eventos de medição
@@ -94,8 +95,12 @@ São 11 CTAs distribuídas ao longo da página.
 Disparam no **Meta Pixel** e no **Google Analytics** (o GA só passa a receber quando a tag
 for instalada; o código já está pronto e não quebra nada enquanto isso):
 
-`VSLPlay` · `VSLSom` · `VSLProgresso` (25/50/75/100%) · `VSLCtaExibido` · `VSLCtaClique` ·
-`DepoimentoPlay` · `CliqueChamadaAplicar` · `Lead`
+`CliqueHeroParaVSL` · `VSLPlay` · `VSLSom` · `VSLProgresso` (25/50/75/100%) · `VSLCtaExibido` ·
+`VSLCtaClique` · `DepoimentoPlay` · `CliqueChamadaAplicar` · `Lead`
+
+`Lead` (evento padrão do Pixel, o que o Meta usa para otimizar) dispara em **todo clique que
+sai para o formulário**, com o parâmetro `origem` (`vsl` ou `final`). Até 24/09 ele também
+disparava no envio do popup de saída, o que misturava contatos de popup com aplicações.
 
 ### Performance — decisões que não devem ser desfeitas
 
@@ -155,7 +160,24 @@ esticarem a página. Clique amplia (lightbox com Esc, clique fora e teclado).
 
 ---
 
-## 5. Decisões de conteúdo já tomadas
+## 5. Funil da página (sugestões do Ítalo, gestor de tráfego — 24/09/2026)
+
+A página é **carta de apresentação e funil de qualificação**: a pessoa deve ler e assistir
+antes de aplicar. Por isso:
+
+- **Botão do topo → VSL**, e não mais para o fim da página.
+- **Botão da VSL (7:25) → direto no formulário do Respondi.**
+- **Sem barra fixa** de "Quero aplicar" no rodapé do celular.
+- **Sem o link "Prefere não assistir agora?"** abaixo da VSL.
+- **Sem popup de saída** pedindo nome, e-mail e WhatsApp. Motivo do Ítalo: capta dado
+  incompleto e pula a qualificação do Respondi; funciona para infoproduto, não para
+  mentoria. Além disso, o popup abria após 45s sem mexer no mouse — ou seja, **em cima
+  da VSL** para quem estava assistindo parado.
+
+A aplicação continua acessível pelos botões ao longo da leitura (que levam à seção final)
+e pelo CTA da VSL.
+
+## 5b. Decisões de conteúdo já tomadas
 
 - **Preço não aparece na página.** O interessado vai para a aplicação e o preço é apresentado
   na conversa no WhatsApp, conforme o perfil.
