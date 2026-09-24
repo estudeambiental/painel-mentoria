@@ -166,8 +166,13 @@ A página é **carta de apresentação e funil de qualificação**: a pessoa dev
 antes de aplicar. Por isso:
 
 - **Botão do topo → VSL**, e não mais para o fim da página.
-- **Botão da VSL (7:25) → direto no formulário do Respondi.**
-- **Sem barra fixa** de "Quero aplicar" no rodapé do celular.
+- **Botão da VSL (7:25) → direto no formulário do Respondi**, com o texto "Quero aplicar para
+  a Mentoria" e uma linha embaixo avisando que são perguntas, que cada aplicação é analisada
+  e que aplicar não garante vaga. Os dois botões que abrem o formulário (VSL e final) têm o
+  mesmo texto; os do meio da página levam à leitura. O preço fica fora dessa linha de
+  propósito, para o caçador de preço não preencher o formulário só para receber o número.
+- **Sem botão fixo de "Quero aplicar"** em lugar nenhum: saiu a barra do rodapé do celular
+  e o botão do menu no computador.
 - **Sem o link "Prefere não assistir agora?"** abaixo da VSL.
 - **Sem popup de saída** pedindo nome, e-mail e WhatsApp. Motivo do Ítalo: capta dado
   incompleto e pula a qualificação do Respondi; funciona para infoproduto, não para

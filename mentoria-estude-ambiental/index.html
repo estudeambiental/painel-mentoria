@@ -565,6 +565,7 @@ section{ padding: var(--section-y) 0; }
   animation: vslReveal .5s ease both;
 }
 .vsl-cta.is-visible{ display:block; }
+.vsl-cta-note{ max-width:46ch; margin:1rem auto 0; font-size:.84rem; line-height:1.55; color: rgba(255,255,255,.74); }
 @keyframes vslReveal{ from{ opacity:0; transform: translateY(14px); } to{ opacity:1; transform:none; } }
 @media (prefers-reduced-motion: reduce){ .vsl-cta{ animation:none; } }
 
@@ -784,8 +785,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 .nav-links a.is-active{ color: var(--verde-escuro); font-weight:800; }
 .nav-links a.is-active::after{ transform: scaleX(1); }
 @media (prefers-reduced-motion: reduce){ .nav-links a::after{ transition:none; } }
-.header-cta{ display:none; }
-@media (min-width: 720px){ .header-cta{ display:inline-flex; padding: .65rem 1.3rem; font-size:.85rem; } .nav-links{ display:flex; } }
+@media (min-width: 720px){ .nav-links{ display:flex; } }
 
 /* no celular o respiro no topo das seções é menor que o menu fixo:
    sem isso, quem chega por âncora tem o título cortado pelo menu */
@@ -811,7 +811,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       <a href="#resultados">Depoimentos</a>
       <a href="#faq">Dúvidas</a>
     </nav>
-    <a href="#aplicar" class="btn btn-primary header-cta">Quero aplicar</a>
   </div>
 </header>
 
@@ -900,7 +899,8 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     <p class="vsl-caption">Assista até o final para entender o Método TEIA antes de aplicar.</p>
 
     <div class="vsl-cta" id="vslCta">
-      <a href="https://form.respondi.app/USGGUf9h" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Quero uma preparação com direção</a>
+      <a href="https://form.respondi.app/USGGUf9h" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Quero aplicar para a Mentoria</a>
+      <p class="vsl-cta-note">São algumas perguntas sobre o seu momento de estudo. Cada aplicação é analisada antes da conversa no WhatsApp, e aplicar não garante vaga.</p>
     </div>
   </div>
 </section>
