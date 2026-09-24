@@ -215,16 +215,6 @@ button{ font-family:inherit; cursor:pointer; }
 .quick-proof-quotes cite{ display:block; font-style:normal; font-weight:700; font-size:.72rem; margin-top:.35rem; color: var(--verde-escuro); }
 @media (max-width: 640px){ .quick-proof-quotes p{ max-width:100%; } }
 
-.sticky-cta{
-  position:fixed; left:0; right:0; bottom:0; z-index:60;
-  background: var(--branco); border-top:1px solid var(--border);
-  box-shadow: 0 -8px 24px -12px rgba(68,60,66,.25); padding: .7rem 1rem;
-  transform: translateY(110%); transition: transform .4s cubic-bezier(.22,1,.36,1); display:none;
-}
-.sticky-cta.show{ transform: translateY(0); }
-.sticky-cta .btn{ width:100%; padding: .9rem 1rem; font-size:.92rem; }
-@media (max-width: 860px){ .sticky-cta{ display:block; } }
-
 /* ============================================================
    POPUP DE SAÍDA / INATIVIDADE
    ============================================================ */
@@ -610,10 +600,6 @@ section{ padding: var(--section-y) 0; }
 .vsl-cta.is-visible{ display:block; }
 @keyframes vslReveal{ from{ opacity:0; transform: translateY(14px); } to{ opacity:1; transform:none; } }
 @media (prefers-reduced-motion: reduce){ .vsl-cta{ animation:none; } }
-/* link discreto pra quem não assiste até lá */
-.vsl-skip{ margin-top:1.5rem; font-size:.88rem; color: rgba(255,255,255,.72); }
-.vsl-skip a{ color: var(--verde-claro); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
-.vsl-skip a:hover{ color: var(--branco); }
 
 /* ============================================================
    DEPOIMENTOS EM VÍDEO — os quatro juntos, cada um marcado com a
@@ -834,6 +820,9 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 .header-cta{ display:none; }
 @media (min-width: 720px){ .header-cta{ display:inline-flex; padding: .65rem 1.3rem; font-size:.85rem; } .nav-links{ display:flex; } }
 
+/* no celular o respiro no topo das seções é menor que o menu fixo:
+   sem isso, quem chega por âncora tem o título cortado pelo menu */
+@media (max-width: 760px){ section[id]{ scroll-margin-top: 64px; } }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .faq-a, .faq-q .plus, .btn{ transition:none; } }
 </style>
 </head>
@@ -870,7 +859,7 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
       <span class="eyebrow hero-anim d1">Mentoria para concursos da área ambiental</span>
       <h1 class="h-display hero-anim d2">Pare de estudar no escuro. Saiba o que estudar, em qual ordem e como avançar na sua preparação.</h1>
       <p class="lede hero-anim d3">A Mentoria Estude Ambiental transforma editais extensos, rotinas apertadas e dificuldades nos estudos em uma preparação organizada, com plano personalizado, metas diárias, revisões, questões, simulados e acompanhamento próximo.</p>
-      <a href="#aplicar" class="btn btn-primary btn-lg hero-anim d4">Quero aplicar para a Mentoria</a>
+      <a href="#vsl" class="btn btn-primary btn-lg hero-anim d4" id="ctaHero">Quero aplicar para a Mentoria</a>
       <p class="micro-note hero-anim d5" style="text-align:left;">Preencha a aplicação em poucos minutos e conclua seu atendimento pelo WhatsApp.</p>
       <div class="hero-proof hero-anim d5">
         <span class="hero-proof-label">Alunos aprovados em</span>
@@ -946,7 +935,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
     <div class="vsl-cta" id="vslCta">
       <a href="#aplicar" class="btn btn-primary btn-lg">Quero uma preparação com direção</a>
     </div>
-    <p class="vsl-skip">Prefere não assistir agora? <a href="#aplicar">Ir direto para a aplicação</a></p>
   </div>
 </section>
 
@@ -1804,10 +1792,6 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
   </div>
 </footer>
 
-<div class="sticky-cta" id="stickyCta">
-  <a href="#aplicar" class="btn btn-primary">Quero aplicar para a Mentoria</a>
-</div>
-
 <!-- ============================================================
      POPUP DE SAÍDA / INATIVIDADE
      Aparece uma vez por sessão quando a pessoa tenta sair (mouse
@@ -1856,28 +1840,6 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     }
   });
 });
-
-// Sticky mobile CTA: show after hero, hide once the final CTA is reachable
-(function(){
-  var bar = document.getElementById('stickyCta');
-  var hero = document.getElementById('hero');
-  var offer = document.getElementById('aplicar');
-  var foot = document.querySelector('footer');
-  if(!bar || !hero || !offer || !foot || !('IntersectionObserver' in window)) return;
-  var pastHero = false, nearCta = false;
-  var update = function(){ bar.classList.toggle('show', pastHero && !nearCta); };
-  new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ pastHero = !e.isIntersecting; });
-    update();
-  }, { threshold: 0 }).observe(hero);
-  var ctaWatcher = new IntersectionObserver(function(entries){
-    var anyVisible = entries.some(function(e){ return e.isIntersecting; });
-    nearCta = anyVisible;
-    update();
-  }, { threshold: .15 });
-  ctaWatcher.observe(offer);
-  ctaWatcher.observe(foot);
-})();
 
 // Header reacts to scroll
 (function(){
@@ -1946,6 +1908,11 @@ document.querySelectorAll('.faq-item').forEach(function(item){
       if(typeof gtag === 'function'){ gtag('event', nome, dados); }
       else if(window.dataLayer && window.dataLayer.push){ window.dataLayer.push(Object.assign({ event: nome }, dados)); }
     } catch(e) {}
+  }
+
+  var ctaHero = document.getElementById('ctaHero');
+  if(ctaHero){
+    ctaHero.addEventListener('click', function(){ medir('CliqueHeroParaVSL'); });
   }
 
   document.querySelectorAll('a[href="#aplicar"]').forEach(function(el){
