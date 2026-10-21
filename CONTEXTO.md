@@ -3,7 +3,7 @@
 Documento de referência do trabalho feito na branch `claude/sales-page-design-9l9omo`,
 para não depender de vasculhar histórico de conversa. **Atualize conforme o projeto evoluir.**
 
-Última atualização: **24 de setembro de 2026**
+Última atualização: **21 de outubro de 2026**
 
 ---
 
@@ -42,7 +42,9 @@ Outros dados fixos:
 - **E-mail**: estudeambiental@gmail.com
 - **WhatsApp comercial**: 55 48 99818-8078
 - **Meta Pixel ID**: 706004184857947
-- **Google Analytics**: ainda não instalado (os eventos já estão escritos, esperando a tag)
+- **Google Tag Manager**: `GTM-WBZFBFSM`, instalado em 21/10/2026 na home e nas 3 páginas
+  institucionais
+- **Google Analytics**: entra **por dentro do Tag Manager**, não colado direto na página
 
 ---
 
@@ -127,8 +129,9 @@ São 11 CTAs distribuídas ao longo da página.
 
 ### Eventos de medição
 
-Disparam no **Meta Pixel** e no **Google Analytics** (o GA só passa a receber quando a tag
-for instalada; o código já está pronto e não quebra nada enquanto isso):
+Cada evento vai para dois lugares: o **Meta Pixel** (chamado direto pela página) e o
+**`dataLayer`**, de onde o **Google Tag Manager** distribui para o Google Analytics e o que mais
+for configurado nele. No `dataLayer` eles chegam assim: `{ event: "Lead", origem: "vsl" }`.
 
 `CliqueHeroParaVSL` · `VSLPlay` · `VSLSom` · `VSLProgresso` (25/50/75/100%) · `VSLCtaExibido` ·
 `VSLCtaClique` · `DepoimentoPlay` · `CliqueChamadaAplicar` · `Lead`
@@ -136,6 +139,30 @@ for instalada; o código já está pronto e não quebra nada enquanto isso):
 `Lead` (evento padrão do Pixel, o que o Meta usa para otimizar) dispara em **todo clique que
 sai para o formulário**, com o parâmetro `origem` (`vsl` ou `final`). Até 24/09 ele também
 disparava no envio do popup de saída, o que misturava contatos de popup com aplicações.
+
+### Google Tag Manager — regras para quem for configurar
+
+- **Não colocar o Meta Pixel dentro do Tag Manager.** Ele já está na página, chamado direto.
+  Duplicar faz cada visita e cada `Lead` contarem duas vezes no Meta.
+- **Não colar o código do Google Analytics (`gtag.js`) direto na página.** O GA entra como tag
+  dentro do Tag Manager. Os eventos da página vão só para o `dataLayer`, e o `gtag.js` colado
+  direto não os enxergaria.
+- Os eventos do `dataLayer` viram acionadores do tipo **"Evento personalizado"** com o nome
+  exato (`Lead`, `VSLProgresso`...). Os parâmetros (`origem`, `percentual`, `segundo`, `video`)
+  são lidos com variáveis do tipo **"Variável da camada de dados"**.
+- **O envio do formulário não acontece no site.** O Respondi é outro endereço, e o Tag Manager
+  da página não enxerga o que acontece lá. O `Lead` do site é o **clique para ir ao formulário**.
+  Medir o envio de verdade depende de configurar pixel/Tag Manager no próprio Respondi, se o
+  plano permitir. As UTMs já seguem para o Respondi junto com o link.
+
+### Caracteres trocados ("preparaÃ§Ã£o") — 21/10/2026
+
+O Ítalo viu, em algumas formas de abrir o site, os acentos trocados ("Ã§" no lugar de "ç").
+O arquivo é UTF-8 válido e o Chrome lê a declaração `<meta charset>` corretamente (testado).
+A declaração foi movida para a primeira linha do `<head>`, como recomenda a especificação.
+Se o defeito continuar, a causa provável é o **cabeçalho da resposta da HostGator** anunciando
+outra codificação, que tem prioridade sobre a página. Correção: uma linha no topo do
+`.htaccess` das duas pastas: `AddDefaultCharset UTF-8`.
 
 ### Performance — decisões que não devem ser desfeitas
 
@@ -290,8 +317,8 @@ Depois, limpar o cache local: `ipconfig /flushdns` e `chrome://net-internals/#dn
 
 ## 9. Pendências em aberto
 
-1. **Instalar a tag do Google Analytics.** Os eventos já estão programados e passam a
-   funcionar sozinhos assim que o `gtag` existir na página.
+1. **Configurar o Tag Manager** (Ítalo): Google Analytics e o que mais for preciso, usando os
+   eventos do `dataLayer` como acionadores. Ver regras na seção 3.
 2. **Revisão do contrato por advogado** (ver seção 6).
 3. **Foto do André** para substituir o monograma nos cards de resultado.
 4. **Hebert / Itabaiana** entra no quadro de aprovações quando houver convocação.

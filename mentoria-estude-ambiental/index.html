@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<meta charset="UTF-8" />
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WBZFBFSM');</script>
+<!-- End Google Tag Manager -->
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -18,7 +26,6 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=706004184857947&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- as duas fontes da primeira tela (título e corpo) na frente da fila,
@@ -794,6 +801,10 @@ footer{ background: #37312F; color: rgba(255,255,255,.55); padding: 2.25rem 0; f
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBZFBFSM"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -1833,8 +1844,8 @@ document.querySelectorAll('.faq-item').forEach(function(item){
 // Tracking: cliques nos CTAs "Quero aplicar" (Meta Pixel)
 // Distingue dois momentos: rolar até a seção de oferta (engajamento) e
 // Cliques nas chamadas para aplicar. Cada evento vai para o Meta Pixel
-// e para o Google Analytics (assim que a tag do GA estiver instalada:
-// o código abaixo só dispara se gtag/dataLayer existirem).
+// e para o dataLayer, de onde o Google Tag Manager distribui para o
+// Google Analytics e outras ferramentas configuradas nele.
 (function(){
   function medir(nome, dados, padraoDoPixel){
     dados = dados || {};
@@ -1845,8 +1856,8 @@ document.querySelectorAll('.faq-item').forEach(function(item){
       }
     } catch(e) {}
     try {
-      if(typeof gtag === 'function'){ gtag('event', nome, dados); }
-      else if(window.dataLayer && window.dataLayer.push){ window.dataLayer.push(Object.assign({ event: nome }, dados)); }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: nome }, dados));
     } catch(e) {}
   }
 
@@ -1894,13 +1905,13 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   var jaDeuPlay = false
   var ctaLiberado = false
 
-  // --- medição: manda o mesmo evento pro Meta Pixel e pro Google Analytics
+  // --- medição: manda o mesmo evento pro Meta Pixel e pro dataLayer (Tag Manager)
   function medir(nome, dados) {
     dados = dados || {}
     try { if (typeof fbq === 'function') fbq('trackCustom', nome, dados) } catch (e) {}
     try {
-      if (typeof gtag === 'function') gtag('event', nome, dados)
-      else if (window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({ event: nome }, dados))
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push(Object.assign({ event: nome }, dados))
     } catch (e) {}
   }
 
@@ -2031,8 +2042,8 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   function medir(nome, dados) {
     try { if (typeof fbq === 'function') fbq('trackCustom', nome, dados || {}) } catch (e) {}
     try {
-      if (typeof gtag === 'function') gtag('event', nome, dados || {})
-      else if (window.dataLayer && window.dataLayer.push) window.dataLayer.push(Object.assign({ event: nome }, dados || {}))
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push(Object.assign({ event: nome }, dados || {}))
     } catch (e) {}
   }
 
