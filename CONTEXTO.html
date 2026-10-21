@@ -109,13 +109,26 @@ Se estes links se perderem, o acesso se perde junto.</p>
 </table></div>
 <p>Outros dados fixos:</p>
 <ul>
-<li><strong>Domínio definitivo</strong>: <code>estudeambiental.com</code></li>
+<li><strong>Domínio principal: <code>estudeambiental.com.br</code></strong> (decidido na prática em 26/09/2026, quando a
+  cópia do <code>.com.br</code> teve <code>canonical</code>, <code>og:url</code>, <code>og:image</code> e <code>twitter:image</code> trocados para o
+  <code>.com.br</code>). Desde 21/10/2026 o mesmo <code>index.html</code> vai para as duas pastas, com essas
+  etiquetas apontando para o <code>.com.br</code>: o <code>.com</code> declara ao Google que é cópia.</li>
+<li><strong><code>estudeambiental.com</code></strong>: continua no ar, servindo a pasta <code>public_html</code>. Os anúncios do
+  Ítalo e a verificação de domínio no Meta foram feitos nele.</li>
 <li><strong><code>estudeambiental.com.br</code></strong>: até 24/09/2026 apontava para o <strong>Framer</strong> (site institucional
   antigo, abandonado). Nesse dia o DNS foi trocado: A → <code>69.49.241.120</code> e <code>www</code> → CNAME
   <code>estudeambiental.com.br</code>. Agora serve a pasta <strong><code>/estudeambiental.com.br</code></strong> do cPanel, onde
   está uma <strong>cópia</strong> do site. Enquanto houver duas cópias, <strong>toda atualização precisa ser
-  extraída nas duas pastas</strong> (<code>public_html</code> e <code>estudeambiental.com.br</code>). Pendente: escolher
-  o domínio principal e redirecionar o outro (301), para voltar a um upload só.</li>
+  extraída nas duas pastas</strong> (<code>public_html</code> e <code>estudeambiental.com.br</code>). Pendente:
+  redirecionar o <code>.com</code> para o <code>.com.br</code> (301) e voltar a um upload só — combinar antes
+  com o Ítalo, por causa dos anúncios e da verificação de domínio no Meta.</li>
+<li><strong>Arquivos que existem só no servidor, fora do repositório</strong> (pasta <code>estudeambiental.com.br</code>,
+  vistos em 21/10/2026): <code>google91c97000c35d1c44.html</code> (verificação do Search Console),
+  <code>robots.txt</code> e <code>sitemap.xml</code> (26–27/09), a pasta <code>radar-concursos-ambientais</code> (criada em
+  21/10) e alterações no <code>.htaccess</code> (21/10, 12:26). O zip do site não contém nem apaga
+  esses arquivos, mas também não há cópia deles aqui. <strong>Antes de gerar um zip, sempre
+  baixar o <code>index.html</code> que está no ar e comparar</strong>: em 26/09 ele foi editado direto no
+  servidor, e um zip cego teria desfeito a edição.</li>
 <li><strong>E-mail do <code>.com.br</code></strong>: os registros MX, o SPF e os CNAME <code>mail/imap/pop/smtp</code> apontam
   para o <strong>Google Workspace</strong>. Não existe e-mail de boas-vindas nem cobrança no Gmail
   pessoal da Domi; pode ser configuração que nunca foi concluída, ou conta criada com

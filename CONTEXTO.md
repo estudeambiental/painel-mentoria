@@ -24,13 +24,26 @@ Se estes links se perderem, o acesso se perde junto.
 
 Outros dados fixos:
 
-- **Domínio definitivo**: `estudeambiental.com`
+- **Domínio principal: `estudeambiental.com.br`** (decidido na prática em 26/09/2026, quando a
+  cópia do `.com.br` teve `canonical`, `og:url`, `og:image` e `twitter:image` trocados para o
+  `.com.br`). Desde 21/10/2026 o mesmo `index.html` vai para as duas pastas, com essas
+  etiquetas apontando para o `.com.br`: o `.com` declara ao Google que é cópia.
+- **`estudeambiental.com`**: continua no ar, servindo a pasta `public_html`. Os anúncios do
+  Ítalo e a verificação de domínio no Meta foram feitos nele.
 - **`estudeambiental.com.br`**: até 24/09/2026 apontava para o **Framer** (site institucional
   antigo, abandonado). Nesse dia o DNS foi trocado: A → `69.49.241.120` e `www` → CNAME
   `estudeambiental.com.br`. Agora serve a pasta **`/estudeambiental.com.br`** do cPanel, onde
   está uma **cópia** do site. Enquanto houver duas cópias, **toda atualização precisa ser
-  extraída nas duas pastas** (`public_html` e `estudeambiental.com.br`). Pendente: escolher
-  o domínio principal e redirecionar o outro (301), para voltar a um upload só.
+  extraída nas duas pastas** (`public_html` e `estudeambiental.com.br`). Pendente:
+  redirecionar o `.com` para o `.com.br` (301) e voltar a um upload só — combinar antes
+  com o Ítalo, por causa dos anúncios e da verificação de domínio no Meta.
+- **Arquivos que existem só no servidor, fora do repositório** (pasta `estudeambiental.com.br`,
+  vistos em 21/10/2026): `google91c97000c35d1c44.html` (verificação do Search Console),
+  `robots.txt` e `sitemap.xml` (26–27/09), a pasta `radar-concursos-ambientais` (criada em
+  21/10) e alterações no `.htaccess` (21/10, 12:26). O zip do site não contém nem apaga
+  esses arquivos, mas também não há cópia deles aqui. **Antes de gerar um zip, sempre
+  baixar o `index.html` que está no ar e comparar**: em 26/09 ele foi editado direto no
+  servidor, e um zip cego teria desfeito a edição.
 - **E-mail do `.com.br`**: os registros MX, o SPF e os CNAME `mail/imap/pop/smtp` apontam
   para o **Google Workspace**. Não existe e-mail de boas-vindas nem cobrança no Gmail
   pessoal da Domi; pode ser configuração que nunca foi concluída, ou conta criada com
