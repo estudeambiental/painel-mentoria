@@ -64,7 +64,7 @@ strong{font-weight:700;}
 <h1>Contexto do projeto — Estude Ambiental</h1>
 <p>Documento de referência do trabalho feito na branch <code>claude/sales-page-design-9l9omo</code>,
 para não depender de vasculhar histórico de conversa. <strong>Atualize conforme o projeto evoluir.</strong></p>
-<p>Última atualização: <strong>24 de setembro de 2026</strong></p>
+<p>Última atualização: <strong>21 de outubro de 2026</strong></p>
 <hr />
 <h2>1. Links que não podem ser perdidos</h2>
 <p>Os vídeos do YouTube são <strong>não listados</strong>: não aparecem em busca nem no canal.
@@ -127,7 +127,9 @@ Se estes links se perderem, o acesso se perde junto.</p>
 <li><strong>E-mail</strong>: estudeambiental@gmail.com</li>
 <li><strong>WhatsApp comercial</strong>: 55 48 99818-8078</li>
 <li><strong>Meta Pixel ID</strong>: 706004184857947</li>
-<li><strong>Google Analytics</strong>: ainda não instalado (os eventos já estão escritos, esperando a tag)</li>
+<li><strong>Google Tag Manager</strong>: <code>GTM-WBZFBFSM</code>, instalado em 21/10/2026 na home e nas 3 páginas
+  institucionais</li>
+<li><strong>Google Analytics</strong>: entra <strong>por dentro do Tag Manager</strong>, não colado direto na página</li>
 </ul>
 <hr />
 <h2>2. Onde cada pasta do repositório vai parar</h2>
@@ -222,13 +224,36 @@ Recapitulando → Garantia 7 dias → CTA final.</p>
 <li>A API do YouTube só é baixada quando a pessoa chega perto do vídeo.</li>
 </ul>
 <h3>Eventos de medição</h3>
-<p>Disparam no <strong>Meta Pixel</strong> e no <strong>Google Analytics</strong> (o GA só passa a receber quando a tag
-for instalada; o código já está pronto e não quebra nada enquanto isso):</p>
+<p>Cada evento vai para dois lugares: o <strong>Meta Pixel</strong> (chamado direto pela página) e o
+<strong><code>dataLayer</code></strong>, de onde o <strong>Google Tag Manager</strong> distribui para o Google Analytics e o que mais
+for configurado nele. No <code>dataLayer</code> eles chegam assim: <code>{ event: "Lead", origem: "vsl" }</code>.</p>
 <p><code>CliqueHeroParaVSL</code> · <code>VSLPlay</code> · <code>VSLSom</code> · <code>VSLProgresso</code> (25/50/75/100%) · <code>VSLCtaExibido</code> ·
 <code>VSLCtaClique</code> · <code>DepoimentoPlay</code> · <code>CliqueChamadaAplicar</code> · <code>Lead</code></p>
 <p><code>Lead</code> (evento padrão do Pixel, o que o Meta usa para otimizar) dispara em <strong>todo clique que
 sai para o formulário</strong>, com o parâmetro <code>origem</code> (<code>vsl</code> ou <code>final</code>). Até 24/09 ele também
 disparava no envio do popup de saída, o que misturava contatos de popup com aplicações.</p>
+<h3>Google Tag Manager — regras para quem for configurar</h3>
+<ul>
+<li><strong>Não colocar o Meta Pixel dentro do Tag Manager.</strong> Ele já está na página, chamado direto.
+  Duplicar faz cada visita e cada <code>Lead</code> contarem duas vezes no Meta.</li>
+<li><strong>Não colar o código do Google Analytics (<code>gtag.js</code>) direto na página.</strong> O GA entra como tag
+  dentro do Tag Manager. Os eventos da página vão só para o <code>dataLayer</code>, e o <code>gtag.js</code> colado
+  direto não os enxergaria.</li>
+<li>Os eventos do <code>dataLayer</code> viram acionadores do tipo <strong>"Evento personalizado"</strong> com o nome
+  exato (<code>Lead</code>, <code>VSLProgresso</code>...). Os parâmetros (<code>origem</code>, <code>percentual</code>, <code>segundo</code>, <code>video</code>)
+  são lidos com variáveis do tipo <strong>"Variável da camada de dados"</strong>.</li>
+<li><strong>O envio do formulário não acontece no site.</strong> O Respondi é outro endereço, e o Tag Manager
+  da página não enxerga o que acontece lá. O <code>Lead</code> do site é o <strong>clique para ir ao formulário</strong>.
+  Medir o envio de verdade depende de configurar pixel/Tag Manager no próprio Respondi, se o
+  plano permitir. As UTMs já seguem para o Respondi junto com o link.</li>
+</ul>
+<h3>Caracteres trocados ("preparaÃ§Ã£o") — 21/10/2026</h3>
+<p>O Ítalo viu, em algumas formas de abrir o site, os acentos trocados ("Ã§" no lugar de "ç").
+O arquivo é UTF-8 válido e o Chrome lê a declaração <code>&lt;meta charset&gt;</code> corretamente (testado).
+A declaração foi movida para a primeira linha do <code>&lt;head&gt;</code>, como recomenda a especificação.
+Se o defeito continuar, a causa provável é o <strong>cabeçalho da resposta da HostGator</strong> anunciando
+outra codificação, que tem prioridade sobre a página. Correção: uma linha no topo do
+<code>.htaccess</code> das duas pastas: <code>AddDefaultCharset UTF-8</code>.</p>
 <h3>Performance — decisões que não devem ser desfeitas</h3>
 <p>O primeiro carregamento já foi <strong>2.034 KB</strong> e hoje é <strong>628 KB</strong>. O que segura isso:</p>
 <ul>
@@ -423,8 +448,8 @@ do servidor de vocês."</p>
 <hr />
 <h2>9. Pendências em aberto</h2>
 <ol>
-<li><strong>Instalar a tag do Google Analytics.</strong> Os eventos já estão programados e passam a
-   funcionar sozinhos assim que o <code>gtag</code> existir na página.</li>
+<li><strong>Configurar o Tag Manager</strong> (Ítalo): Google Analytics e o que mais for preciso, usando os
+   eventos do <code>dataLayer</code> como acionadores. Ver regras na seção 3.</li>
 <li><strong>Revisão do contrato por advogado</strong> (ver seção 6).</li>
 <li><strong>Foto do André</strong> para substituir o monograma nos cards de resultado.</li>
 <li><strong>Hebert / Itabaiana</strong> entra no quadro de aprovações quando houver convocação.</li>
