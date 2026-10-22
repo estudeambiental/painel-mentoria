@@ -153,6 +153,27 @@ for configurado nele. No `dataLayer` eles chegam assim: `{ event: "Lead", origem
 sai para o formulário**, com o parâmetro `origem` (`vsl` ou `final`). Até 24/09 ele também
 disparava no envio do popup de saída, o que misturava contatos de popup com aplicações.
 
+### Busca e IAs (ChatGPT, Google) — 22/10/2026
+
+Em 22/10 o ChatGPT, em navegação anônima, listou a Estude Ambiental em 1º lugar entre as
+mentorias para concursos ambientais, descrevendo-a com o texto da própria página. Mas só
+citava IBAMA, ICMBio e órgãos estaduais, porque a página não dizia em nenhuma frase que
+atende concursos municipais. Foi reforçado:
+
+- frase na seção "Para quem": concursos municipais, estaduais ou federais, cargos de nível
+  técnico ou superior (analista, fiscal, técnico, engenheiro);
+- etiqueta "prefeituras" na faixa de órgãos;
+- 1ª pergunta do FAQ: "Para quais concursos a mentoria prepara?";
+- `description`, `og:description` e `twitter:description` citando as três esferas;
+- **dados estruturados JSON-LD** no `<head>`: `EducationalOrganization`, `Person`
+  (Dominique), `Service` (a mentoria), `WebPage` e `FAQPage`. **O `FAQPage` repete o FAQ
+  visível palavra por palavra: ao mudar uma pergunta ou resposta, mude nos dois lugares.**
+
+O robô do ChatGPT não roda JavaScript: tudo que precisa ser encontrado tem que estar no
+HTML, como está hoje (o FAQ fica no código mesmo fechado). O `robots.txt` da pasta do
+`.com.br` (criado em 27/09, fora do repositório) não pode bloquear `GPTBot`,
+`OAI-SearchBot` nem `Googlebot` — ainda não foi conferido.
+
 ### Google Tag Manager — regras para quem for configurar
 
 - **Não colocar o Meta Pixel dentro do Tag Manager.** Ele já está na página, chamado direto.

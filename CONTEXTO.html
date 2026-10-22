@@ -245,6 +245,25 @@ for configurado nele. No <code>dataLayer</code> eles chegam assim: <code>{ event
 <p><code>Lead</code> (evento padrão do Pixel, o que o Meta usa para otimizar) dispara em <strong>todo clique que
 sai para o formulário</strong>, com o parâmetro <code>origem</code> (<code>vsl</code> ou <code>final</code>). Até 24/09 ele também
 disparava no envio do popup de saída, o que misturava contatos de popup com aplicações.</p>
+<h3>Busca e IAs (ChatGPT, Google) — 22/10/2026</h3>
+<p>Em 22/10 o ChatGPT, em navegação anônima, listou a Estude Ambiental em 1º lugar entre as
+mentorias para concursos ambientais, descrevendo-a com o texto da própria página. Mas só
+citava IBAMA, ICMBio e órgãos estaduais, porque a página não dizia em nenhuma frase que
+atende concursos municipais. Foi reforçado:</p>
+<ul>
+<li>frase na seção "Para quem": concursos municipais, estaduais ou federais, cargos de nível
+  técnico ou superior (analista, fiscal, técnico, engenheiro);</li>
+<li>etiqueta "prefeituras" na faixa de órgãos;</li>
+<li>1ª pergunta do FAQ: "Para quais concursos a mentoria prepara?";</li>
+<li><code>description</code>, <code>og:description</code> e <code>twitter:description</code> citando as três esferas;</li>
+<li><strong>dados estruturados JSON-LD</strong> no <code>&lt;head&gt;</code>: <code>EducationalOrganization</code>, <code>Person</code>
+  (Dominique), <code>Service</code> (a mentoria), <code>WebPage</code> e <code>FAQPage</code>. <strong>O <code>FAQPage</code> repete o FAQ
+  visível palavra por palavra: ao mudar uma pergunta ou resposta, mude nos dois lugares.</strong></li>
+</ul>
+<p>O robô do ChatGPT não roda JavaScript: tudo que precisa ser encontrado tem que estar no
+HTML, como está hoje (o FAQ fica no código mesmo fechado). O <code>robots.txt</code> da pasta do
+<code>.com.br</code> (criado em 27/09, fora do repositório) não pode bloquear <code>GPTBot</code>,
+<code>OAI-SearchBot</code> nem <code>Googlebot</code> — ainda não foi conferido.</p>
 <h3>Google Tag Manager — regras para quem for configurar</h3>
 <ul>
 <li><strong>Não colocar o Meta Pixel dentro do Tag Manager.</strong> Ele já está na página, chamado direto.
